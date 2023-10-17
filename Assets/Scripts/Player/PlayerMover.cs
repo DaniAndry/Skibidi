@@ -6,6 +6,7 @@ public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _turnSpeed = 5f;
+    [SerializeField] private FixedJoystick _joystick;
 
     private Rigidbody _rigidbody;
 
@@ -22,9 +23,18 @@ public class PlayerMover : MonoBehaviour
         {
             _rigidbody.velocity = new Vector3(_turnSpeed * -1, 0, _moveSpeed);
         }
-        else if(Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || _joystick.Horizontal > 0)
         {
             _rigidbody.velocity = new Vector3(_turnSpeed * 1, 0, _moveSpeed);
+        }
+
+        if (_joystick.Horizontal < 0f && _joystick.Horizontal > -1)
+        {
+            _rigidbody.velocity = new Vector3(_turnSpeed * _joystick.Horizontal, 0, _moveSpeed);
+        }
+        if (_joystick.Horizontal > 0f && _joystick.Horizontal < 1)
+        {
+            _rigidbody.velocity = new Vector3(_turnSpeed * _joystick.Horizontal, 0, _moveSpeed);
         }
     }
 }
