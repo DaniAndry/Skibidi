@@ -1308,8 +1308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98335b9bb4ad54e45b9216d25e980c7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 3
-  _turnSpeed: 3
   _joystick: {fileID: 746772156}
 --- !u!114 &1728382453
 MonoBehaviour:
@@ -1538,7 +1536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _offSet: {x: 0, y: 0.55, z: -0.8}
   _player: {fileID: 1728382457}
-  _speed: 5
+  _speed: 5.25
 --- !u!81 &1868257261
 AudioListener:
   m_ObjectHideFlags: 0
