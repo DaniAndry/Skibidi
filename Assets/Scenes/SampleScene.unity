@@ -1017,7 +1017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 3
-  _turnSpeed: 5
+  _turnSpeed: 3
 --- !u!114 &1728382453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1245,6 +1245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _offSet: {x: 0, y: 0.55, z: -0.8}
   _player: {fileID: 1728382457}
+  _speed: 5
 --- !u!81 &1868257261
 AudioListener:
   m_ObjectHideFlags: 0
