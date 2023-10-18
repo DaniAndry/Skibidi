@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Block : MonoBehaviour
@@ -8,7 +6,7 @@ public class Block : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Player player))
         {
-            player.Crashed();
+            player.Crash();
             gameObject.gameObject.SetActive(false);
         }
     }

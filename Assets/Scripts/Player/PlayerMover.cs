@@ -1,16 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private FixedJoystick _joystick;
+    [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] private float _turnSpeed = 3f;
 
-    private float _moveSpeed = 5f;
-    private float _turnSpeed = 3f;
     private Rigidbody _rigidbody;
     private Coroutine _speedCoroutine;
-    private WaitForSeconds _waitRestoreSpeed = new WaitForSeconds(0.5f);
+    private WaitForSeconds _waitRestoreSpeed = new WaitForSeconds(0.1f);
+
+    public float MoveSpeed => _moveSpeed;
 
     private void Start()
     {
@@ -49,27 +50,19 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
-    public void ChangeSpeed()
+    public void ChangeSpeed(float moveSpeed)
     {
-        float moveSpeed = _moveSpeed;
-        float turnSpeed = _turnSpeed;
-
-        _moveSpeed = 1f;
-        _turnSpeed = 1f;
-
-        _speedCoroutine = StartCoroutine(RestoreSpeed(moveSpeed, turnSpeed));
+        _speedCoroutine = StartCoroutine(RestoreSpeed(moveSpeed));
     }
 
-    private IEnumerator RestoreSpeed(float moveSpeed, float turnSpeed)
+    private IEnumerator RestoreSpeed(float moveSpeed)
     {
-        while (_moveSpeed < moveSpeed || _turnSpeed < turnSpeed)
+        float turnMultiplier = 1.6f;
+
+        while (_moveSpeed != moveSpeed)
         {
-            if (_moveSpeed < moveSpeed)
-                _moveSpeed++;
-
-            if (_turnSpeed < turnSpeed)
-                _turnSpeed++;
-
+            _moveSpeed = _moveSpeed < moveSpeed ? _moveSpeed + 1 : _moveSpeed > moveSpeed ? _moveSpeed - 1 : _moveSpeed;
+            _turnSpeed = _moveSpeed / turnMultiplier;
             yield return _waitRestoreSpeed;
         }
     }
