@@ -12,6 +12,8 @@ public class ChunksPlacer : MonoBehaviour
     private List<Chunk> _spawnedChunks = new List<Chunk>();
     private int _spawnLenght = 4;
 
+    public Chunk[] Chunks => _chunks;
+
     private void Start()
     {
         _spawnedChunks.Add(_firstChunk);
@@ -48,7 +50,7 @@ public class ChunksPlacer : MonoBehaviour
         newChunk.gameObject.SetActive(true);
         float position = _spawnedChunks[_spawnedChunks.Count - 1].transform.localScale.z;
         newChunk.transform.position = _spawnedChunks[_spawnedChunks.Count - 1].transform.position;
-        newChunk.transform.position += new Vector3(0,0, position);
+        newChunk.transform.position += new Vector3(0, 0, position);
 
         _spawnedChunks.Add(newChunk);
 
@@ -58,7 +60,7 @@ public class ChunksPlacer : MonoBehaviour
 
     private void DisableChunks()
     {
-        for(int i = 0; i < _spawnedChunks.Count - 1; i++)
+        for (int i = 0; i < _spawnedChunks.Count - 1; i++)
         {
             _spawnedChunks[i].gameObject.SetActive(false);
             _spawnedChunks.Remove(_spawnedChunks[i]);
