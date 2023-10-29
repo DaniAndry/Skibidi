@@ -21,7 +21,7 @@ public class MenuPresenter
 
     public void OnDisable()
     {
-        _model.StartedGame += OnStartedGame;
+        _model.StartedGame -= OnStartedGame;
         _view.ClickStart -= OnClickStart;
     }
 

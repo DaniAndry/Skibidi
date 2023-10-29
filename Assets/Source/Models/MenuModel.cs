@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class MenuModel : MonoBehaviour
+public class MenuModel
 {
     public event Action StartedGame;
 
