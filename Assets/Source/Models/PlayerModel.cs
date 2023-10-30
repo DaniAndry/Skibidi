@@ -27,7 +27,12 @@ public class PlayerModel
         StartedGame?.Invoke();
     }
 
-    public void Update(Transform transform)
+    public void UpMaxEnergy(float count)
+    {
+        MaxEnergy += count;
+    }
+
+    private void GiveEnergy(Transform transform)
     {
         float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
         _totalDistanceTraveled += distanceMoved;
@@ -37,5 +42,10 @@ public class PlayerModel
         _lastPosition = transform.position;
 
         EnergyChanged?.Invoke();
+    }
+
+    public void Update(Transform transform)
+    {
+        GiveEnergy(transform);
     }
 }
