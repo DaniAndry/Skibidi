@@ -6,7 +6,7 @@ public class PlayerPresenter
     private PlayerModel _model;
     private PlayerView _view;
     private Menu _viewMenu;
- 
+
     public PlayerPresenter(PlayerModel model, PlayerView view, Menu viewMenu)
     {
         _model = model;
@@ -21,6 +21,7 @@ public class PlayerPresenter
         _view.EnergyChanged += OnViewEnergyChanged;
         _view.UpdatePlayer += Update;
         _viewMenu.ClickStart += OnClickStart;
+    /*    _viewMenu.ClickUpgradeEnergy += OnClickUpgradeEnergy;*/
     }
 
     public void Disable()
@@ -30,11 +31,17 @@ public class PlayerPresenter
         _view.EnergyChanged -= OnViewEnergyChanged;
         _view.UpdatePlayer -= Update;
         _viewMenu.ClickStart -= OnClickStart;
+    /*    _viewMenu.ClickUpgradeEnergy -= OnClickUpgradeEnergy;*/
     }
 
     public void Update(Transform transform)
     {
         _model.Update(transform);
+    }
+
+    private void OnClickUpgradeEnergy(float count)
+    {
+        _model.UpMaxEnergy(count);
     }
 
     private void OnClickStart()

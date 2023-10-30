@@ -27,7 +27,7 @@ public class MenuPresenter
 
     private void OnStartedGame()
     {
-        _view.HideInterface();
+        _view.HideMenu();
     }
 
     private void OnClickStart()
