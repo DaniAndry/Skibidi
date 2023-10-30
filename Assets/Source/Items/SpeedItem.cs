@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class SpeedItem : MonoBehaviour
+public class SpeedItem : Item
 {
-    private float _count = 5f;
+    private float _value = 5f;
 
-    private void OnTriggerEnter(Collider collision)
+    protected override void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.TryGetComponent(out PlayerMoverView playerMoverView))
         {
-            playerMoverView.TakeSpeed(_count);
+            playerMoverView.TakeSpeed(_value);
             Destroy(gameObject);
         }
     }

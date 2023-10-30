@@ -4,7 +4,7 @@ public abstract class Item : MonoBehaviour
 {
     protected float Resourses;
 
-    private void OnTriggerEnter(Collider collision)
+    protected virtual void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.TryGetComponent(out PlayerView playerView))
         {
