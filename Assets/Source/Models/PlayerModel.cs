@@ -4,13 +4,16 @@ using UnityEngine;
 public class PlayerModel
 {
     private Vector3 _lastPosition;
-    private float _totalDistanceTraveled;
 
+    public int Money { get; private set; }
+    public float TotalDistanceTraveled { get; private set; }
     public float MaxEnergy { get; private set; } = 50f;
     public float CurrentEnergy { get; private set; }
 
     public event Action StartedGame;
     public event Action EnergyChanged;
+    public event Action DistanceChanging;
+    public event Action OnEnergyGone;
 
     public void Init()
     {
@@ -25,6 +28,7 @@ public class PlayerModel
     public void StartGame()
     {
         StartedGame?.Invoke();
+        TotalDistanceTraveled = 0;
     }
 
     public void UpMaxEnergy(float count)
@@ -34,14 +38,22 @@ public class PlayerModel
 
     private void GiveEnergy(Transform transform)
     {
-        float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
-        _totalDistanceTraveled += distanceMoved;
+        if (CurrentEnergy > 0)
+        {
+            float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
+            TotalDistanceTraveled += distanceMoved;
 
-        CurrentEnergy -= distanceMoved;
+            CurrentEnergy -= distanceMoved;
 
-        _lastPosition = transform.position;
+            _lastPosition = transform.position;
 
-        EnergyChanged?.Invoke();
+            DistanceChanging?.Invoke();
+            EnergyChanged?.Invoke();
+        }
+        else
+        {
+            OnEnergyGone?.Invoke();
+        }
     }
 
     public void Update(Transform transform)

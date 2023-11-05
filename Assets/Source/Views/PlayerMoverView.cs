@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -10,27 +8,26 @@ public class PlayerMoverView : MonoBehaviour
     [SerializeField] private TMP_Text _speed;
     [SerializeField] private CameraMover _cameraMover;
 
-    public event Action<float> OnMove;
-    public event Action<float> ChangeSpeedCrash;
-    public event Action<float> ChangeSpeedBoost;
-    public event Action UpdateMover;
+    public event Action<float> OnMoving;
+    public event Action<float> ChangingSpeedCrash;
+    public event Action<float> ChangingSpeedBoost;
+    public event Action OnEndGame;
 
     private void Update()
     {
         DecktopContorol();
         /*   MobileContorol();*/
-        UpdateMover?.Invoke();
     }
 
     public void TakeSpeed(float count)
     {
-        ChangeSpeedBoost?.Invoke(count);
+        ChangingSpeedBoost?.Invoke(count);
     }
 
     public void Crash()
     {
         float moveSpeed = 2;
-        ChangeSpeedCrash?.Invoke(moveSpeed);
+        ChangingSpeedCrash?.Invoke(moveSpeed);
     }
 
     public void SetSpeed(float speed)
@@ -46,20 +43,25 @@ public class PlayerMoverView : MonoBehaviour
     private void DecktopContorol()
     {
         if (Input.GetKey(KeyCode.A))
-            OnMove?.Invoke(-1);
+            OnMoving?.Invoke(-1);
         else if (Input.GetKey(KeyCode.D) || _joystick.Horizontal > 0)
-            OnMove?.Invoke(1);
+            OnMoving?.Invoke(1);
         else
-            OnMove?.Invoke(0);
+            OnMoving?.Invoke(0);
     }
 
     private void MobileContorol()
     {
         if (_joystick.Horizontal < 0f && _joystick.Horizontal > -1)
-            OnMove?.Invoke(-1);
+            OnMoving?.Invoke(-1);
         else if (_joystick.Horizontal > 0f && _joystick.Horizontal < 1)
-            OnMove?.Invoke(1);
+            OnMoving?.Invoke(1);
         else
-            OnMove?.Invoke(0);
+            OnMoving?.Invoke(0);
+    }
+
+    public void EndGame()
+    {
+        OnEndGame?.Invoke();
     }
 }

@@ -1,14 +1,13 @@
 using System;
 using UnityEngine;
 
-public class PlayerMoverModel : IPhysics, IUpdateable
+public class PlayerMoverModel
 {
     private float _turnSpeed = 3f;
     private float _moveVariableSpeed = 2f;
-    private Rigidbody _rigidbody;
+    private float _maxSpeed = 5f;
     private bool _isMove = false;
-
-    public float MoveSpeed { get; private set; } = 5f;
+    private Rigidbody _rigidbody;
 
     public event Action StartedGame;
     public event Action ChangedSpeed;
@@ -18,30 +17,29 @@ public class PlayerMoverModel : IPhysics, IUpdateable
         _rigidbody = rigidbody;
     }
 
-    public void SetVelocity(Vector3 velocity)
-    {
-        _rigidbody.velocity = velocity;
-    }
-
-    public Vector3 GetVelocity()
-    {
-        return _rigidbody.velocity;
-    }
+    public float MoveSpeed { get; private set; }
 
     public void Move(float coefficient)
     {
         if (_isMove)
         {
-            Vector3 velocity = GetVelocity();
+            Vector3 velocity = _rigidbody.velocity;
             velocity = new Vector3(_turnSpeed * coefficient, 0, MoveSpeed);
-            SetVelocity(velocity);
+            _rigidbody.velocity = velocity;
         }
     }
 
     public void StartGame()
     {
         _isMove = true;
+        MoveSpeed = _maxSpeed;
         StartedGame?.Invoke();
+    }
+
+    public void EndGame()
+    {
+        _isMove = false;
+        _rigidbody.velocity = Vector3.zero;
     }
 
     public void Update()

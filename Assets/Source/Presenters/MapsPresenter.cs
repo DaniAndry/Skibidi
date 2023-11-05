@@ -18,13 +18,13 @@ public class MapsPresenter
     public void OnEnable()
     {
         _view.ClickButtonClose += OnClickButtonClose;
-        _viewMenu.ClickMaps += OnClickMaps;
+        _viewMenu.ClickingMaps += OnClickMaps;
     }
 
     public void OnDisable()
     {
         _view.ClickButtonClose -= OnClickButtonClose;
-        _viewMenu.ClickMaps -= OnClickMaps;
+        _viewMenu.ClickingMaps -= OnClickMaps;
     }
 
     private void OnClickButtonClose()

@@ -8,14 +8,14 @@ public class SettingsView : Screen
 
     private float _currentSoundValue = 1f;
 
-    public event Action<float> ChangeSoundValue;
+    public event Action<float> ChangingSoundValue;
 
     private void Update()
     {
         if(_sound.value != _currentSoundValue)
         {
             _currentSoundValue = _sound.value;
-            ChangeSoundValue(_currentSoundValue);
+            ChangingSoundValue(_currentSoundValue);
         }
     }
 }
