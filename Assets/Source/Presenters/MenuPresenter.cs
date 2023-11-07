@@ -16,18 +16,18 @@ public class MenuPresenter
     public void OnEnable()
     {
         _model.StartedGame += OnStartedGame;
-        _view.ClickStart += OnClickStart;
+        _view.ClickingStart += OnClickStart;
     }
 
     public void OnDisable()
     {
         _model.StartedGame -= OnStartedGame;
-        _view.ClickStart -= OnClickStart;
+        _view.ClickingStart -= OnClickStart;
     }
 
     private void OnStartedGame()
     {
-        _view.HideMenu();
+        _view.CloseMenu();
     }
 
     private void OnClickStart()

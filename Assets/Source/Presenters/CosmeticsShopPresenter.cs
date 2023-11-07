@@ -16,13 +16,13 @@ public class CosmeticsShopPresenter
     public void OnEnable()
     {
         _view.ClickButtonClose += OnClickButtonClose;
-        _viewMenu.ClickCosmeticsShop += OnClickCosmeticsShop;
+        _viewMenu.ClickingCosmeticsShop += OnClickCosmeticsShop;
     }
 
     public void OnDisable() 
     { 
         _view.ClickButtonClose -= OnClickButtonClose;
-        _viewMenu.ClickCosmeticsShop -= OnClickCosmeticsShop;
+        _viewMenu.ClickingCosmeticsShop -= OnClickCosmeticsShop;
     }
 
     private void OnClickCosmeticsShop()

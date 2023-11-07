@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,12 +10,16 @@ public class Menu : MonoBehaviour
     [SerializeField] private Button _cosmeticsShopButton;
     [SerializeField] private Button _upgradeEnergyButton;
     [SerializeField] private Button _mapsButton;
+    [SerializeField] private TMP_Text _currentDistanceText;
+    [SerializeField] private TMP_Text _recordDistanceText;
 
-    public event Action ClickStart;
-    public event Action ClickSettings;
-    public event Action ClickCosmeticsShop;
-    public event Action ClickUpgradeEnergy;
-    public event Action ClickMaps;
+    private float _recordDistance;
+
+    public event Action ClickingStart;
+    public event Action ClickingSettings;
+    public event Action ClickingCosmeticsShop;
+    public event Action ClickingUpgradeEnergy;
+    public event Action ClickingMaps;
 
     private void OnEnable()
     {
@@ -34,33 +39,48 @@ public class Menu : MonoBehaviour
         _cosmeticsShopButton.onClick.RemoveListener(OnClickCosmeticsShop);
     }
 
-    public void HideMenu()
+    public void CloseMenu()
     {
         gameObject.SetActive(false);
     }
 
+    public void OpenMenu()
+    {
+        gameObject.SetActive(true);
+    }
+
     private void OnClickMaps()
     {
-        ClickMaps?.Invoke();
+        ClickingMaps?.Invoke();
     }
 
     private void OnClickUpgradeEnergy()
     {
-        ClickUpgradeEnergy?.Invoke();
+        ClickingUpgradeEnergy?.Invoke();
     }
 
    private void OnClickCosmeticsShop()
     {
-        ClickCosmeticsShop?.Invoke();
+        ClickingCosmeticsShop?.Invoke();
     }
 
     private void OnClickSettings()
     {
-        ClickSettings?.Invoke();
+        ClickingSettings?.Invoke();
     }
 
     private void OnClickStart()
     {
-        ClickStart?.Invoke();
+        ClickingStart?.Invoke();
+    }
+
+    public void SetDistance(float distance)
+    {
+        _currentDistanceText.text = $"{Convert.ToInt32(distance)}";
+
+        if(distance > _recordDistance)
+        {
+            _recordDistanceText.text = $"{Convert.ToInt32(distance)}";
+        }
     }
 }
