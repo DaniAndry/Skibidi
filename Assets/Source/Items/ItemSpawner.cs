@@ -3,15 +3,17 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> itemPrefabs = new List<GameObject>();
-    [SerializeField] private ChunksPlacer chunksPlacer;
+    [SerializeField] private List<GameObject> _itemPrefabs = new List<GameObject>();
+    [SerializeField] private ChunksPlacer _chunksPlacer;
     [SerializeField] private PlayerView _player;
+    [SerializeField] private BoostItemFactory _boostItemFactory;
+    [SerializeField] private OtherItemFactory _otherItemFactory;
 
     private Dictionary<Chunk, List<GameObject>> spawnedItems = new Dictionary<Chunk, List<GameObject>>();
 
     private void Awake()
     {
-        foreach (var chunk in chunksPlacer.Chunks)
+        foreach (var chunk in _chunksPlacer.Chunks)
         {
             chunk.Spawned += OnChunkSpawned;
             chunk.Deactivated += OnChunkDeactivated;
@@ -20,7 +22,7 @@ public class ItemSpawner : MonoBehaviour
 
     private void OnDisable()
     {
-        foreach (var chunk in chunksPlacer.Chunks)
+        foreach (var chunk in _chunksPlacer.Chunks)
         {
             chunk.Spawned -= OnChunkSpawned;
             chunk.Deactivated -= OnChunkDeactivated;
@@ -29,17 +31,18 @@ public class ItemSpawner : MonoBehaviour
 
     private void OnChunkSpawned(Chunk chunk)
     {
-        if (itemPrefabs.Count == 0) return;
+        if (_itemPrefabs.Count == 0) return;
 
-        GameObject randomItemPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Count)];
-        Vector3 spawnPosition = GetRandomPositionOnChunk(chunk);
-        GameObject spawnedItem = Instantiate(randomItemPrefab, spawnPosition, Quaternion.identity);
+        GameObject randomItemPrefab = _itemPrefabs[Random.Range(0, _itemPrefabs.Count)];
+        ItemFactory factory = ChooseFactory(randomItemPrefab);
+        GameObject spawnedItem = factory.CreateItem(randomItemPrefab, chunk, _player);
 
         if (!spawnedItems.ContainsKey(chunk))
             spawnedItems[chunk] = new List<GameObject>();
 
         spawnedItems[chunk].Add(spawnedItem);
     }
+
 
     private void OnChunkDeactivated(Chunk chunk)
     {
@@ -51,24 +54,15 @@ public class ItemSpawner : MonoBehaviour
         spawnedItems[chunk].Clear();
     }
 
-    private Vector3 GetRandomPositionOnChunk(Chunk chunk)
+    private ItemFactory ChooseFactory(GameObject prefab)
     {
-        Collider chunkCollider = chunk.GetComponent<Collider>();
-
-        if (chunkCollider == null)
+        if (prefab.GetComponent<OtherItem>() != null)
         {
-            Debug.LogError("Chunk does not have a Collider component!");
-            return Vector3.zero;
+            return _otherItemFactory;
         }
-
-        Bounds bounds = chunkCollider.bounds;
-        Vector3 chunkCenter = chunk.transform.position;
-        Vector3 extents = bounds.extents;
-
-        float randomX = chunkCenter.x + Random.Range(-extents.x, extents.x);
-        float randomY = bounds.max.y + 0.3f; 
-        
-        return new Vector3(randomX, randomY, _player.transform.position.z +5);
+        else
+        {
+            return _boostItemFactory;
+        }
     }
-
 }
