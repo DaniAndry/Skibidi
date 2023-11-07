@@ -7,6 +7,7 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private TMP_Text _distance;
     [SerializeField] private TMP_Text _energy;
     [SerializeField] private Canvas _headUpDisplay;
+    [SerializeField] private TMP_Text _money;
 
     public event Action<float> EnergyChanging;
 
@@ -28,6 +29,11 @@ public class PlayerView : MonoBehaviour
     public void SetDistance(float distance)
     {
         _distance.text = $"{Convert.ToInt32(distance)}";
+    }
+
+    public void SetMoney(int money)
+    {
+        _money.text = $"{money}";
     }
 
     public void SetEnergy(float energyAmount)

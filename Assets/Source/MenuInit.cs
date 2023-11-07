@@ -5,7 +5,6 @@ public class MenuInit : MonoBehaviour
     [SerializeField] private SettingsView _viewSettings;
     [SerializeField] private Menu _viewMenu;
     [SerializeField] private CosmeticsShopView _viewCosmeticsShop;
-    [SerializeField] private UpgradeView _viewUpgrade;
     [SerializeField] private MapsView _viewMaps;
     [SerializeField] private EndScreenView _viewEndScreen;
 

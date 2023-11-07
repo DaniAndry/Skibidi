@@ -11,6 +11,7 @@ public class PlayerInit : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private PlayerMoverPresenter _moverPresenter;
     [SerializeField] private PlayerPresenter _presenter;
+    [SerializeField] private EnergyUpgrade _energyUpgrade;
 
     private PlayerModel _model;
     private PlayerMoverModel _moverModel;
@@ -20,7 +21,7 @@ public class PlayerInit : MonoBehaviour
         _model = new PlayerModel();
         _moverModel = new PlayerMoverModel(_rigidbody);
 
-        _presenter.Init(_model, _view, _viewMenu, _viewEndScreen,_viewMover);
+        _presenter.Init(_model, _view, _viewMenu, _viewEndScreen,_viewMover, _energyUpgrade);
         _moverPresenter.Init(_moverModel, _viewMover, _viewMenu);
     }
 

@@ -5,10 +5,9 @@ public class PlayerMoverModel
 {
     private float _turnSpeed;
     private float _moveVariableSpeed;
-    private float _maxSpeed = 5f;
-    private float _maxTurnSpeed = 3f;
     private bool _isMove = false;
-    private Rigidbody _rigidbody;
+    private readonly float _maxSpeed = 5f;
+    private readonly Rigidbody _rigidbody;
 
     public event Action StartedGame;
     public event Action ChangedSpeed;
