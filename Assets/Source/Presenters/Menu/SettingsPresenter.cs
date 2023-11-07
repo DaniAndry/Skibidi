@@ -17,16 +17,16 @@ public class SettingsPresenter
 
     public void OnEnable()
     {
-        _view.ChangeSoundValue += OnChangeSoundValue;
+        _view.ChangingSoundValue += OnChangeSoundValue;
         _view.ClickButtonClose += OnClickButtonClose;
-        _viewMenu.ClickSettings += OnClickSettings;
+        _viewMenu.ClickingSettings += OnClickSettings;
     }
 
     public void OnDisable()
     {
-        _view.ChangeSoundValue -= OnChangeSoundValue;
+        _view.ChangingSoundValue -= OnChangeSoundValue;
         _view.ClickButtonClose -= OnClickButtonClose;
-        _viewMenu.ClickSettings -= OnClickSettings;
+        _viewMenu.ClickingSettings -= OnClickSettings;
     }
 
     private void OnClickSettings()

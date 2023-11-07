@@ -1,20 +1,13 @@
 using UnityEngine;
 using System;
 
-public class PlayerMoverPresenter
+public class PlayerMoverPresenter : MonoBehaviour
 {
     private PlayerMoverModel _model;
     private PlayerMoverView _view;
     private Menu _viewMenu;
-    private IUpdateable _iupdateable = null;
 
-    public void Init()
-    {
-        if (_model is IUpdateable)
-            _iupdateable = (IUpdateable)_model;
-    }
-
-    public PlayerMoverPresenter(PlayerMoverModel model, PlayerMoverView view, Menu viewMenu)
+    public void Init(PlayerMoverModel model, PlayerMoverView view, Menu viewMenu)
     {
         _model = model;
         _view = view;
@@ -25,27 +18,27 @@ public class PlayerMoverPresenter
     {
         _model.StartedGame += OnStartedGame;
         _model.ChangedSpeed += OnSpeedChanged;
-        _viewMenu.ClickStart += OnClickStart;
-        _view.OnMove += Move;
-        _view.ChangeSpeedCrash += ChangeSpeedCrash;
-        _view.ChangeSpeedBoost += ChangeSpeedBoost;
-        _view.UpdateMover += Update;
+        _viewMenu.ClickingStart += StartGame;
+        _view.OnMoving += Move;
+        _view.ChangingSpeedCrash += ChangeSpeedCrash;
+        _view.ChangingSpeedBoost += ChangeSpeedBoost;
+        _view.OnEndGame += EndGame;
     }
 
     public void Disable()
     {
         _model.StartedGame -= OnStartedGame;
         _model.ChangedSpeed -= OnSpeedChanged;
-        _view.OnMove -= Move;
-        _view.ChangeSpeedCrash -= ChangeSpeedCrash;
-        _view.ChangeSpeedBoost -= ChangeSpeedBoost;
-        _view.UpdateMover -= Update;
-        _viewMenu.ClickStart -= OnClickStart;
+        _view.OnMoving -= Move;
+        _view.ChangingSpeedCrash -= ChangeSpeedCrash;
+        _view.ChangingSpeedBoost -= ChangeSpeedBoost;
+        _viewMenu.ClickingStart -= StartGame;
+        _view.OnEndGame -= EndGame;
     }
 
     private void Update()
     {
-        _iupdateable?.Update();
+        _model?.Update();
     }
 
     private void OnStartedGame()
@@ -53,7 +46,12 @@ public class PlayerMoverPresenter
         _view.StartGame();
     }
 
-    private void OnClickStart()
+    private void EndGame()
+    {
+        _model.EndGame();
+    }
+
+    private void StartGame()
     {
         _model.StartGame();
     }

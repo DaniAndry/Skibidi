@@ -4,16 +4,23 @@ using UnityEngine;
 public class PlayerModel
 {
     private Vector3 _lastPosition;
-    private float _totalDistanceTraveled;
+    private bool _isEnergyGone = false;
 
+    public int Money { get; private set; } = 50;
+    public float TotalDistanceTraveled { get; private set; }
     public float MaxEnergy { get; private set; } = 50f;
     public float CurrentEnergy { get; private set; }
 
     public event Action StartedGame;
     public event Action EnergyChanged;
+    public event Action DistanceChanging;
+    public event Action OnEnergyGone;
+    public event Action OnEnergyUpgraded;
+    public event Action OnErrorUpgraded;
 
     public void Init()
     {
+        LoadPlayer();
         CurrentEnergy = MaxEnergy;
     }
 
@@ -25,27 +32,63 @@ public class PlayerModel
     public void StartGame()
     {
         StartedGame?.Invoke();
+        TotalDistanceTraveled = 0;
     }
 
-    public void UpMaxEnergy(float count)
+    public void UpMaxEnergy(int price, float energy)
     {
-        MaxEnergy += count;
+        if (Money >= price)
+        {
+            Money -= price;
+            MaxEnergy += energy;
+            OnEnergyUpgraded?.Invoke();
+        }
+        else
+            OnErrorUpgraded?.Invoke();
     }
 
     private void GiveEnergy(Transform transform)
     {
-        float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
-        _totalDistanceTraveled += distanceMoved;
+        if (CurrentEnergy > 0)
+        {
+            float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
+            TotalDistanceTraveled += distanceMoved;
 
-        CurrentEnergy -= distanceMoved;
+            CurrentEnergy -= distanceMoved;
 
-        _lastPosition = transform.position;
+            _lastPosition = transform.position;
 
-        EnergyChanged?.Invoke();
+            DistanceChanging?.Invoke();
+            EnergyChanged?.Invoke();
+
+            _isEnergyGone = false;
+        }
+        else if (_isEnergyGone == false)
+        {
+            OnEnergyGone?.Invoke();
+            _isEnergyGone = true;
+        }
     }
 
     public void Update(Transform transform)
     {
         GiveEnergy(transform);
+    }
+
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(this);
+    }
+
+    public void LoadPlayer()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+
+        if (data != null)
+        {
+            MaxEnergy = data.Energy;
+            Money = data.Money;
+            TotalDistanceTraveled = data.TotalDistance;
+        }
     }
 }

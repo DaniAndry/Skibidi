@@ -2,33 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSetup : MonoBehaviour
+public class PlayerInit : MonoBehaviour
 {
     [SerializeField] private PlayerView _view;
     [SerializeField] private Menu _viewMenu;
-    [SerializeField] private PlayerMoverView _moverView;
+    [SerializeField] private PlayerMoverView _viewMover;
+    [SerializeField] private EndScreenView _viewEndScreen;
     [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private PlayerMoverPresenter _moverPresenter;
+    [SerializeField] private PlayerPresenter _presenter;
+    [SerializeField] private EnergyUpgrade _energyUpgrade;
 
     private PlayerModel _model;
     private PlayerMoverModel _moverModel;
-    private PlayerPresenter _presenter;
-    private PlayerMoverPresenter _moverPresenter;
 
     private void Awake()
     {
         _model = new PlayerModel();
-        _presenter = new PlayerPresenter(_model, _view, _viewMenu);
         _moverModel = new PlayerMoverModel(_rigidbody);
-        _moverPresenter = new PlayerMoverPresenter(_moverModel, _moverView, _viewMenu);
 
-        _moverPresenter.Init();
+        _presenter.Init(_model, _view, _viewMenu, _viewEndScreen,_viewMover, _energyUpgrade);
+        _moverPresenter.Init(_moverModel, _viewMover, _viewMenu);
     }
 
     private void OnEnable()
     {
         _presenter.Enable();
         _moverPresenter.Enable();
-
     }
 
     private void OnDisable()

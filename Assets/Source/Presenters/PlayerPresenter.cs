@@ -1,52 +1,103 @@
 using System;
 using UnityEngine;
 
-public class PlayerPresenter
+public class PlayerPresenter : MonoBehaviour
 {
     private PlayerModel _model;
     private PlayerView _view;
     private Menu _viewMenu;
+    private EndScreenView _viewEndScreen;
+    private PlayerMoverView _viewMover;
+    private EnergyUpgrade _energyUpgrade;
 
-    public PlayerPresenter(PlayerModel model, PlayerView view, Menu viewMenu)
+    public void Init(PlayerModel model, PlayerView view, Menu viewMenu, EndScreenView viewEndScreen, PlayerMoverView viewMover, EnergyUpgrade energyUpgrade)
     {
         _model = model;
         _view = view;
         _viewMenu = viewMenu;
+        _viewEndScreen = viewEndScreen;
+        _viewMover = viewMover;
+        _energyUpgrade = energyUpgrade;
+    }
+
+    private void Awake()
+    {
+        _model?.Init();
+        UpdateMoney();
+        _viewMenu.SetDistance(_model.TotalDistanceTraveled);    
     }
 
     public void Enable()
     {
+        _model.OnErrorUpgraded += ErrorUpgrade;
+        _model.OnEnergyUpgraded += EnergyUpgraded;
+        _model.OnEnergyGone += EndGame;
+        _model.DistanceChanging += OnDistanceChanged;
         _model.StartedGame += OnStartedgame;
         _model.EnergyChanged += OnEnergyChanged;
-        _view.EnergyChanged += OnViewEnergyChanged;
-        _view.UpdatePlayer += Update;
-        _viewMenu.ClickStart += OnClickStart;
-    /*    _viewMenu.ClickUpgradeEnergy += OnClickUpgradeEnergy;*/
+        _view.EnergyChanging += OnViewEnergyChanged;
+        _viewMenu.ClickingStart += OnClickStart;
+        _energyUpgrade.ClickingUpgrade += OnClickUpgradeEnergy;
     }
 
     public void Disable()
     {
+        _model.OnErrorUpgraded -= ErrorUpgrade;
+        _model.OnEnergyUpgraded -= EnergyUpgraded;
+        _model.OnEnergyGone -= EndGame;
+        _model.DistanceChanging -= OnDistanceChanged;
         _model.StartedGame -= OnStartedgame;
         _model.EnergyChanged -= OnEnergyChanged;
-        _view.EnergyChanged -= OnViewEnergyChanged;
-        _view.UpdatePlayer -= Update;
-        _viewMenu.ClickStart -= OnClickStart;
-    /*    _viewMenu.ClickUpgradeEnergy -= OnClickUpgradeEnergy;*/
+        _view.EnergyChanging -= OnViewEnergyChanged;
+        _viewMenu.ClickingStart -= OnClickStart;
+        _energyUpgrade.ClickingUpgrade -= OnClickUpgradeEnergy;
     }
 
-    public void Update(Transform transform)
+    private void Update()
     {
-        _model.Update(transform);
+        _model?.Update(_view.transform);
     }
 
-    private void OnClickUpgradeEnergy(float count)
+    private void OnClickUpgradeEnergy()
     {
-        _model.UpMaxEnergy(count);
+        _model.UpMaxEnergy(_energyUpgrade.Price, _energyUpgrade.AmountEnergy);
+    }
+
+    private void ErrorUpgrade()
+    {
+        _energyUpgrade.ErrorUpgrade();
+    }
+
+    private void EnergyUpgraded()
+    {
+        _energyUpgrade.Upgrade();
+        UpdateMoney();
+        OnEnergyChanged();
+    }
+
+    private void UpdateMoney()
+    {
+        _view.SetMoney(_model.Money);
+        _viewMenu.SetMoney(_model.Money);
+    }
+
+    private void OnDistanceChanged()
+    {
+        _view.SetDistance(_model.TotalDistanceTraveled);
     }
 
     private void OnClickStart()
     {
+        _model.Init();
         _model.StartGame();
+    }
+
+    private void EndGame()
+    {
+        _model.SavePlayer();
+        _viewMover.EndGame();
+        _viewEndScreen.OpenEndScreen();
+        _viewEndScreen.SetData(_model.Money, _model.TotalDistanceTraveled);
     }
 
     private void OnStartedgame()
@@ -63,5 +114,4 @@ public class PlayerPresenter
     {
         _model.TakeEnergy(energyAmount);
     }
-
 }

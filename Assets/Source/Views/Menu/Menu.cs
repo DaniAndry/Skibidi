@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,19 +8,21 @@ public class Menu : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Button _cosmeticsShopButton;
-    [SerializeField] private Button _upgradeEnergyButton;
     [SerializeField] private Button _mapsButton;
+    [SerializeField] private TMP_Text _currentDistanceText;
+    [SerializeField] private TMP_Text _recordDistanceText;
+    [SerializeField] private TMP_Text _money;
 
-    public event Action ClickStart;
-    public event Action ClickSettings;
-    public event Action ClickCosmeticsShop;
-    public event Action ClickUpgradeEnergy;
-    public event Action ClickMaps;
+    private float _recordDistance;
+
+    public event Action ClickingStart;
+    public event Action ClickingSettings;
+    public event Action ClickingCosmeticsShop;
+    public event Action ClickingMaps;
 
     private void OnEnable()
     {
         _mapsButton.onClick.AddListener(OnClickMaps);
-        _upgradeEnergyButton.onClick.AddListener(OnClickUpgradeEnergy);
         _startButton.onClick.AddListener(OnClickStart);
         _settingsButton.onClick.AddListener(OnClickSettings);
         _cosmeticsShopButton.onClick.AddListener(OnClickCosmeticsShop);
@@ -28,39 +31,53 @@ public class Menu : MonoBehaviour
     private void OnDisable()
     {
         _mapsButton.onClick.RemoveListener(OnClickMaps);
-        _upgradeEnergyButton.onClick.RemoveListener(OnClickUpgradeEnergy);
         _startButton.onClick.RemoveListener(OnClickStart);
         _settingsButton.onClick.RemoveListener(OnClickSettings);
         _cosmeticsShopButton.onClick.RemoveListener(OnClickCosmeticsShop);
     }
 
-    public void HideMenu()
+    public void CloseMenu()
     {
         gameObject.SetActive(false);
     }
 
-    private void OnClickMaps()
+    public void OpenMenu()
     {
-        ClickMaps?.Invoke();
+        gameObject.SetActive(true);
     }
 
-    private void OnClickUpgradeEnergy()
+    private void OnClickMaps()
     {
-        ClickUpgradeEnergy?.Invoke();
+        ClickingMaps?.Invoke();
     }
 
    private void OnClickCosmeticsShop()
     {
-        ClickCosmeticsShop?.Invoke();
+        ClickingCosmeticsShop?.Invoke();
     }
 
     private void OnClickSettings()
     {
-        ClickSettings?.Invoke();
+        ClickingSettings?.Invoke();
     }
 
     private void OnClickStart()
     {
-        ClickStart?.Invoke();
+        ClickingStart?.Invoke();
+    }
+
+    public void SetMoney(int money)
+    {
+        _money.text = $"{money}";
+    }
+
+    public void SetDistance(float distance)
+    {
+        _currentDistanceText.text = $"{Convert.ToInt32(distance)}";
+
+        if(distance > _recordDistance)
+        {
+            _recordDistanceText.text = $"{Convert.ToInt32(distance)}";
+        }
     }
 }
