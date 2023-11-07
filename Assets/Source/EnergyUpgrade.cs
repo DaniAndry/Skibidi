@@ -11,7 +11,6 @@ public class EnergyUpgrade : MonoBehaviour
     private Button _button;
     private readonly int _additionPrice = 10;
     private readonly float _additionEnergy = 20;
-    private int _countUpgrades = 1;
 
     public event Action ClickingUpgrade;
 
@@ -21,6 +20,7 @@ public class EnergyUpgrade : MonoBehaviour
     private void Awake()
     {
         _button = GetComponent<Button>();
+        LoadEnergyUpgrade();
     }
 
     private void OnEnable()
@@ -33,25 +33,15 @@ public class EnergyUpgrade : MonoBehaviour
         _button.onClick.RemoveListener(OnClickUpdate);
     }
 
-    /* public void LoadSave()
-     {
-         _countUpgrades = PlayerPrefs.GetInt("asd");
-
-         _amountEnergy += _additionEnergy * _countUpgrades;
-         Price += _additionPrice * _countUpgrades;
-
-         _currentEnergy.text = $"+{_additionEnergy}";
-         _currentPrice.text = $"{Price}";
-     }*/
-
     public void Upgrade()
     {
-        _countUpgrades++;
         Price += _additionPrice;
         AmountEnergy += _additionEnergy;
 
         _currentEnergy.text = $"+{_additionEnergy}";
         _currentPrice.text = $"{Price}";
+
+        SaveEnergyUpgrade();
     }
 
     public void ErrorUpgrade()
@@ -62,5 +52,24 @@ public class EnergyUpgrade : MonoBehaviour
     private void OnClickUpdate()
     {
         ClickingUpgrade?.Invoke();
+    }
+
+    private void SaveEnergyUpgrade()
+    {
+        SaveSystem.SaveEnergyUpgrade(this);
+    }
+
+    private void LoadEnergyUpgrade()
+    {
+        UpgradeData data = SaveSystem.LoadEnergyUpgrade();
+
+        if (data != null)
+        {
+            AmountEnergy = data.AmountEnergy;
+            Price = data.Price;
+
+        }
+            _currentEnergy.text = $"+{_additionEnergy}";
+            _currentPrice.text = $"{Price}";
     }
 }

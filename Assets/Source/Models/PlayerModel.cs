@@ -20,6 +20,7 @@ public class PlayerModel
 
     public void Init()
     {
+        LoadPlayer();
         CurrentEnergy = MaxEnergy;
     }
 
@@ -72,5 +73,22 @@ public class PlayerModel
     public void Update(Transform transform)
     {
         GiveEnergy(transform);
+    }
+
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(this);
+    }
+
+    public void LoadPlayer()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+
+        if (data != null)
+        {
+            MaxEnergy = data.Energy;
+            Money = data.Money;
+            TotalDistanceTraveled = data.TotalDistance;
+        }
     }
 }

@@ -20,10 +20,11 @@ public class PlayerPresenter : MonoBehaviour
         _energyUpgrade = energyUpgrade;
     }
 
-    private void Start()
+    private void Awake()
     {
         _model?.Init();
         UpdateMoney();
+        _viewMenu.SetDistance(_model.TotalDistanceTraveled);    
     }
 
     public void Enable()
@@ -87,12 +88,13 @@ public class PlayerPresenter : MonoBehaviour
 
     private void OnClickStart()
     {
-        _model.StartGame();
         _model.Init();
+        _model.StartGame();
     }
 
     private void EndGame()
     {
+        _model.SavePlayer();
         _viewMover.EndGame();
         _viewEndScreen.OpenEndScreen();
         _viewEndScreen.SetData(_model.Money, _model.TotalDistanceTraveled);

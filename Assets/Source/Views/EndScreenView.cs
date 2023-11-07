@@ -28,7 +28,7 @@ public class EndScreenView : MonoBehaviour
 
     public void SetData(int money, float distance)
     {
-        _distance.text = $"{distance}";
+        _distance.text = $"{Convert.ToInt32(distance)}";
         _money.text = $"{money}";
     }
 
