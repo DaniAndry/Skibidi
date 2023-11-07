@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ItemController : MonoBehaviour
 {
-    [SerializeField] private List<ItemView> _items = new List<ItemView>();
+    private List<ItemView> _items = new List<ItemView>();
 
     public event Action ItemsClearedDueToMismatch;
     public event Action ItemsClearedDueToMatch;
