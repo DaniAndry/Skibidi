@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndScreenPresenter
 {
@@ -28,6 +29,6 @@ public class EndScreenPresenter
     private void OnClickExitMenu()
     {
         _view.CloseEndScreen();
-        _viewMenu.OpenMenu();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

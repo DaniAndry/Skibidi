@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerModel
 {
     private Vector3 _lastPosition;
+    private bool _isEnergyGone = false;
 
     public int Money { get; private set; }
     public float TotalDistanceTraveled { get; private set; }
@@ -49,10 +50,13 @@ public class PlayerModel
 
             DistanceChanging?.Invoke();
             EnergyChanged?.Invoke();
+
+            _isEnergyGone = false;
         }
-        else
+        else if(_isEnergyGone == false)
         {
             OnEnergyGone?.Invoke();
+            _isEnergyGone = true;
         }
     }
 

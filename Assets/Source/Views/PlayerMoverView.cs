@@ -8,10 +8,17 @@ public class PlayerMoverView : MonoBehaviour
     [SerializeField] private TMP_Text _speed;
     [SerializeField] private CameraMover _cameraMover;
 
+    private Vector3 _startPosition = new Vector3(0, 0, 0);
+
     public event Action<float> OnMoving;
     public event Action<float> ChangingSpeedCrash;
     public event Action<float> ChangingSpeedBoost;
     public event Action OnEndGame;
+
+    private void Start()
+    {
+        _cameraMover.SetStartPosition();
+    }
 
     private void Update()
     {
@@ -33,6 +40,17 @@ public class PlayerMoverView : MonoBehaviour
     public void SetSpeed(float speed)
     {
         _speed.text = Convert.ToInt32(speed).ToString();
+    }
+
+    public void SetPlayerStartPosition()
+    {
+        transform.position = _startPosition;
+    }
+
+    public void SetCameraPosition()
+    {
+        _cameraMover.SetStartPosition();
+        _cameraMover.enabled = false;
     }
 
     public void StartGame()

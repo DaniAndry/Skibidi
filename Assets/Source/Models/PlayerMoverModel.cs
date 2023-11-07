@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class PlayerMoverModel
 {
-    private float _turnSpeed = 3f;
-    private float _moveVariableSpeed = 2f;
+    private float _turnSpeed;
+    private float _moveVariableSpeed;
     private float _maxSpeed = 5f;
+    private float _maxTurnSpeed = 3f;
     private bool _isMove = false;
     private Rigidbody _rigidbody;
 
@@ -23,17 +24,19 @@ public class PlayerMoverModel
     {
         if (_isMove)
         {
-            Vector3 velocity = _rigidbody.velocity;
-            velocity = new Vector3(_turnSpeed * coefficient, 0, MoveSpeed);
-            _rigidbody.velocity = velocity;
+            _rigidbody.velocity = new Vector3(_turnSpeed * coefficient, 0, MoveSpeed);
         }
     }
 
     public void StartGame()
     {
-        _isMove = true;
         MoveSpeed = _maxSpeed;
+        _moveVariableSpeed = _maxSpeed;
+        _turnSpeed = _maxSpeed;
+        _isMove = true;
+
         StartedGame?.Invoke();
+        ChangedSpeed?.Invoke();
     }
 
     public void EndGame()

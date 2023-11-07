@@ -55,14 +55,6 @@ public class PlayerPresenter : MonoBehaviour
         _model.UpMaxEnergy(count);
     }*/
 
-    private void EndGame()
-    {
-        _view.EndGame();
-        _viewEndScreen.OpenEndScreen();
-        _viewEndScreen.SetDate(_model.Money, _model.CurrentEnergy);
-        _viewMover.EndGame();
-    }
-
     private void OnDistanceChanged()
     {
         _view.SetDistance(_model.TotalDistanceTraveled);
@@ -72,6 +64,13 @@ public class PlayerPresenter : MonoBehaviour
     {
         _model.StartGame();
         _model.Init();
+    }
+
+    private void EndGame()
+    {
+        _viewMover.EndGame();
+        _viewEndScreen.OpenEndScreen();
+        _viewEndScreen.SetData(_model.Money, _model.TotalDistanceTraveled);
     }
 
     private void OnStartedgame()

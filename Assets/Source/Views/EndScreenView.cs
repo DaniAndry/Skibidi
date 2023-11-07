@@ -8,7 +8,6 @@ public class EndScreenView : MonoBehaviour
     [SerializeField] private Button _exitButton;
     [SerializeField] private TMP_Text _distance;
     [SerializeField] private TMP_Text _money;
-    [SerializeField] private Canvas _exitScreen;
 
     public event Action ClickingExitMenu;
 
@@ -27,7 +26,7 @@ public class EndScreenView : MonoBehaviour
         ClickingExitMenu?.Invoke();
     }
 
-    public void SetDate(int money, float distance)
+    public void SetData(int money, float distance)
     {
         _distance.text = $"{distance}";
         _money.text = $"{money}";
@@ -35,11 +34,11 @@ public class EndScreenView : MonoBehaviour
 
     public void OpenEndScreen()
     {
-        _exitScreen.enabled = true;
+        gameObject.SetActive(true);
     }
 
     public void CloseEndScreen()
     {
-        _exitScreen.enabled = false;
+        gameObject.SetActive(false);
     }
 }

@@ -16,24 +16,24 @@ public class PlayerMoverPresenter : MonoBehaviour
 
     public void Enable()
     {
-        _view.OnEndGame += EndGame;  
         _model.StartedGame += OnStartedGame;
         _model.ChangedSpeed += OnSpeedChanged;
         _viewMenu.ClickingStart += StartGame;
         _view.OnMoving += Move;
         _view.ChangingSpeedCrash += ChangeSpeedCrash;
         _view.ChangingSpeedBoost += ChangeSpeedBoost;
+        _view.OnEndGame += EndGame;
     }
 
     public void Disable()
     {
-        _view.OnEndGame -= EndGame;  
         _model.StartedGame -= OnStartedGame;
         _model.ChangedSpeed -= OnSpeedChanged;
         _view.OnMoving -= Move;
         _view.ChangingSpeedCrash -= ChangeSpeedCrash;
         _view.ChangingSpeedBoost -= ChangeSpeedBoost;
         _viewMenu.ClickingStart -= StartGame;
+        _view.OnEndGame -= EndGame;
     }
 
     private void Update()
@@ -48,7 +48,7 @@ public class PlayerMoverPresenter : MonoBehaviour
 
     private void EndGame()
     {
-        _model.EndGame();    
+        _model.EndGame();
     }
 
     private void StartGame()
