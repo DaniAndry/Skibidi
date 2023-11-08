@@ -23,7 +23,13 @@ public class PlayerMoverModel
     {
         if (_isMove)
         {
-            _rigidbody.velocity = new Vector3(_turnSpeed * coefficient, 0, MoveSpeed);
+            Vector3 currentPosition = _rigidbody.position;
+
+            float newXPosition = currentPosition.x + _turnSpeed * coefficient * Time.deltaTime;
+            newXPosition = Mathf.Clamp(newXPosition, -1f, 1f);
+
+            _rigidbody.position = new Vector3(newXPosition, currentPosition.y, currentPosition.z);
+            _rigidbody.velocity = new Vector3(0, 0, MoveSpeed);
         }
     }
 
