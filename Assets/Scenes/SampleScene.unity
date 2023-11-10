@@ -4000,6 +4000,7 @@ MonoBehaviour:
   _moverPresenter: {fileID: 1147137974}
   _presenter: {fileID: 1147137975}
   _energyUpgrade: {fileID: 1725831396}
+  _animator: {fileID: 1880608638}
 --- !u!4 &654894316
 Transform:
   m_ObjectHideFlags: 0

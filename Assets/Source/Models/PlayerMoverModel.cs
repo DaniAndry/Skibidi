@@ -8,13 +8,17 @@ public class PlayerMoverModel
     private bool _isMove = false;
     private readonly float _maxSpeed = 5f;
     private readonly Rigidbody _rigidbody;
+    private readonly Animator _animator;
+    private readonly int RunState = Animator.StringToHash("RunState");
+    private readonly int CrashState = Animator.StringToHash("CrashState");
 
     public event Action StartedGame;
     public event Action ChangedSpeed;
 
-    public PlayerMoverModel(Rigidbody rigidbody)
+    public PlayerMoverModel(Rigidbody rigidbody, Animator animator)
     {
         _rigidbody = rigidbody;
+        _animator = animator;
     }
 
     public float MoveSpeed { get; private set; }
@@ -42,6 +46,8 @@ public class PlayerMoverModel
 
         StartedGame?.Invoke();
         ChangedSpeed?.Invoke();
+
+        _animator.Play(RunState);
     }
 
     public void EndGame()
@@ -58,6 +64,7 @@ public class PlayerMoverModel
     public void ChangeSpeedCrash(float moveSpeed)
     {
         _moveVariableSpeed = moveSpeed;
+        _animator.Play(CrashState);
     }
 
     public void ChangeSpeedBoost(float moveSpeed)

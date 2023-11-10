@@ -10,6 +10,7 @@ public class PlayerInit : MonoBehaviour
     [SerializeField] private PlayerMoverPresenter _moverPresenter;
     [SerializeField] private PlayerPresenter _presenter;
     [SerializeField] private EnergyUpgrade _energyUpgrade;
+    [SerializeField] private Animator _animator;
 
     private PlayerModel _model;
     private PlayerMoverModel _moverModel;
@@ -17,7 +18,7 @@ public class PlayerInit : MonoBehaviour
     private void Awake()
     {
         _model = new PlayerModel();
-        _moverModel = new PlayerMoverModel(_rigidbody);
+        _moverModel = new PlayerMoverModel(_rigidbody, _animator);
 
         _presenter.Init(_model, _view, _viewMenu, _viewEndScreen,_viewMover, _energyUpgrade);
         _moverPresenter.Init(_moverModel, _viewMover, _viewMenu);
