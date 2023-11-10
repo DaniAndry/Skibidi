@@ -4376,6 +4376,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2709099908643109447, guid: 406a2c802beba0845964dcb90b5f73fe, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 406a2c802beba0845964dcb90b5f73fe, type: 3}
       propertyPath: m_Name
       value: Slow Run
@@ -4383,6 +4387,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 65702495048144492, guid: 406a2c802beba0845964dcb90b5f73fe, type: 3}
+    - {fileID: -8700617353114198275, guid: 406a2c802beba0845964dcb90b5f73fe, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 406a2c802beba0845964dcb90b5f73fe, type: 3}
       insertIndex: -1

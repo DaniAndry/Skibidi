@@ -9,8 +9,10 @@ public class PlayerMoverModel
     private readonly float _maxSpeed = 5f;
     private readonly Rigidbody _rigidbody;
     private readonly Animator _animator;
+
     private readonly int RunState = Animator.StringToHash("RunState");
     private readonly int CrashState = Animator.StringToHash("CrashState");
+    private readonly int EndState = Animator.StringToHash("EndState");
 
     public event Action StartedGame;
     public event Action ChangedSpeed;
@@ -54,6 +56,7 @@ public class PlayerMoverModel
     {
         _isMove = false;
         _rigidbody.velocity = Vector3.zero;
+        _animator.Play(EndState);
     }
 
     public void Update()

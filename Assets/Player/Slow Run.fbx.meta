@@ -3,7 +3,62 @@ guid: 406a2c802beba0845964dcb90b5f73fe
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Erectustoiletsmd0021Mtl
+    second: {fileID: 2100000, guid: 13dcf3f25b244a84383000266773c33a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Erectustoiletsmd0031Mtl
+    second: {fileID: 2100000, guid: 38f2b3d498332b045818f4aea012717f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Erectustoiletsmd0041Mtl
+    second: {fileID: 2100000, guid: c3737a8aa3ebc214fb3c14fdbc3714c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gmanupgrsmd0061Mtl
+    second: {fileID: 2100000, guid: 031c9fe4fc1aee9429286e07874c4a3b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gmanupgrsmd0071Mtl
+    second: {fileID: 2100000, guid: 6d46afb4093e09f4abd21c9a70ee418c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gmanupgrsmd0091Mtl
+    second: {fileID: 2100000, guid: d3e8b7c011bef184a84755ce82aae02e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gmanupgrsmd0101Mtl
+    second: {fileID: 2100000, guid: 8b4acc061cc86d948a2cae3c0b342e48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: e4cf8d681ef35fa4ea073c945c77a433, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 477e86cdc6d4b4c42a990b7f33457d69, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Object111Mtl
+    second: {fileID: 2100000, guid: f44c75616fdc2e149adbcf6209f767a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Object131Mtl
+    second: {fileID: 2100000, guid: fde8b0f799b1da94994fd46abe7d82c7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
