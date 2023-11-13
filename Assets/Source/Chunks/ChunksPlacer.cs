@@ -1,13 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ChunksPlacer : MonoBehaviour
 {
     [SerializeField] private Chunk[] _chunks;
-    [SerializeField] private PlayerView _player;
     [SerializeField] private Chunk _firstChunk;
 
+    private Transform _player;
     private List<Chunk> _disabledChunks = new List<Chunk>();
     private List<Chunk> _spawnedChunks = new List<Chunk>();
     private int _spawnLenght = 4;
@@ -21,7 +20,7 @@ public class ChunksPlacer : MonoBehaviour
 
     private void Update()
     {
-        if (_player.transform.position.z > _spawnedChunks[_spawnedChunks.Count - 1].End.transform.position.z - _spawnLenght)
+        if (_player.position.z > _spawnedChunks[_spawnedChunks.Count - 1].End.transform.position.z - _spawnLenght)
         {
             SpawnChunk();
         }
@@ -65,5 +64,10 @@ public class ChunksPlacer : MonoBehaviour
             _spawnedChunks[i].gameObject.SetActive(false);
             _spawnedChunks.Remove(_spawnedChunks[i]);
         }
+    }
+
+    public void GetPlayerTransform(Transform player)
+    {
+        _player = player;
     }
 }

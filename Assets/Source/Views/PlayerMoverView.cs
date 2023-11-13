@@ -15,15 +15,15 @@ public class PlayerMoverView : MonoBehaviour
     public event Action<float> ChangingSpeedBoost;
     public event Action OnEndGame;
 
-    private void Start()
-    {
-        _cameraMover.SetStartPosition();
-    }
-
     private void Update()
     {
         DecktopContorol();
         /*   MobileContorol();*/
+    }
+
+    private void OnEnable()
+    {
+        _cameraMover.GetPlayerTransform(transform);
     }
 
     public void TakeSpeed(float count)
@@ -42,20 +42,9 @@ public class PlayerMoverView : MonoBehaviour
         _speed.text = Convert.ToInt32(speed).ToString();
     }
 
-    public void SetPlayerStartPosition()
-    {
-        transform.position = _startPosition;
-    }
-
-    public void SetCameraPosition()
-    {
-        _cameraMover.SetStartPosition();
-        _cameraMover.enabled = false;
-    }
-
     public void StartGame()
     {
-        _cameraMover.enabled = true;
+        _cameraMover?.StartMove();
     }
 
     private void DecktopContorol()
@@ -81,5 +70,6 @@ public class PlayerMoverView : MonoBehaviour
     public void EndGame()
     {
         OnEndGame?.Invoke();
+        _cameraMover?.EndMove();
     }
 }
