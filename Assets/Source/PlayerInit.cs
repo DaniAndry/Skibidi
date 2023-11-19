@@ -8,7 +8,7 @@ public class PlayerInit : MonoBehaviour
     [SerializeField] private PlayerMoverPresenter _moverPresenter;
     [SerializeField] private PlayerPresenter _presenter;
     [SerializeField] private EnergyUpgrade _energyUpgrade;
-    [SerializeField] private CosmeticsShopView _cosmeticsShop;
+    [SerializeField] private Shop _shop;
     [SerializeField] private List<PlayerView> _playerViews = new List<PlayerView>();
     [SerializeField] private GameObject _core;
     [SerializeField] private ChunksPlacer _chunksPlacer;
@@ -27,15 +27,15 @@ public class PlayerInit : MonoBehaviour
 
     private void OnEnable()
     {
-        _cosmeticsShop.ChangingSkin += Init;
+        _shop.OnChangingSkin += Init;
     }
 
     private void OnDisable()
     {
-        _cosmeticsShop.ChangingSkin -= Init;
+        _shop.OnChangingSkin -= Init;
 
-        _presenter?.Disable();
-        _moverPresenter?.Disable();
+        _presenter.Disable();
+        _moverPresenter.Disable();
     }
 
     public void Init(PlayerView playerView)
@@ -54,7 +54,7 @@ public class PlayerInit : MonoBehaviour
                 _model = new PlayerModel();
                 _moverModel = new PlayerMoverModel(_rigidbody, _animator);
 
-                _presenter.Init(_model, _view, _viewMenu, _viewEndScreen, _viewMover, _energyUpgrade);
+                _presenter.Init(_model, _view, _viewMenu, _viewEndScreen, _viewMover, _energyUpgrade, _shop);
                 _moverPresenter.Init(_moverModel, _viewMover, _viewMenu);
 
                 _chunksPlacer.GetPlayerTransform(player.transform);

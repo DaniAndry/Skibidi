@@ -1,6 +1,8 @@
 using System;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EndScreenView : MonoBehaviour
@@ -8,8 +10,6 @@ public class EndScreenView : MonoBehaviour
     [SerializeField] private Button _exitButton;
     [SerializeField] private TMP_Text _distance;
     [SerializeField] private TMP_Text _money;
-
-    public event Action ClickingExitMenu;
 
     private void OnEnable()
     {
@@ -23,7 +23,7 @@ public class EndScreenView : MonoBehaviour
 
     private void OnClickExitMenu()
     {
-        ClickingExitMenu?.Invoke();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void SetData(int money, float distance)

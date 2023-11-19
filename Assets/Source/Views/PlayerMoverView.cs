@@ -8,8 +8,6 @@ public class PlayerMoverView : MonoBehaviour
     [SerializeField] private TMP_Text _speed;
     [SerializeField] private CameraMover _cameraMover;
 
-    private Vector3 _startPosition = new Vector3(0, 0, 0);
-
     public event Action<float> OnMoving;
     public event Action<float> ChangingSpeedCrash;
     public event Action<float> ChangingSpeedBoost;

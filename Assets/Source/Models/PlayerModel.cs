@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using UnityEngine;
 
 public class PlayerModel
@@ -37,9 +38,8 @@ public class PlayerModel
 
     public void UpMaxEnergy(int price, float energy)
     {
-        if (Money >= price)
+        if (TryChangeMoney(price))
         {
-            Money -= price;
             MaxEnergy += energy;
             OnEnergyUpgraded?.Invoke();
         }
@@ -73,6 +73,24 @@ public class PlayerModel
     public void Update(Transform transform)
     {
         GiveEnergy(transform);
+    }
+
+    public bool TryBuySkin(int price)
+    {
+        return TryChangeMoney(price);
+    }
+
+    private bool TryChangeMoney(int price)
+    {
+        if (Money >= price)
+        {
+            Money -= price;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void SavePlayer()

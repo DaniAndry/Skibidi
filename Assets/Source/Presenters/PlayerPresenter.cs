@@ -9,8 +9,9 @@ public class PlayerPresenter : MonoBehaviour
     private EndScreenView _viewEndScreen;
     private PlayerMoverView _viewMover;
     private EnergyUpgrade _energyUpgrade;
+    private Shop _shop;
 
-    public void Init(PlayerModel model, PlayerView view, Menu viewMenu, EndScreenView viewEndScreen, PlayerMoverView viewMover, EnergyUpgrade energyUpgrade)
+    public void Init(PlayerModel model, PlayerView view, Menu viewMenu, EndScreenView viewEndScreen, PlayerMoverView viewMover, EnergyUpgrade energyUpgrade, Shop shop)
     {
         _model = model;
         _view = view;
@@ -18,6 +19,7 @@ public class PlayerPresenter : MonoBehaviour
         _viewEndScreen = viewEndScreen;
         _viewMover = viewMover;
         _energyUpgrade = energyUpgrade;
+        _shop = shop;
     }
 
     public void Enable()
@@ -33,6 +35,7 @@ public class PlayerPresenter : MonoBehaviour
         _model.StartedGame += OnStartedgame;
         _model.EnergyChanged += OnEnergyChanged;
         _view.EnergyChanging += OnViewEnergyChanged;
+        _view.OnChangingMoney += OnMoneyChanged;
         _viewMenu.ClickingStart += OnClickStart;
         _energyUpgrade.ClickingUpgrade += OnClickUpgradeEnergy;
     }
@@ -46,6 +49,7 @@ public class PlayerPresenter : MonoBehaviour
         _model.StartedGame -= OnStartedgame;
         _model.EnergyChanged -= OnEnergyChanged;
         _view.EnergyChanging -= OnViewEnergyChanged;
+        _view.OnChangingMoney -= OnMoneyChanged;
         _viewMenu.ClickingStart -= OnClickStart;
         _energyUpgrade.ClickingUpgrade -= OnClickUpgradeEnergy;
     }
@@ -105,6 +109,17 @@ public class PlayerPresenter : MonoBehaviour
     private void OnEnergyChanged()
     {
         _view.SetEnergy(_model.CurrentEnergy);
+    }
+
+    private void OnMoneyChanged(int money)
+    {
+        Debug.Log("Model Try Buy");
+        if (_model.TryBuySkin(money))
+        {
+        Debug.Log("true");
+            UpdateMoney();
+            _shop.BuySkin();
+        }
     }
 
     private void OnViewEnergyChanged(float energyAmount)

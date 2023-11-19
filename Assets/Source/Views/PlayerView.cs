@@ -10,6 +10,7 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private TMP_Text _money;
 
     public event Action<float> EnergyChanging;
+    public event Action<int> OnChangingMoney;
 
     public void StartGame()
     {
@@ -34,6 +35,12 @@ public class PlayerView : MonoBehaviour
     public void SetMoney(int money)
     {
         _money.text = $"{money}";
+    }
+
+    public void ChangingMoney(int money)
+    {
+        Debug.Log("view");
+        OnChangingMoney?.Invoke(money); 
     }
 
     public void SetEnergy(float energyAmount)

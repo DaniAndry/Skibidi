@@ -2,31 +2,24 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public class SaveSystem 
+public class SaveSystem
 {
     public static void SavePlayer(PlayerModel player)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.json";
-        FileStream stream = new FileStream(path, FileMode.Create);
-
         PlayerData data = new PlayerData(player);
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.dataPath + "/player.json", json);
 
-        formatter.Serialize(stream, data);
-        stream.Close();
     }
 
     public static PlayerData LoadPlayer()
     {
-        string path = Application.persistentDataPath + "/player.json";
+        string path = Application.dataPath + "/player.json";
+
         if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            PlayerData data = formatter.Deserialize(stream) as PlayerData;
-            stream.Close();
-
+            string json = File.ReadAllText(path);
+            PlayerData data = JsonUtility.FromJson<PlayerData>(json);
             return data;
         }
         else
@@ -38,27 +31,43 @@ public class SaveSystem
 
     public static void SaveEnergyUpgrade(EnergyUpgrade energyUpgrade)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/upgradeEnergy.json";
-        FileStream stream = new FileStream(path, FileMode.Create);
-
         UpgradeData data = new UpgradeData(energyUpgrade);
-
-        formatter.Serialize(stream, data);
-        stream.Close();
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.dataPath + "/EnergyUpgrade", json);
     }
 
     public static UpgradeData LoadEnergyUpgrade()
     {
-        string path = Application.persistentDataPath + "/upgradeEnergy.json";
+        string path = Application.dataPath + "/EnergyUpgrade.json";
+
         if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
+            string json = File.ReadAllText(path);
+            UpgradeData data = JsonUtility.FromJson<UpgradeData>(json);
+            return data;
+        }
+        else
+        {
+            Debug.Log("Save file not found in" + path);
+            return null;
+        }
+    }
 
-            UpgradeData data = formatter.Deserialize(stream) as UpgradeData;
-            stream.Close();
+    public static void SaveShop(Shop shop)
+    {
+        ShopData data = new ShopData(shop);
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.dataPath + "/shop.json", json);
+    }
 
+    public static ShopData LoadShop()
+    {
+        string path = Application.dataPath + "/shop.json";
+
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            ShopData data = JsonUtility.FromJson<ShopData>(json);
             return data;
         }
         else
@@ -72,11 +81,14 @@ public class SaveSystem
     {
         string path = Application.persistentDataPath + "/upgradeEnergy.json";
         File.Delete(path);
-    } 
-    
+    }
+
     public static void DeletePlayerSaveData()
     {
         string path = Application.persistentDataPath + "/player.json";
+        File.Delete(path);
+
+        path = Application.persistentDataPath + "/shop.json";
         File.Delete(path);
     }
 }
