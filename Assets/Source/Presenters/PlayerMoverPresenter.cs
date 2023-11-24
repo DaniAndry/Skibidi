@@ -5,35 +5,27 @@ public class PlayerMoverPresenter : MonoBehaviour
 {
     private PlayerMoverModel _model;
     private PlayerMoverView _view;
-    private Menu _viewMenu;
 
-    public void Init(PlayerMoverModel model, PlayerMoverView view, Menu viewMenu)
+    public void Init(PlayerMoverModel model, PlayerMoverView view)
     {
         _model = model;
         _view = view;
-        _viewMenu = viewMenu;
     }
 
     public void Enable()
     {
-        _model.StartedGame += OnStartedGame;
         _model.ChangedSpeed += OnSpeedChanged;
-        _viewMenu.ClickingStart += StartGame;
         _view.OnMoving += Move;
         _view.ChangingSpeedCrash += ChangeSpeedCrash;
         _view.ChangingSpeedBoost += ChangeSpeedBoost;
-        _view.OnEndGame += EndGame;
     }
 
     public void Disable()
     {
-        _model.StartedGame -= OnStartedGame;
         _model.ChangedSpeed -= OnSpeedChanged;
         _view.OnMoving -= Move;
         _view.ChangingSpeedCrash -= ChangeSpeedCrash;
         _view.ChangingSpeedBoost -= ChangeSpeedBoost;
-        _viewMenu.ClickingStart -= StartGame;
-        _view.OnEndGame -= EndGame;
     }
 
     private void Update()
@@ -41,19 +33,16 @@ public class PlayerMoverPresenter : MonoBehaviour
         _model?.Update();
     }
 
-    private void OnStartedGame()
-    {
-        _view.StartGame();
-    }
-
-    private void EndGame()
+    public void EndGame()
     {
         _model.EndGame();
+        _view.EndGame();
     }
 
-    private void StartGame()
+    public void StartGame()
     {
         _model.StartGame();
+        _view.StartGame();
     }
 
     private void OnSpeedChanged()

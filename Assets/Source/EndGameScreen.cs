@@ -1,11 +1,10 @@
 using System;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class EndScreenView : MonoBehaviour
+public class EndGameScreen : MonoBehaviour
 {
     [SerializeField] private Button _exitButton;
     [SerializeField] private TMP_Text _distance;

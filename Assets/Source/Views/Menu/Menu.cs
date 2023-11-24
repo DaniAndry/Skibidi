@@ -6,46 +6,45 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     [SerializeField] private Button _startButton;
-    [SerializeField] private Button _settingsButton;
     [SerializeField] private TMP_Text _currentDistanceText;
     [SerializeField] private TMP_Text _recordDistanceText;
     [SerializeField] private TMP_Text _money;
 
     private float _recordDistance;
+    private MenuWindow _menuWindow;
 
     public event Action ClickingStart;
     public event Action ClickingSettings;
 
+    private void Awake()
+    {
+        _menuWindow = GetComponent<MenuWindow>();
+    }
+
     private void OnEnable()
     {
         _startButton.onClick.AddListener(OnClickStart);
-        _settingsButton.onClick.AddListener(OnClickSettings);
     }
 
     private void OnDisable()
     {
         _startButton.onClick.RemoveListener(OnClickStart);
-        _settingsButton.onClick.RemoveListener(OnClickSettings);
     }
 
-    public void CloseMenu()
+    private void Close()
     {
-        GetComponent<MenuWindow>().Close();
+        _menuWindow.Close();
     }
 
-    public void OpenMenu()
+    private void Open()
     {
-        GetComponent<MenuWindow>().Open();
-    }
-
-    private void OnClickSettings()
-    {
-        ClickingSettings?.Invoke();
+        _menuWindow.Open();
     }
 
     private void OnClickStart()
     {
         ClickingStart?.Invoke();
+        _menuWindow.Close();
     }
 
     public void SetMoney(int money)

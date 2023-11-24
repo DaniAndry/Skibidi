@@ -12,7 +12,6 @@ public class PlayerModel
     public float MaxEnergy { get; private set; } = 50f;
     public float CurrentEnergy { get; private set; }
 
-    public event Action StartedGame;
     public event Action EnergyChanged;
     public event Action DistanceChanging;
     public event Action OnEnergyGone;
@@ -32,7 +31,6 @@ public class PlayerModel
 
     public void StartGame()
     {
-        StartedGame?.Invoke();
         TotalDistanceTraveled = 0;
     }
 

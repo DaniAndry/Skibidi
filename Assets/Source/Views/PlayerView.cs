@@ -8,6 +8,8 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private TMP_Text _energy;
     [SerializeField] private Canvas _headUpDisplay;
     [SerializeField] private TMP_Text _money;
+    [SerializeField] private Menu _menu;
+    [SerializeField] private EndGameScreen _endScreen;
 
     public event Action<float> EnergyChanging;
     public event Action<int> OnChangingMoney;
@@ -17,9 +19,13 @@ public class PlayerView : MonoBehaviour
         _headUpDisplay.gameObject.SetActive(true);
     }
 
-    public void EndGame()
+    public void EndGame(int money, float distance)
     {
         _headUpDisplay.gameObject.SetActive(false);
+        _menu.SetDistance(distance);
+        _menu.SetMoney(money);
+        _endScreen.OpenEndScreen();
+        _endScreen.SetData(money, distance);
     }
 
     public void OnEnergyChanged(float energyAmount)

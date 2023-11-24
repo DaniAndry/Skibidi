@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerIniter : MonoBehaviour
 {
     [SerializeField] private Menu _viewMenu;
-    [SerializeField] private EndScreenView _viewEndScreen;
+    [SerializeField] private EndGameScreen _viewEndScreen;
     [SerializeField] private PlayerMoverPresenter _moverPresenter;
     [SerializeField] private PlayerPresenter _presenter;
     [SerializeField] private EnergyUpgrade _energyUpgrade;
@@ -43,8 +43,8 @@ public class PlayerIniter : MonoBehaviour
         _model = new PlayerModel();
         _moverModel = new PlayerMoverModel(_rigidbody, _animator);
 
-        _presenter.Init(_model, _view, _viewMenu, _viewEndScreen, _viewMover, _energyUpgrade);
-        _moverPresenter.Init(_moverModel, _viewMover, _viewMenu);
+        _presenter.Init(_model, _view, _energyUpgrade);
+        _moverPresenter.Init(_moverModel, _viewMover);
 
         _chunksPlacer.GetPlayerTransform(playerView.transform);
 

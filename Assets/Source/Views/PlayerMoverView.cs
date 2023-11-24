@@ -11,7 +11,6 @@ public class PlayerMoverView : MonoBehaviour
     public event Action<float> OnMoving;
     public event Action<float> ChangingSpeedCrash;
     public event Action<float> ChangingSpeedBoost;
-    public event Action OnEndGame;
 
     private void Update()
     {
@@ -67,7 +66,6 @@ public class PlayerMoverView : MonoBehaviour
 
     public void EndGame()
     {
-        OnEndGame?.Invoke();
         _cameraMover?.EndMove();
     }
 }
