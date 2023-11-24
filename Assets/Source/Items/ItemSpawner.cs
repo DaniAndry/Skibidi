@@ -31,7 +31,7 @@ public class ItemSpawner : MonoBehaviour
 
     private void OnChunkSpawned(Chunk chunk)
     {
-        if (_itemPrefabs.Count == 0) return;
+        if (_itemPrefabs.Count == 5) return;
 
         GameObject randomItemPrefab = _itemPrefabs[Random.Range(0, _itemPrefabs.Count)];
         ItemFactory factory = ChooseFactory(randomItemPrefab);

@@ -11,7 +11,7 @@ public class PlayerPresenter : MonoBehaviour
     private EnergyUpgrade _energyUpgrade;
     private Shop _shop;
 
-    public void Init(PlayerModel model, PlayerView view, Menu viewMenu, EndScreenView viewEndScreen, PlayerMoverView viewMover, EnergyUpgrade energyUpgrade, Shop shop)
+    public void Init(PlayerModel model, PlayerView view, Menu viewMenu, EndScreenView viewEndScreen, PlayerMoverView viewMover, EnergyUpgrade energyUpgrade)
     {
         _model = model;
         _view = view;
@@ -19,7 +19,6 @@ public class PlayerPresenter : MonoBehaviour
         _viewEndScreen = viewEndScreen;
         _viewMover = viewMover;
         _energyUpgrade = energyUpgrade;
-        _shop = shop;
     }
 
     public void Enable()
@@ -118,7 +117,7 @@ public class PlayerPresenter : MonoBehaviour
         {
         Debug.Log("true");
             UpdateMoney();
-            _shop.BuySkin();
+          //  _shop.BuySkin();
         }
     }
 

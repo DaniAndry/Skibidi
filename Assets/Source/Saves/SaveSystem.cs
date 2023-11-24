@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class SaveSystem
 {
@@ -53,10 +52,9 @@ public class SaveSystem
         }
     }
 
-    public static void SaveShop(Shop shop)
+    public static void SaveShop(ShopData shopData)
     {
-        ShopData data = new ShopData(shop);
-        string json = JsonUtility.ToJson(data);
+        string json = JsonUtility.ToJson(shopData);
         File.WriteAllText(Application.dataPath + "/shop.json", json);
     }
 

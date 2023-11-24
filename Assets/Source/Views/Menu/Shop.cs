@@ -1,130 +1,87 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Shop : MonoBehaviour 
+public class Shop : MonoBehaviour
 {
     [SerializeField] private Button _buyButton;
-    [SerializeField] private Button _selectButton;
-    [SerializeField] private Skin _firstSkin;
+    [SerializeField] private List<Skin> _skinForSale;
 
+    private PlayerView _player;
+    private ShopData _shopData;
     private Skin _selectedSkin;
-
-    public event Action<PlayerView> OnChangingSkin;
-
-    public PlayerView CurrentPlayerSkin { get; private set; }
-    public List<Skin> BoughtSkins { get; private set; } = new List<Skin>();
+    private SkinSelecter _selecter;
 
     private void Start()
     {
+        _selecter = GetComponent<SkinSelecter>();
         LoadShop();
-        InitSkins();
-
-        _buyButton.onClick.AddListener(TryBuySkin);
-        _selectButton.onClick.AddListener(SelectSkin);
+        _buyButton.gameObject.SetActive(false);
     }
 
     public void OnEnable()
     {
         _buyButton.onClick.AddListener(TryBuySkin);
-        _selectButton.onClick.AddListener(SelectSkin);
+
+        foreach (var skin in _skinForSale)
+        {
+            skin.OnSelected += SelectSkin;
+        }
     }
 
     public void OnDisable()
     {
         _buyButton.onClick.RemoveListener(TryBuySkin);
-        _selectButton.onClick.RemoveListener(SelectSkin);
+
+        foreach (var skin in _skinForSale)
+        {
+            skin.OnSelected -= SelectSkin;
+        }
     }
 
-    public void ShowSkin(Skin skin)
+    private void SelectSkin(Skin skin)
     {
         _selectedSkin = skin;
-
-        if (skin.IsBought && skin.IsSelected == false)
-        {
-            _selectButton.gameObject.SetActive(true);
-            _selectButton.interactable = true;
-        }
-        else if(skin.IsBought && skin.IsSelected)
-        {
-            _selectButton.gameObject.SetActive(true);
-            _selectButton.interactable = false;
-        }
-        else
-        {
-            _buyButton.gameObject.SetActive(true);
-        }
-    }
-
-    private void SelectSkin()
-    {
-        OnChangingSkin?.Invoke(_selectedSkin.GetSkin());
-
-        foreach (Skin skin in BoughtSkins)
-        {
-            skin.TurnOffSkin();
-        }
-
-        _selectedSkin.TurnOnSkin();
-        _selectButton.interactable = false;
+        _buyButton.gameObject.SetActive(true);
     }
 
     private void TryBuySkin()
     {
-        CurrentPlayerSkin.ChangingMoney(_selectedSkin.Price);
+        _player = _selecter.Player;
+        _player.ChangingMoney(_selectedSkin.Price);
+
+        BuySkin();
     }
 
     public void BuySkin()
     {
-        _selectedSkin.Buy();
-        if(BoughtSkins.Contains(_selectedSkin) == false)
-            BoughtSkins.Add(_selectedSkin);
+        _selectedSkin.Unlock();
         _buyButton.gameObject.SetActive(false);
-        SelectSkin();
+        _selecter.AddSkin(_selectedSkin);
+        _skinForSale.Remove(_selectedSkin);
+        _selectedSkin.OnSelected -= SelectSkin;
 
         SaveShop();
     }
 
-    private void InitSkins()
-    {
-        if (BoughtSkins.Contains(_firstSkin) == false)
-        {
-            BoughtSkins.Add(_firstSkin);
-            _firstSkin.Buy();
-            _firstSkin.TurnOnSkin();
-        }
-
-        foreach (Skin skin in BoughtSkins)
-        {
-            skin.LoadData();
-
-            if (skin.IsSelected == true)
-            {
-                skin.TurnOnSkin();
-                CurrentPlayerSkin = skin.GetSkin();
-                OnChangingSkin?.Invoke(CurrentPlayerSkin);
-            }
-        }
-    }
 
     public void SaveShop()
     {
-        SaveSystem.SaveShop(this);
+        SaveSystem.SaveShop(_shopData);
     }
 
     public void LoadShop()
     {
-        ShopData data = SaveSystem.LoadShop();
+        //ShopData data = SaveSystem.LoadShop();
 
-        if (data != null)
-        {
-            CurrentPlayerSkin = data.PlayerSkin;
+        // if (data != null)
+        // {
+        //CurrentPlayerSkin = data.PlayerSkin;
 
-            foreach(Skin skin in data.BoughtSkins)
-            {
-                BoughtSkins.Add(skin);
-            }
-        }
+        //foreach(Skin skin in data.BoughtSkins)
+        //{
+        //    BoughtSkins.Add(skin);
+        //}
+        // }
     }
 }
