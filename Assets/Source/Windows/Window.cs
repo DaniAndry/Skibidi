@@ -30,6 +30,8 @@ public class Window : MonoBehaviour
 
     public virtual void Open()
     {
+        AudioManager.Instance.Play("Click");
+
         _canvasGroup.blocksRaycasts = true;
         _canvasGroup.interactable = true;
         _canvasGroup.alpha = 1f;
