@@ -1,25 +1,7 @@
-using UnityEngine;
-
-public class MenuWindow : MonoBehaviour
+public class MenuWindow : Window
 {
-    private CanvasGroup _canvasGroup;
-
-    private void Start()
+    private void Awake()
     {
-        _canvasGroup = GetComponent<CanvasGroup>();
-    }
-
-    public void Open()
-    {
-        _canvasGroup.blocksRaycasts = true;
-        _canvasGroup.interactable = true;
-        _canvasGroup.alpha = 1f;
-    }
-
-    public void Close()
-    {
-        _canvasGroup.interactable = false;
-        _canvasGroup.blocksRaycasts = false;
-        _canvasGroup.alpha = 0f;
+        Open();
     }
 }
