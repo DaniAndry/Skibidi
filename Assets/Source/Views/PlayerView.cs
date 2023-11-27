@@ -6,7 +6,7 @@ public class PlayerView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _distance;
     [SerializeField] private TMP_Text _energy;
-    [SerializeField] private Canvas _headUpDisplay;
+    [SerializeField] private HudWindow _headUpDisplay;
     [SerializeField] private TMP_Text _money;
     [SerializeField] private Menu _menu;
     [SerializeField] private EndGameScreen _endScreen;
@@ -16,12 +16,12 @@ public class PlayerView : MonoBehaviour
 
     public void StartGame()
     {
-        _headUpDisplay.gameObject.SetActive(true);
+        _headUpDisplay.Open();
     }
 
     public void EndGame(int money, float distance)
     {
-        _headUpDisplay.gameObject.SetActive(false);
+        _headUpDisplay.Close();
         _menu.SetDistance(distance);
         _menu.SetMoney(money);
         _endScreen.OpenEndScreen();

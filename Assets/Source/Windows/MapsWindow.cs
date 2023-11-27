@@ -4,12 +4,10 @@ using UnityEngine.UI;
 public class MapsWindow : Window
 {
     [SerializeField] private Button _openButton;
-
-    private Button _closeButton;
+    [SerializeField] private Button _closeButton;
 
     private void Awake()
     {
-        _closeButton = GetComponentInChildren<CloseButton>().GetComponent<Button>();
         base.Close();
     }
 
