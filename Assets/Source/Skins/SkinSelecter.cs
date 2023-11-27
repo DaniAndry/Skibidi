@@ -55,7 +55,7 @@ public class SkinSelecter : MonoBehaviour
 
     private void InitSkin()
     {
-        Player = _selectedSkin.GetSkin();
+        Player = _selectedSkin.GetView();
         OnChangingSkin?.Invoke(Player);
 
         foreach (Skin skin in _boughtSkins)
@@ -65,5 +65,15 @@ public class SkinSelecter : MonoBehaviour
                 skin.TurnOffSkin();
             }
         }
+    }
+
+    private void SaveData()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+    }
+
+    private void LoadData()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
     }
 }

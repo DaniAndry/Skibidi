@@ -9,8 +9,8 @@ public class Skin : MonoBehaviour
     [SerializeField] private Image _buyFlag;
     [SerializeField] private string _skinName;
     [SerializeField] private string _skinDescription;
+    [SerializeField] private bool _isSelected;
 
-       [SerializeField] private bool _isSelected;
     private Button _skinChangeButton;
 
     public bool IsSelected => _isSelected;
@@ -26,7 +26,7 @@ public class Skin : MonoBehaviour
         _skinChangeButton.onClick.AddListener(Select);
     }
 
-    public PlayerView GetSkin()
+    public PlayerView GetView()
     {
         return _playerView;
     }

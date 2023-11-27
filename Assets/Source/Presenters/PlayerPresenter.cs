@@ -86,7 +86,7 @@ public class PlayerPresenter : MonoBehaviour
     {
         OnEndGame?.Invoke();
 
-        _model.SavePlayer();
+       // _model.SavePlayer();
         _view.EndGame(_model.Money, _model.TotalDistanceTraveled);
     }
 
