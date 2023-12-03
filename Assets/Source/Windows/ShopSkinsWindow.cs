@@ -1,10 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopWindow : Window
+public class ShopSkinsWindow : Window
 {
-    [SerializeField] private Camera _canvasCamera;
-    [SerializeField] private MenuWindow _mainMenu;
     [SerializeField] private Button _openButton;
     [SerializeField] private Button _closeButton;
 
@@ -28,18 +26,14 @@ public class ShopWindow : Window
     public override void Open()
     {
         AudioManager.Instance.Play("Click");
+        GetComponent<ShopSkins>().TurnOnSkinModel();
         base.Open();
-
-        _canvasCamera.gameObject.SetActive(true);
-        _mainMenu.Close();
     }
 
     public override void Close()
     {
         AudioManager.Instance.Play("Click");
+        GetComponent<ShopSkins>().TurnOffSkin();
         base.Close();
-
-        _canvasCamera.gameObject.SetActive(false);
-        _mainMenu.Open();
     }
 }

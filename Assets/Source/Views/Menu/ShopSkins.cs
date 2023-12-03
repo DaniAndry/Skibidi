@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,13 @@ public class ShopSkins : MonoBehaviour
     [SerializeField] private Bank _bank;
     [SerializeField] private Button _buyButton;
     [SerializeField] private List<Skin> _skinForSale;
+    [SerializeField] private TMP_Text _description;
+    [SerializeField] private TMP_Text _name;
 
     private ShopData _shopData;
     private Skin _selectedSkin;
     private SkinSelecter _selecter;
-    private GameObject _prefabSkin;
+    private GameObject _modelSkin;
 
     private void Start()
     {
@@ -46,11 +49,29 @@ public class ShopSkins : MonoBehaviour
         _selectedSkin = skin;
         _buyButton.gameObject.SetActive(true);
 
-        if(_prefabSkin != null)
-            Destroy(_prefabSkin);
+        ShowInfoForSkin();
+    }
 
-        _prefabSkin = _selectedSkin.GetPrefab();
-        Instantiate(_prefabSkin, _placeSkin);
+    public void ShowInfoForSkin()
+    {
+        _name.text = _selectedSkin.Name;
+        _description.text = _selectedSkin.Description;
+
+        if (_modelSkin != null)
+            Destroy(_modelSkin);
+
+        _modelSkin = Instantiate(_selectedSkin.GetPrefab(), _placeSkin);
+    }
+    //œ≈–≈ƒ≈À¿“‹ —»—“≈Ã” Õ¿ POOL, ”¡–¿“‹ √–ﬂ«‹ »«  Œƒ¿
+    //œŒ—À≈ œŒ ”œ » — »Õ¿ ≈—À» œ≈–≈¬€¡–¿“‹ Õ≈ œŒﬂ¬Àﬂ≈“—ﬂ »Õ‘Œ–Ã¿÷»ﬂ
+    public void TurnOffSkin()
+    {
+        _modelSkin?.SetActive(false);
+    }
+
+    public void TurnOnSkinModel()
+    {
+        _modelSkin?.SetActive(true);
     }
 
     private void TryBuySkin()

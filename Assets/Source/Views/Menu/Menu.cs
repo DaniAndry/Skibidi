@@ -29,16 +29,6 @@ public class Menu : MonoBehaviour
         _startButton.onClick.RemoveListener(OnClickStart);
     }
 
-    private void Close()
-    {
-        _menuWindow.Close();
-    }
-
-    private void Open()
-    {
-        _menuWindow.Open();
-    }
-
     private void OnClickStart()
     {
         ClickingStart?.Invoke();

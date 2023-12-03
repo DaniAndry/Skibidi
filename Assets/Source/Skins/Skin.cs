@@ -8,12 +8,14 @@ public class Skin : MonoBehaviour
     [SerializeField] private GameObject _prefabSkin;
     [SerializeField] private int _price;
     [SerializeField] private Image _buyFlag;
-    [SerializeField] private string _skinName;
-    [SerializeField] private string _skinDescription;
+    [SerializeField] private string _name;
+    [SerializeField] private string _description;
     [SerializeField] private bool _isSelected;
 
     private Button _skinChangeButton;
 
+    public string Description => _description;
+    public string Name => _name;
     public bool IsSelected => _isSelected;
     public int Price => _price;
     public bool IsBought { get; private set; } = false;
