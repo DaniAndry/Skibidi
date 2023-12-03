@@ -8,7 +8,7 @@ public class SpeedItem : Item
     {
         if (collision.gameObject.TryGetComponent(out PlayerMoverView playerMoverView))
         {
-            playerMoverView.TakeSpeed(_value);
+            playerMoverView.ChangeSpeed(_value);
             Destroy(gameObject);
         }
     }

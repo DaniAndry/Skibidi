@@ -14,7 +14,6 @@ public class Menu : MonoBehaviour
     private MenuWindow _menuWindow;
 
     public event Action ClickingStart;
-    public event Action ClickingSettings;
 
     private void Awake()
     {

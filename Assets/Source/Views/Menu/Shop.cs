@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
+    [SerializeField] private Bank _bank;
     [SerializeField] private Button _buyButton;
     [SerializeField] private List<Skin> _skinForSale;
 
-    private PlayerView _player;
     private ShopData _shopData;
     private Skin _selectedSkin;
     private SkinSelecter _selecter;
@@ -47,10 +47,16 @@ public class Shop : MonoBehaviour
 
     private void TryBuySkin()
     {
-        _player = _selecter.Player;
-        _player.ChangingMoney(_selectedSkin.Price);
+        if (_bank.TryTakeMoney(_selectedSkin.Price))
+            BuySkin();
+        else
+            ThrowErrorBuySkin();
 
-        BuySkin();
+    }
+
+    private void ThrowErrorBuySkin()
+    {
+        Debug.Log("ErrorBuy");
     }
 
     public void BuySkin()

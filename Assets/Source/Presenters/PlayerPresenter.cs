@@ -5,42 +5,33 @@ public class PlayerPresenter : MonoBehaviour
 {
     private PlayerModel _model;
     private PlayerView _view;
-    private EnergyUpgrade _energyUpgrade;
 
     public event Action OnEndGame;
 
-    public void Init(PlayerModel model, PlayerView view, EnergyUpgrade energyUpgrade)
+    public void Init(PlayerModel model, PlayerView view)
     {
         _model = model;
         _view = view;
-        _energyUpgrade = energyUpgrade;
     }
 
     public void Enable()
     {
         _model?.Init();
-        UpdateMoney();
 
-        _model.OnErrorUpgraded += ErrorUpgrade;
-        _model.OnEnergyUpgraded += EnergyUpgraded;
+        _view.DistanceBoostChanging += OnDistanceChanging;
+        _model.EnergyChanged += OnEnergyChanged;
         _model.OnEnergyGone += EndGame;
         _model.DistanceChanging += OnDistanceChanged;
-        _model.EnergyChanged += OnEnergyChanged;
         _view.EnergyChanging += OnViewEnergyChanged;
-        _view.OnChangingMoney += OnMoneyChanged;
-        _energyUpgrade.ClickingUpgrade += OnClickUpgradeEnergy;
     }
 
     public void Disable()
     {
-        _model.OnErrorUpgraded -= ErrorUpgrade;
-        _model.OnEnergyUpgraded -= EnergyUpgraded;
+        _view.DistanceBoostChanging -= OnDistanceChanging;
+        _model.EnergyChanged -= OnEnergyChanged;
         _model.OnEnergyGone -= EndGame;
         _model.DistanceChanging -= OnDistanceChanged;
-        _model.EnergyChanged -= OnEnergyChanged;
         _view.EnergyChanging -= OnViewEnergyChanged;
-        _view.OnChangingMoney -= OnMoneyChanged;
-        _energyUpgrade.ClickingUpgrade -= OnClickUpgradeEnergy;
     }
 
     private void Update()
@@ -48,31 +39,24 @@ public class PlayerPresenter : MonoBehaviour
         _model?.Update(_view.transform);
     }
 
-    private void OnClickUpgradeEnergy()
+    private void OnDistanceChanging(EnergyBoost energyBoost)
     {
-        _model.UpMaxEnergy(_energyUpgrade.Price, _energyUpgrade.AmountEnergy);
+        _model.TurnOnEnergyBoost(energyBoost.Bonus, energyBoost.Time);
     }
 
-    private void ErrorUpgrade()
+    private void OnEnergyChanged()
     {
-        _energyUpgrade.ErrorUpgrade();
-    }
-
-    private void EnergyUpgraded()
-    {
-        _energyUpgrade.Upgrade();
-        UpdateMoney();
-        OnEnergyChanged();
-    }
-
-    private void UpdateMoney()
-    {
-        _view.SetMoney(_model.Money);
+        _view.SetEnergy(_model.CurrentEnergy);
     }
 
     private void OnDistanceChanged()
     {
         _view.SetDistance(_model.TotalDistanceTraveled);
+    }
+
+    private void OnViewEnergyChanged(float energyAmount)
+    {
+        _model.TakeEnergy(energyAmount);
     }
 
     public void StartGame()
@@ -87,26 +71,6 @@ public class PlayerPresenter : MonoBehaviour
         OnEndGame?.Invoke();
 
        // _model.SavePlayer();
-        _view.EndGame(_model.Money, _model.TotalDistanceTraveled);
-    }
-
-    private void OnEnergyChanged()
-    {
-        _view.SetEnergy(_model.CurrentEnergy);
-    }
-
-    private void OnMoneyChanged(int money)
-    {
-        Debug.Log("Model Try Buy");
-        if (_model.TryBuySkin(money))
-        {
-        Debug.Log("true");
-            UpdateMoney();
-        }
-    }
-
-    private void OnViewEnergyChanged(float energyAmount)
-    {
-        _model.TakeEnergy(energyAmount);
+        _view.EndGame(_model.TotalDistanceTraveled);
     }
 }

@@ -6,7 +6,6 @@ public class PlayerIniter : MonoBehaviour
     [SerializeField] private EndGameScreen _viewEndScreen;
     [SerializeField] private PlayerMoverPresenter _moverPresenter;
     [SerializeField] private PlayerPresenter _presenter;
-    [SerializeField] private EnergyUpgrade _energyUpgrade;
     [SerializeField] private SkinSelecter _selecter;
     [SerializeField] private ChunksPlacer _chunksPlacer;
 
@@ -43,7 +42,7 @@ public class PlayerIniter : MonoBehaviour
         _model = new PlayerModel();
         _moverModel = new PlayerMoverModel(_rigidbody, _animator);
 
-        _presenter.Init(_model, _view, _energyUpgrade);
+        _presenter.Init(_model, _view);
         _moverPresenter.Init(_moverModel, _viewMover);
 
         _chunksPlacer.GetPlayerTransform(playerView.transform);

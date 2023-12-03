@@ -6,17 +6,17 @@ public class PlayerModel
 {
     private Vector3 _lastPosition;
     private bool _isEnergyGone = false;
+    private float _energyBonus;
+    private float _energyTime;
+    private bool _isEnergyBoost = false;
 
-    public int Money { get; private set; } = 50;
     public float TotalDistanceTraveled { get; private set; }
     public float MaxEnergy { get; private set; } = 50f;
     public float CurrentEnergy { get; private set; }
 
-    public event Action EnergyChanged;
     public event Action DistanceChanging;
     public event Action OnEnergyGone;
-    public event Action OnEnergyUpgraded;
-    public event Action OnErrorUpgraded;
+    public event Action EnergyChanged;
 
     public void Init()
     {
@@ -34,17 +34,6 @@ public class PlayerModel
         TotalDistanceTraveled = 0;
     }
 
-    public void UpMaxEnergy(int price, float energy)
-    {
-        if (TryChangeMoney(price))
-        {
-            MaxEnergy += energy;
-            OnEnergyUpgraded?.Invoke();
-        }
-        else
-            OnErrorUpgraded?.Invoke();
-    }
-
     private void GiveEnergy(Transform transform)
     {
         if (CurrentEnergy > 0)
@@ -52,7 +41,7 @@ public class PlayerModel
             float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
             TotalDistanceTraveled += distanceMoved;
 
-            CurrentEnergy -= distanceMoved;
+            ChangingEnergy(distanceMoved);
 
             _lastPosition = transform.position;
 
@@ -73,22 +62,33 @@ public class PlayerModel
         GiveEnergy(transform);
     }
 
-    public bool TryBuySkin(int price)
+    public void ChangingEnergy(float distanceMoved)
     {
-        return TryChangeMoney(price);
+        if (_isEnergyBoost == false)
+        {
+            CurrentEnergy -= distanceMoved;
+        }
+        else if (_isEnergyBoost)
+        {
+            _energyTime -= Time.deltaTime;
+
+            if (_energyTime > 0)
+            {
+                distanceMoved /= _energyBonus;
+                CurrentEnergy -= distanceMoved;
+            }
+            else if(_energyTime <= 0)
+            {
+                _isEnergyBoost = false;
+            }
+        }
     }
 
-    private bool TryChangeMoney(int price)
+    public void TurnOnEnergyBoost(float bonus, float time)
     {
-        if (Money >= price)
-        {
-            Money -= price;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        _energyBonus = bonus;
+        _energyTime = time;
+        _isEnergyBoost = true;
     }
 
     public void SavePlayer()
@@ -103,7 +103,6 @@ public class PlayerModel
         if (data != null)
         {
             MaxEnergy = data.Energy;
-            Money = data.Money;
             TotalDistanceTraveled = data.TotalDistance;
         }
     }

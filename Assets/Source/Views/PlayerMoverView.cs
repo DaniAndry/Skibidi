@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMoverView : MonoBehaviour
 {
@@ -23,27 +24,6 @@ public class PlayerMoverView : MonoBehaviour
         _cameraMover.GetPlayerTransform(transform);
     }
 
-    public void TakeSpeed(float count)
-    {
-        ChangingSpeedBoost?.Invoke(count);
-    }
-
-    public void Crash()
-    {
-        float moveSpeed = 2;
-        ChangingSpeedCrash?.Invoke(moveSpeed);
-    }
-
-    public void SetSpeed(float speed)
-    {
-        _speed.text = Convert.ToInt32(speed).ToString();
-    }
-
-    public void StartGame()
-    {
-        _cameraMover?.StartMove();
-    }
-
     private void DecktopContorol()
     {
         if (Input.GetKey(KeyCode.A))
@@ -63,6 +43,29 @@ public class PlayerMoverView : MonoBehaviour
         else
             OnMoving?.Invoke(0);
     }
+
+    public void ChangeSpeed(float count)
+    {
+        ChangingSpeedBoost?.Invoke(count);
+    }
+
+    public void Crash()
+    {
+        float moveSpeed = 2;
+        ChangingSpeedCrash?.Invoke(moveSpeed);
+    }
+
+    public void SetSpeed(float speed)
+    {
+        _speed.text = Convert.ToInt32(speed).ToString();
+    }
+
+
+    public void StartGame()
+    {
+        _cameraMover?.StartMove();
+    }
+
 
     public void EndGame()
     {

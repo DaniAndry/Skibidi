@@ -8,7 +8,6 @@ public class EndGameScreen : MonoBehaviour
 {
     [SerializeField] private Button _exitButton;
     [SerializeField] private TMP_Text _distance;
-    [SerializeField] private TMP_Text _money;
 
     private void OnEnable()
     {
@@ -25,10 +24,9 @@ public class EndGameScreen : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void SetData(int money, float distance)
+    public void SetData(float distance)
     {
         _distance.text = $"{Convert.ToInt32(distance)}";
-        _money.text = $"{money}";
     }
 
     public void OpenEndScreen()
