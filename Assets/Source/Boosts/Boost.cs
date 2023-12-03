@@ -18,6 +18,11 @@ public class Boost : MonoBehaviour
         _button = GetComponent<Button>();
     }
 
+    private void Decrease()
+    {
+        _count--;
+    }
+
     public bool TryUse()
     {
         bool _canUse = _count > 0;
@@ -31,10 +36,5 @@ public class Boost : MonoBehaviour
     public void Increase()
     {
         _count++;
-    }
-
-    public void Decrease()
-    {
-        _count--;
     }
 }

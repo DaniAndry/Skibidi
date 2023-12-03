@@ -5357,7 +5357,7 @@ GameObject:
   - component: {fileID: 910949839}
   - component: {fileID: 910949842}
   m_Layer: 5
-  m_Name: DistanceBoostCard
+  m_Name: EnergyBoostCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5541,6 +5541,8 @@ MonoBehaviour:
   _headUpDisplay: {fileID: 1969126969}
   _menu: {fileID: 205052494}
   _endScreen: {fileID: 875725584}
+  _boosts:
+  - {fileID: 1369617450}
 --- !u!95 &915918844
 Animator:
   serializedVersion: 5
@@ -7882,7 +7884,7 @@ GameObject:
   - component: {fileID: 1369617450}
   - component: {fileID: 1369617449}
   m_Layer: 5
-  m_Name: DistanceBoost
+  m_Name: EnergyBoost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7921,8 +7923,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff5a921b08bc0c4a8d08a7289485e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bonus: 0
-  _time: 0
+  _bonus: 2
+  _time: 10
 --- !u!114 &1369617450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10220,6 +10222,8 @@ MonoBehaviour:
   _headUpDisplay: {fileID: 1969126969}
   _menu: {fileID: 205052494}
   _endScreen: {fileID: 875725584}
+  _boosts:
+  - {fileID: 1369617450}
 --- !u!95 &1754922153
 Animator:
   serializedVersion: 5
@@ -11294,6 +11298,8 @@ MonoBehaviour:
   _headUpDisplay: {fileID: 1969126969}
   _menu: {fileID: 205052494}
   _endScreen: {fileID: 875725584}
+  _boosts:
+  - {fileID: 1369617450}
 --- !u!136 &1880608635
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -12650,6 +12656,7 @@ MonoBehaviour:
   - {fileID: 910949839}
   - {fileID: 362812523}
   - {fileID: 1433876699}
+  _bank: {fileID: 2142831800}
 --- !u!114 &2098364466
 MonoBehaviour:
   m_ObjectHideFlags: 0
