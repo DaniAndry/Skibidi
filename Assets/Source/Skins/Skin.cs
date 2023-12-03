@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Skin : MonoBehaviour
 {
     [SerializeField] private PlayerView _playerView;
+    [SerializeField] private GameObject _prefabSkin;
     [SerializeField] private int _price;
     [SerializeField] private Image _buyFlag;
     [SerializeField] private string _skinName;
@@ -29,6 +30,11 @@ public class Skin : MonoBehaviour
     public PlayerView GetView()
     {
         return _playerView;
+    }
+
+    public GameObject GetPrefab()
+    {
+        return _prefabSkin;
     }
 
     public void TurnOffSkin()
