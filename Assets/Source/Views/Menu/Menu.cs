@@ -8,7 +8,6 @@ public class Menu : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private TMP_Text _currentDistanceText;
     [SerializeField] private TMP_Text _recordDistanceText;
-    [SerializeField] private TMP_Text _money;
 
     private float _recordDistance;
     private MenuWindow _menuWindow;
@@ -30,25 +29,10 @@ public class Menu : MonoBehaviour
         _startButton.onClick.RemoveListener(OnClickStart);
     }
 
-    private void Close()
-    {
-        _menuWindow.Close();
-    }
-
-    private void Open()
-    {
-        _menuWindow.Open();
-    }
-
     private void OnClickStart()
     {
         ClickingStart?.Invoke();
         _menuWindow.Close();
-    }
-
-    public void SetMoney(int money)
-    {
-        _money.text = $"{money}";
     }
 
     public void SetDistance(float distance)

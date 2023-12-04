@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class ShopWindow : Window
 {
+    [SerializeField] private Camera _canvasCamera;
+    [SerializeField] private MenuWindow _mainMenu;
     [SerializeField] private Button _openButton;
     [SerializeField] private Button _closeButton;
 
@@ -27,11 +29,17 @@ public class ShopWindow : Window
     {
         AudioManager.Instance.Play("Click");
         base.Open();
+
+        _canvasCamera.gameObject.SetActive(true);
+        _mainMenu.Close();
     }
 
     public override void Close()
     {
         AudioManager.Instance.Play("Click");
         base.Close();
+
+        _canvasCamera.gameObject.SetActive(false);
+        _mainMenu.Open();
     }
 }
