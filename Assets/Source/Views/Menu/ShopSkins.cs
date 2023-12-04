@@ -51,7 +51,7 @@ public class ShopSkins : MonoBehaviour
 
         ShowInfoForSkin();
     }
-
+    //РСР МЕЛМНЦН ЦПЪГМН
     public void ShowInfoForSkin()
     {
         _name.text = _selectedSkin.Name;
@@ -62,8 +62,7 @@ public class ShopSkins : MonoBehaviour
 
         _modelSkin = Instantiate(_selectedSkin.GetPrefab(), _placeSkin);
     }
-    //оепедекюрэ яхярелс мю POOL, сапюрэ цпъгэ хг йндю
-    //оняке онйсойх яйхмю еякх оепебшапюрэ ме онъбкъеряъ хмтнплюжхъ
+
     public void TurnOffSkin()
     {
         _modelSkin?.SetActive(false);

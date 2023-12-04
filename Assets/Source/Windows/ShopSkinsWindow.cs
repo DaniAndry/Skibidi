@@ -26,14 +26,12 @@ public class ShopSkinsWindow : Window
     public override void Open()
     {
         AudioManager.Instance.Play("Click");
-        GetComponent<ShopSkins>().TurnOnSkinModel();
         base.Open();
     }
 
     public override void Close()
     {
         AudioManager.Instance.Play("Click");
-        GetComponent<ShopSkins>().TurnOffSkin();
         base.Close();
     }
 }
