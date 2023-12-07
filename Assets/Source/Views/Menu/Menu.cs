@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     [SerializeField] private Button _startButton;
-    [SerializeField] private TMP_Text _currentDistanceText;
     [SerializeField] private TMP_Text _recordDistanceText;
 
     private float _recordDistance;
@@ -37,8 +36,6 @@ public class Menu : MonoBehaviour
 
     public void SetDistance(float distance)
     {
-        _currentDistanceText.text = $"{Convert.ToInt32(distance)}";
-
         if(distance > _recordDistance)
         {
             _recordDistanceText.text = $"{Convert.ToInt32(distance)}";
