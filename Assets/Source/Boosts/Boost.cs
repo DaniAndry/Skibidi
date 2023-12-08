@@ -6,26 +6,24 @@ public class Boost : MonoBehaviour
     [SerializeField] private float _bonus;
     [SerializeField] private float _time;
 
-    private Button _button;
-    private int _count;
+    private int _countBoosts;
+    private int _countUpgrade = 0;
+    private int _maxCountUpgrade = 5;
+    private int _timeIncreaseNumber = 5;
 
-    public int Count => _count;
+    public int CountUpgrade => _countUpgrade;
+    public int Count => _countBoosts;
     public float Bonus => _bonus;
     public float Time => _time;
 
-    private void Awake()
-    {
-        _button = GetComponent<Button>();
-    }
-
     private void Decrease()
     {
-        _count--;
+        _countBoosts--;
     }
 
     public bool TryUse()
     {
-        bool _canUse = _count > 0;
+        bool _canUse = _countBoosts > 0;
 
         if (_canUse)
             Decrease();
@@ -35,6 +33,25 @@ public class Boost : MonoBehaviour
 
     public void Increase()
     {
-        _count++;
+        _countBoosts++;
+    }
+
+    public void Upgrade()
+    {
+        if(_countUpgrade < _maxCountUpgrade)
+        {
+            _countUpgrade++;
+            _time += _timeIncreaseNumber;
+        }
+    }
+
+    public void SavaData()
+    {
+
+    }
+
+    public void LoadData()
+    {
+
     }
 }

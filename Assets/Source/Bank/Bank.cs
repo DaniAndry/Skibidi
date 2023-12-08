@@ -13,7 +13,7 @@ public class Bank : MonoBehaviour
         UpdateMoneyText();
     }
 
-    private void TakeMoney(int money)
+    public void TakeMoney(int money)
     {
         _money -= money;
         UpdateMoneyText();
@@ -30,14 +30,9 @@ public class Bank : MonoBehaviour
     public bool TryTakeMoney(int money)
     {
         if(_money >= money)
-        {
-            TakeMoney(money);
             return true;
-        }
         else 
-        {
             return false; 
-        }
     }
 
     public void GiveMoney(int money)
