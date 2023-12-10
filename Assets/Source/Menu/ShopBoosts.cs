@@ -1,36 +1,27 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ShopBoosts : MonoBehaviour
 {
-    [SerializeField] private List<Button> _boostCards;
     [SerializeField] private Bank _bank;
 
-    private Boost _currentBoost;
-
-    private void OnEnable()
+    public void Buy(Boost boost, int price)
     {
-        foreach (Button button in _boostCards)
+        if (_bank.TryTakeMoney(price))
         {
-            button.onClick.AddListener(() => Buy(button.GetComponentInParent<BoostBuyButton>()));
+            _bank.TakeMoney(price);
+            boost.Increase();
         }
+        else
+            Debug.Log("Error Buy Boost");
     }
 
-    private void OnDisable()
+    public void BuyUpgrade(Boost boost, int price)
     {
-        foreach (Button button in _boostCards)
+        if (_bank.TryTakeMoney(price))
         {
-            button.onClick.RemoveListener(() => Buy(button.GetComponentInParent<BoostBuyButton>()));
+            _bank.TakeMoney(price);
+            boost.Upgrade();
         }
-    }
-
-    private void Buy(BoostBuyButton _boost)
-    {
-        _currentBoost = _boost.GetBoost();
-
-        if (_bank.TryTakeMoney(_boost.Price))
-            _currentBoost.Increase();
         else
             Debug.Log("Error Buy Boost");
     }
