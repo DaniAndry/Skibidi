@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class PlayerMoverView : MonoBehaviour
 {
     [SerializeField] private FixedJoystick _joystick;
-    [SerializeField] private TMP_Text _speed;
     [SerializeField] private CameraMover _cameraMover;
 
     public event Action<float> OnMoving;
@@ -55,17 +54,10 @@ public class PlayerMoverView : MonoBehaviour
         ChangingSpeedCrash?.Invoke(moveSpeed);
     }
 
-    public void SetSpeed(float speed)
-    {
-        _speed.text = Convert.ToInt32(speed).ToString();
-    }
-
-
     public void StartGame()
     {
         _cameraMover?.StartMove();
     }
-
 
     public void EndGame()
     {

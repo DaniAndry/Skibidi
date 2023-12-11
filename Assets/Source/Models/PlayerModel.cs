@@ -91,6 +91,11 @@ public class PlayerModel
         _isEnergyBoost = true;
     }
 
+    public void ChangeMaxEnergy(float maxEnergyAmount)
+    {
+        MaxEnergy += maxEnergyAmount;
+    }
+
     public void SavePlayer()
     {
         SaveSystem.SavePlayer(this);

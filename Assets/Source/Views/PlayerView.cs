@@ -12,8 +12,11 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private Menu _menu;
     [SerializeField] private EndGameScreen _endScreen;
     [SerializeField] private List<Button> _boosts;
+    [SerializeField] private EnergyUpgrade _energyUpgrade;
+    [SerializeField] private Bank _bank;
 
     public event Action<float> EnergyChanging;
+    public event Action<float> MaxEnergyChanging;
     public event Action<EnergyBoost> DistanceBoostChanging;
 
     private void OnEnable()
@@ -22,6 +25,8 @@ public class PlayerView : MonoBehaviour
         {
             button.onClick.AddListener(() => DefineBoost(button.GetComponent<Boost>()));
         }
+
+        _energyUpgrade.GetComponent<Button>().onClick.AddListener(() => OnChangeMaxEnergy(_energyUpgrade.AmountEnergy));
     }
 
     private void OnDisable()
@@ -30,6 +35,8 @@ public class PlayerView : MonoBehaviour
         {
             button.onClick.RemoveListener(() => DefineBoost(button.GetComponent<Boost>()));
         }
+
+        _energyUpgrade.GetComponent<Button>().onClick.RemoveListener(() => OnChangeMaxEnergy(_energyUpgrade.AmountEnergy));
     }
 
     private void DefineBoost(Boost boost)
@@ -64,6 +71,16 @@ public class PlayerView : MonoBehaviour
     public void OnEnergyChanged(float energyAmount)
     {
         EnergyChanging?.Invoke(energyAmount);
+    }
+
+    public void OnChangeMaxEnergy(float maxEnergyAmount)
+    {
+        if (_bank.TryTakeMoney(_energyUpgrade.Price))
+        {
+            _bank.TakeMoney(_energyUpgrade.Price);
+            _energyUpgrade.Upgrade();
+            MaxEnergyChanging?.Invoke(maxEnergyAmount);
+        }
     }
 
     public void SetDistance(float distance)

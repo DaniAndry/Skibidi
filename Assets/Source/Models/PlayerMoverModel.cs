@@ -13,7 +13,6 @@ public class PlayerMoverModel
     private readonly int CrashState = Animator.StringToHash("CrashState");
 
     public event Action StartedGame;
-    public event Action ChangedSpeed;
 
     public PlayerMoverModel(Rigidbody rigidbody, Animator animator)
     {
@@ -45,7 +44,6 @@ public class PlayerMoverModel
         _isMove = true;
 
         StartedGame?.Invoke();
-        ChangedSpeed?.Invoke();
 
         _animator.Play(RunState);
     }
@@ -81,8 +79,6 @@ public class PlayerMoverModel
 
             MoveSpeed = MoveSpeed < _moveVariableSpeed ? MoveSpeed + 0.01f : MoveSpeed > _moveVariableSpeed ? MoveSpeed - 0.01f : _moveVariableSpeed;
             _turnSpeed = MoveSpeed / turnMultiplier;
-
-            ChangedSpeed?.Invoke();
         }
     }
 }

@@ -14,6 +14,7 @@ public class EnergyUpgrade : MonoBehaviour
 
     public event Action ClickingUpgrade;
 
+    public int CountUpgrade { get; private set; }
     public int Price { get; private set; } = 10;
     public float AmountEnergy { get; private set; } = 50;
 
@@ -41,6 +42,8 @@ public class EnergyUpgrade : MonoBehaviour
         _currentEnergy.text = $"+{_additionEnergy}";
         _currentPrice.text = $"{Price}";
 
+        CountUpgrade++;
+
         SaveEnergyUpgrade();
     }
 
@@ -65,11 +68,16 @@ public class EnergyUpgrade : MonoBehaviour
 
         if (data != null)
         {
-            AmountEnergy = data.AmountEnergy;
-            Price = data.Price;
+            CountUpgrade = data.CountUpgrade;
 
+            for (int i = 0; i < CountUpgrade; i++)
+            {
+                AmountEnergy += _additionEnergy;
+                Price += _additionPrice;
+            }
         }
-            _currentEnergy.text = $"+{_additionEnergy}";
-            _currentPrice.text = $"{Price}";
+
+        _currentEnergy.text = $"+{_additionEnergy}";
+        _currentPrice.text = $"{Price}";
     }
 }

@@ -11,6 +11,7 @@ public class ShopWindow : Window
     private void Awake()
     {
         base.Close();
+        _canvasCamera.gameObject.SetActive(false);
     }
 
     private void OnEnable()

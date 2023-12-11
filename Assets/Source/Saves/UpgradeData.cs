@@ -1,12 +1,10 @@
 [System.Serializable]
 public class UpgradeData
 {
-    public int Price;
-    public float AmountEnergy;
+    public int CountUpgrade;
 
     public UpgradeData(EnergyUpgrade energyUpgrade)
     {
-        Price = energyUpgrade.Price;
-        AmountEnergy = energyUpgrade.AmountEnergy;
+        CountUpgrade = energyUpgrade.CountUpgrade;
     }
 }
