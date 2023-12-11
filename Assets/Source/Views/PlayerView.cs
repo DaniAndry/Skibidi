@@ -15,18 +15,22 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private EnergyUpgrade _energyUpgrade;
     [SerializeField] private Bank _bank;
 
+    private Button _energyUpgradeButton;
+
     public event Action<float> EnergyChanging;
     public event Action<float> MaxEnergyChanging;
     public event Action<EnergyBoost> DistanceBoostChanging;
 
     private void OnEnable()
     {
+        _energyUpgradeButton = _energyUpgrade.GetComponent<Button>();
+
         foreach (Button button in _boosts)
         {
             button.onClick.AddListener(() => DefineBoost(button.GetComponent<Boost>()));
         }
 
-        _energyUpgrade.GetComponent<Button>().onClick.AddListener(() => OnChangeMaxEnergy(_energyUpgrade.AmountEnergy));
+        _energyUpgradeButton.onClick.AddListener(() => OnChangeMaxEnergy(_energyUpgrade.AmountEnergy));
     }
 
     private void OnDisable()
@@ -36,7 +40,7 @@ public class PlayerView : MonoBehaviour
             button.onClick.RemoveListener(() => DefineBoost(button.GetComponent<Boost>()));
         }
 
-        _energyUpgrade.GetComponent<Button>().onClick.RemoveListener(() => OnChangeMaxEnergy(_energyUpgrade.AmountEnergy));
+        _energyUpgradeButton.onClick.RemoveListener(() => OnChangeMaxEnergy(_energyUpgrade.AmountEnergy));
     }
 
     private void DefineBoost(Boost boost)
