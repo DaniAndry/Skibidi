@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _itemPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> _itemPrefabs;
     [SerializeField] private ChunksPlacer _chunksPlacer;
     [SerializeField] private PlayerView _player;
     [SerializeField] private BoostItemFactory _boostItemFactory;
     [SerializeField] private OtherItemFactory _otherItemFactory;
 
     private Dictionary<Chunk, List<GameObject>> spawnedItems = new Dictionary<Chunk, List<GameObject>>();
+    private int _spawnCount = 50;
 
     private void Awake()
     {
@@ -31,16 +32,19 @@ public class ItemSpawner : MonoBehaviour
 
     private void OnChunkSpawned(Chunk chunk)
     {
-        if (_itemPrefabs.Count == 5) return;
+        int spawnCount = Random.Range(5, _spawnCount);
 
-        GameObject randomItemPrefab = _itemPrefabs[Random.Range(0, _itemPrefabs.Count)];
-        ItemFactory factory = ChooseFactory(randomItemPrefab);
-        GameObject spawnedItem = factory.CreateItem(randomItemPrefab, chunk, _player);
+        for (int i = 0; i < spawnCount; i++)
+        {
+            GameObject randomItemPrefab = _itemPrefabs[Random.Range(0, _itemPrefabs.Count)];
+            ItemFactory factory = ChooseFactory(randomItemPrefab);
+            GameObject spawnedItem = factory.CreateItem(randomItemPrefab, chunk, _player);
 
-        if (!spawnedItems.ContainsKey(chunk))
-            spawnedItems[chunk] = new List<GameObject>();
+            if (!spawnedItems.ContainsKey(chunk))
+                spawnedItems[chunk] = new List<GameObject>();
 
-        spawnedItems[chunk].Add(spawnedItem);
+            spawnedItems[chunk].Add(spawnedItem);
+        }
     }
 
 

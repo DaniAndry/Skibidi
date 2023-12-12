@@ -22,7 +22,7 @@ public abstract class ItemFactory : MonoBehaviour
 
         float randomX = chunkCenter.x + Random.Range(-extents.x, extents.x);
         float randomY = bounds.max.y + 0.3f;
-        float randomZ = player.transform.position.z + 5;
+        float randomZ = chunkCenter.z + Random.Range(-extents.z, extents.z);
 
         return new Vector3(randomX, randomY, randomZ);
     }
