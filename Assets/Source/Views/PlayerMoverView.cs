@@ -11,6 +11,7 @@ public class PlayerMoverView : MonoBehaviour
     private Button _speedBoostButton;
 
     public event Action<float> OnMoving;
+    public event Action OnJumping;
     public event Action<float> ChangingSpeedCrash;
     public event Action<float, float> SpeedBoostChanging;
 
@@ -44,6 +45,10 @@ public class PlayerMoverView : MonoBehaviour
             OnMoving?.Invoke(1);
         else
             OnMoving?.Invoke(0);
+
+        if (Input.GetKey(KeyCode.Space))
+            OnJumping?.Invoke();
+
     }
 
     private void MobileContorol()

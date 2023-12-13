@@ -14,6 +14,7 @@ public class PlayerMoverPresenter : MonoBehaviour
     public void Enable()
     {
         _view.OnMoving += Move;
+        _view.OnJumping += Jump;
         _view.ChangingSpeedCrash += ChangeSpeedCrash;
         _view.SpeedBoostChanging += OnSpeedChanging;
     }
@@ -21,6 +22,7 @@ public class PlayerMoverPresenter : MonoBehaviour
     public void Disable()
     {
         _view.OnMoving -= Move;
+        _view.OnJumping -= Jump;
         _view.ChangingSpeedCrash -= ChangeSpeedCrash;
         _view.SpeedBoostChanging -= OnSpeedChanging;
     }
@@ -42,6 +44,16 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.StartGame();
     }
 
+    private void Move(float coefficient)
+    {
+        _model.Move(coefficient);
+    }
+
+    private void Jump()
+    {
+        _model.Jump();
+    }
+
     private void ChangeSpeedCrash(float moveSpeed)
     {
         _model.ChangeSpeedCrash(moveSpeed);
@@ -52,8 +64,4 @@ public class PlayerMoverPresenter : MonoBehaviour
         _model.TurnOnSpeedBoost(bonus, time);
     }
 
-    public void Move(float coefficient)
-    {
-        _model.Move(coefficient);
-    }
 }

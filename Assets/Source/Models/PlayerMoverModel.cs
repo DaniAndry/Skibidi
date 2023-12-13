@@ -15,6 +15,10 @@ public class PlayerMoverModel
     private float _speedBonus;
     private float _speedTime;
     private bool _isSpeedBoost;
+    private bool _isGrounded = false;
+    private bool _enableJump = true;
+    private KeyCode _jumpKey = KeyCode.Space;
+    private float _jumpPower = 5f;
 
     public event Action StartedGame;
 
@@ -36,7 +40,9 @@ public class PlayerMoverModel
             newXPosition = Mathf.Clamp(newXPosition, -1f, 1f);
 
             _rigidbody.position = new Vector3(newXPosition, currentPosition.y, currentPosition.z);
-            _rigidbody.velocity = new Vector3(0, 0, MoveSpeed);
+
+            if (_enableJump)
+                _rigidbody.velocity = new Vector3(0, 0, MoveSpeed);
         }
     }
 
@@ -61,6 +67,7 @@ public class PlayerMoverModel
     public void Update()
     {
         ChangeSpeed();
+        CheckGround();
     }
 
     public void ChangeSpeedCrash(float moveSpeed)
@@ -84,6 +91,37 @@ public class PlayerMoverModel
         else
         {
             _speedTime = time;
+        }
+    }
+
+    public void CheckGround()
+    {
+        Transform transform = _rigidbody.transform;
+
+        Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * 0.5f), transform.position.z);
+        Vector3 direction = transform.TransformDirection(Vector3.down);
+        float distance = 100f;
+
+        if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
+        {
+            Debug.DrawRay(origin, direction * distance, Color.red);
+            Debug.DrawLine(origin, direction * distance, Color.red);
+            _isGrounded = false;
+            _enableJump = false;
+        }
+        else
+        {
+            _enableJump = true;
+            _isGrounded = true;
+        }
+    }
+
+    public void Jump()
+    {
+        if (_enableJump && Input.GetKeyDown(_jumpKey) && _isGrounded)
+        {
+            _rigidbody.AddForce(0f, _jumpPower, 0f, ForceMode.Impulse);
+            _isGrounded = false;
         }
     }
 
