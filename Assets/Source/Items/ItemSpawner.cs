@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
+    [SerializeField] private int _spawnCount = 50;
     [SerializeField] private List<GameObject> _itemPrefabs;
     [SerializeField] private ChunksPlacer _chunksPlacer;
     [SerializeField] private PlayerView _player;
@@ -10,15 +11,16 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private OtherItemFactory _otherItemFactory;
 
     private Dictionary<Chunk, List<GameObject>> spawnedItems = new Dictionary<Chunk, List<GameObject>>();
-    private int _spawnCount = 50;
 
-    private void Awake()
+    private void OnEnable()
     {
         foreach (var chunk in _chunksPlacer.Chunks)
         {
             chunk.Spawned += OnChunkSpawned;
             chunk.Deactivated += OnChunkDeactivated;
         }
+
+        OnChunkSpawned(_chunksPlacer.Chunks[0]);
     }
 
     private void OnDisable()
@@ -32,6 +34,7 @@ public class ItemSpawner : MonoBehaviour
 
     private void OnChunkSpawned(Chunk chunk)
     {
+        Debug.Log(chunk);
         int spawnCount = Random.Range(5, _spawnCount);
 
         for (int i = 0; i < spawnCount; i++)

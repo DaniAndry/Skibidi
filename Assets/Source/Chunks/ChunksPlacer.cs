@@ -46,10 +46,11 @@ public class ChunksPlacer : MonoBehaviour
             }
         }
 
-        newChunk.gameObject.SetActive(true);
         float position = _spawnedChunks[_spawnedChunks.Count - 1].transform.localScale.z;
+
         newChunk.transform.position = _spawnedChunks[_spawnedChunks.Count - 1].transform.position;
         newChunk.transform.position += new Vector3(0, 0, position);
+        newChunk.gameObject.SetActive(true);
 
         _spawnedChunks.Add(newChunk);
 
