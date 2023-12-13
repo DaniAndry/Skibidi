@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class Boost : MonoBehaviour
 {
     [SerializeField] private float _bonus;
-    [SerializeField] private float _time;
 
+    private float _time = 5;
     private int _countBoosts;
     private int _countUpgrade = 0;
     private int _maxCountUpgrade = 5;

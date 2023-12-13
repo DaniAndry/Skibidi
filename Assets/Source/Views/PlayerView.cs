@@ -11,50 +11,39 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private HudWindow _headUpDisplay;
     [SerializeField] private Menu _menu;
     [SerializeField] private EndGameScreen _endScreen;
-    [SerializeField] private List<Button> _boosts;
+    [SerializeField] private EnergyBoost _energyBoost;
     [SerializeField] private EnergyUpgrade _energyUpgrade;
     [SerializeField] private Bank _bank;
 
+    private Button _energyBoostButton;
     private Button _energyUpgradeButton;
 
     public event Action<float> EnergyChanging;
     public event Action<float> MaxEnergyChanging;
     public event Action<EnergyBoost> DistanceBoostChanging;
 
+    private void Awake()
+    {
+        _energyBoostButton = _energyBoost.GetComponent<Button>();
+        _energyUpgradeButton = _energyUpgrade.GetComponent<Button>();
+    }
+
     private void OnEnable()
     {
-        _energyUpgradeButton = _energyUpgrade.GetComponent<Button>();
-
-        foreach (Button button in _boosts)
-        {
-            button.onClick.AddListener(() => DefineBoost(button.GetComponent<Boost>()));
-        }
-
+        _energyBoostButton.onClick.AddListener(UseEnergyBoost);
         _energyUpgradeButton.onClick.AddListener(() => OnChangeMaxEnergy(_energyUpgrade.AmountEnergy));
     }
 
     private void OnDisable()
     {
-        foreach (Button button in _boosts)
-        {
-            button.onClick.RemoveListener(() => DefineBoost(button.GetComponent<Boost>()));
-        }
-
+        _energyBoostButton.onClick.RemoveListener(UseEnergyBoost);
         _energyUpgradeButton.onClick.RemoveListener(() => OnChangeMaxEnergy(_energyUpgrade.AmountEnergy));
     }
 
-    private void DefineBoost(Boost boost)
+    private void UseEnergyBoost()
     {
-        EnergyBoost distanceBoost = boost.GetComponent<EnergyBoost>();
-
-        if (distanceBoost)
-            UseDistanceBoost(distanceBoost);
-    }
-
-    private void UseDistanceBoost(EnergyBoost energyBoost)
-    {
-        if (energyBoost.TryUse())
-            DistanceBoostChanging?.Invoke(energyBoost);
+        if (_energyBoost.TryUse())
+            DistanceBoostChanging?.Invoke(_energyBoost);
         else
             Debug.Log("ErrorUseBoost");
     }

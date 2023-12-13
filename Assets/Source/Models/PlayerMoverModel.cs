@@ -4,13 +4,17 @@ using UnityEngine;
 public class PlayerMoverModel
 {
     private float _turnSpeed;
+    private float _lastMoveSpeed;
     private float _moveVariableSpeed;
     private bool _isMove = false;
-    private readonly float _maxSpeed = 5f;
+    private readonly float _maxSpeed = 3f;
     private readonly Rigidbody _rigidbody;
     private readonly Animator _animator;
     private readonly int RunState = Animator.StringToHash("RunState");
     private readonly int CrashState = Animator.StringToHash("CrashState");
+    private float _speedBonus;
+    private float _speedTime;
+    private bool _isSpeedBoost;
 
     public event Action StartedGame;
 
@@ -65,20 +69,50 @@ public class PlayerMoverModel
         _animator.Play(CrashState);
     }
 
-    public void ChangeSpeedBoost(float moveSpeed)
+    public void TurnOnSpeedBoost(float bonus, float time)
     {
-        moveSpeed += MoveSpeed;
-        _moveVariableSpeed = moveSpeed;
+        if (_isSpeedBoost == false)
+        {
+            _speedBonus = bonus;
+            _speedTime = time;
+            _isSpeedBoost = true;
+
+            _lastMoveSpeed = _moveVariableSpeed;
+            _moveVariableSpeed += _speedBonus;
+            _moveVariableSpeed = _moveVariableSpeed > 10 ? 10 : _moveVariableSpeed;
+        }
+        else
+        {
+            _speedTime = time;
+        }
     }
 
     private void ChangeSpeed()
     {
-        if (MoveSpeed != _moveVariableSpeed)
-        {
-            float turnMultiplier = 1.6f;
+        if (MoveSpeed != _moveVariableSpeed && _isSpeedBoost == false)
+            ChangingSpeed();
 
-            MoveSpeed = MoveSpeed < _moveVariableSpeed ? MoveSpeed + 0.01f : MoveSpeed > _moveVariableSpeed ? MoveSpeed - 0.01f : _moveVariableSpeed;
-            _turnSpeed = MoveSpeed / turnMultiplier;
+        if (MoveSpeed != _moveVariableSpeed && _isSpeedBoost)
+        {
+            _speedTime -= Time.deltaTime;
+
+            if (_speedTime > 0)
+            {
+                ChangingSpeed();
+            }
+            else
+            {
+                _moveVariableSpeed = _lastMoveSpeed;
+                _isSpeedBoost = false;
+            }
         }
+    }
+
+    private void ChangingSpeed()
+    {
+        float turnMultiplier = 1.6f;
+
+        MoveSpeed = MoveSpeed < _moveVariableSpeed ? MoveSpeed + 0.01f : MoveSpeed > _moveVariableSpeed ? MoveSpeed - 0.01f : _moveVariableSpeed;
+        _turnSpeed = MoveSpeed / turnMultiplier;
     }
 }

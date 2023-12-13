@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,10 +6,18 @@ public class PlayerMoverView : MonoBehaviour
 {
     [SerializeField] private FixedJoystick _joystick;
     [SerializeField] private CameraMover _cameraMover;
+    [SerializeField] private Boost _speedBoost;
+
+    private Button _speedBoostButton;
 
     public event Action<float> OnMoving;
     public event Action<float> ChangingSpeedCrash;
-    public event Action<float> ChangingSpeedBoost;
+    public event Action<float, float> SpeedBoostChanging;
+
+    private void Awake()
+    {
+        _speedBoostButton = _speedBoost.GetComponent<Button>();
+    }
 
     private void Update()
     {
@@ -21,6 +28,12 @@ public class PlayerMoverView : MonoBehaviour
     private void OnEnable()
     {
         _cameraMover.GetPlayerTransform(transform);
+        _speedBoostButton.onClick.AddListener(UseSpeedBoost);
+    }
+
+    private void OnDisable()
+    {
+        _speedBoostButton.onClick.RemoveListener(UseSpeedBoost);
     }
 
     private void DecktopContorol()
@@ -43,9 +56,17 @@ public class PlayerMoverView : MonoBehaviour
             OnMoving?.Invoke(0);
     }
 
-    public void ChangeSpeed(float count)
+    private void UseSpeedBoost()
     {
-        ChangingSpeedBoost?.Invoke(count);
+        if (_speedBoost.TryUse())
+            SpeedBoostChanging?.Invoke(_speedBoost.Bonus, _speedBoost.Time);
+        else
+            Debug.Log("ErrorUseBoost");
+    }
+
+    public void ChangeSpeed(float count, float time)
+    {
+        SpeedBoostChanging?.Invoke(count, time);
     }
 
     public void Crash()

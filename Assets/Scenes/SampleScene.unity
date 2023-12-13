@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2340,7 +2340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -4.9999695, y: 0}
+  m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &239241334
@@ -4355,7 +4355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.060312815, y: 0.065451235}
   m_AnchorMax: {x: 0.96573746, y: 0.80300003}
-  m_AnchoredPosition: {x: -4.1069336, y: -4.1809998}
+  m_AnchoredPosition: {x: -4.106903, y: -4.1809998}
   m_SizeDelta: {x: 4.8120117, y: 5.019989}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &402363519
@@ -5625,7 +5625,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72.3
+  m_fontSize: 72.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6114,7 +6114,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.2337595}
-  m_AnchoredPosition: {x: -7.4000244, y: 1}
+  m_AnchoredPosition: {x: -7.4000244, y: 1.0000038}
   m_SizeDelta: {x: 0, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &701498273
@@ -6305,7 +6305,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonus: 5
-  _time: 10
 --- !u!114 &708292608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7705,7 +7704,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.03465542, y: 0.09900001}
   m_AnchorMax: {x: 0.2766723, y: 0.7488498}
-  m_AnchoredPosition: {x: -1.4368896, y: 0.4609375}
+  m_AnchoredPosition: {x: -1.4369507, y: 0.4609375}
   m_SizeDelta: {x: -2.8729992, y: -0.9300003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &839378712
@@ -7721,7 +7720,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonus: 5
-  _time: 10
 --- !u!114 &839378713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8455,10 +8453,7 @@ MonoBehaviour:
   _headUpDisplay: {fileID: 1969126969}
   _menu: {fileID: 205052494}
   _endScreen: {fileID: 875725584}
-  _boosts:
-  - {fileID: 839378713}
-  - {fileID: 708292608}
-  - {fileID: 2017219555}
+  _energyBoost: {fileID: 839378712}
   _energyUpgrade: {fileID: 2940233347283744340}
   _bank: {fileID: 2142831800}
 --- !u!95 &915918844
@@ -8546,6 +8541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _joystick: {fileID: 1239744371}
   _cameraMover: {fileID: 1868257260}
+  _speedBoost: {fileID: 2017219554}
 --- !u!1 &917415238
 GameObject:
   m_ObjectHideFlags: 0
@@ -9282,7 +9278,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72.1
+  m_fontSize: 72.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9764,7 +9760,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90.2
+  m_fontSize: 90.15
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10096,7 +10092,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.46679348, y: 0.027819533}
   m_AnchorMax: {x: 0.5932316, y: 0.113436684}
-  m_AnchoredPosition: {x: -0.5, y: -4.9989014}
+  m_AnchoredPosition: {x: -0.5, y: -4.9985657}
   m_SizeDelta: {x: 16.567993, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1206391452
@@ -11239,7 +11235,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.67600006, y: 0.027819533}
   m_AnchorMax: {x: 0.81031424, y: 0.113436684}
-  m_AnchoredPosition: {x: -2.5, y: -3.9987793}
+  m_AnchoredPosition: {x: -2.5, y: -3.9985657}
   m_SizeDelta: {x: 2.5679932, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1375033542
@@ -11866,7 +11862,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.13434404, y: 0.07261951}
   m_AnchorMax: {x: 0.28800002, y: 0.32320654}
-  m_AnchoredPosition: {x: -1, y: 1.9997559}
+  m_AnchoredPosition: {x: -1, y: 1.9996948}
   m_SizeDelta: {x: -1.7000122, y: 6.4100037}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1433876700
@@ -12175,7 +12171,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.4298006, y: 0.33361015}
   m_AnchorMax: {x: 0.58029956, y: 0.6411119}
-  m_AnchoredPosition: {x: -6.0000005, y: 5.5}
+  m_AnchoredPosition: {x: -6, y: 5.5}
   m_SizeDelta: {x: 13.386002, y: 24.600998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1467316463
@@ -12334,7 +12330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -49.998047
+      value: -49.99817
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -14523,10 +14519,7 @@ MonoBehaviour:
   _headUpDisplay: {fileID: 1969126969}
   _menu: {fileID: 205052494}
   _endScreen: {fileID: 875725584}
-  _boosts:
-  - {fileID: 839378713}
-  - {fileID: 708292608}
-  - {fileID: 2017219555}
+  _energyBoost: {fileID: 839378712}
   _energyUpgrade: {fileID: 2940233347283744340}
   _bank: {fileID: 2142831800}
 --- !u!95 &1754922153
@@ -14614,6 +14607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _joystick: {fileID: 1239744371}
   _cameraMover: {fileID: 1868257260}
+  _speedBoost: {fileID: 2017219554}
 --- !u!1001 &1761204467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14762,7 +14756,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 101.15
+  m_fontSize: 101.1
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15882,10 +15876,7 @@ MonoBehaviour:
   _headUpDisplay: {fileID: 1969126969}
   _menu: {fileID: 205052494}
   _endScreen: {fileID: 875725584}
-  _boosts:
-  - {fileID: 839378713}
-  - {fileID: 708292608}
-  - {fileID: 2017219555}
+  _energyBoost: {fileID: 839378712}
   _energyUpgrade: {fileID: 2940233347283744340}
   _bank: {fileID: 2142831800}
 --- !u!136 &1880608635
@@ -15952,6 +15943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _joystick: {fileID: 1239744371}
   _cameraMover: {fileID: 1868257260}
+  _speedBoost: {fileID: 2017219554}
 --- !u!95 &1880608638
 Animator:
   serializedVersion: 5
@@ -16717,8 +16709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd33e827bde52747aa6858bbc9aec85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bonus: 10
-  _time: 10
+  _bonus: 3
 --- !u!114 &2017219555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18746,7 +18737,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.08484503, y: 0.041877396}
   m_AnchorMax: {x: 0.94400007, y: 0.349}
-  m_AnchoredPosition: {x: 3.5, y: -0.99993896}
+  m_AnchoredPosition: {x: 3.5, y: -1}
   m_SizeDelta: {x: 2.8530273, y: 12.126007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5707849406021446463

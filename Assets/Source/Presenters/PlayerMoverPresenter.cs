@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 public class PlayerMoverPresenter : MonoBehaviour
 {
@@ -16,14 +15,14 @@ public class PlayerMoverPresenter : MonoBehaviour
     {
         _view.OnMoving += Move;
         _view.ChangingSpeedCrash += ChangeSpeedCrash;
-        _view.ChangingSpeedBoost += ChangeSpeedBoost;
+        _view.SpeedBoostChanging += OnSpeedChanging;
     }
 
     public void Disable()
     {
         _view.OnMoving -= Move;
         _view.ChangingSpeedCrash -= ChangeSpeedCrash;
-        _view.ChangingSpeedBoost -= ChangeSpeedBoost;
+        _view.SpeedBoostChanging -= OnSpeedChanging;
     }
 
     private void Update()
@@ -48,9 +47,9 @@ public class PlayerMoverPresenter : MonoBehaviour
         _model.ChangeSpeedCrash(moveSpeed);
     }
 
-    private void ChangeSpeedBoost(float moveSpeed)
+    private void OnSpeedChanging(float bonus, float time)
     {
-        _model.ChangeSpeedBoost(moveSpeed);
+        _model.TurnOnSpeedBoost(bonus, time);
     }
 
     public void Move(float coefficient)
