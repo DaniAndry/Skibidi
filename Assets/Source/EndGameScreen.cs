@@ -31,11 +31,11 @@ public class EndGameScreen : MonoBehaviour
 
     public void OpenEndScreen()
     {
-        gameObject.SetActive(true);
+        GetComponent<EndScreenWindow>().Open();
     }
 
     public void CloseEndScreen()
     {
-        gameObject.SetActive(false);
+        GetComponent<EndScreenWindow>().Close();
     }
 }
