@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class BoostShopWindow : Window
 {
     [SerializeField] private Button _openButton;
-    [SerializeField] private Button _closeButton;
+    [SerializeField] private ShopDancingWindow _shopDancing;
+    [SerializeField] private ShopSkinsWindow _shopSkins;
 
     private void Awake()
     {
@@ -14,24 +15,19 @@ public class BoostShopWindow : Window
     private void OnEnable()
     {
         _openButton.onClick.AddListener(Open);
-        _closeButton.onClick.AddListener(Close);
     }
 
     private void OnDisable()
     {
         _openButton.onClick.RemoveListener(Open);
-        _closeButton.onClick.RemoveListener(Close);
     }
 
     public override void Open()
     {
         AudioManager.Instance.Play("Click");
         base.Open();
-    }
 
-    public override void Close()
-    {
-        AudioManager.Instance.Play("Click");
-        base.Close();
+        _shopDancing.Close();
+        _shopSkins.Close();
     }
 }

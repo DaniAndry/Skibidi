@@ -1,18 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopSkinsWindow : Window
+public class ShopDancingWindow : Window
 {
     [SerializeField] private Button _openButton;
-    [SerializeField] private ShopDancingWindow _shopDancing;
     [SerializeField] private BoostShopWindow _shopBoosts;
+    [SerializeField] private ShopSkinsWindow _shopSkins;
 
-    private ShopSkins _shop;
+    private ShopDancing _shop;
 
     private void Awake()
     {
-        base.Open();
-        _shop = GetComponent<ShopSkins>();
+        base.Close();
+        _shop = GetComponent<ShopDancing>();
     }
 
     private void OnEnable()
@@ -29,15 +29,15 @@ public class ShopSkinsWindow : Window
     {
         AudioManager.Instance.Play("Click");
         base.Open();
-        _shop.TurnOnSkinModel();
+        _shop.TurnOnDanceModel();
 
         _shopBoosts.Close();
-        _shopDancing.Close();
+        _shopSkins.Close();
     }
 
     public override void Close()
     {
         base.Close();
-        _shop.TurnOffSkin();
+        _shop.TurnOffDanceModel();
     }
 }
