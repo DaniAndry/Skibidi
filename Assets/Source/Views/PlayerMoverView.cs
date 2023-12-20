@@ -17,6 +17,8 @@ public class PlayerMoverView : MonoBehaviour
     public event Action OnJumping;
     public event Action<float> ChangingSpeedCrash;
     public event Action<float, float> SpeedBoostChanging;
+    public event Action OnStarted;
+    public event Action OnStoped;
 
     private void Awake()
     {
@@ -97,10 +99,12 @@ public class PlayerMoverView : MonoBehaviour
     public void StartGame()
     {
         _cameraMover?.StartMove();
+        OnStarted?.Invoke();
     }
 
     public void EndGame()
     {
         _cameraMover?.EndMove();
+        OnStoped?.Invoke();
     }
 }
