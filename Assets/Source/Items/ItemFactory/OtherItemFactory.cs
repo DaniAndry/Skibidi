@@ -16,5 +16,4 @@ public class OtherItemFactory : ItemFactory
 
         return itemObject;
     }
-
 }
