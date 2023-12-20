@@ -34,7 +34,6 @@ public class ItemSpawner : MonoBehaviour
 
     private void OnChunkSpawned(Chunk chunk)
     {
-        Debug.Log(chunk);
         int spawnCount = Random.Range(5, _spawnCount);
 
         for (int i = 0; i < spawnCount; i++)

@@ -40,7 +40,6 @@ public class SkinSelecter : MonoBehaviour
 
     private void SelectSkin(Skin skin)
     {
-        Debug.Log(skin);
         if (skin != _selectedSkin)
         {
             Debug.Log(_selectedSkin.ToString());

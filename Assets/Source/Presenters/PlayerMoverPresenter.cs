@@ -26,7 +26,7 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.ChangingSpeedBoost -= ChangeSpeedBoost;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         _model?.Update();
     }
