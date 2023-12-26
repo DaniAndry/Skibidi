@@ -8,6 +8,7 @@ public class PlayerIniter : MonoBehaviour
     [SerializeField] private PlayerPresenter _presenter;
     [SerializeField] private SkinSelecter _selecter;
     [SerializeField] private ChunksPlacer _chunksPlacer;
+    [SerializeField] private ChunksPlacer _backChunksPlacer;
     [SerializeField] private ShopDancing _shopDancing;
 
     private Rigidbody _rigidbody;
@@ -41,6 +42,7 @@ public class PlayerIniter : MonoBehaviour
         _animator = playerView.GetComponent<Animator>();
         _rigidbody = playerView.GetComponent<Rigidbody>();
         _chunksPlacer.GetPlayerTransform(playerView.transform);
+        _backChunksPlacer.GetPlayerTransform(playerView.transform);
 
         _shopDancing.GetPlayer(_viewMover);
 

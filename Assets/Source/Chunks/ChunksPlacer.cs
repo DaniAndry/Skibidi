@@ -5,11 +5,11 @@ public class ChunksPlacer : MonoBehaviour
 {
     [SerializeField] private Chunk[] _chunks;
     [SerializeField] private Chunk _firstChunk;
+    [SerializeField] private int _spawnLenght = 40;
 
     private Transform _player;
     private List<Chunk> _disabledChunks = new List<Chunk>();
     private List<Chunk> _spawnedChunks = new List<Chunk>();
-    private int _spawnLenght = 40;
 
     public Chunk[] Chunks => _chunks;
 
