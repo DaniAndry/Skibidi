@@ -3,14 +3,15 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private int _spawnCount = 50;
+    [SerializeField] private int _itemSpawnCount = 50;
     [SerializeField] private List<GameObject> _itemPrefabs;
     [SerializeField] private ChunksPlacer _chunksPlacer;
     [SerializeField] private PlayerView _player;
     [SerializeField] private BoostItemFactory _boostItemFactory;
     [SerializeField] private OtherItemFactory _otherItemFactory;
+    [SerializeField] private BlockSpawner _blockSpawner;
 
-    private Dictionary<Chunk, List<GameObject>> spawnedItems = new Dictionary<Chunk, List<GameObject>>();
+    private Dictionary<Chunk, List<GameObject>> _spawnedItems = new Dictionary<Chunk, List<GameObject>>();
 
     private void OnEnable()
     {
@@ -34,30 +35,33 @@ public class ItemSpawner : MonoBehaviour
 
     private void OnChunkSpawned(Chunk chunk)
     {
-        int spawnCount = Random.Range(5, _spawnCount);
+        int itemSpawnCount = Random.Range(5, _itemSpawnCount);
 
-        for (int i = 0; i < spawnCount; i++)
+        for (int i = 0; i < itemSpawnCount; i++)
         {
             GameObject randomItemPrefab = _itemPrefabs[Random.Range(0, _itemPrefabs.Count)];
             ItemFactory factory = ChooseFactory(randomItemPrefab);
             GameObject spawnedItem = factory.CreateItem(randomItemPrefab, chunk, _player);
 
-            if (!spawnedItems.ContainsKey(chunk))
-                spawnedItems[chunk] = new List<GameObject>();
+            if (!_spawnedItems.ContainsKey(chunk))
+                _spawnedItems[chunk] = new List<GameObject>();
 
-            spawnedItems[chunk].Add(spawnedItem);
+            _spawnedItems[chunk].Add(spawnedItem);
         }
+
+        _blockSpawner.SpawnBlocks(chunk);
     }
 
 
     private void OnChunkDeactivated(Chunk chunk)
     {
-        if (!spawnedItems.ContainsKey(chunk)) return;
+        if (!_spawnedItems.ContainsKey(chunk)) return;
 
-        foreach (var item in spawnedItems[chunk])
+        foreach (var item in _spawnedItems[chunk])
             Destroy(item);
 
-        spawnedItems[chunk].Clear();
+        _spawnedItems[chunk].Clear();
+        _blockSpawner.RemoveBlocks(chunk);
     }
 
     private ItemFactory ChooseFactory(GameObject prefab)
