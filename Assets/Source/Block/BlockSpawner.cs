@@ -6,19 +6,32 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField] private List<Block> _blocks;
 
     private Dictionary<Chunk, List<GameObject>> _spawnedBlocks = new Dictionary<Chunk, List<GameObject>>();
+    private Dictionary<Chunk, int> _chunkSpawnCount = new Dictionary<Chunk, int>();
 
-    private int _minCount = 5;
-    private int _maxCount = 10;
+    private int _minCount = 3;
+    private int _baseMaxCount = 7;
 
     public void SpawnBlocks(Chunk chunk)
     {
-        int count = GetCountToSpawn();
-        Vector3 transform;
+        if (!_chunkSpawnCount.ContainsKey(chunk))
+        {
+            _chunkSpawnCount[chunk] = _chunkSpawnCount.Count + 1;
+        }
+
+        int maxCount = _baseMaxCount + (_chunkSpawnCount[chunk] - 1) * 2;
+        int count = GetCountToSpawn(_minCount, maxCount);
+
+        if (_chunkSpawnCount[chunk] == 1)
+        {
+            return; // Не спавнить блоки для первого chunk
+        }
 
         if (!_spawnedBlocks.ContainsKey(chunk))
         {
             _spawnedBlocks[chunk] = new List<GameObject>();
         }
+
+        Vector3 transform;
 
         for (int i = 0; i < count; i++)
         {
@@ -26,7 +39,6 @@ public class BlockSpawner : MonoBehaviour
             {
                 transform = GetRandomSpawnPosition(chunk);
             }
-
             while (CheckCollision(transform));
 
             Block block = SelectBlock();
@@ -66,9 +78,9 @@ public class BlockSpawner : MonoBehaviour
         return block;
     }
 
-    private int GetCountToSpawn()
+    private int GetCountToSpawn(int minCount, int maxCount)
     {
-        return Random.Range(_minCount, _maxCount);
+        return Random.Range(minCount, maxCount);
     }
 
     private Vector3 GetRandomSpawnPosition(Chunk chunk)
