@@ -18,7 +18,7 @@ public class PlayerMoverModel
     private bool _isGrounded = false;
     private bool _enableJump = true;
     private KeyCode _jumpKey = KeyCode.Space;
-    private float _jumpPower = 5f;
+    private float _jumpPower = 2f;
 
     public event Action StartedGame;
 
@@ -111,17 +111,18 @@ public class PlayerMoverModel
         }
         else
         {
-            _enableJump = true;
             _isGrounded = true;
+            _enableJump = true;
         }
+
+        Debug.Log("Grounded " + _isGrounded + " Enable " + _enableJump);
     }
 
     public void Jump()
     {
         if (_enableJump && Input.GetKeyDown(_jumpKey) && _isGrounded)
         {
-            _rigidbody.AddForce(0f, _jumpPower, 0f, ForceMode.Impulse);
-            _isGrounded = false;
+            _rigidbody.AddForce(0, _jumpPower, 0f, ForceMode.Impulse);
         }
     }
 

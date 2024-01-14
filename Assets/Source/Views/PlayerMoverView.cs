@@ -45,15 +45,17 @@ public class PlayerMoverView : MonoBehaviour
 
     private void DecktopContorol()
     {
+        if (Input.GetKey(KeyCode.Space))
+            OnJumping?.Invoke();
         if (Input.GetKey(KeyCode.A))
             OnMoving?.Invoke(-1);
-        else if (Input.GetKey(KeyCode.D) || _joystick.Horizontal > 0)
+        else if (Input.GetKey(KeyCode.D))
             OnMoving?.Invoke(1);
+        else if (Input.GetKey(KeyCode.Space))
+            OnJumping?.Invoke();
         else
             OnMoving?.Invoke(0);
 
-        if (Input.GetKey(KeyCode.Space))
-            OnJumping?.Invoke();
 
     }
 
