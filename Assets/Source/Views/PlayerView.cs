@@ -63,6 +63,7 @@ public class PlayerView : MonoBehaviour
 
     public void OnEnergyChanged(float energyAmount)
     {
+        AudioManager.Instance.Play("UseBoost");
         EnergyChanging?.Invoke(energyAmount);
     }
 

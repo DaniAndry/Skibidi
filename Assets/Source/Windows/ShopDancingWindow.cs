@@ -11,7 +11,7 @@ public class ShopDancingWindow : Window
 
     private void Awake()
     {
-        base.Close();
+        CloseWithoutSound();
         _shop = GetComponent<ShopDancing>();
     }
 
@@ -27,17 +27,16 @@ public class ShopDancingWindow : Window
 
     public override void Open()
     {
-        AudioManager.Instance.Play("Click");
         base.Open();
         _shop.TurnOnDanceModel();
 
-        _shopBoosts.Close();
+        _shopBoosts.CloseWithoutSound();
         _shopSkins.Close();
     }
 
     public override void Close()
     {
-        base.Close();
+        base.CloseWithoutSound();
         _shop.TurnOffDanceModel();
     }
 }

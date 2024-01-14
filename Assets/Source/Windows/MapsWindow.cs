@@ -8,7 +8,7 @@ public class MapsWindow : Window
 
     private void Awake()
     {
-        base.Close();
+        CloseWithoutSound();
     }
 
     private void OnEnable()
@@ -21,17 +21,5 @@ public class MapsWindow : Window
     {
         _openButton.onClick.RemoveListener(Open);
         _closeButton.onClick.RemoveListener(Close);
-    }
-
-    public override void Open()
-    {
-        AudioManager.Instance.Play("Click");
-        base.Open();
-    }
-
-    public override void Close()
-    {
-        AudioManager.Instance.Play("Click");
-        base.Close();
     }
 }

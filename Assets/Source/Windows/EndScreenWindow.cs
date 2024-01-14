@@ -11,13 +11,14 @@ public class EndScreenWindow : Window
 
     public override void Open()
     {
-        base.Open();
+        OpenWithoutSound();
 
         _endScreenCanvasCamera.gameObject.SetActive(true);
     }
+
     public override void Close()
     {
-        base.Close();
+        CloseWithoutSound();
 
         _endScreenCanvasCamera.gameObject.SetActive(false);
     }

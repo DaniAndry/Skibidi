@@ -1260,7 +1260,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &43293129
 MonoBehaviour:
@@ -1323,7 +1323,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &111674752
 PrefabInstance:
@@ -4635,7 +4635,7 @@ Transform:
   - {fileID: 2131595443}
   - {fileID: 1599221526}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &210804586 stripped
 Transform:
@@ -14478,7 +14478,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1171054365
 GameObject:
@@ -19578,7 +19578,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3503250702570448039, guid: 244fe934a07e47348acb5728ef8eba21, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3503250702570448039, guid: 244fe934a07e47348acb5728ef8eba21, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23046,7 +23046,7 @@ Transform:
   - {fileID: 1103850552}
   - {fileID: 1754922151}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1853821689 stripped
 Transform:
@@ -23464,7 +23464,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1896719030
 MonoBehaviour:
@@ -25868,7 +25868,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 10b1c076c6858304db807846d0be412f, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 10b1c076c6858304db807846d0be412f, type: 3}
       propertyPath: m_LocalScale.x
@@ -26450,7 +26450,7 @@ Transform:
   - {fileID: 638167461}
   - {fileID: 710994953}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2129540200
 MonoBehaviour:
@@ -27735,7 +27735,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.171, y: 0.52166885}
   m_AnchorMax: {x: 0.23300001, y: 0.64583445}
-  m_AnchoredPosition: {x: 4.9001465, y: 4.5}
+  m_AnchoredPosition: {x: 4.9002686, y: 4.5}
   m_SizeDelta: {x: 6, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &470462884934975847
@@ -29211,7 +29211,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.287, y: 0.36546573}
   m_AnchorMax: {x: 0.287, y: 0.36546573}
-  m_AnchoredPosition: {x: -90.093, y: -89.755005}
+  m_AnchoredPosition: {x: -90.09302, y: -89.755005}
   m_SizeDelta: {x: 179.63, y: 179.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1248498403570888282
@@ -29398,7 +29398,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.008513787, y: 0.80300003}
   m_AnchorMax: {x: 0.43572605, y: 1}
-  m_AnchoredPosition: {x: -5.1203003, y: -0.32006836}
+  m_AnchoredPosition: {x: -5.1203613, y: -0.32006836}
   m_SizeDelta: {x: -0.23899841, y: 2.6990051}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1330808145417706254
@@ -30695,7 +30695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2335d91e58e5a45b6506a227cfa853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boost: {fileID: 0}
+  _boost: {fileID: 576948232494475710}
   _priceBuyBoost: 5
   _priceUpgradeBoost: 5
   _buyForMoney: {fileID: 392248124679136263}
@@ -30717,7 +30717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3941442277345988914, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 3941442277345988914, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30761,31 +30761,155 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
       propertyPath: sounds.Array.size
-      value: 2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
       propertyPath: sounds.Array.data[0].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 1b1f4bea749049343849c04b34268d14, type: 3}
+      objectReference: {fileID: 8300000, guid: 4cc4f76d9705bb34a935f0b48f2d60e4, type: 3}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[0].name
+      value: ClickOpen
+      objectReference: {fileID: 0}
     - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
       propertyPath: sounds.Array.data[1].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 33010a17c0beccf4392ca69c886c10de, type: 3}
+      objectReference: {fileID: 8300000, guid: b7e0a5c27b720014380c572678d54290, type: 3}
     - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
       propertyPath: sounds.Array.data[1].loop
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
       propertyPath: sounds.Array.data[1].name
-      value: music
+      value: ClickClose
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 19dbaac32bc42ed4884d13b628fb6fdc, type: 3}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[2].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[2].name
+      value: Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: eef8074c0925e454ea7c99400a0c86cc, type: 3}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[3].name
+      value: Crash
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9d0df39735ade1e479eeff85e035ed0e, type: 3}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[4].name
+      value: StoneCrash
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: c1379d58f2396014f8d444364e8d7c38, type: 3}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[5].name
+      value: UseBoost
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 377a1d9d724803f479e69b9f4f50f3ea, type: 3}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[6].name
+      value: StartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2d3b7e9e123d8524db832dd718032e55, type: 3}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[7].name
+      value: UpgradeBoost
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b1010438e09f41a449ea04f1be27eab2, type: 3}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[8].name
+      value: Buy
       objectReference: {fileID: 0}
     - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
       propertyPath: sounds.Array.data[1].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
-      propertyPath: sounds.Array.data[1].volume
+      propertyPath: sounds.Array.data[2].pitch
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[3].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[4].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[5].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[6].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[7].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[8].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.358
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[1].volume
+      value: 0.382
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[2].volume
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[3].volume
+      value: 0.098
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[4].volume
+      value: 0.114
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[5].volume
+      value: 0.398
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[6].volume
+      value: 0.195
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[7].volume
+      value: 0.325
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962633219374469035, guid: 95e97774f2ad3b94c8fa4b005e0fccfd, type: 3}
+      propertyPath: sounds.Array.data[8].volume
+      value: 0.325
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31290,7 +31414,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.060312815, y: 0.065451235}
   m_AnchorMax: {x: 0.96573746, y: 0.80300003}
-  m_AnchoredPosition: {x: -4.10614, y: -4.1810303}
+  m_AnchoredPosition: {x: -4.1063843, y: -4.1810303}
   m_SizeDelta: {x: 4.8120117, y: 5.019989}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &2410126198862076966
@@ -31366,7 +31490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2335d91e58e5a45b6506a227cfa853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boost: {fileID: 0}
+  _boost: {fileID: 3840777002694472541}
   _priceBuyBoost: 10
   _priceUpgradeBoost: 5
   _buyForMoney: {fileID: 4027717750526482897}
@@ -32001,7 +32125,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.008513787, y: 0.80300003}
   m_AnchorMax: {x: 0.43572605, y: 1}
-  m_AnchoredPosition: {x: -5.1203003, y: -0.32006836}
+  m_AnchoredPosition: {x: -5.1203613, y: -0.32006836}
   m_SizeDelta: {x: -0.23899841, y: 2.6990051}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2990343571976603499
@@ -33024,7 +33148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.171, y: 0.52166885}
   m_AnchorMax: {x: 0.23300001, y: 0.64583445}
-  m_AnchoredPosition: {x: 4.9001465, y: 4.5}
+  m_AnchoredPosition: {x: 4.9002686, y: 4.5}
   m_SizeDelta: {x: 6, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &3565627279699630470
@@ -33256,7 +33380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.85933346, y: 0.252}
   m_AnchorMax: {x: 0.85933346, y: 0.252}
-  m_AnchoredPosition: {x: 109.92749, y: -93.36552}
+  m_AnchoredPosition: {x: 109.92749, y: -93.36551}
   m_SizeDelta: {x: 213.414, y: 188.73096}
   m_Pivot: {x: 1, y: 0}
 --- !u!1 &3675341090879872629
@@ -36897,7 +37021,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.060312815, y: 0.065451235}
   m_AnchorMax: {x: 0.96573746, y: 0.80300003}
-  m_AnchoredPosition: {x: -4.10614, y: -4.1810303}
+  m_AnchoredPosition: {x: -4.1063843, y: -4.1810303}
   m_SizeDelta: {x: 4.8120117, y: 5.019989}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5773471847581996141
@@ -37761,7 +37885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2335d91e58e5a45b6506a227cfa853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boost: {fileID: 0}
+  _boost: {fileID: 5319360496669427585}
   _priceBuyBoost: 2
   _priceUpgradeBoost: 1
   _buyForMoney: {fileID: 137768367708574315}
@@ -38339,7 +38463,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.287, y: 0.532}
   m_AnchorMax: {x: 0.287, y: 0.532}
-  m_AnchoredPosition: {x: -90.09201, y: 0.000045776367}
+  m_AnchoredPosition: {x: -90.09204, y: 0.000045776367}
   m_SizeDelta: {x: 179.63, y: 181.42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6544125019447125735
@@ -41522,7 +41646,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.017360719, y: 0.18}
   m_AnchorMax: {x: 1, y: 0.18}
-  m_AnchoredPosition: {x: -0.35968018, y: 26.099182}
+  m_AnchoredPosition: {x: -0.35986328, y: 26.099182}
   m_SizeDelta: {x: 1.2900009, y: 54.3064}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8039553758104707724
@@ -42020,7 +42144,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.12577778, y: 0.8774792}
   m_AnchorMax: {x: 0.26259258, y: 0.8774792}
-  m_AnchoredPosition: {x: -2.8968506, y: 96.03125}
+  m_AnchoredPosition: {x: -2.8969727, y: 96.03125}
   m_SizeDelta: {x: 2.748001, y: 95.647995}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8283547391017902435
@@ -43859,7 +43983,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.287, y: 0.71500003}
   m_AnchorMax: {x: 0.287, y: 0.71500003}
-  m_AnchoredPosition: {x: -90.091995, y: 88.07001}
+  m_AnchoredPosition: {x: -90.09198, y: 88.07001}
   m_SizeDelta: {x: 179.628, y: 176.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9151292769545755573

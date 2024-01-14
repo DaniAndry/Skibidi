@@ -55,8 +55,6 @@ public class PlayerMoverView : MonoBehaviour
             OnJumping?.Invoke();
         else
             OnMoving?.Invoke(0);
-
-
     }
 
     private void MobileContorol()
@@ -89,12 +87,14 @@ public class PlayerMoverView : MonoBehaviour
 
     public void ChangeSpeed(float count, float time)
     {
+        AudioManager.Instance.Play("UseBoost");
         SpeedBoostChanging?.Invoke(count, time);
     }
 
     public void Crash()
     {
         float moveSpeed = 2;
+        AudioManager.Instance.Play("Crash");
         ChangingSpeedCrash?.Invoke(moveSpeed);
     }
 

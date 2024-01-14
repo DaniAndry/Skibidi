@@ -1,4 +1,4 @@
-using UnityEngine;
+    using UnityEngine;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class Window : MonoBehaviour
@@ -7,12 +7,28 @@ public class Window : MonoBehaviour
 
     public virtual void Open()
     {
+        AudioManager.Instance.Play("ClickOpen");
         _canvasGroup.blocksRaycasts = true;
         _canvasGroup.interactable = true;
         _canvasGroup.alpha = 1f;
     }
 
     public virtual void Close()
+    {
+        AudioManager.Instance.Play("ClickClose");
+        _canvasGroup.interactable = false;
+        _canvasGroup.blocksRaycasts = false;
+        _canvasGroup.alpha = 0f;
+    }
+
+    public virtual void OpenWithoutSound()
+    {
+        _canvasGroup.blocksRaycasts = true;
+        _canvasGroup.interactable = true;
+        _canvasGroup.alpha = 1f;
+    }
+    
+    public virtual void CloseWithoutSound()
     {
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;

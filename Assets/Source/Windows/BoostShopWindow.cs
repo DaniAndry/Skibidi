@@ -9,7 +9,7 @@ public class BoostShopWindow : Window
 
     private void Awake()
     {
-        base.Close();
+        CloseWithoutSound();
     }
 
     private void OnEnable()
@@ -24,7 +24,6 @@ public class BoostShopWindow : Window
 
     public override void Open()
     {
-        AudioManager.Instance.Play("Click");
         base.Open();
 
         _shopDancing.Close();

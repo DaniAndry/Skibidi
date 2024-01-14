@@ -11,7 +11,7 @@ public class ShopSkinsWindow : Window
 
     private void Awake()
     {
-        base.Open();
+        OpenWithoutSound();
         _shop = GetComponent<ShopSkins>();
     }
 
@@ -27,17 +27,16 @@ public class ShopSkinsWindow : Window
 
     public override void Open()
     {
-        AudioManager.Instance.Play("Click");
         base.Open();
         _shop.TurnOnSkinModel();
 
-        _shopBoosts.Close();
+        _shopBoosts.CloseWithoutSound();
         _shopDancing.Close();
     }
 
     public override void Close()
     {
-        base.Close();
+        base.CloseWithoutSound();
         _shop.TurnOffSkin();
     }
 }

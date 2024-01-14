@@ -23,6 +23,9 @@ public class StartStateGame
 
     private void Start()
     {
+        AudioManager.Instance.Play("StartGame");
+        AudioManager.Instance.Play("Music");
+
         _presenter.StartGame();
         _presenterMover.StartGame();
     }

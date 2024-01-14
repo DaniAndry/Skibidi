@@ -26,7 +26,10 @@ public class Boost : MonoBehaviour
         bool _canUse = _countBoosts > 0;
 
         if (_canUse)
+        {
             Decrease();
+            AudioManager.Instance.Play("UseBoost");
+        }
 
         return _canUse;
     }
@@ -42,6 +45,7 @@ public class Boost : MonoBehaviour
         {
             _countUpgrade++;
             _time += _timeIncreaseNumber;
+            AudioManager.Instance.Play("UpgradeBoost");
         }
     }
 

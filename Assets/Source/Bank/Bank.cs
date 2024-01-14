@@ -16,6 +16,7 @@ public class Bank : MonoBehaviour
     public void TakeMoney(int money)
     {
         _money -= money;
+        AudioManager.Instance.Play("Buy");
         UpdateMoneyText();
     }
 

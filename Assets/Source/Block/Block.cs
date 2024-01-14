@@ -9,6 +9,7 @@ public class Block : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out PlayerMoverView player))
         {
             player.Crash();
+            AudioManager.Instance.Play("StoneCrash");
             Instantiate(_crashParticle.gameObject, transform.position, transform.rotation);
             Destroy(gameObject);
         }

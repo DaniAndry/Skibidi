@@ -10,7 +10,7 @@ public class ShopWindow : Window
 
     private void Awake()
     {
-        base.Close();
+        CloseWithoutSound();
         _canvasCamera.gameObject.SetActive(false);
     }
 
@@ -28,19 +28,17 @@ public class ShopWindow : Window
 
     public override void Open()
     {
-        AudioManager.Instance.Play("Click");
         base.Open();
 
         _canvasCamera.gameObject.SetActive(true);
-        _mainMenu.Close();
+        _mainMenu.CloseWithoutSound();
     }
 
     public override void Close()
     {
-        AudioManager.Instance.Play("Click");
         base.Close();
 
         _canvasCamera.gameObject.SetActive(false);
-        _mainMenu.Open();
+        _mainMenu.OpenWithoutSound();
     }
 }
