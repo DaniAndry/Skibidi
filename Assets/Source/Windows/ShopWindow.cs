@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class ShopWindow : Window
 {
-    [SerializeField] private Camera _canvasCamera;
     [SerializeField] private MenuWindow _mainMenu;
     [SerializeField] private Button _openButton;
     [SerializeField] private Button _closeButton;
@@ -11,7 +10,6 @@ public class ShopWindow : Window
     private void Awake()
     {
         CloseWithoutSound();
-        _canvasCamera.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -29,16 +27,12 @@ public class ShopWindow : Window
     public override void Open()
     {
         base.Open();
-
-        _canvasCamera.gameObject.SetActive(true);
         _mainMenu.CloseWithoutSound();
     }
 
     public override void Close()
     {
         base.Close();
-
-        _canvasCamera.gameObject.SetActive(false);
         _mainMenu.OpenWithoutSound();
     }
 }
