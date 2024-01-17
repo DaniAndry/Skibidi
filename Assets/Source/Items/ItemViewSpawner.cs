@@ -19,5 +19,9 @@ public class ItemViewSpawner : MonoBehaviour
             var instance = Instantiate(itemViewToSpawn, _targetPanel);
             _itemController.AddItem(instance);
         }
+        else
+        {
+            
+        }
     }
 }

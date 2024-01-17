@@ -15,6 +15,11 @@ public class OtherItem : Item
         }
     }
 
+    protected void UseBonus()
+    {
+        
+    }
+
     public void Init(ItemViewSpawner spawwner)
     {
         _spawner = spawwner;
