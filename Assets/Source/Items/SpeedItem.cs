@@ -10,7 +10,8 @@ public class SpeedItem : Item
         if (collision.gameObject.TryGetComponent(out PlayerMoverView playerMoverView))
         {
             playerMoverView.ChangeSpeed(_value, _time);
-            Destroy(gameObject);
+            ExplosionParticle.Play();
+            Invoke("Destroy", 1f);
         }
     }
 }

@@ -19,6 +19,7 @@ public class PlayerMoverModel
     private bool _enableJump = true;
     private KeyCode _jumpKey = KeyCode.Space;
     private float _jumpPower = 2f;
+    private float _moveCoefficient;
 
     public event Action StartedGame;
 
@@ -30,13 +31,18 @@ public class PlayerMoverModel
 
     public float MoveSpeed { get; private set; }
 
-    public void Move(float coefficient)
+    public void SetDataMove(float coefficient)
+    {
+        _moveCoefficient = coefficient;
+    }
+
+    public void Move()
     {
         if (_isMove)
         {
             Vector3 currentPosition = _rigidbody.position;
 
-            float newXPosition = currentPosition.x + _turnSpeed * coefficient * Time.deltaTime;
+            float newXPosition = currentPosition.x + _turnSpeed * _moveCoefficient * Time.deltaTime;
             newXPosition = Mathf.Clamp(newXPosition, -1f, 1f);
 
             _rigidbody.position = new Vector3(newXPosition, currentPosition.y, currentPosition.z);
@@ -68,11 +74,13 @@ public class PlayerMoverModel
     {
         ChangeSpeed();
         CheckGround();
+        Move();
     }
 
     public void ChangeSpeedCrash(float moveSpeed)
     {
         _moveVariableSpeed = moveSpeed;
+        _isSpeedBoost = false;
         _animator.Play(CrashState);
     }
 
@@ -114,8 +122,6 @@ public class PlayerMoverModel
             _isGrounded = true;
             _enableJump = true;
         }
-
-        Debug.Log("Grounded " + _isGrounded + " Enable " + _enableJump);
     }
 
     public void Jump()
