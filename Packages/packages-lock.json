@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "8b3ff533346e27727613880171be328b15cb4e84"
     },
+    "com.agava.yandexgames": {
+      "version": "https://github.com/forcepusher/com.agava.yandexgames.git#16.0.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "faf20595c0f18f4a471e6b27fbd5fbf5fd05d7a2"
+    },
     "com.unity.collab-proxy": {
       "version": "2.0.5",
       "depth": 0,
