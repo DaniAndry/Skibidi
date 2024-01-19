@@ -1,5 +1,6 @@
+using System;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Boost : MonoBehaviour
 {
@@ -16,9 +17,17 @@ public class Boost : MonoBehaviour
     public float Bonus => _bonus;
     public float Time => _time;
 
+    public event Action OnUpdateCount;
+
     private void Decrease()
     {
         _countBoosts--;
+        UpdateText();
+    }
+
+    private void UpdateText()
+    {
+        OnUpdateCount?.Invoke();
     }
 
     public bool TryUse()
@@ -37,6 +46,7 @@ public class Boost : MonoBehaviour
     public void Increase()
     {
         _countBoosts++;
+        UpdateText();
     }
 
     public void Upgrade()

@@ -13,12 +13,15 @@ public class BoostBuyButton : MonoBehaviour
     [SerializeField] private Button _upgradeForAd;
     [SerializeField] private TMP_Text _workTimeText;
     [SerializeField] private TMP_Text _countBoosts;
+    [SerializeField] private Image _panelCountUpgrade;
+    [SerializeField] private Image _prefabCountUpgradeImage;
 
-    private int _countUpgrade = 1;
+    private int _countUpgrade = 0;
     private float _workTime = 10;
     private TMP_Text _priceBuyText;
     private TMP_Text _priceUpgradeText;
     private ShopBoosts _shopBoosts;
+    private bool _isBanUpgrade = false;
 
     public int Price => _priceBuyBoost;
 
@@ -57,8 +60,16 @@ public class BoostBuyButton : MonoBehaviour
 
     private void BanUpgrade()
     {
+        _isBanUpgrade = true;
         _upgradeForAd.interactable = false;
         _upgradeForMoney.interactable = false;
+    }
+
+    private void SpawnUpgradeImage()
+    {
+        Vector3 imagePosition = new Vector3(_prefabCountUpgradeImage.transform.position.x, _prefabCountUpgradeImage.transform.position.y + Mathf.Abs(_prefabCountUpgradeImage.transform.position.y) / 2 * _countUpgrade, 0);
+        Image upgradeImage = Instantiate(_prefabCountUpgradeImage, imagePosition, Quaternion.Euler(0, 0, 0));
+        upgradeImage.transform.SetParent(_panelCountUpgrade.transform, false);
     }
 
     public void BuyForMoney()
@@ -74,13 +85,17 @@ public class BoostBuyButton : MonoBehaviour
 
     public void UpgradeForMoney()
     {
-        _shopBoosts.BuyUpgrade(_boost, _priceUpgradeBoost);
-        _workTime = _boost.Time;
-        _countUpgrade++;
-        UpdateText();
+        if (_isBanUpgrade == false)
+        {
+            _shopBoosts.BuyUpgrade(_boost, _priceUpgradeBoost);
+            _workTime = _boost.Time;
+            _countUpgrade++;
+            SpawnUpgradeImage();
+            UpdateText();
 
-        if (_countUpgrade > 5)
-            BanUpgrade();
+            if (_countUpgrade > 3)
+                BanUpgrade();
+        }
     }
 
     public void UpgradeForAd()
