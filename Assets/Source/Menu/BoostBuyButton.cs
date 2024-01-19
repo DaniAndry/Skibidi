@@ -12,6 +12,7 @@ public class BoostBuyButton : MonoBehaviour
     [SerializeField] private Button _upgradeForMoney;
     [SerializeField] private Button _upgradeForAd;
     [SerializeField] private TMP_Text _workTimeText;
+    [SerializeField] private TMP_Text _countBoosts;
 
     private int _countUpgrade = 1;
     private float _workTime = 10;
@@ -51,6 +52,7 @@ public class BoostBuyButton : MonoBehaviour
         _priceBuyText.text = _priceBuyBoost.ToString();
         _priceUpgradeText.text = _priceUpgradeBoost.ToString();
         _workTimeText.text = _workTime.ToString();
+        _countBoosts.text = _boost.Count.ToString();
     }
 
     private void BanUpgrade()

@@ -16,6 +16,7 @@ public abstract class Item : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out PlayerView playerView))
         {
             GetResourses(playerView);
+            ExplosionParticle!.Play();
             Invoke("Destroy", 1f);
         }
     }
