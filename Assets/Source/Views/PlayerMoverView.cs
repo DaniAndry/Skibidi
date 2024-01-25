@@ -13,6 +13,7 @@ public class PlayerMoverView : MonoBehaviour
     private string _nameDanceAnim;
     private Button _speedBoostButton;
     private float _speed;
+    private bool _isProtected;
 
     public event Action<float> OnMoving;
     public event Action OnJumping;
@@ -100,11 +101,19 @@ public class PlayerMoverView : MonoBehaviour
         _speed = speed;
     }
 
+    public void Protect(bool protect)
+    {
+        _isProtected = protect;
+    }
+
     public void Crash()
     {
-        float moveSpeed = 2;
-        AudioManager.Instance.Play("Crash");
-        ChangingSpeedCrash?.Invoke(moveSpeed);
+        if (!_isProtected)
+        {
+            float moveSpeed = 2;
+            AudioManager.Instance.Play("Crash");
+            ChangingSpeedCrash?.Invoke(moveSpeed);
+        }
     }
 
     public void StartGame()
