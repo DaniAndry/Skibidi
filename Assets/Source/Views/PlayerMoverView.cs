@@ -12,6 +12,7 @@ public class PlayerMoverView : MonoBehaviour
     private Animator _animator;
     private string _nameDanceAnim;
     private Button _speedBoostButton;
+    private float _speed;
 
     public event Action<float> OnMoving;
     public event Action OnJumping;
@@ -19,6 +20,9 @@ public class PlayerMoverView : MonoBehaviour
     public event Action<float, float> SpeedBoostChanging;
     public event Action OnStarted;
     public event Action OnStoped;
+    public event Action OnKicked;
+
+    public float CurrentSpeed => _speed;
 
     private void Awake()
     {
@@ -91,6 +95,11 @@ public class PlayerMoverView : MonoBehaviour
         SpeedBoostChanging?.Invoke(count, time);
     }
 
+    public void ChangeCurrentSpeed(float speed)
+    {
+        _speed = speed;
+    }
+
     public void Crash()
     {
         float moveSpeed = 2;
@@ -108,5 +117,10 @@ public class PlayerMoverView : MonoBehaviour
     {
         _cameraMover?.EndMove();
         OnStoped?.Invoke();
+    }
+
+    public void Kick()
+    {
+        OnKicked?.Invoke();
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMoverModel
 {
@@ -12,6 +13,7 @@ public class PlayerMoverModel
     private readonly Animator _animator;
     private readonly int RunState = Animator.StringToHash("RunState");
     private readonly int CrashState = Animator.StringToHash("CrashState");
+    private readonly int KickState = Animator.StringToHash("Kick");
     private float _speedBonus;
     private float _speedTime;
     private bool _isSpeedBoost;
@@ -22,6 +24,8 @@ public class PlayerMoverModel
     private float _moveCoefficient;
 
     public event Action StartedGame;
+
+    public event UnityAction<float> OnChangeSpeed;
 
     public PlayerMoverModel(Rigidbody rigidbody, Animator animator)
     {
@@ -62,6 +66,7 @@ public class PlayerMoverModel
         StartedGame?.Invoke();
 
         _animator.Play(RunState);
+        OnChangeSpeed?.Invoke(MoveSpeed);
     }
 
     public void EndGame()
@@ -82,6 +87,11 @@ public class PlayerMoverModel
         _moveVariableSpeed = moveSpeed;
         _isSpeedBoost = false;
         _animator.Play(CrashState);
+    }
+
+    public void Kick()
+    {
+        _animator.Play(KickState);
     }
 
     public void TurnOnSpeedBoost(float bonus, float time)
@@ -159,5 +169,6 @@ public class PlayerMoverModel
 
         MoveSpeed = MoveSpeed < _moveVariableSpeed ? MoveSpeed + 0.01f : MoveSpeed > _moveVariableSpeed ? MoveSpeed - 0.01f : _moveVariableSpeed;
         _turnSpeed = MoveSpeed / turnMultiplier;
+        OnChangeSpeed?.Invoke(MoveSpeed);
     }
 }

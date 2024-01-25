@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private int _itemSpawnCount = 50;
+    [SerializeField] private int _itemSpawnCount = 7;
     [SerializeField] private List<GameObject> _itemPrefabs;
     [SerializeField] private ChunksPlacer _chunksPlacer;
     [SerializeField] private PlayerView _player;

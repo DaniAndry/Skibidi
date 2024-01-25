@@ -5,10 +5,12 @@ public abstract class Item : MonoBehaviour
     protected ParticleSystem ExplosionParticle;
 
     protected float Resourses;
+    protected MeshRenderer Mesh;
 
     private void Start()
     {
         ExplosionParticle = GetComponentInChildren<ParticleSystem>();
+        Mesh = GetComponentInChildren<MeshRenderer>();
     }
 
     protected virtual void OnTriggerEnter(Collider collision)
@@ -16,6 +18,7 @@ public abstract class Item : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out PlayerView playerView))
         {
             GetResourses(playerView);
+            Mesh.enabled = false;
             ExplosionParticle!.Play();
             Invoke("Destroy", 1f);
         }

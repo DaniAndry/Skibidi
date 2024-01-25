@@ -86,4 +86,9 @@ public class PlayerView : MonoBehaviour
     {
         _energy.text = $"{Convert.ToInt32(energyAmount)}";
     }
+
+    public void AddMoney(int count)
+    {
+        _bank.GiveMoney(count);
+    }
 }

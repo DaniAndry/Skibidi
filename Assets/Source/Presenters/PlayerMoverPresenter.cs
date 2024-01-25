@@ -17,6 +17,8 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.OnJumping += Jump;
         _view.ChangingSpeedCrash += ChangeSpeedCrash;
         _view.SpeedBoostChanging += OnSpeedChanging;
+        _view.OnKicked += _model.Kick;
+        _model.OnChangeSpeed += _view.ChangeCurrentSpeed;
     }
 
     public void Disable()
@@ -25,6 +27,8 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.OnJumping -= Jump;
         _view.ChangingSpeedCrash -= ChangeSpeedCrash;
         _view.SpeedBoostChanging -= OnSpeedChanging;
+        _view.OnKicked -= _model.Kick;
+        _model.OnChangeSpeed -= _view.ChangeCurrentSpeed;
     }
 
     private void FixedUpdate()
@@ -63,5 +67,4 @@ public class PlayerMoverPresenter : MonoBehaviour
     {
         _model.TurnOnSpeedBoost(bonus, time);
     }
-
 }
