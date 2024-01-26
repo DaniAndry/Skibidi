@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerMoverModel
 {
@@ -13,9 +12,6 @@ public class PlayerMoverModel
     private readonly Animator _animator;
     private readonly int RunState = Animator.StringToHash("RunState");
     private readonly int CrashState = Animator.StringToHash("CrashState");
-    private readonly int JumpState = Animator.StringToHash("JumpState");
-    private readonly int LoseState = Animator.StringToHash("LoseState");
-    private readonly int KickState = Animator.StringToHash("Kick");
     private float _speedBonus;
     private float _speedTime;
     private bool _isSpeedBoost;
@@ -26,8 +22,6 @@ public class PlayerMoverModel
     private float _moveCoefficient;
 
     public event Action StartedGame;
-
-    public event UnityAction<float> OnChangeSpeed;
 
     public PlayerMoverModel(Rigidbody rigidbody, Animator animator)
     {
@@ -68,14 +62,12 @@ public class PlayerMoverModel
         StartedGame?.Invoke();
 
         _animator.Play(RunState);
-        OnChangeSpeed?.Invoke(MoveSpeed);
     }
 
     public void EndGame()
     {
         _isMove = false;
         _rigidbody.velocity = Vector3.zero;
-        _animator.Play(LoseState);
     }
 
     public void Update()
@@ -90,11 +82,6 @@ public class PlayerMoverModel
         _moveVariableSpeed = moveSpeed;
         _isSpeedBoost = false;
         _animator.Play(CrashState);
-    }
-
-    public void Kick()
-    {
-        _animator.Play(KickState);
     }
 
     public void TurnOnSpeedBoost(float bonus, float time)
@@ -142,7 +129,7 @@ public class PlayerMoverModel
         if (_enableJump && Input.GetKeyDown(_jumpKey) && _isGrounded)
         {
             _rigidbody.AddForce(0, _jumpPower, 0f, ForceMode.Impulse);
-            _animator.Play(JumpState);
+            TaskCounter.IncereaseProgress(1, Convert.ToString(TaskType.Jump));
         }
     }
 
@@ -173,6 +160,5 @@ public class PlayerMoverModel
 
         MoveSpeed = MoveSpeed < _moveVariableSpeed ? MoveSpeed + 0.01f : MoveSpeed > _moveVariableSpeed ? MoveSpeed - 0.01f : _moveVariableSpeed;
         _turnSpeed = MoveSpeed / turnMultiplier;
-        OnChangeSpeed?.Invoke(MoveSpeed);
     }
 }

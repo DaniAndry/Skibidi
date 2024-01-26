@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,9 +14,28 @@ public class Bank : MonoBehaviour
         UpdateMoneyText();
     }
 
+    private void OnEnable()
+    {
+        AwardGiver.OnReward += GiveRewardMoney;
+    }
+
+    private void OnDisable()
+    {
+        AwardGiver.OnReward -= GiveRewardMoney;
+    }
+
+    private void GiveRewardMoney(string name, int amount)
+    {
+        if(name == Convert.ToString(ResourceType.Money))
+        {
+            GiveMoney(amount);
+        }
+    }
+
     public void TakeMoney(int money)
     {
         _money -= money;
+        TaskCounter.IncereaseProgress(money, Convert.ToString(TaskType.SpendMoney));
         AudioManager.Instance.Play("Buy");
         UpdateMoneyText();
     }

@@ -7,8 +7,8 @@ public class TaskWindow : Window
     [SerializeField] private Button _closeButton;
     [SerializeField] private Button _openDailyList;
     [SerializeField] private Button _openWeeklyList;
-    [SerializeField] private Image DailyTaskList;
-    [SerializeField] private Image WeeklyTaskList;
+    [SerializeField] private DailyTaskWindow _dailyTaskList;
+    [SerializeField] private WeeklyTaskWindow _weeklyTaskList;
 
     private void Awake()
     {
@@ -34,13 +34,13 @@ public class TaskWindow : Window
 
     private void OpenDailyList()
     {
-        DailyTaskList.gameObject.SetActive(true);
-        WeeklyTaskList.gameObject.SetActive(false);
+        _dailyTaskList.Open();
+        _weeklyTaskList.CloseWithoutSound();
     }
 
     private void OpenWeeklyList()
     {
-        DailyTaskList.gameObject.SetActive(false);
-        WeeklyTaskList.gameObject.SetActive(true);
+        _dailyTaskList.CloseWithoutSound();
+        _weeklyTaskList.Open();
     }
 }

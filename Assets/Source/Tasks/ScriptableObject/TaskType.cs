@@ -1,0 +1,19 @@
+public enum TaskType
+{
+    Jump,
+    CollectMoney,
+    SpendMoney,
+    UseSpeedBoost,
+    UseEnergyBoost,
+    UseMoneyBoost,
+    BuySpeedBoost,
+    BuyEnergyBoost,
+    BuyMoneyBoost,
+    Run,
+    Buy,
+    BuySkin,
+    BuyDance,
+    CrashCar,
+    CrashBus,
+    CrashWall
+}
