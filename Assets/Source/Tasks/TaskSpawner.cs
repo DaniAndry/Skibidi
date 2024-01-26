@@ -16,8 +16,8 @@ public class TaskSpawner : MonoBehaviour
 
     private void Awake()
     {
-        SpawnTasks();
         TaskCounter.Init();
+        SpawnTasks();
     }
 
     private void OnDisable()

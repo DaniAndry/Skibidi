@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public static class TaskCounter
 {
@@ -15,7 +16,8 @@ public static class TaskCounter
     {
         for (int i = 0; i < _tasksArray.Length; i++)
         {
-            _tasks.Add(_tasksArray[i], false);
+            if (_tasks.ContainsKey(_tasksArray[i]))
+                _tasks.Add(_tasksArray[i], false);
         }
     }
 
@@ -27,7 +29,7 @@ public static class TaskCounter
 
     public static void CompleteTask(string name)
     {
-        if( _tasks.ContainsKey(name))
+        if (_tasks.ContainsKey(name))
             _tasks[name] = false;
     }
 

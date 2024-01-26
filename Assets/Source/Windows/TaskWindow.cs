@@ -13,7 +13,8 @@ public class TaskWindow : Window
     private void Awake()
     {
         CloseWithoutSound();
-        OpenDailyList();
+        _dailyTaskList.OpenWithoutSound();
+        _weeklyTaskList.CloseWithoutSound();
     }
 
     private void OnEnable()
