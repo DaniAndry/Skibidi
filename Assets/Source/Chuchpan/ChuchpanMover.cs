@@ -49,7 +49,7 @@ public class ChuchpanMover : MonoBehaviour
 
     private void Push(float speed)
     {
-        float pushDistance = speed += 2f;
+        float pushDistance = speed += 3f;
         StartCoroutine(SmoothPush(pushDistance));
     }
 

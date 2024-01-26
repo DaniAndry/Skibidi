@@ -36,8 +36,8 @@ public class Chuchpan : MonoBehaviour
         OnHit?.Invoke(mover.CurrentSpeed);
 
         _animator.Play(FallState);
-        _collider.enabled = false;
         yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+        _collider.enabled = false;
 
         _fall.Play();
         yield return new WaitForSeconds(_fall.main.duration);

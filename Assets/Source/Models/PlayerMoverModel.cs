@@ -13,6 +13,8 @@ public class PlayerMoverModel
     private readonly Animator _animator;
     private readonly int RunState = Animator.StringToHash("RunState");
     private readonly int CrashState = Animator.StringToHash("CrashState");
+    private readonly int JumpState = Animator.StringToHash("JumpState");
+    private readonly int LoseState = Animator.StringToHash("LoseState");
     private readonly int KickState = Animator.StringToHash("Kick");
     private float _speedBonus;
     private float _speedTime;
@@ -73,6 +75,7 @@ public class PlayerMoverModel
     {
         _isMove = false;
         _rigidbody.velocity = Vector3.zero;
+        _animator.Play(LoseState);
     }
 
     public void Update()
@@ -139,6 +142,7 @@ public class PlayerMoverModel
         if (_enableJump && Input.GetKeyDown(_jumpKey) && _isGrounded)
         {
             _rigidbody.AddForce(0, _jumpPower, 0f, ForceMode.Impulse);
+            _animator.Play(JumpState);
         }
     }
 

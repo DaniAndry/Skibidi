@@ -10,7 +10,7 @@ public abstract class ItemFactory : MonoBehaviour
 
     protected GameObject InstantiateItem(GameObject prefab, Vector3 spawnPosition)
     {
-        return Instantiate(prefab, spawnPosition, Quaternion.identity);
+        return Instantiate(prefab, spawnPosition, Quaternion.Euler(0,90,0));
     }
 
     protected Vector3 GetRandomSpawnPosition(Chunk chunk, PlayerView player)

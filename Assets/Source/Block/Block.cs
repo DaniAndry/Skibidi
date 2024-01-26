@@ -14,4 +14,13 @@ public class Block : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out Chuchpan chuchpan))
+        {
+            Instantiate(_crashParticle.gameObject, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
+    }
 }
