@@ -8,10 +8,15 @@ public class OtherItem : Item
 
     protected override void OnTriggerEnter(Collider collision)
     {
-        base.OnTriggerEnter(collision);
         _spawner.Spawn(this);
-
+        base.OnTriggerEnter(collision);
     }
+
+    public virtual void Boost()
+    { }
+
+    public virtual void DeBoost()
+    { }
 
     public void Init(ItemViewSpawner spawwner)
     {

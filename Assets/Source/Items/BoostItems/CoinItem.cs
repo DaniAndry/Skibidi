@@ -8,5 +8,4 @@ public class CoinItem : Item
     {
         playerView.AddMoney(Reward);
     }
-
 }
