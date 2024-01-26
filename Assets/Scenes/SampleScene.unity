@@ -28524,6 +28524,9 @@ MonoBehaviour:
   - {fileID: 2573909892187333522, guid: 2875acc33df8f4a458fd5d90e79e0e1d, type: 3}
   - {fileID: 5956539019955316106, guid: a2f5bb8d6544ef347b97e1e38b54448b, type: 3}
   - {fileID: 5521827270838497613, guid: 8d280008b14666242ad39c30e8c20f23, type: 3}
+  - {fileID: 5843850783078593070, guid: 1758f3a01aa522f48b36b518ab191511, type: 3}
+  - {fileID: 3323914070900818851, guid: cf23a361d1745c646b92232c950452e3, type: 3}
+  - {fileID: 3293960129829554931, guid: 37b735af057db824486c4e2f3078031b, type: 3}
   _chunksPlacer: {fileID: 151307077}
   _player: {fileID: 1754922152}
   _boostItemFactory: {fileID: 1587891477}

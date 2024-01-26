@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class EnergyCollectibleItem : OtherItem
 {
-    // Start is called before the first frame update
-    void Start()
+    private int _boostCount = 50;
+    private int _deBoostCount = -35;
+
+    public override void Boost()
     {
-        
+        PlayerView.OnEnergyChanged(_boostCount);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void DeBoost()
     {
-        
+        PlayerView.OnEnergyChanged(_deBoostCount);
     }
 }

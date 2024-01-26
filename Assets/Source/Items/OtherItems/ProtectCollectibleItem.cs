@@ -1,16 +1,25 @@
+using System.Collections;
 using UnityEngine;
 
 public class ProtectCollectibleItem : OtherItem
 {
-    // Start is called before the first frame update
-    void Start()
+    private bool _isActivated = true;
+    private int _duration = 5;
+
+    public override void Boost()
     {
-        
+        PlayerMoverView.Protect(_isActivated);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void DeBoost()
     {
-        
+        PlayerMoverView.Protect(!_isActivated);
+    }
+
+    private IEnumerator ProtectOnTime()
+    {
+        yield return new WaitForSeconds(_duration);
+
+        DeBoost();
     }
 }

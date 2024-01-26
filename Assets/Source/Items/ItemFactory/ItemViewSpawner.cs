@@ -12,12 +12,12 @@ public class ItemViewSpawner : MonoBehaviour
     public void Spawn(OtherItem item)
     {
         var exists = _items.Any(itemView => itemView.Name.Trim().Equals(item.itemType.Trim(), StringComparison.OrdinalIgnoreCase));
-
+        Debug.Log(exists);
         if (exists)
         {
             var itemViewToSpawn = _items.First(iv => iv.Name.Trim().Equals(item.itemType.Trim(), StringComparison.OrdinalIgnoreCase));
             var instance = Instantiate(itemViewToSpawn, _targetPanel);
-            _itemController.AddItem(instance);
+            _itemController.AddItem(instance, item);
         }
     }
 }

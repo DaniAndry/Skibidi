@@ -5,15 +5,9 @@ public class SpeedItem : Item
     private float _value = 5f;
     private float _time = 5f;
 
-    protected override void OnTriggerEnter(Collider collision)
+    protected override void GetMoverResourses(PlayerMoverView playerMoverView)
     {
-        if (collision.gameObject.TryGetComponent(out PlayerMoverView playerMoverView))
-        {
-            playerMoverView.ChangeSpeed(_value, _time);
-            Mesh.enabled = false;
-            ExplosionParticle!.Play();
-            Invoke("Destroy", 1f);
-        }
+        PlayerMoverView.ChangeSpeed(_value, _time);
     }
 }
 
