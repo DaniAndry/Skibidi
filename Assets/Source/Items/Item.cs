@@ -5,28 +5,28 @@ public abstract class Item : MonoBehaviour
     protected ParticleSystem ExplosionParticle;
 
     protected float Resourses;
-    protected MeshRenderer Mesh;
+    protected float Delay = 2;
     protected PlayerView PlayerView;
     protected PlayerMoverView PlayerMoverView;
+
+    private Collider _collider;
+    private MeshRenderer _mesh;
 
     private void Start()
     {
         ExplosionParticle = GetComponentInChildren<ParticleSystem>();
-        Mesh = GetComponentInChildren<MeshRenderer>();
+        _mesh = GetComponentInChildren<MeshRenderer>();
+        _collider = GetComponent<Collider>();
     }
 
-    protected virtual void OnTriggerEnter(Collider collision)
+    protected void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.TryGetComponent(out PlayerView playerView))
+        if (collision.gameObject.TryGetComponent(out PlayerView playerView) && collision.gameObject.TryGetComponent(out PlayerMoverView playerMoverView))
         {
             PlayerView = playerView;
-            GetResourses(PlayerView);
-            StartDestroy();
-        }
-        if (collision.gameObject.TryGetComponent(out PlayerMoverView playerMoverView))
-        {
             PlayerMoverView = playerMoverView;
             GetMoverResourses(PlayerMoverView);
+            GetResourses(PlayerView);
             StartDestroy();
         }
     }
@@ -37,9 +37,10 @@ public abstract class Item : MonoBehaviour
 
     private void StartDestroy()
     {
-        Mesh.enabled = false;
+        _mesh.enabled = false;
+        _collider.enabled = false;
         ExplosionParticle!.Play();
-        Invoke("Destroy", 1f);
+        Invoke("Destroy", Delay);
     }
 
     private void Destroy()

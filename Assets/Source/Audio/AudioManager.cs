@@ -7,13 +7,13 @@ public class AudioManager : MonoBehaviour
 
 	[SerializeField] private Sound[] sounds;
 
-	private void Awake ()
+	private void Start ()
 	{
 		if (Instance != null)
 		{
 			Destroy(gameObject);
 			return;
-		} 
+		}
 		else
 		{
 			Instance = this;
@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
 		foreach (Sound sond in sounds)
 		{
 			sond.source = gameObject.AddComponent<AudioSource>();
+			sond.source.playOnAwake = false;
 			sond.source.clip = sond.clip;
 			sond.source.volume = sond.volume;
 			sond.source.pitch = sond.pitch;
@@ -32,7 +33,7 @@ public class AudioManager : MonoBehaviour
 
 	public void Play(string sound)
 	{
-		Sound s = Array.Find(sounds, item => item.name == sound);
+        Sound s = Array.Find(sounds, item => item.name == sound);
 		s.source.Play();
 	}
 

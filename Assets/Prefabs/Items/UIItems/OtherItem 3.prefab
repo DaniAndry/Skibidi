@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6349600583436790210}
   - component: {fileID: 5821931868426901224}
   m_Layer: 5
-  m_Name: Item
+  m_Name: OtherItem 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Item
+  m_text: 'OtherItem
 
 '
   m_isRightToLeft: 0

@@ -6,10 +6,14 @@ public class OtherItem : Item
 
     private ItemViewSpawner _spawner;
 
-    protected override void OnTriggerEnter(Collider collision)
+    protected override void GetResourses(PlayerView playerView)
     {
         _spawner.Spawn(this);
-        base.OnTriggerEnter(collision);
+    }
+
+    protected override void GetMoverResourses(PlayerMoverView playerMoverView)
+    {
+        PlayerMoverView = playerMoverView;
     }
 
     public virtual void Boost()

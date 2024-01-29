@@ -28456,11 +28456,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d227a00888376094eb44daf068da01ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemSpawnCount: 15
+  _itemSpawnCount: 50
   _itemPrefabs:
   - {fileID: 4311593421214662173, guid: 244fe934a07e47348acb5728ef8eba21, type: 3}
   - {fileID: 4151648190916678948, guid: 7cabd9acdc810a14680fc7d5f03ccdbb, type: 3}
-  - {fileID: 2573909892187333522, guid: 2875acc33df8f4a458fd5d90e79e0e1d, type: 3}
   - {fileID: 5956539019955316106, guid: a2f5bb8d6544ef347b97e1e38b54448b, type: 3}
   - {fileID: 5521827270838497613, guid: 8d280008b14666242ad39c30e8c20f23, type: 3}
   - {fileID: 5843850783078593070, guid: 1758f3a01aa522f48b36b518ab191511, type: 3}
@@ -43816,8 +43815,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _items:
-  - {fileID: 5821931868426901224, guid: 8c54b51a5d0363b4c9fe32c37b5764a7, type: 3}
   - {fileID: 5821931868426901224, guid: 5cf5c1622441d5c43a579dc27d87c576, type: 3}
+  - {fileID: 5821931868426901224, guid: 7e43579761b2dc046ac74a9f982c7d9d, type: 3}
+  - {fileID: 5821931868426901224, guid: 275fa15da08d68e4aa421194e7fcf1ef, type: 3}
   _targetPanel: {fileID: 6363838430553580229}
   _itemController: {fileID: 2225042195295245525}
 --- !u!114 &4644782928538113005
