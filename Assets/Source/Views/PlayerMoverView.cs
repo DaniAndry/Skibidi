@@ -108,6 +108,7 @@ public class PlayerMoverView : MonoBehaviour
 
     public void Crash()
     {
+        Debug.Log(_isProtected);
         if (!_isProtected)
         {
             float moveSpeed = 2;

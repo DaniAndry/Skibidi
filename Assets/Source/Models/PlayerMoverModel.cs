@@ -4,28 +4,32 @@ using UnityEngine.Events;
 
 public class PlayerMoverModel
 {
-    private float _turnSpeed;
-    private float _lastMoveSpeed;
-    private float _moveVariableSpeed;
-    private bool _isMove = false;
     private readonly float _maxSpeed = 3f;
     private readonly Rigidbody _rigidbody;
     private readonly Animator _animator;
+
     private readonly int RunState = Animator.StringToHash("RunState");
     private readonly int CrashState = Animator.StringToHash("CrashState");
     private readonly int JumpState = Animator.StringToHash("JumpState");
     private readonly int LoseState = Animator.StringToHash("LoseState");
     private readonly int KickState = Animator.StringToHash("Kick");
+
+    private float _turnSpeed;
+    private float _lastMoveSpeed;
+    private float _moveVariableSpeed;
     private float _speedBonus;
     private float _speedTime;
+    private float _jumpPower = 2f;
+    private float _moveCoefficient;
+
+    private bool _isMove = false;
     private bool _isSpeedBoost;
     private bool _isGrounded = false;
     private bool _enableJump = true;
     private KeyCode _jumpKey = KeyCode.Space;
-    private float _jumpPower = 2f;
-    private float _moveCoefficient;
 
     public event Action StartedGame;
+
     public event UnityAction<float> OnChangeSpeed;
 
     public PlayerMoverModel(Rigidbody rigidbody, Animator animator)
@@ -141,7 +145,6 @@ public class PlayerMoverModel
         if (_enableJump && Input.GetKeyDown(_jumpKey) && _isGrounded)
         {
             _rigidbody.AddForce(0, _jumpPower, 0f, ForceMode.Impulse);
-            TaskCounter.IncereaseProgress(1, Convert.ToString(TaskType.Jump));
             _animator.Play(JumpState);
         }
     }

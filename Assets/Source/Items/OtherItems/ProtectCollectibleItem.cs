@@ -4,22 +4,27 @@ using UnityEngine;
 public class ProtectCollectibleItem : OtherItem
 {
     private bool _isActivated = true;
-    private int _duration = 5;
+    private int _duration = 10;
 
     public override void Boost()
     {
-        PlayerMoverView.Protect(_isActivated);
-    }
-
-    public override void DeBoost()
-    {
-        PlayerMoverView.Protect(!_isActivated);
+        if (PlayerMoverView != null)
+        {
+            Delay = _duration +1f;
+            PlayerMoverView.Protect(_isActivated);
+            StartCoroutine(ProtectOnTime());
+        }
     }
 
     private IEnumerator ProtectOnTime()
     {
         yield return new WaitForSeconds(_duration);
 
-        DeBoost();
+        ProtectDisable();
+    }
+
+    private void ProtectDisable()
+    {
+        PlayerMoverView.Protect(!_isActivated);
     }
 }

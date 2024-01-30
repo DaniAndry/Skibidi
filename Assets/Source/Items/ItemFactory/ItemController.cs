@@ -16,11 +16,12 @@ public class ItemController : MonoBehaviour
         {
             ActivationDeboost(otherItem);
         }
-        else
+
+        if (!_items.Any() || (_items.All(existingItem => existingItem.Name == newItem.Name) && _items.Count < 3))
         {
             _items.Add(newItem);
 
-            if (_items.Count == 3 && _items.All(existingItem => existingItem.Name == newItem.Name))
+            if (_items.Count == 3)
             {
                 ActivationBoost(otherItem);
             }
@@ -29,26 +30,23 @@ public class ItemController : MonoBehaviour
 
     private void ActivationBoost(OtherItem otherItem)
     {
+        otherItem.Boost();
         ClearPanel();
         ItemsClearedDueToMatch?.Invoke();
-        otherItem.Boost();
     }
 
     private void ActivationDeboost(OtherItem otherItem)
     {
+        otherItem.DeBoost();
         ClearPanel();
         ItemsClearedDueToMismatch?.Invoke();
-        otherItem.DeBoost();
     }
 
     private void ClearPanel()
     {
         foreach (var itemView in _items)
         {
-            if (itemView != null)
-            {
-                Destroy(itemView.gameObject);
-            }
+            Destroy(itemView.gameObject);
         }
 
         _items.Clear();
