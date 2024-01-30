@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.683
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.41202575, g: 0.52998406, b: 0.6049215, a: 0.683}
+  m_IndirectSpecularColor: {r: 0.41382933, g: 0.5322291, b: 0.60689765, a: 0.683}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17556,7 +17556,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.31970373, y: 0.22335108}
   m_AnchorMax: {x: 0.684, y: 0.32217553}
-  m_AnchoredPosition: {x: -1.9998779, y: -4.4998474}
+  m_AnchoredPosition: {x: -1.9998779, y: -4.499878}
   m_SizeDelta: {x: -7.4890137, y: -8.403992}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1183048089
@@ -24491,7 +24491,11 @@ MonoBehaviour:
   _itemPrefabs:
   - {fileID: 4311593421214662173, guid: 244fe934a07e47348acb5728ef8eba21, type: 3}
   - {fileID: 4151648190916678948, guid: 7cabd9acdc810a14680fc7d5f03ccdbb, type: 3}
-  - {fileID: 2573909892187333522, guid: 2875acc33df8f4a458fd5d90e79e0e1d, type: 3}
+  - {fileID: 5956539019955316106, guid: a2f5bb8d6544ef347b97e1e38b54448b, type: 3}
+  - {fileID: 5843850783078593070, guid: 1758f3a01aa522f48b36b518ab191511, type: 3}
+  - {fileID: 3323914070900818851, guid: cf23a361d1745c646b92232c950452e3, type: 3}
+  - {fileID: 5521827270838497613, guid: 8d280008b14666242ad39c30e8c20f23, type: 3}
+  - {fileID: 3293960129829554931, guid: 37b735af057db824486c4e2f3078031b, type: 3}
   _chunksPlacer: {fileID: 151307077}
   _player: {fileID: 1754922152}
   _boostItemFactory: {fileID: 1587891477}
@@ -34668,7 +34672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -49.99713
+      value: -49.99707
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -39024,8 +39028,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _items:
-  - {fileID: 5821931868426901224, guid: 8c54b51a5d0363b4c9fe32c37b5764a7, type: 3}
+  - {fileID: 5821931868426901224, guid: 275fa15da08d68e4aa421194e7fcf1ef, type: 3}
   - {fileID: 5821931868426901224, guid: 5cf5c1622441d5c43a579dc27d87c576, type: 3}
+  - {fileID: 5821931868426901224, guid: 7e43579761b2dc046ac74a9f982c7d9d, type: 3}
   _targetPanel: {fileID: 6363838430553580229}
   _itemController: {fileID: 2225042195295245525}
 --- !u!114 &4644782928538113005
