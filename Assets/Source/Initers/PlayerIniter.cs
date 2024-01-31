@@ -10,6 +10,8 @@ public class PlayerIniter : MonoBehaviour
     [SerializeField] private ChunksPlacer _chunksPlacer;
     [SerializeField] private ChunksPlacer _backChunksPlacer;
     [SerializeField] private ShopDancing _shopDancing;
+    [SerializeField] private PlayerEffectController _playerEffects;
+    [SerializeField] private PlayerAnimatorController _playerAnimatorController;
 
     private Rigidbody _rigidbody;
     private PlayerView _view;
@@ -48,10 +50,10 @@ public class PlayerIniter : MonoBehaviour
 
         _model = new PlayerModel();
         _moverModel = new PlayerMoverModel(_rigidbody, _animator);
-
+        _playerAnimatorController.Init(_viewMover, _animator);
         _presenter.Init(_model, _view);
         _moverPresenter.Init(_moverModel, _viewMover);
-
+        _playerEffects.Init(_viewMover, _view);
         _chunksPlacer.GetPlayerTransform(playerView.transform);
 
         _presenter?.Enable();

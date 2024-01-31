@@ -6,6 +6,6 @@ public class CoinItem : Item
 
     protected override void GetResourses(PlayerView playerView)
     {
-        playerView.AddMoney(Reward);
+        playerView.AddMoney(Reward, false);
     }
 }

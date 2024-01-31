@@ -15,20 +15,20 @@ public class PlayerMoverPresenter : MonoBehaviour
     {
         _view.OnMoving += SetDataMove;
         _view.OnJumping += Jump;
-        _view.ChangingSpeedCrash += ChangeSpeedCrash;
-        _view.SpeedBoostChanging += OnSpeedChanging;
-        _view.OnKicked += _model.Kick;
+        _view.OnChangingSpeedCrash += ChangeSpeedCrash;
+        _view.OnSpeedBoostChanging += OnSpeedChanging;
         _model.OnChangeSpeed += _view.ChangeCurrentSpeed;
+        _model.Jumped += _view.Jump;
     }
 
     public void Disable()
     {
         _view.OnMoving -= SetDataMove;
         _view.OnJumping -= Jump;
-        _view.ChangingSpeedCrash -= ChangeSpeedCrash;
-        _view.SpeedBoostChanging -= OnSpeedChanging;
-        _view.OnKicked -= _model.Kick;
+        _view.OnChangingSpeedCrash -= ChangeSpeedCrash;
+        _view.OnSpeedBoostChanging -= OnSpeedChanging;
         _model.OnChangeSpeed -= _view.ChangeCurrentSpeed;
+        _model.Jumped -= _view.Jump;
     }
 
     private void FixedUpdate()

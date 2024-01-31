@@ -8,7 +8,6 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] private float _moveDistance = 10f;
     [SerializeField] private float _duration = 5f;
 
-    private bool _running = false;
     private Animator _animator;
     private int _idleStateHash = Animator.StringToHash("Idle");
     private int _runStateHash = Animator.StringToHash("Run");

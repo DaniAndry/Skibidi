@@ -20,6 +20,7 @@ public class PlayerView : MonoBehaviour
 
     public event Action<float> EnergyChanging;
     public event Action<float> MaxEnergyChanging;
+    public event Action<float,bool>OnMoneyChanging;
     public event Action<EnergyBoost> DistanceBoostChanging;
 
     private void Awake()
@@ -87,8 +88,9 @@ public class PlayerView : MonoBehaviour
         _energy.text = $"{Convert.ToInt32(energyAmount)}";
     }
 
-    public void AddMoney(int count)
+    public void AddMoney(int count, bool isBoost)
     {
         _bank.GiveMoney(count);
+        OnMoneyChanging?.Invoke(count, isBoost);
     }
 }

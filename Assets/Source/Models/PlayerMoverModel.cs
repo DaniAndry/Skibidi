@@ -6,13 +6,6 @@ public class PlayerMoverModel
 {
     private readonly float _maxSpeed = 3f;
     private readonly Rigidbody _rigidbody;
-    private readonly Animator _animator;
-
-    private readonly int RunState = Animator.StringToHash("RunState");
-    private readonly int CrashState = Animator.StringToHash("CrashState");
-    private readonly int JumpState = Animator.StringToHash("JumpState");
-    private readonly int LoseState = Animator.StringToHash("LoseState");
-    private readonly int KickState = Animator.StringToHash("Kick");
 
     private float _turnSpeed;
     private float _lastMoveSpeed;
@@ -29,13 +22,13 @@ public class PlayerMoverModel
     private KeyCode _jumpKey = KeyCode.Space;
 
     public event Action StartedGame;
+    public event Action Jumped;
 
     public event UnityAction<float> OnChangeSpeed;
 
     public PlayerMoverModel(Rigidbody rigidbody, Animator animator)
     {
         _rigidbody = rigidbody;
-        _animator = animator;
     }
 
     public float MoveSpeed { get; private set; }
@@ -70,7 +63,6 @@ public class PlayerMoverModel
 
         StartedGame?.Invoke();
 
-        _animator.Play(RunState);
         OnChangeSpeed?.Invoke(MoveSpeed);
     }
 
@@ -78,7 +70,6 @@ public class PlayerMoverModel
     {
         _isMove = false;
         _rigidbody.velocity = Vector3.zero;
-        _animator.Play(LoseState);
     }
 
     public void Update()
@@ -92,12 +83,6 @@ public class PlayerMoverModel
     {
         _moveVariableSpeed = moveSpeed;
         _isSpeedBoost = false;
-        _animator.Play(CrashState);
-    }
-
-    public void Kick()
-    {
-        _animator.Play(KickState);
     }
 
     public void TurnOnSpeedBoost(float bonus, float time)
@@ -144,8 +129,8 @@ public class PlayerMoverModel
     {
         if (_enableJump && Input.GetKeyDown(_jumpKey) && _isGrounded)
         {
+            Jumped?.Invoke();
             _rigidbody.AddForce(0, _jumpPower, 0f, ForceMode.Impulse);
-            _animator.Play(JumpState);
         }
     }
 

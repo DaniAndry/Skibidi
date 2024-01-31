@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class CoinCollectibleItem : OtherItem
 {
-    private int _boostCount = 10;
+    private int _boostCount = 20;
     private int _deBoostCount = -5;
+    private bool _isBoost = true;
 
     public override void Boost()
     {
-        PlayerView.AddMoney(_boostCount);
+        PlayerView.AddMoney(_boostCount, _isBoost);
     }
 
     public override void DeBoost()
     {
-        PlayerView.AddMoney(_deBoostCount);
+        PlayerView.AddMoney(_deBoostCount, _isBoost);
     }
 }
