@@ -25,6 +25,8 @@ public class PlayerMoverView : MonoBehaviour
     public event Action OnStoped;
     public event Action OnKicked;
     public event Action OnJumped;
+    public event Action OnSomersault;
+    public event Action OnCrashed;
 
 
     public float CurrentSpeed => _speed;
@@ -121,6 +123,12 @@ public class PlayerMoverView : MonoBehaviour
         }
     }
 
+    public void CrashOnCar()
+    {
+        OnCrashed?.Invoke();
+        //EndGame();
+    }
+
     public void StartGame()
     {
         _cameraMover?.StartMove();
@@ -141,5 +149,10 @@ public class PlayerMoverView : MonoBehaviour
     public void Jump()
     {
         OnJumped?.Invoke();
+    }
+
+    public void Somersault()
+    {
+        OnSomersault?.Invoke();
     }
 }

@@ -4,9 +4,11 @@ public class PlayerAnimatorController : MonoBehaviour
 {
     private readonly int RunState = Animator.StringToHash("RunState");
     private readonly int CrashState = Animator.StringToHash("CrashState");
+    private readonly int CrashOnCarState = Animator.StringToHash("CrashOnCarState");
     private readonly int JumpState = Animator.StringToHash("JumpState");
     private readonly int LoseState = Animator.StringToHash("LoseState");
     private readonly int KickState = Animator.StringToHash("Kick");
+    private readonly int FlipState = Animator.StringToHash("FlipState");
 
     private Animator _animator;
     private PlayerMoverView _playerMoverView;
@@ -18,6 +20,8 @@ public class PlayerAnimatorController : MonoBehaviour
         _playerMoverView.OnKicked -= Kick;
         _playerMoverView.OnChangingSpeedCrash -= Crash;
         _playerMoverView.OnStoped -= Lose;
+        _playerMoverView.OnSomersault -= Somersault;
+        _playerMoverView.OnCrashed -= CrashOnCar;
     }
 
     public void Init(PlayerMoverView playerMoverView, Animator animator)
@@ -30,6 +34,8 @@ public class PlayerAnimatorController : MonoBehaviour
         _playerMoverView.OnKicked += Kick;
         _playerMoverView.OnChangingSpeedCrash += Crash;
         _playerMoverView.OnStoped += Lose;
+        _playerMoverView.OnSomersault += Somersault;
+        _playerMoverView.OnCrashed += CrashOnCar;
     }
 
     private void Run()
@@ -50,6 +56,16 @@ public class PlayerAnimatorController : MonoBehaviour
     private void Crash(float speed)
     {
         _animator.Play(CrashState);
+    }
+
+    private void CrashOnCar()
+    {
+        _animator.Play(CrashOnCarState);
+    }
+
+    private void Somersault()
+    {
+        _animator.Play(FlipState);
     }
 
     private void Lose()

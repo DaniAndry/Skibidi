@@ -26,7 +26,8 @@ public class PlayerEffectController : MonoBehaviour
     {
         _viewMover.OnProtected -= ProtectBoostEffect;
         _viewMover.OnChangingSpeed -= SpeedBoostEffect;
-
+        _view.EnergyChanging -= EnergyBoostEffect;
+        _view.OnMoneyChanging -= CoinBoostEffect;
     }
 
     public void Init(PlayerMoverView playerMoverView, PlayerView playerView)

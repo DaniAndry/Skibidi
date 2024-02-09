@@ -31,18 +31,18 @@ public class BlockSpawner : MonoBehaviour
             _spawnedBlocks[chunk] = new List<GameObject>();
         }
 
-        Vector3 transform;
+        Vector3 spawnPossition;
 
         for (int i = 0; i < count; i++)
         {
             do
             {
-                transform = GetRandomSpawnPosition(chunk);
+                spawnPossition = GetRandomSpawnPosition(chunk);
             }
-            while (CheckCollision(transform));
+            while (CheckCollision(spawnPossition));
 
             Block block = SelectBlock();
-            GameObject blockObj = Instantiate(block.gameObject, transform, Quaternion.identity);
+            GameObject blockObj = Instantiate(block.gameObject, spawnPossition, Quaternion.identity);
             _spawnedBlocks[chunk].Add(blockObj);
         }
     }

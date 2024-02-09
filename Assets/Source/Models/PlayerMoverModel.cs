@@ -134,6 +134,11 @@ public class PlayerMoverModel
         }
     }
 
+    public void Somersault()
+    {
+       _rigidbody.AddForce(0, _jumpPower, 1, ForceMode.Impulse);
+    }
+
     private void ChangeSpeed()
     {
         if (MoveSpeed != _moveVariableSpeed && _isSpeedBoost == false)

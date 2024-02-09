@@ -1532,6 +1532,8 @@ MonoBehaviour:
   _blocks:
   - {fileID: 2103241787030663647, guid: 045b53d34e19f5641b9537cc8f16ff60, type: 3}
   - {fileID: 5499577499349548423, guid: 9b18fedbc4399504b9854ee2c4203577, type: 3}
+  - {fileID: 3461712656136091685, guid: dd396600b1b376245bcf988976506fe7, type: 3}
+  - {fileID: 2899695680555669030, guid: 2fc8abeaef8450744987fe4912fb8022, type: 3}
 --- !u!1 &51248917
 GameObject:
   m_ObjectHideFlags: 0
@@ -35082,7 +35084,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -49.99707
+      value: -49.997086
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_AnchoredPosition.y

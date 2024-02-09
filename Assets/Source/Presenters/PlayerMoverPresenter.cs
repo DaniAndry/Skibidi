@@ -17,6 +17,7 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.OnJumping += Jump;
         _view.OnChangingSpeedCrash += ChangeSpeedCrash;
         _view.OnSpeedBoostChanging += OnSpeedChanging;
+        _view.OnSomersault += Somerslaut;
         _model.OnChangeSpeed += _view.ChangeCurrentSpeed;
         _model.Jumped += _view.Jump;
     }
@@ -27,6 +28,7 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.OnJumping -= Jump;
         _view.OnChangingSpeedCrash -= ChangeSpeedCrash;
         _view.OnSpeedBoostChanging -= OnSpeedChanging;
+        _view.OnSomersault -= Somerslaut;
         _model.OnChangeSpeed -= _view.ChangeCurrentSpeed;
         _model.Jumped -= _view.Jump;
     }
@@ -56,6 +58,11 @@ public class PlayerMoverPresenter : MonoBehaviour
     private void Jump()
     {
         _model.Jump();
+    }
+
+    private void Somerslaut()
+    {
+        _model.Somersault();
     }
 
     private void ChangeSpeedCrash(float moveSpeed)
