@@ -126,7 +126,6 @@ public class PlayerMoverView : MonoBehaviour
     public void CrashOnCar()
     {
         OnCrashed?.Invoke();
-        //EndGame();
     }
 
     public void StartGame()
