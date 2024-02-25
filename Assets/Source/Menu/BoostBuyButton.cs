@@ -22,11 +22,13 @@ public class BoostBuyButton : MonoBehaviour
     private TMP_Text _priceUpgradeText;
     private ShopBoosts _shopBoosts;
     private bool _isBanUpgrade = false;
+    private ParticleSystem _upgradeEffect;
 
     public int Price => _priceBuyBoost;
 
     private void Awake()
     {
+        _upgradeEffect = GetComponentInChildren<ParticleSystem>();
         _priceBuyText = _buyForMoney.GetComponentInChildren<TMP_Text>();
         _priceUpgradeText = _upgradeForMoney.GetComponentInChildren<TMP_Text>();
         _shopBoosts = GetComponentInParent<ShopBoosts>();
@@ -87,6 +89,7 @@ public class BoostBuyButton : MonoBehaviour
     {
         if (_isBanUpgrade == false)
         {
+            _upgradeEffect.Play();
             _shopBoosts.BuyUpgrade(_boost, _priceUpgradeBoost);
             _workTime = _boost.Time;
             _countUpgrade++;
@@ -100,6 +103,7 @@ public class BoostBuyButton : MonoBehaviour
 
     public void UpgradeForAd()
     {
+        _upgradeEffect.Play();
     }
 
     public void LoadData()

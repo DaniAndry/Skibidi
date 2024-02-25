@@ -9,6 +9,8 @@ public class Bank : MonoBehaviour
 
     private int _money = 50;
 
+    public event Action OnBuy;
+
     private void Start()
     {
         UpdateMoneyText();
@@ -37,6 +39,7 @@ public class Bank : MonoBehaviour
         _money -= money;
         TaskCounter.IncereaseProgress(money, Convert.ToString(TaskType.SpendMoney));
         AudioManager.Instance.Play("Buy");
+        OnBuy?.Invoke();
         UpdateMoneyText();
     }
 

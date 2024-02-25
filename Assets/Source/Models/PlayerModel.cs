@@ -11,7 +11,7 @@ public class PlayerModel
     private bool _isEnergyBoost = false;
 
     public float TotalDistanceTraveled { get; private set; }
-    public float MaxEnergy { get; private set; } = 50f;
+    public float MaxEnergy { get; private set; } = 10000f;
     public float CurrentEnergy { get; private set; }
 
     public event Action DistanceChanging;
