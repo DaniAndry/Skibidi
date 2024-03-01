@@ -32,6 +32,7 @@ public class PlayerModel
     public void StartGame()
     {
         TotalDistanceTraveled = 0;
+        CurrentEnergy = MaxEnergy;
     }
 
     private void GiveEnergy(Transform transform)

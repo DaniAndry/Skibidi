@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +9,7 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private TMP_Text _energy;
     [SerializeField] private HudWindow _headUpDisplay;
     [SerializeField] private Menu _menu;
-    [SerializeField] private EndGameScreen _endScreen;
+    [SerializeField] private PlayerResurrect _playerResurrect;
     [SerializeField] private EnergyBoost _energyBoost;
     [SerializeField] private EnergyUpgrade _energyUpgrade;
     [SerializeField] private Bank _bank;
@@ -56,10 +55,8 @@ public class PlayerView : MonoBehaviour
 
     public void EndGame(float distance)
     {
-        _headUpDisplay.Close();
+        _playerResurrect.StartTimer(distance);
         _menu.SetDistance(distance);
-        _endScreen.OpenEndScreen();
-        _endScreen.SetData(distance);
     }
 
     public void OnEnergyChanged(float energyAmount)

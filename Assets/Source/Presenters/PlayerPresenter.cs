@@ -38,7 +38,7 @@ public class PlayerPresenter : MonoBehaviour
 
     private void Update()
     {
-        _model?.Update(_view.transform);
+        _model?.Update(_view.transform);    
     }
 
     private void OnDistanceChanging(EnergyBoost energyBoost)
