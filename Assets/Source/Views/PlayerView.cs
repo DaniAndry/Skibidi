@@ -8,8 +8,6 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private TMP_Text _distance;
     [SerializeField] private TMP_Text _energy;
     [SerializeField] private HudWindow _headUpDisplay;
-    [SerializeField] private Menu _menu;
-    [SerializeField] private PlayerResurrect _playerResurrect;
     [SerializeField] private EnergyBoost _energyBoost;
     [SerializeField] private EnergyUpgrade _energyUpgrade;
     [SerializeField] private Bank _bank;
@@ -46,17 +44,6 @@ public class PlayerView : MonoBehaviour
             DistanceBoostChanging?.Invoke(_energyBoost);
         else
             Debug.Log("ErrorUseBoost");
-    }
-
-    public void StartGame()
-    {
-        _headUpDisplay.Open();
-    }
-
-    public void EndGame(float distance)
-    {
-        _playerResurrect.StartTimer(distance);
-        _menu.SetDistance(distance);
     }
 
     public void OnEnergyChanged(float energyAmount)

@@ -38,22 +38,22 @@ public class PlayerMoverPresenter : MonoBehaviour
         _model?.Update();
     }
 
-    public void EndGame()
+    public void EndPlayerMove()
     {
-        _model.EndGame();
-        _view.EndGame();
+        _model.EndMove();
+        _view.EndMove();
     }
 
     public void ResetPlayerMove()
     {
         _model.ResetMove();
-        _view.ResetGame();
+        _view.ResetMove();
     }
 
-    public void StartGame()
+    public void StartPlayerMove()
     {
-        _model.StartGame();
-        _view.StartGame();
+        _model.StartMove();
+        _view.StartMove();
     }
 
     private void SetDataMove(float coefficient)

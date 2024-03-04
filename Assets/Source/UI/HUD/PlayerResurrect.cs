@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -9,21 +10,21 @@ public class PlayerResurrect : MonoBehaviour
     [SerializeField] private Button _diamondContinue;
     [SerializeField] private Button _watchContinue;
     [SerializeField] private Bank _bank;
-    [SerializeField] private EndGameScreen _endGameScreen;
 
     private Coroutine _waitForWindow;
     private int _price = 1;
     private int _time = 5;
+    private bool _isTimeRunning = true;
     private WaitForSeconds _waitForWindowTime = new WaitForSeconds(1f);
-    private HudWindow _hudWindow;
     private PlayerResurrectWindow _playerResurrectWindow;
-    private float _distance;
-    private MenuWindow _menu;
+    private float _energyGiftForWatch = 200;
+    private float _energyGiftForDiamond = 100;
+
+    public event Action OnRestart;
+    public event Action<float> OnResurrect;
 
     private void Awake()
     {
-        _hudWindow = GetComponentInParent<HudWindow>();
-        _menu = _endGameScreen.GetComponentInParent<MenuWindow>();
         _playerResurrectWindow = GetComponent<PlayerResurrectWindow>();
     }
 
@@ -39,12 +40,10 @@ public class PlayerResurrect : MonoBehaviour
         _watchContinue.onClick.RemoveListener(WatchResurrect);
     }
 
-    public void StartTimer(float distance)
+    public void StartTimer()
     {
-        Debug.Log("startTimer");
         _waitForWindow = StartCoroutine(WaitForWindow());
         _playerResurrectWindow.OpenWithoutSound();
-        _distance = distance;
     }
 
     private void DiamondResurrect()
@@ -53,44 +52,49 @@ public class PlayerResurrect : MonoBehaviour
         {
             _bank.GiveDiamond(_price);
             _price *= 2;
-            Resurrect();
+            Resurrect(_energyGiftForDiamond);
         }       
     }
 
     private void WatchResurrect()
     {
-        Resurrect();
+        Resurrect(_energyGiftForWatch);
     }
 
-    private void Resurrect()
+    private void Resurrect(float energy)
     {
-       
-    }
-
-    private void OpenEndScreen()
-    {
-        _hudWindow.CloseWithoutSound();
+        _isTimeRunning = false;
         _playerResurrectWindow.CloseWithoutSound();
-        _menu.OpenWithoutSound();
-        _endGameScreen.OpenEndScreen();
-        _endGameScreen.SetData(_distance);
+        OnResurrect?.Invoke(energy);
+    }
+
+    private void EndTime()
+    {
+        _playerResurrectWindow.CloseWithoutSound();
+        _price = 1;
+        OnRestart?.Invoke();
     }
 
     private IEnumerator WaitForWindow()
     {
+        _isTimeRunning = true;
         int time = _time;
-        while (time > 0)
+
+        while (time > 0 && _isTimeRunning)
         {
             time--;
             _timer.text = $"{time}";
 
             if (time <= 0)
             {
-                OpenEndScreen();
+                EndTime();
                 StopCoroutine(_waitForWindow);
             }
 
             yield return _waitForWindowTime;
         }
+
+        if(_isTimeRunning == false)
+            StopCoroutine(_waitForWindow);
     }
 }

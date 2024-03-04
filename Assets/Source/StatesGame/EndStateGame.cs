@@ -1,28 +1,46 @@
 public class EndStateGame
 {
-    private Menu _menu;
-    private PlayerMoverPresenter _presenterMover;
-    private PlayerPresenter _presenter;
+    private readonly Menu _menu;
+    private readonly EndGameScreen _endScreen;
+    private readonly PlayerMoverPresenter _presenterMover;
+    private readonly PlayerPresenter _presenter;
+    private readonly PlayerResurrect _playerResurrect;
+    private readonly HudWindow _hudWindow;
 
-    public EndStateGame(Menu menu, PlayerPresenter presenter, PlayerMoverPresenter presenterMover)
+    public EndStateGame(Menu menu, PlayerPresenter presenter, PlayerMoverPresenter presenterMover, PlayerResurrect playerResurrect, EndGameScreen endScreen, HudWindow hudWindow)
     {
         _menu = menu;
         _presenterMover = presenterMover;
         _presenter = presenter;
+        _playerResurrect = playerResurrect;
+        _endScreen = endScreen;
+        _hudWindow = hudWindow;
     }
 
     public void Enable()
     {
         _presenter.OnEndGame += End;
+        _playerResurrect.OnRestart += OpenWindows;
     }
 
     public void Disable()
     {
         _presenter.OnEndGame -= End;
+        _playerResurrect.OnRestart -= OpenWindows;
     }
 
     private void End()
     {
-        _presenterMover.EndGame();
+        _presenterMover.EndPlayerMove();
+        _playerResurrect.StartTimer();
+        _endScreen.SetData(_presenter.TakeTotalDistance());
+        _menu.SetDistance(_presenter.TakeTotalDistance());
+    }
+
+    private void OpenWindows()
+    {
+        _menu.GetComponent<MenuWindow>().OpenWithoutSound();
+        _endScreen.GetComponent<EndScreenWindow>().OpenWithoutSound();
+        _hudWindow.CloseWithoutSound();
     }
 }

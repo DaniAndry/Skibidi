@@ -1,28 +1,28 @@
 public class RestartStateGame
 {
-    private PlayerPresenter _playerPresenter;
-    private PlayerMoverPresenter _playerMoverPresenter;
-    private ChunksPlacer _chunksPlacer;
-    private ChunksPlacer _backgroundChunksPlacer;
-    private EndGameScreen _endGameScreen;
+    private readonly PlayerPresenter _playerPresenter;
+    private readonly PlayerMoverPresenter _playerMoverPresenter;
+    private readonly ChunksPlacer _chunksPlacer;
+    private readonly ChunksPlacer _backgroundChunksPlacer;
+    private readonly PlayerResurrect _playerResurrect;
 
-    public RestartStateGame(PlayerPresenter playerPresenter, PlayerMoverPresenter playerMoverPresenter, ChunksPlacer chunksPlacer, ChunksPlacer backgroundChunksPlacer, EndGameScreen endGameScreen)
+    public RestartStateGame(PlayerPresenter playerPresenter, PlayerMoverPresenter playerMoverPresenter, ChunksPlacer chunksPlacer, ChunksPlacer backgroundChunksPlacer, PlayerResurrect playerResurrect)
     {
         _playerPresenter = playerPresenter;
         _playerMoverPresenter = playerMoverPresenter;
         _chunksPlacer = chunksPlacer;
         _backgroundChunksPlacer = backgroundChunksPlacer;
-        _endGameScreen = endGameScreen;
+        _playerResurrect = playerResurrect;
     }
 
     public void Enable()
     {
-        _endGameScreen.OnRestartGame += ResetGame;
+        _playerResurrect.OnRestart += ResetGame;
     }
 
     public void Disable()
     {
-        _endGameScreen.OnRestartGame -= ResetGame;
+        _playerResurrect.OnRestart -= ResetGame;
     }
 
     public void ResetGame()

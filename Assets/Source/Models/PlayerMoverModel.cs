@@ -21,7 +21,6 @@ public class PlayerMoverModel
     private bool _enableJump = true;
     private KeyCode _jumpKey = KeyCode.Space;
 
-    public event Action StartedGame;
     public event Action Jumped;
 
     public event UnityAction<float> OnChangeSpeed;
@@ -54,14 +53,12 @@ public class PlayerMoverModel
         }
     }
 
-    public void StartGame()
+    public void StartMove()
     {
         MoveSpeed = _maxSpeed;
         _moveVariableSpeed = _maxSpeed;
         _turnSpeed = _maxSpeed;
         _isMove = true;
-
-        StartedGame?.Invoke();
 
         OnChangeSpeed?.Invoke(MoveSpeed);
     }
@@ -75,7 +72,7 @@ public class PlayerMoverModel
         _turnSpeed = 0;
     }
 
-    public void EndGame()
+    public void EndMove()
     {
         _isMove = false;
         _rigidbody.velocity = Vector3.zero;

@@ -87,7 +87,7 @@ public class Bank : MonoBehaviour
     {
         if (TryTakeDiamond(diamond))
         {
-            _diamond += diamond;
+            _diamond -= diamond;
             UpdateText();
         }
     }

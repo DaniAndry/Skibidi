@@ -69,16 +69,22 @@ public class PlayerPresenter : MonoBehaviour
     private void EndGame()
     {
         OnEndGame?.Invoke();
-        Debug.Log("EndGame");
-
-        _view.EndGame(_model.TotalDistanceTraveled);
     }
 
     public void StartGame()
     {
         _model.Init();
         _model.StartGame();
-        _view.StartGame();
+    }
+
+    public void ResurrectPlayer(float energy)
+    {
+        _model.Resurrect(energy);
+    }
+
+    public float TakeTotalDistance()
+    {
+        return _model.TotalDistanceTraveled;
     }
 
     public void ResetPlayer()

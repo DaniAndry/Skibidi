@@ -8,7 +8,10 @@ public class StatesGameIniter : MonoBehaviour
     [SerializeField] private EndGameScreen _endGameScreen;
     [SerializeField] private ChunksPlacer _chunksPlacer;
     [SerializeField] private ChunksPlacer _backgroundChunksPlacer;
+    [SerializeField] private HudWindow _hudWindow;
+    [SerializeField] private PlayerResurrect _playerResurrect;
 
+    private ResurrectStateGame _resurrectStateGame;
     private RestartStateGame _restartStateGame;
     private StartStateGame _startStateGame;
     private EndStateGame _endStateGame;
@@ -20,6 +23,7 @@ public class StatesGameIniter : MonoBehaviour
 
     private void OnEnable()
     {
+        _resurrectStateGame.Enable();
         _restartStateGame.Enable();
         _startStateGame.Enable();
         _endStateGame.Enable();
@@ -27,6 +31,7 @@ public class StatesGameIniter : MonoBehaviour
 
     private void OnDisable()
     {
+        _resurrectStateGame.Disable();
         _restartStateGame.Disable();
         _startStateGame.Disable();
         _endStateGame.Disable();
@@ -34,8 +39,9 @@ public class StatesGameIniter : MonoBehaviour
 
     private void Init()
     {
-        _restartStateGame = new RestartStateGame(_playerPresenter, _playerMoverPresenter, _chunksPlacer, _backgroundChunksPlacer, _endGameScreen);
-        _startStateGame = new StartStateGame(_menu, _playerPresenter,_playerMoverPresenter);
-        _endStateGame = new EndStateGame(_menu, _playerPresenter, _playerMoverPresenter);
+        _restartStateGame = new RestartStateGame(_playerPresenter, _playerMoverPresenter, _chunksPlacer, _backgroundChunksPlacer, _playerResurrect);
+        _endStateGame = new EndStateGame(_menu, _playerPresenter, _playerMoverPresenter, _playerResurrect, _endGameScreen, _hudWindow);
+        _resurrectStateGame = new ResurrectStateGame(_playerPresenter, _playerMoverPresenter, _playerResurrect);
+        _startStateGame = new StartStateGame(_menu, _playerPresenter,_playerMoverPresenter, _hudWindow);
     }
 }

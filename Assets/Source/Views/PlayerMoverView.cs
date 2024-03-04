@@ -131,20 +131,20 @@ public class PlayerMoverView : MonoBehaviour
         //EndGame();
     }
 
-    public void StartGame()
+    public void StartMove()
     {
         _cameraMover?.StartMove();
         OnStarted?.Invoke();
     }
 
-    public void ResetGame()
+    public void ResetMove()
     {
         _cameraMover?.ResetCameraPosition();
         transform.position = _startPlayerPosition;
         OnRestart?.Invoke();    
     }
 
-    public void EndGame()
+    public void EndMove()
     {
         _cameraMover?.EndMove();
         OnStoped?.Invoke();
