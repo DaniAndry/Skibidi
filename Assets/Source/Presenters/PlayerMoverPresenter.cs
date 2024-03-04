@@ -44,6 +44,12 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.EndGame();
     }
 
+    public void ResetPlayerMove()
+    {
+        _model.ResetMove();
+        _view.ResetGame();
+    }
+
     public void StartGame()
     {
         _model.StartGame();

@@ -36,6 +36,12 @@ public class CameraMover : MonoBehaviour
         _isMove = true;
     }
 
+    public void ResetCameraPosition()
+    {
+        transform.position = _startPosition;
+        transform.rotation = _startRotation;
+    }
+
     public void EndMove()
     {
         _isMove = false;

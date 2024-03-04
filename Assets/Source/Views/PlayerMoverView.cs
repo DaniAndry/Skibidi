@@ -9,6 +9,7 @@ public class PlayerMoverView : MonoBehaviour
     [SerializeField] private Boost _speedBoost;
     [SerializeField] private GameObject _prefabForDanceShop;
 
+    private Vector3 _startPlayerPosition;
     private string _nameDanceAnim;
     private Button _speedBoostButton;
     private float _speed;
@@ -27,12 +28,13 @@ public class PlayerMoverView : MonoBehaviour
     public event Action OnJumped;
     public event Action OnSomersault;
     public event Action OnCrashed;
-
+    public event Action OnRestart;
 
     public float CurrentSpeed => _speed;
 
     private void Awake()
     {
+        _startPlayerPosition = transform.position;
         _speedBoostButton = _speedBoost.GetComponent<Button>();
     }
 
@@ -133,6 +135,13 @@ public class PlayerMoverView : MonoBehaviour
     {
         _cameraMover?.StartMove();
         OnStarted?.Invoke();
+    }
+
+    public void ResetGame()
+    {
+        _cameraMover?.ResetCameraPosition();
+        transform.position = _startPlayerPosition;
+        OnRestart?.Invoke();    
     }
 
     public void EndGame()

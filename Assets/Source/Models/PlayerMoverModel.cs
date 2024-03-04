@@ -66,6 +66,15 @@ public class PlayerMoverModel
         OnChangeSpeed?.Invoke(MoveSpeed);
     }
 
+    public void ResetMove()
+    {
+        _rigidbody.velocity = Vector3.zero;
+        _isMove = false;
+        MoveSpeed = 0;
+        _moveVariableSpeed = 0;
+        _turnSpeed = 0;
+    }
+
     public void EndGame()
     {
         _isMove = false;

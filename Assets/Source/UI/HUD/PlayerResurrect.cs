@@ -41,6 +41,7 @@ public class PlayerResurrect : MonoBehaviour
 
     public void StartTimer(float distance)
     {
+        Debug.Log("startTimer");
         _waitForWindow = StartCoroutine(WaitForWindow());
         _playerResurrectWindow.OpenWithoutSound();
         _distance = distance;

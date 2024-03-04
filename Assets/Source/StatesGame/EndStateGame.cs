@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class EndStateGame : MonoBehaviour
+public class EndStateGame
 {
     private Menu _menu;
     private PlayerMoverPresenter _presenterMover;

@@ -9,19 +9,16 @@ public class EndGameScreen : MonoBehaviour
     [SerializeField] private Button _exitButton;
     [SerializeField] private TMP_Text _distance;
 
+    public event Action OnRestartGame;
+
     private void OnEnable()
     {
-        _exitButton.onClick.AddListener(OnClickExitMenu);
+        _exitButton.onClick.AddListener(CloseEndScreen);
     }
 
     private void OnDisable()
     {
-        _exitButton.onClick.RemoveListener(OnClickExitMenu);
-    }
-
-    private void OnClickExitMenu()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        _exitButton.onClick.RemoveListener(CloseEndScreen);
     }
 
     public void SetData(float distance)
@@ -32,6 +29,7 @@ public class EndGameScreen : MonoBehaviour
     public void OpenEndScreen()
     {
         GetComponent<EndScreenWindow>().Open();
+        OnRestartGame?.Invoke();
     }
 
     public void CloseEndScreen()

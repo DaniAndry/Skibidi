@@ -69,8 +69,8 @@ public class PlayerPresenter : MonoBehaviour
     private void EndGame()
     {
         OnEndGame?.Invoke();
+        Debug.Log("EndGame");
 
-       // _model.SavePlayer();
         _view.EndGame(_model.TotalDistanceTraveled);
     }
 
@@ -79,5 +79,10 @@ public class PlayerPresenter : MonoBehaviour
         _model.Init();
         _model.StartGame();
         _view.StartGame();
+    }
+
+    public void ResetPlayer()
+    {
+        _model.ResetGame(_view.transform);
     }
 }
