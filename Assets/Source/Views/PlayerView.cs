@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerView : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _distance;
+    [SerializeField] private TMP_Text _distanceText;
     [SerializeField] private TMP_Text _energy;
     [SerializeField] private HudWindow _headUpDisplay;
     [SerializeField] private Menu _menu;
@@ -17,11 +18,13 @@ public class PlayerView : MonoBehaviour
 
     private Button _energyBoostButton;
     private Button _energyUpgradeButton;
+    private float _distance;
 
     public event Action<float> EnergyChanging;
     public event Action<float> MaxEnergyChanging;
-    public event Action<float,bool>OnMoneyChanging;
+    public event Action<float, bool> OnMoneyChanging;
     public event Action<EnergyBoost> DistanceBoostChanging;
+    public event Action GameOvered;
 
     private void Awake()
     {
@@ -54,12 +57,19 @@ public class PlayerView : MonoBehaviour
         _headUpDisplay.Open();
     }
 
+   
     public void EndGame(float distance)
     {
+        _distance = distance;
         _headUpDisplay.Close();
-        _menu.SetDistance(distance);
+        _menu.SetDistance(_distance);
         _endScreen.OpenEndScreen();
-        _endScreen.SetData(distance);
+        _endScreen.SetData(_distance);
+    }
+
+    public void GameOver()
+    {
+        GameOvered?.Invoke();
     }
 
     public void OnEnergyChanged(float energyAmount)
@@ -80,7 +90,7 @@ public class PlayerView : MonoBehaviour
 
     public void SetDistance(float distance)
     {
-        _distance.text = $"{Convert.ToInt32(distance)}";
+        _distanceText.text = $"{Convert.ToInt32(distance)}";
     }
 
     public void SetEnergy(float energyAmount)

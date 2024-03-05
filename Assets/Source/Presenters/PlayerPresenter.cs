@@ -24,6 +24,12 @@ public class PlayerPresenter : MonoBehaviour
         _model.OnEnergyGone += EndGame;
         _model.DistanceChanging += OnDistanceChanged;
         _view.EnergyChanging += OnViewEnergyChanged;
+        _view.GameOvered += EndGame;
+    }
+
+    private void _view_GameOvered()
+    {
+        throw new NotImplementedException();
     }
 
     public void Disable()

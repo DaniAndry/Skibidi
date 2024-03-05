@@ -4,11 +4,11 @@ public class Block : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _crashParticle;
 
-    private Celling _celling;
+    private Ceiling _ceiling;
 
     private void Awake()
     {
-        _celling = GetComponentInChildren<Celling>();
+        _ceiling = GetComponentInChildren<Ceiling>();
     }
 
     protected void OnCollisionEnter(Collision collision)
@@ -39,6 +39,6 @@ public class Block : MonoBehaviour
 
     private void DisableCelling()
     {
-        _celling.gameObject.SetActive(false);
+        _ceiling.gameObject.SetActive(false);
     }
 }

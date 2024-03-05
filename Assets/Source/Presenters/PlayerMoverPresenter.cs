@@ -18,7 +18,7 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.OnChangingSpeedCrash += ChangeSpeedCrash;
         _view.OnSpeedBoostChanging += OnSpeedChanging;
         _view.OnSomersault += Somerslaut;
-        _view.OnCrashed += EndGame;
+        _view.OnCrashed += CrahOnCar;
         _model.OnChangeSpeed += _view.ChangeCurrentSpeed;
         _model.Jumped += _view.Jump;
     }
@@ -30,7 +30,7 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.OnChangingSpeedCrash -= ChangeSpeedCrash;
         _view.OnSpeedBoostChanging -= OnSpeedChanging;
         _view.OnSomersault -= Somerslaut;
-        _view.OnCrashed -= EndGame;
+        _view.OnCrashed -= CrahOnCar;
         _model.OnChangeSpeed -= _view.ChangeCurrentSpeed;
         _model.Jumped -= _view.Jump;
     }
@@ -44,6 +44,11 @@ public class PlayerMoverPresenter : MonoBehaviour
     {
         _model.EndGame();
         _view.EndGame();
+    }
+
+    public void CrahOnCar()
+    {
+        Invoke("EndGame", 1.5f);
     }
 
     public void StartGame()
