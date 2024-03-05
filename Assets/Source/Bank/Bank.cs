@@ -38,11 +38,14 @@ public class Bank : MonoBehaviour
 
     public void TakeMoney(int money)
     {
-        _money -= money;
-        TaskCounter.IncereaseProgress(money, Convert.ToString(TaskType.SpendMoney));
-        AudioManager.Instance.Play("Buy");
-        OnBuy?.Invoke();
-        UpdateText();
+        if (TryTakeValue(money))
+        {
+            _money -= money;
+            TaskCounter.IncereaseProgress(money, Convert.ToString(TaskType.SpendMoney));
+            AudioManager.Instance.Play("Buy");
+            OnBuy?.Invoke();
+            UpdateText();
+        }
     }
 
     public void UpdateText()
@@ -58,9 +61,9 @@ public class Bank : MonoBehaviour
         }
     }
 
-    public bool TryTakeMoney(int money)
+    public bool TryTakeValue(int value)
     {
-        if(_money >= money)
+        if(_money >= value)
             return true;
         else 
             return false; 
@@ -68,24 +71,13 @@ public class Bank : MonoBehaviour
 
     public void GiveMoney(int money)
     {
-        if (TryTakeMoney(money))
-        {
-            _money += money;
-            UpdateText();
-        }
+        _money += money;
+        UpdateText();
     }
 
-    public bool TryTakeDiamond(int diamond)
+    public void TakeDiamond(int diamond)
     {
-        if (_diamond >= diamond)
-            return true;
-        else
-            return false;
-    }
-
-    public void GiveDiamond(int diamond)
-    {
-        if (TryTakeDiamond(diamond))
+        if (TryTakeValue(diamond))
         {
             _diamond -= diamond;
             UpdateText();

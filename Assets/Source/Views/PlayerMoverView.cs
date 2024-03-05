@@ -14,6 +14,7 @@ public class PlayerMoverView : MonoBehaviour
     private Button _speedBoostButton;
     private float _speed;
     private bool _isProtected;
+    private bool _canMove = false;
 
     public event Action<float> OnMoving;
     public event Action<float> OnChangingSpeed;
@@ -40,6 +41,7 @@ public class PlayerMoverView : MonoBehaviour
 
     private void Update()
     {
+        if(_canMove)
         DecktopContorol();
         /*   MobileContorol();*/
     }
@@ -134,6 +136,7 @@ public class PlayerMoverView : MonoBehaviour
     public void StartMove()
     {
         _cameraMover?.StartMove();
+        _canMove = true;
         OnStarted?.Invoke();
     }
 
@@ -147,6 +150,7 @@ public class PlayerMoverView : MonoBehaviour
     public void EndMove()
     {
         _cameraMover?.EndMove();
+        _canMove = false;
         OnStoped?.Invoke();
     }
 

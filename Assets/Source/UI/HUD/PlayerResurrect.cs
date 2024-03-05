@@ -48,9 +48,9 @@ public class PlayerResurrect : MonoBehaviour
 
     private void DiamondResurrect()
     {
-        if (_bank.TryTakeDiamond(_price))
+        if (_bank.TryTakeValue(_price))
         {
-            _bank.GiveDiamond(_price);
+            _bank.TakeDiamond(_price);
             _price *= 2;
             Resurrect(_energyGiftForDiamond);
         }       

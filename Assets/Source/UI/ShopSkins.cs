@@ -75,7 +75,7 @@ public class ShopSkins : MonoBehaviour
 
     private void TryBuySkin()
     {
-        if (_bank.TryTakeMoney(_selectedSkin.Price))
+        if (_bank.TryTakeValue(_selectedSkin.Price))
         {
             _bank.TakeMoney(_selectedSkin.Price);
             BuySkin();

@@ -6,7 +6,7 @@ public class ShopBoosts : MonoBehaviour
 
     public void Buy(Boost boost, int price)
     {
-        if (_bank.TryTakeMoney(price))
+        if (_bank.TryTakeValue(price))
         {
             _bank.TakeMoney(price);
             boost.Increase();
@@ -17,7 +17,7 @@ public class ShopBoosts : MonoBehaviour
 
     public void BuyUpgrade(Boost boost, int price)
     {
-        if (_bank.TryTakeMoney(price))
+        if (_bank.TryTakeValue(price))
         {
             _bank.TakeMoney(price);
             boost.Upgrade();

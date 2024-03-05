@@ -7,6 +7,7 @@ public class PlayerView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _distance;
     [SerializeField] private TMP_Text _energy;
+    [SerializeField] private TMP_Text _maxEnergy;
     [SerializeField] private HudWindow _headUpDisplay;
     [SerializeField] private EnergyBoost _energyBoost;
     [SerializeField] private EnergyUpgrade _energyUpgrade;
@@ -29,13 +30,13 @@ public class PlayerView : MonoBehaviour
     private void OnEnable()
     {
         _energyBoostButton.onClick.AddListener(UseEnergyBoost);
-        _energyUpgradeButton.onClick.AddListener(() => OnChangeMaxEnergy(_energyUpgrade.AmountEnergy));
+        _energyUpgradeButton.onClick.AddListener(OnChangeMaxEnergy);
     }
 
     private void OnDisable()
     {
         _energyBoostButton.onClick.RemoveListener(UseEnergyBoost);
-        _energyUpgradeButton.onClick.RemoveListener(() => OnChangeMaxEnergy(_energyUpgrade.AmountEnergy));
+        _energyUpgradeButton.onClick.RemoveListener(OnChangeMaxEnergy);
     }
 
     private void UseEnergyBoost()
@@ -52,14 +53,9 @@ public class PlayerView : MonoBehaviour
         EnergyChanging?.Invoke(energyAmount);
     }
 
-    public void OnChangeMaxEnergy(float maxEnergyAmount)
+    public void OnChangeMaxEnergy()
     {
-        if (_bank.TryTakeMoney(_energyUpgrade.Price))
-        {
-            _bank.TakeMoney(_energyUpgrade.Price);
-            _energyUpgrade.Upgrade();
-            MaxEnergyChanging?.Invoke(maxEnergyAmount);
-        }
+        MaxEnergyChanging?.Invoke(_energyUpgrade.Upgrade());
     }
 
     public void SetDistance(float distance)
@@ -70,6 +66,11 @@ public class PlayerView : MonoBehaviour
     public void SetEnergy(float energyAmount)
     {
         _energy.text = $"{Convert.ToInt32(energyAmount)}";
+    }
+
+    public void UpdateUI(float maxEnergy)
+    {
+        _maxEnergy.text = maxEnergy.ToString();
     }
 
     public void AddMoney(int count, bool isBoost)
