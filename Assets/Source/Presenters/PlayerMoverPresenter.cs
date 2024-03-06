@@ -18,7 +18,6 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.OnChangingSpeedCrash += ChangeSpeedCrash;
         _view.OnSpeedBoostChanging += OnSpeedChanging;
         _view.OnSomersault += Somerslaut;
-        _view.OnCrashed += CrahOnCar;
         _model.OnChangeSpeed += _view.ChangeCurrentSpeed;
         _model.Jumped += _view.Jump;
     }
@@ -30,7 +29,6 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.OnChangingSpeedCrash -= ChangeSpeedCrash;
         _view.OnSpeedBoostChanging -= OnSpeedChanging;
         _view.OnSomersault -= Somerslaut;
-        _view.OnCrashed -= CrahOnCar;
         _model.OnChangeSpeed -= _view.ChangeCurrentSpeed;
         _model.Jumped -= _view.Jump;
     }
@@ -40,21 +38,22 @@ public class PlayerMoverPresenter : MonoBehaviour
         _model?.Update();
     }
 
-    public void EndGame()
+    public void EndPlayerMove()
     {
-        _model.EndGame();
-        _view.EndGame();
+        _model.EndMove();
+        _view.EndMove();
     }
 
-    public void CrahOnCar()
+    public void ResetPlayerMove()
     {
-        Invoke("EndGame", 1.5f);
+        _model.ResetMove();
+        _view.ResetMove();
     }
 
-    public void StartGame()
+    public void StartPlayerMove()
     {
-        _model.StartGame();
-        _view.StartGame();
+        _model.StartMove();
+        _view.StartMove();
     }
 
     private void SetDataMove(float coefficient)

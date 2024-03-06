@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerIniter : MonoBehaviour
 {
     [SerializeField] private Menu _viewMenu;
-    [SerializeField] private EndGameScreen _viewEndScreen;
     [SerializeField] private PlayerMoverPresenter _moverPresenter;
     [SerializeField] private PlayerPresenter _presenter;
     [SerializeField] private SkinSelecter _selecter;

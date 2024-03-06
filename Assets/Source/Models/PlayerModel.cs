@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using UnityEngine;
 
 public class PlayerModel
@@ -11,7 +10,7 @@ public class PlayerModel
     private bool _isEnergyBoost = false;
 
     public float TotalDistanceTraveled { get; private set; }
-    public float MaxEnergy { get; private set; } = 50f;
+    public float MaxEnergy { get; private set; } = 40f;
     public float CurrentEnergy { get; private set; }
 
     public event Action DistanceChanging;
@@ -20,7 +19,7 @@ public class PlayerModel
 
     public void Init()
     {
-        LoadPlayer();
+        /*LoadPlayer();*/
         CurrentEnergy = MaxEnergy;
     }
 
@@ -30,13 +29,28 @@ public class PlayerModel
     }
 
     public void StartGame()
+    {      
+        CurrentEnergy = MaxEnergy;
+        _isEnergyGone = false;
+    }
+
+    public void Resurrect(float energy)
     {
+        CurrentEnergy = energy;
+        _isEnergyGone = false;
+    }
+
+    public void ResetGame(Transform transformPosition)
+    {
+        _lastPosition = transformPosition.position;
+        CurrentEnergy = MaxEnergy;
         TotalDistanceTraveled = 0;
+        CurrentEnergy = MaxEnergy;
     }
 
     private void GiveEnergy(Transform transform)
     {
-        if (CurrentEnergy > 0)
+        if (CurrentEnergy > 0 && _isEnergyGone == false)
         {
             float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
             TotalDistanceTraveled += distanceMoved;
@@ -48,12 +62,11 @@ public class PlayerModel
             DistanceChanging?.Invoke();
             EnergyChanged?.Invoke();
 
-            _isEnergyGone = false;
-        }
-        else if (_isEnergyGone == false)
-        {
-            OnEnergyGone?.Invoke();
-            _isEnergyGone = true;
+            if (CurrentEnergy <= 0)
+            {
+                _isEnergyGone = true;
+                OnEnergyGone?.Invoke();
+            }
         }
     }
 

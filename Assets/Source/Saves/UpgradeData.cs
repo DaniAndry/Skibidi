@@ -5,6 +5,5 @@ public class UpgradeData
 
     public UpgradeData(EnergyUpgrade energyUpgrade)
     {
-        CountUpgrade = energyUpgrade.CountUpgrade;
     }
 }

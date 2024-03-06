@@ -9,10 +9,12 @@ public class PlayerMoverView : MonoBehaviour
     [SerializeField] private Boost _speedBoost;
     [SerializeField] private GameObject _prefabForDanceShop;
 
+    private Vector3 _startPlayerPosition;
     private string _nameDanceAnim;
     private Button _speedBoostButton;
     private float _speed;
     private bool _isProtected;
+    private bool _canMove = false;
 
     public event Action<float> OnMoving;
     public event Action<float> OnChangingSpeed;
@@ -27,17 +29,19 @@ public class PlayerMoverView : MonoBehaviour
     public event Action OnJumped;
     public event Action OnSomersault;
     public event Action OnCrashed;
-
+    public event Action OnRestart;
 
     public float CurrentSpeed => _speed;
 
     private void Awake()
     {
+        _startPlayerPosition = transform.position;
         _speedBoostButton = _speedBoost.GetComponent<Button>();
     }
 
     private void Update()
     {
+        if(_canMove)
         DecktopContorol();
         /*   MobileContorol();*/
     }
@@ -128,15 +132,24 @@ public class PlayerMoverView : MonoBehaviour
         OnCrashed?.Invoke();
     }
 
-    public void StartGame()
+    public void StartMove()
     {
         _cameraMover?.StartMove();
+        _canMove = true;
         OnStarted?.Invoke();
     }
 
-    public void EndGame()
+    public void ResetMove()
+    {
+        _cameraMover?.ResetCameraPosition();
+        transform.position = _startPlayerPosition;
+        OnRestart?.Invoke();    
+    }
+
+    public void EndMove()
     {
         _cameraMover?.EndMove();
+        _canMove = false;
         OnStoped?.Invoke();
     }
 

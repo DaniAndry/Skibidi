@@ -9,12 +9,14 @@ public class PlayerAnimatorController : MonoBehaviour
     private readonly int LoseState = Animator.StringToHash("LoseState");
     private readonly int KickState = Animator.StringToHash("Kick");
     private readonly int FlipState = Animator.StringToHash("FlipState");
+    private readonly int IdleState = Animator.StringToHash("IdleState");
 
     private Animator _animator;
     private PlayerMoverView _playerMoverView;
 
     private void OnDisable()
     {
+        _playerMoverView.OnRestart -= ResetPlayer;
         _playerMoverView.OnStarted -= Run;
         _playerMoverView.OnJumped -= Jump;
         _playerMoverView.OnKicked -= Kick;
@@ -29,6 +31,7 @@ public class PlayerAnimatorController : MonoBehaviour
         _playerMoverView = playerMoverView;
         _animator = animator;
 
+        _playerMoverView.OnRestart += ResetPlayer;
         _playerMoverView.OnStarted += Run;
         _playerMoverView.OnJumped += Jump;
         _playerMoverView.OnKicked += Kick;
@@ -71,5 +74,10 @@ public class PlayerAnimatorController : MonoBehaviour
     private void Lose()
     {
         _animator.Play(LoseState);
+    }
+
+    private void ResetPlayer()
+    {
+        _animator.Play(IdleState);
     }
 }

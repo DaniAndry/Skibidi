@@ -7,6 +7,7 @@ public class ChunksPlacer : MonoBehaviour
     [SerializeField] private Chunk _firstChunk;
     [SerializeField] private int _spawnLenght = 40;
 
+    private Vector3 _startFirstChunkPosition;
     private Transform _player;
     private List<Chunk> _disabledChunks = new List<Chunk>();
     private List<Chunk> _spawnedChunks = new List<Chunk>();
@@ -15,6 +16,7 @@ public class ChunksPlacer : MonoBehaviour
 
     private void Start()
     {
+        _startFirstChunkPosition = _firstChunk.transform.position;
         _spawnedChunks.Add(_firstChunk);
     }
 
@@ -70,5 +72,19 @@ public class ChunksPlacer : MonoBehaviour
     public void GetPlayerTransform(Transform player)
     {
         _player = player;
+    }
+
+    public void ResetFirstChunk()
+    {
+        foreach(Chunk chunk in _spawnedChunks)
+        {
+            chunk.gameObject.SetActive(false);
+        }
+
+        _spawnedChunks.Clear();
+
+        _firstChunk.gameObject.SetActive(true);
+        _firstChunk.transform.position = _startFirstChunkPosition;
+        _spawnedChunks.Add(_firstChunk);
     }
 }

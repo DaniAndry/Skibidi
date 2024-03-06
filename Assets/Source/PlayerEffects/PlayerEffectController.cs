@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EffectType
+public enum PlayerEffectType
 {
     ProtectBoost,
     SpeedBoost,
@@ -18,9 +18,9 @@ public class PlayerEffectController : MonoBehaviour
 
     private PlayerView _view;
     private PlayerMoverView _viewMover;
-    private EffectType _effectType;
+    private PlayerEffectType _effectType;
 
-    private Dictionary<EffectType, ParticleSystem> _effectsDictionary = new Dictionary<EffectType, ParticleSystem>();
+    private Dictionary<PlayerEffectType, ParticleSystem> _effectsDictionary = new Dictionary<PlayerEffectType, ParticleSystem>();
 
     private void OnDisable()
     {
@@ -37,7 +37,7 @@ public class PlayerEffectController : MonoBehaviour
 
         for (int i = 0; i < _effects.Count; i++)
         {
-            _effectsDictionary.Add((EffectType)i, _effects[i]);
+            _effectsDictionary.Add((PlayerEffectType)i, _effects[i]);
         }
 
         _viewMover.OnProtected += ProtectBoostEffect;
@@ -64,7 +64,7 @@ public class PlayerEffectController : MonoBehaviour
 
     private void ProtectBoostEffect(bool isProtect)
     {
-        _effectType = EffectType.ProtectBoost;
+        _effectType = PlayerEffectType.ProtectBoost;
 
         if (isProtect)
         {
@@ -78,7 +78,7 @@ public class PlayerEffectController : MonoBehaviour
 
     private void SpeedBoostEffect(float speed)
     {
-        _effectType = EffectType.SpeedBoost;
+        _effectType = PlayerEffectType.SpeedBoost;
 
         if (IsBoost(speed))
         {
@@ -94,7 +94,7 @@ public class PlayerEffectController : MonoBehaviour
     {
         if (IsBoost(count))
         {
-            _effectType = EffectType.EnergyBoost;
+            _effectType = PlayerEffectType.EnergyBoost;
             PlayEffect();
         }
         else
@@ -105,7 +105,7 @@ public class PlayerEffectController : MonoBehaviour
 
     private void EnergyDeboostEffect()
     {
-        _effectType = EffectType.EnergyDeboost;
+        _effectType = PlayerEffectType.EnergyDeboost;
         PlayEffect();
     }
 
@@ -113,7 +113,7 @@ public class PlayerEffectController : MonoBehaviour
     {
         if (IsBoost(count) && isBoost)
         {
-            _effectType = EffectType.CoinBoost;
+            _effectType = PlayerEffectType.CoinBoost;
             PlayEffect();
         }
         else if (isBoost)
@@ -124,7 +124,7 @@ public class PlayerEffectController : MonoBehaviour
 
     private void CoinDeboostEffect()
     {
-        _effectType = EffectType.CoinDeboost;
+        _effectType = PlayerEffectType.CoinDeboost;
         PlayEffect();
     }
 

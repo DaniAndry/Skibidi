@@ -7,8 +7,8 @@ public class CameraMover : MonoBehaviour
 
     private Transform _player;
     private bool _isMove = false;
-    private Vector3 _startPosition = new Vector3(-1.3f, 0.7f, 1.5f);
-    private Quaternion _startRotation = Quaternion.Euler(22, 142, 0);
+    private Vector3 _startPosition = new Vector3(-1.213f, -34.5f, 17.892f);
+    private Quaternion _startRotation = Quaternion.Euler(22, 140, 0);
 
     private void Awake()
     {
@@ -34,6 +34,12 @@ public class CameraMover : MonoBehaviour
     public void StartMove()
     {
         _isMove = true;
+    }
+
+    public void ResetCameraPosition()
+    {
+        transform.position = _startPosition;
+        transform.rotation = _startRotation;
     }
 
     public void EndMove()

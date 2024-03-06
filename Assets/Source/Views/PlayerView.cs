@@ -1,30 +1,25 @@
 using System;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerView : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _distanceText;
+    [SerializeField] private TMP_Text _distance;
     [SerializeField] private TMP_Text _energy;
+    [SerializeField] private TMP_Text _maxEnergy;
     [SerializeField] private HudWindow _headUpDisplay;
-    [SerializeField] private Menu _menu;
-    [SerializeField] private EndGameScreen _endScreen;
     [SerializeField] private EnergyBoost _energyBoost;
     [SerializeField] private EnergyUpgrade _energyUpgrade;
     [SerializeField] private Bank _bank;
 
     private Button _energyBoostButton;
     private Button _energyUpgradeButton;
-    private float _distance;
 
     public event Action<float> EnergyChanging;
     public event Action<float> MaxEnergyChanging;
-    public event Action<float, bool> OnMoneyChanging;
+    public event Action<float,bool>OnMoneyChanging;
     public event Action<EnergyBoost> DistanceBoostChanging;
-    public event Action GameOvered;
 
     private void Awake()
     {
@@ -35,13 +30,13 @@ public class PlayerView : MonoBehaviour
     private void OnEnable()
     {
         _energyBoostButton.onClick.AddListener(UseEnergyBoost);
-        _energyUpgradeButton.onClick.AddListener(() => OnChangeMaxEnergy(_energyUpgrade.AmountEnergy));
+        _energyUpgradeButton.onClick.AddListener(OnChangeMaxEnergy);
     }
 
     private void OnDisable()
     {
         _energyBoostButton.onClick.RemoveListener(UseEnergyBoost);
-        _energyUpgradeButton.onClick.RemoveListener(() => OnChangeMaxEnergy(_energyUpgrade.AmountEnergy));
+        _energyUpgradeButton.onClick.RemoveListener(OnChangeMaxEnergy);
     }
 
     private void UseEnergyBoost()
@@ -52,50 +47,30 @@ public class PlayerView : MonoBehaviour
             Debug.Log("ErrorUseBoost");
     }
 
-    public void StartGame()
-    {
-        _headUpDisplay.Open();
-    }
-
-   
-    public void EndGame(float distance)
-    {
-        _distance = distance;
-        _headUpDisplay.Close();
-        _menu.SetDistance(_distance);
-        _endScreen.OpenEndScreen();
-        _endScreen.SetData(_distance);
-    }
-
-    public void GameOver()
-    {
-        GameOvered?.Invoke();
-    }
-
     public void OnEnergyChanged(float energyAmount)
     {
         AudioManager.Instance.Play("UseBoost");
         EnergyChanging?.Invoke(energyAmount);
     }
 
-    public void OnChangeMaxEnergy(float maxEnergyAmount)
+    public void OnChangeMaxEnergy()
     {
-        if (_bank.TryTakeMoney(_energyUpgrade.Price))
-        {
-            _bank.TakeMoney(_energyUpgrade.Price);
-            _energyUpgrade.Upgrade();
-            MaxEnergyChanging?.Invoke(maxEnergyAmount);
-        }
+        MaxEnergyChanging?.Invoke(_energyUpgrade.Upgrade());
     }
 
     public void SetDistance(float distance)
     {
-        _distanceText.text = $"{Convert.ToInt32(distance)}";
+        _distance.text = $"{Convert.ToInt32(distance)}";
     }
 
     public void SetEnergy(float energyAmount)
     {
         _energy.text = $"{Convert.ToInt32(energyAmount)}";
+    }
+
+    public void UpdateUI(float maxEnergy)
+    {
+        _maxEnergy.text = maxEnergy.ToString();
     }
 
     public void AddMoney(int count, bool isBoost)

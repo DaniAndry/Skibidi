@@ -12,6 +12,8 @@ public class PlayerPresenter : MonoBehaviour
     {
         _model = model;
         _view = view;
+
+        _view.UpdateUI(_model.MaxEnergy);
     }
 
     public void Enable()
@@ -44,7 +46,7 @@ public class PlayerPresenter : MonoBehaviour
 
     private void Update()
     {
-        _model?.Update(_view.transform);
+        _model?.Update(_view.transform);    
     }
 
     private void OnDistanceChanging(EnergyBoost energyBoost)
@@ -70,20 +72,32 @@ public class PlayerPresenter : MonoBehaviour
     private void OnMaxEnergyChanging(float maxEnergyAmount)
     {
         _model.ChangeMaxEnergy(maxEnergyAmount);
+        _view.UpdateUI(_model.MaxEnergy);
     }
 
     private void EndGame()
     {
         OnEndGame?.Invoke();
-
-       // _model.SavePlayer();
-        _view.EndGame(_model.TotalDistanceTraveled);
     }
 
     public void StartGame()
     {
         _model.Init();
         _model.StartGame();
-        _view.StartGame();
+    }
+
+    public void ResurrectPlayer(float energy)
+    {
+        _model.Resurrect(energy);
+    }
+
+    public float TakeTotalDistance()
+    {
+        return _model.TotalDistanceTraveled;
+    }
+
+    public void ResetPlayer()
+    {
+        _model.ResetGame(_view.transform);
     }
 }

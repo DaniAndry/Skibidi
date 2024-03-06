@@ -50,7 +50,7 @@ public class ShopDancing : MonoBehaviour
 
     private void TryBuySkin()
     {
-        if (_bank.TryTakeMoney(_selectedDance.Price))
+        if (_bank.TryTakeValue(_selectedDance.Price))
         {
             _bank.TakeMoney(_selectedDance.Price);
             BuySkin();
