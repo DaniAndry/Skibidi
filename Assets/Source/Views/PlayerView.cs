@@ -20,6 +20,7 @@ public class PlayerView : MonoBehaviour
     public event Action<float> MaxEnergyChanging;
     public event Action<float,bool>OnMoneyChanging;
     public event Action<EnergyBoost> DistanceBoostChanging;
+    public event Action GameOvered;
 
     private void Awake()
     {
@@ -39,12 +40,9 @@ public class PlayerView : MonoBehaviour
         _energyUpgradeButton.onClick.RemoveListener(OnChangeMaxEnergy);
     }
 
-    private void UseEnergyBoost()
+    public void GameOver()
     {
-        if (_energyBoost.TryUse())
-            DistanceBoostChanging?.Invoke(_energyBoost);
-        else
-            Debug.Log("ErrorUseBoost");
+        GameOvered?.Invoke();
     }
 
     public void OnEnergyChanged(float energyAmount)
@@ -77,5 +75,12 @@ public class PlayerView : MonoBehaviour
     {
         _bank.GiveMoney(count);
         OnMoneyChanging?.Invoke(count, isBoost);
+    }
+    private void UseEnergyBoost()
+    {
+        if (_energyBoost.TryUse())
+            DistanceBoostChanging?.Invoke(_energyBoost);
+        else
+            Debug.Log("ErrorUseBoost");
     }
 }

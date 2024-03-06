@@ -9,9 +9,6 @@ public class BlockCar : Block
             player.CrashOnCar();
             AudioManager.Instance.Play("StoneCrash");
             playerView.GameOver();
-            Debug.Log("cvthnm");
         }
     }
-
- 
 }
