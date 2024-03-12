@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Ceilings : MonoBehaviour
 {
-    [SerializeField] private List<Collider> _colliders = new List<Collider>();
+    private List<Collider> _colliders = new List<Collider>();
 
     private void Awake()
     {
