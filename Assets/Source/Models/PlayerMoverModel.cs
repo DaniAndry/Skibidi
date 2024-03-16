@@ -4,22 +4,21 @@ using UnityEngine.Events;
 
 public class PlayerMoverModel
 {
-    private readonly float _maxSpeed = 3f;
+    private readonly float _maxSpeed = 4f;
+    private readonly float _maxTurnSpeed = 1.5f;
     private readonly Rigidbody _rigidbody;
-
     private float _turnSpeed;
     private float _lastMoveSpeed;
     private float _moveVariableSpeed;
     private float _speedBonus;
     private float _speedTime;
-    private float _jumpPower = 2f;
+    private float _jumpPower = 3f;
     private float _moveCoefficient;
-
     private bool _isMove = false;
     private bool _isSpeedBoost;
     private bool _isGrounded = false;
     private bool _enableJump = true;
-    private KeyCode _jumpKey = KeyCode.Space;
+    private PlayerInputHandler _inputHandler;
 
     public event Action Jumped;
 
@@ -28,6 +27,7 @@ public class PlayerMoverModel
     public PlayerMoverModel(Rigidbody rigidbody, Animator animator)
     {
         _rigidbody = rigidbody;
+        _inputHandler = PlayerInputHandler.Instance;
     }
 
     public float MoveSpeed { get; private set; }
@@ -43,13 +43,21 @@ public class PlayerMoverModel
         {
             Vector3 currentPosition = _rigidbody.position;
 
-            float newXPosition = currentPosition.x + _turnSpeed * _moveCoefficient * Time.deltaTime;
-            newXPosition = Mathf.Clamp(newXPosition, -1f, 1f);
+            float turn = DefineTurn();
+
+            float newXPosition = currentPosition.x + _turnSpeed * turn * Time.deltaTime;
+            newXPosition = Mathf.Clamp(newXPosition, -1.5f, 1.5f);
 
             _rigidbody.position = new Vector3(newXPosition, currentPosition.y, currentPosition.z);
 
             if (_enableJump)
                 _rigidbody.velocity = new Vector3(0, 0, MoveSpeed);
+
+            if (_inputHandler.JumpTriggered)
+                Jump();
+
+            if (_inputHandler.JumpMobileTriggered.y > _inputHandler.DeltaMobileJump)
+                Jump();
         }
     }
 
@@ -57,9 +65,8 @@ public class PlayerMoverModel
     {
         MoveSpeed = _maxSpeed;
         _moveVariableSpeed = _maxSpeed;
-        _turnSpeed = _maxSpeed;
         _isMove = true;
-
+        _turnSpeed = _maxTurnSpeed;
         OnChangeSpeed?.Invoke(MoveSpeed);
     }
 
@@ -133,16 +140,16 @@ public class PlayerMoverModel
 
     public void Jump()
     {
-        if (_enableJump && Input.GetKeyDown(_jumpKey) && _isGrounded)
+        if (_enableJump && _isGrounded)
         {
             Jumped?.Invoke();
-            _rigidbody.AddForce(0, _jumpPower, 0f, ForceMode.Impulse);
+            _rigidbody.AddForce(0, _jumpPower, 0, ForceMode.Impulse);
         }
     }
 
     public void Somersault()
     {
-       _rigidbody.AddForce(0, _jumpPower, 1, ForceMode.Impulse);
+        _rigidbody.AddForce(0, _jumpPower, 1, ForceMode.Impulse);
     }
 
     private void ChangeSpeed()
@@ -166,9 +173,23 @@ public class PlayerMoverModel
         }
     }
 
+    private float DefineTurn()
+    {
+        float turn;
+
+        if (_moveCoefficient == 0 && _inputHandler.TurnInput.x != 0)
+            turn = _inputHandler.TurnInput.x;
+        else if (_moveCoefficient != 0 && _inputHandler.TurnInput.x == 0)
+            turn = _moveCoefficient;
+        else
+            turn = 0;
+
+        return turn;
+    }
+
     private void ChangingSpeed()
     {
-        float turnMultiplier = 1.6f;
+        float turnMultiplier = 2f;
 
         MoveSpeed = MoveSpeed < _moveVariableSpeed ? MoveSpeed + 0.01f : MoveSpeed > _moveVariableSpeed ? MoveSpeed - 0.01f : _moveVariableSpeed;
         _turnSpeed = MoveSpeed / turnMultiplier;

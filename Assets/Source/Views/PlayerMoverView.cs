@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerMoverView : MonoBehaviour
 {
-    [SerializeField] private FixedJoystick _joystick;
+    [SerializeField] private Joystick _joystick;
     [SerializeField] private CameraMover _cameraMover;
     [SerializeField] private Boost _speedBoost;
     [SerializeField] private GameObject _prefabForDanceShop;
@@ -22,7 +22,6 @@ public class PlayerMoverView : MonoBehaviour
     public event Action<float, float> OnSpeedBoostChanging;
     public event Action<bool> OnProtected;
 
-    public event Action OnJumping;
     public event Action OnStarted;
     public event Action OnStoped;
     public event Action OnKicked;
@@ -41,9 +40,10 @@ public class PlayerMoverView : MonoBehaviour
 
     private void Update()
     {
-        if(_canMove)
-        DecktopContorol();
-        /*   MobileContorol();*/
+        if (_canMove) 
+        {
+            MobileContorol();
+        }
     }
 
     private void OnEnable()
@@ -57,26 +57,12 @@ public class PlayerMoverView : MonoBehaviour
         _speedBoostButton.onClick.RemoveListener(UseSpeedBoost);
     }
 
-    private void DecktopContorol()
-    {
-        if (Input.GetKey(KeyCode.Space))
-            OnJumping?.Invoke();
-        if (Input.GetKey(KeyCode.A))
-            OnMoving?.Invoke(-1);
-        else if (Input.GetKey(KeyCode.D))
-            OnMoving?.Invoke(1);
-        else if (Input.GetKey(KeyCode.Space))
-            OnJumping?.Invoke();
-        else
-            OnMoving?.Invoke(0);
-    }
-
     private void MobileContorol()
     {
         if (_joystick.Horizontal < 0f && _joystick.Horizontal > -1)
-            OnMoving?.Invoke(-1);
+            OnMoving?.Invoke(_joystick.Horizontal);
         else if (_joystick.Horizontal > 0f && _joystick.Horizontal < 1)
-            OnMoving?.Invoke(1);
+            OnMoving?.Invoke(_joystick.Horizontal);
         else
             OnMoving?.Invoke(0);
     }
@@ -158,7 +144,7 @@ public class PlayerMoverView : MonoBehaviour
         OnKicked?.Invoke();
     }
 
-    public void Jump()
+    public void Jumped()
     {
         OnJumped?.Invoke();
     }
