@@ -6,16 +6,15 @@ public class Chunk : MonoBehaviour
     public event UnityAction<Chunk> Spawned;
     public event UnityAction<Chunk> Deactivated;
 
-    private BeginPoint _begin;
-    private EndPoint _end;
-
-    public BeginPoint Begin => _begin;
-    public EndPoint End => _end;
+    public BeginPoint Begin { get; private set; }
+    public EndPoint End { get; private set; }
+    public LenghtChunk LenghChunk { get; private set; }
 
     private void Awake()
     {
-        _begin = GetComponentInChildren<BeginPoint>();
-        _end = GetComponentInChildren<EndPoint>();
+        Begin = GetComponentInChildren<BeginPoint>();
+        End = GetComponentInChildren<EndPoint>();
+        LenghChunk = GetComponentInChildren<LenghtChunk>();
     }
 
     private void OnEnable()

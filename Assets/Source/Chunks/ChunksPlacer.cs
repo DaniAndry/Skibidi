@@ -48,9 +48,9 @@ public class ChunksPlacer : MonoBehaviour
             }
         }
 
-        float position = _spawnedChunks[_spawnedChunks.Count - 1].transform.localScale.z;
+        float position = _spawnedChunks[_spawnedChunks.Count - 1].LenghChunk.transform.localScale.z;
 
-        newChunk.transform.position = _spawnedChunks[_spawnedChunks.Count - 1].transform.position;
+        newChunk.transform.position = _spawnedChunks[_spawnedChunks.Count - 1].LenghChunk.transform.position;
         newChunk.transform.position += new Vector3(0, 0, position);
         newChunk.gameObject.SetActive(true);
 
