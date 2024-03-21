@@ -15,5 +15,6 @@ public enum TaskType
     BuyDance,
     CrashCar,
     CrashBus,
-    CrashWall
+    CrashWall,
+    RecordDistance
 }
