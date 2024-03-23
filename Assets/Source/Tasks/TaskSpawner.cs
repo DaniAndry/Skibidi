@@ -6,13 +6,17 @@ public class TaskSpawner : MonoBehaviour
     [SerializeField] private GameObject _prefabTask;
     [SerializeField] private Transform _contentDailyTask;
     [SerializeField] private Transform _contentWeeklyTask;
+    [SerializeField] private Transform _contentDistanceTasks;
     [SerializeField] private List<Task> _dailyTasks = new List<Task>();
     [SerializeField] private List<Task> _weeklyTasks = new List<Task>();
+    [SerializeField] private List<Task> _distanceTasks = new List<Task>();
 
     private Queue<TaskView> _prefabDailyTaskViews = new Queue<TaskView>();
     private Queue<TaskView> _prefabWeeklyTaskViews = new Queue<TaskView>();
+    private Queue<TaskView> _prefabDistanceTaskViews = new Queue<TaskView>();
     private List<TaskView> _activeDailyTasks = new List<TaskView>();
     private List<TaskView> _activeWeeklyTasks = new List<TaskView>();
+    private List<TaskView> _activeDistanceTasks = new List<TaskView>();
 
     private void Awake()
     {
@@ -32,11 +36,13 @@ public class TaskSpawner : MonoBehaviour
     {
         SpawnDailyTasks();
         SpawnWeeklyTasks();
+        SpawnDistanceTasks();
 
         for (int i = 0; i < 2; i++)
         {
             TurnOnDailyTask();
             TurnOnWeeklyTask();
+            TurnOnDistanceTask();
         }
     }
 
@@ -80,6 +86,26 @@ public class TaskSpawner : MonoBehaviour
         }
     }
 
+    private void SpawnDistanceTasks()
+    {
+        for (int i = 0; i < _distanceTasks.Count; i++)
+        {
+            GameObject gameObject = Instantiate(_prefabTask, _contentDistanceTasks, false);
+            TaskView taskView = gameObject.GetComponent<TaskView>();
+            taskView.transform.SetParent(_contentDistanceTasks);
+            taskView.GetTask(_distanceTasks[i]);
+            taskView.Init();
+
+            taskView.gameObject.SetActive(true);
+            _prefabDistanceTaskViews.Enqueue(taskView);
+        }
+
+        foreach (var task in _prefabDistanceTaskViews)
+        {
+            task.OnComplete += DestroyTask;
+        }
+    }
+
     private void TurnOnDailyTask()
     {
         if (_prefabDailyTaskViews.Count > 0)
@@ -102,6 +128,16 @@ public class TaskSpawner : MonoBehaviour
         }
     }
 
+    private void TurnOnDistanceTask()
+    {
+        if (_prefabDistanceTaskViews.Count > 0)
+        {
+            TaskView task = _prefabDistanceTaskViews.Peek();
+            _activeDistanceTasks.Add(task);
+            _prefabDistanceTaskViews.Dequeue();
+        }
+    }
+
     private void DestroyTask(TaskView taskView)
     {
         foreach (var task in _activeDailyTasks)
@@ -120,6 +156,16 @@ public class TaskSpawner : MonoBehaviour
             {
                 _activeDailyTasks.Remove(task);
                 TurnOnWeeklyTask();
+                break;
+            }
+        }
+
+        foreach (var task in _activeDistanceTasks)
+        {
+            if (taskView == task)
+            {
+                _activeDistanceTasks.Remove(task);
+                TurnOnDistanceTask();
                 break;
             }
         }

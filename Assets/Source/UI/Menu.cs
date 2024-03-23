@@ -38,7 +38,9 @@ public class Menu : MonoBehaviour
     {
         if(distance > _recordDistance)
         {
-            _recordDistanceText.text = $"{Convert.ToInt32(distance)}";
+            _recordDistance = distance;
+            _recordDistanceText.text = $"{Convert.ToInt32(_recordDistance)}";
+            TaskCounter.IncereaseProgress(Convert.ToInt32(_recordDistance), TaskType.RecordDistance.ToString());
         }
     }
 }
