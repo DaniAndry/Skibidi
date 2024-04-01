@@ -7,6 +7,7 @@ public class PlayerMoverModel
     private readonly float _maxSpeed = 4f;
     private readonly float _maxTurnSpeed = 1.5f;
     private readonly Rigidbody _rigidbody;
+
     private float _turnSpeed;
     private float _lastMoveSpeed;
     private float _moveVariableSpeed;
@@ -14,10 +15,12 @@ public class PlayerMoverModel
     private float _speedTime;
     private float _jumpPower = 3f;
     private float _moveCoefficient;
+
     private bool _isMove = false;
     private bool _isSpeedBoost;
     private bool _isGrounded = false;
     private bool _enableJump = true;
+
     private PlayerInputHandler _inputHandler;
 
     public event Action Jumped;

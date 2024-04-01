@@ -9,15 +9,15 @@ public class ShopDancingWindow : Window
 
     private ShopDancing _shop;
 
+    private void OnEnable()
+    {
+        _openButton.onClick.AddListener(Open);
+    }
+
     private void Awake()
     {
         CloseWithoutSound();
         _shop = GetComponent<ShopDancing>();
-    }
-
-    private void OnEnable()
-    {
-        _openButton.onClick.AddListener(Open);
     }
 
     private void OnDisable()

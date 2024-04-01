@@ -9,6 +9,7 @@ public class ChunksPlacer : MonoBehaviour
 
     private Vector3 _startFirstChunkPosition;
     private Transform _player;
+
     private List<Chunk> _disabledChunks = new List<Chunk>();
     private List<Chunk> _spawnedChunks = new List<Chunk>();
 
@@ -26,6 +27,25 @@ public class ChunksPlacer : MonoBehaviour
         {
             SpawnChunk();
         }
+    }
+
+    public void GetPlayerTransform(Transform player)
+    {
+        _player = player;
+    }
+
+    public void ResetFirstChunk()
+    {
+        foreach (Chunk chunk in _spawnedChunks)
+        {
+            chunk.gameObject.SetActive(false);
+        }
+
+        _spawnedChunks.Clear();
+
+        _firstChunk.gameObject.SetActive(true);
+        _firstChunk.transform.position = _startFirstChunkPosition;
+        _spawnedChunks.Add(_firstChunk);
     }
 
     private void SpawnChunk()
@@ -67,24 +87,5 @@ public class ChunksPlacer : MonoBehaviour
             _spawnedChunks[i].gameObject.SetActive(false);
             _spawnedChunks.Remove(_spawnedChunks[i]);
         }
-    }
-
-    public void GetPlayerTransform(Transform player)
-    {
-        _player = player;
-    }
-
-    public void ResetFirstChunk()
-    {
-        foreach(Chunk chunk in _spawnedChunks)
-        {
-            chunk.gameObject.SetActive(false);
-        }
-
-        _spawnedChunks.Clear();
-
-        _firstChunk.gameObject.SetActive(true);
-        _firstChunk.transform.position = _startFirstChunkPosition;
-        _spawnedChunks.Add(_firstChunk);
     }
 }

@@ -5,6 +5,16 @@ public class StartStateGame
     private readonly PlayerMoverPresenter _presenterMover;
     private readonly HudWindow _hudWindow;
 
+    private void Start()
+    {
+        AudioManager.Instance.Play("StartGame");
+        AudioManager.Instance.Play("Music");
+
+        _hudWindow.OpenWithoutSound();
+        _presenter.StartGame();
+        _presenterMover.StartPlayerMove();
+    }
+
     public StartStateGame(Menu menu, PlayerPresenter presenter, PlayerMoverPresenter presenterMover, HudWindow hudWindow)
     {
         _menu = menu;
@@ -21,15 +31,5 @@ public class StartStateGame
     public void Disable()
     {
         _menu.ClickingStart += Start;
-    }
-
-    private void Start()
-    {
-        AudioManager.Instance.Play("StartGame");
-        AudioManager.Instance.Play("Music");
-
-        _hudWindow.OpenWithoutSound();
-        _presenter.StartGame();
-        _presenterMover.StartPlayerMove();
     }
 }

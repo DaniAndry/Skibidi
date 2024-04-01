@@ -22,16 +22,16 @@ public class PlayerView : MonoBehaviour
     public event Action<EnergyBoost> DistanceBoostChanging;
     public event Action GameOvered;
 
-    private void Awake()
-    {
-        _energyBoostButton = _energyBoost.GetComponent<Button>();
-        _energyUpgradeButton = _energyUpgrade.GetComponent<Button>();
-    }
-
     private void OnEnable()
     {
         _energyBoostButton.onClick.AddListener(UseEnergyBoost);
         _energyUpgradeButton.onClick.AddListener(OnChangeMaxEnergy);
+    }
+
+    private void Awake()
+    {
+        _energyBoostButton = _energyBoost.GetComponent<Button>();
+        _energyUpgradeButton = _energyUpgrade.GetComponent<Button>();
     }
 
     private void OnDisable()

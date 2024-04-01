@@ -5,6 +5,11 @@ public class PlayerMoverPresenter : MonoBehaviour
     private PlayerMoverModel _model;
     private PlayerMoverView _view;
 
+    private void FixedUpdate()
+    {
+        _model?.Update();
+    }
+
     public void Init(PlayerMoverModel model, PlayerMoverView view)
     {
         _model = model;
@@ -29,11 +34,6 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.OnSomersault -= Somerslaut;
         _model.OnChangeSpeed -= _view.ChangeCurrentSpeed;
         _model.Jumped -= _view.Jumped;
-    }
-
-    private void FixedUpdate()
-    {
-        _model?.Update();
     }
 
     public void EndPlayerMove()

@@ -1,4 +1,4 @@
-    using UnityEngine;
+using UnityEngine;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class Window : MonoBehaviour
@@ -16,9 +16,9 @@ public class Window : MonoBehaviour
 
     public virtual void Open()
     {
-        if(_animator != null)
+        if (_animator != null)
             _animator.SetTrigger("open");
-        
+
         AudioManager.Instance.Play("ClickOpen");
         _effectButtonClick?.Play();
         _canvasGroup.blocksRaycasts = true;
@@ -40,7 +40,7 @@ public class Window : MonoBehaviour
         _canvasGroup.interactable = true;
         _canvasGroup.alpha = 1f;
     }
-    
+
     public virtual void CloseWithoutSound()
     {
         _canvasGroup.interactable = false;

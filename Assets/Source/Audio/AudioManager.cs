@@ -5,7 +5,7 @@ public class AudioManager : MonoBehaviour
 {
 	public static AudioManager Instance;
 
-	[SerializeField] private Sound[] sounds;
+	[SerializeField] private Sound[] _sounds;
 
 	private void Start ()
 	{
@@ -20,7 +20,7 @@ public class AudioManager : MonoBehaviour
 			DontDestroyOnLoad(gameObject);
 		}
 
-		foreach (Sound sond in sounds)
+		foreach (Sound sond in _sounds)
 		{
 			sond.source = gameObject.AddComponent<AudioSource>();
 			sond.source.playOnAwake = false;
@@ -33,13 +33,13 @@ public class AudioManager : MonoBehaviour
 
 	public void Play(string sound)
 	{
-        Sound s = Array.Find(sounds, item => item.name == sound);
+        Sound s = Array.Find(_sounds, item => item.name == sound);
 		s.source.Play();
 	}
 
 	public void Stop(string sound)
 	{
-		Sound s = Array.Find(sounds, item => item.name == sound);
+		Sound s = Array.Find(_sounds, item => item.name == sound);
 		s.source.Stop();
 	}
 }

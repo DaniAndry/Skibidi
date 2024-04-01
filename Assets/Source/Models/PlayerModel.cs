@@ -9,13 +9,14 @@ public class PlayerModel
     private float _energyTime;
     private bool _isEnergyBoost = false;
 
+    public event Action DistanceChanging;
+    public event Action OnEnergyGone;
+    public event Action EnergyChanged;
+
     public float TotalDistanceTraveled { get; private set; }
     public float MaxEnergy { get; private set; } = 40f;
     public float CurrentEnergy { get; private set; }
 
-    public event Action DistanceChanging;
-    public event Action OnEnergyGone;
-    public event Action EnergyChanged;
 
     public void Init()
     {
@@ -46,28 +47,6 @@ public class PlayerModel
         CurrentEnergy = MaxEnergy;
         TotalDistanceTraveled = 0;
         CurrentEnergy = MaxEnergy;
-    }
-
-    private void GiveEnergy(Transform transform)
-    {
-        if (CurrentEnergy > 0 && _isEnergyGone == false)
-        {
-            float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
-            TotalDistanceTraveled += distanceMoved;
-
-            ChangingEnergy(distanceMoved);
-
-            _lastPosition = transform.position;
-
-            DistanceChanging?.Invoke();
-            EnergyChanged?.Invoke();
-
-            if (CurrentEnergy <= 0)
-            {
-                _isEnergyGone = true;
-                OnEnergyGone?.Invoke();
-            }
-        }
     }
 
     public void Update(Transform transform)
@@ -122,6 +101,28 @@ public class PlayerModel
         {
             MaxEnergy = data.Energy;
             TotalDistanceTraveled = data.TotalDistance;
+        }
+    }
+
+    private void GiveEnergy(Transform transform)
+    {
+        if (CurrentEnergy > 0 && _isEnergyGone == false)
+        {
+            float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
+            TotalDistanceTraveled += distanceMoved;
+
+            ChangingEnergy(distanceMoved);
+
+            _lastPosition = transform.position;
+
+            DistanceChanging?.Invoke();
+            EnergyChanged?.Invoke();
+
+            if (CurrentEnergy <= 0)
+            {
+                _isEnergyGone = true;
+                OnEnergyGone?.Invoke();
+            }
         }
     }
 }

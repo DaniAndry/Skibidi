@@ -4,16 +4,16 @@ using UnityEngine;
 public class ChuchpanMover : MonoBehaviour
 {
     public float speed = 0.2f;
-    private float targetX = 1f;
-    private float minX = -0.9f;
-    private float maxX = 1f;
+    private float _targetX = 1f;
+    private float _minX = -0.9f;
+    private float _maxX = 1f;
     private Vector3 _targetPosition;
     private bool _isPushed = false;
     private Chuchpan _chuchpan;
 
     private void Start()
     {
-        _targetPosition = new Vector3(targetX, transform.position.y, transform.position.z);
+        _targetPosition = new Vector3(_targetX, transform.position.y, transform.position.z);
         _chuchpan = GetComponent<Chuchpan>();
         _chuchpan.OnHit += Push;
     }
@@ -41,8 +41,8 @@ public class ChuchpanMover : MonoBehaviour
 
     private void ChangeDirection()
     {
-        targetX = (targetX == minX) ? maxX : minX;
-        _targetPosition = new Vector3(targetX, transform.position.y, transform.position.z);
+        _targetX = (_targetX == _minX) ? _maxX : _minX;
+        _targetPosition = new Vector3(_targetX, transform.position.y, transform.position.z);
 
         transform.Rotate(0f, 180f, 0f);
     }
@@ -76,5 +76,4 @@ public class ChuchpanMover : MonoBehaviour
         transform.rotation = endRotation;
         _isPushed = true;
     }
-
 }

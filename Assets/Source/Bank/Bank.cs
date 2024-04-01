@@ -12,28 +12,20 @@ public class Bank : MonoBehaviour
     private int _diamond = 10;
 
     public event Action OnBuy;
+    
+    private void OnEnable()
+    {
+        AwardGiver.OnReward += GiveRewardMoney;
+    }
 
     private void Start()
     {
         UpdateText();
     }
 
-    private void OnEnable()
-    {
-        AwardGiver.OnReward += GiveRewardMoney;
-    }
-
     private void OnDisable()
     {
         AwardGiver.OnReward -= GiveRewardMoney;
-    }
-
-    private void GiveRewardMoney(string name, int amount)
-    {
-        if(name == Convert.ToString(ResourceType.Money))
-        {
-            GiveMoney(amount);
-        }
     }
 
     public void TakeMoney(int money)
@@ -81,6 +73,14 @@ public class Bank : MonoBehaviour
         {
             _diamond -= diamond;
             UpdateText();
+        }
+    }
+
+    private void GiveRewardMoney(string name, int amount)
+    {
+        if (name == Convert.ToString(ResourceType.Money))
+        {
+            GiveMoney(amount);
         }
     }
 }

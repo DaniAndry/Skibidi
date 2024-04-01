@@ -8,12 +8,38 @@ public class PlayerPresenter : MonoBehaviour
 
     public event Action OnEndGame;
 
+    private void Update()
+    {
+        _model?.Update(_view.transform);
+    }
+
     public void Init(PlayerModel model, PlayerView view)
     {
         _model = model;
         _view = view;
 
         _view.UpdateUI(_model.MaxEnergy);
+    }
+
+    public void StartGame()
+    {
+        _model.Init();
+        _model.StartGame();
+    }
+
+    public void ResurrectPlayer(float energy)
+    {
+        _model.Resurrect(energy);
+    }
+
+    public float TakeTotalDistance()
+    {
+        return _model.TotalDistanceTraveled;
+    }
+
+    public void ResetPlayer()
+    {
+        _model.ResetGame(_view.transform);
     }
 
     public void Enable()
@@ -29,11 +55,6 @@ public class PlayerPresenter : MonoBehaviour
         _view.GameOvered += EndGame;
     }
 
-    private void _view_GameOvered()
-    {
-        throw new NotImplementedException();
-    }
-
     public void Disable()
     {
         _view.MaxEnergyChanging -= OnMaxEnergyChanging;
@@ -44,9 +65,9 @@ public class PlayerPresenter : MonoBehaviour
         _view.EnergyChanging -= OnViewEnergyChanged;
     }
 
-    private void Update()
+    private void _view_GameOvered()
     {
-        _model?.Update(_view.transform);    
+        throw new NotImplementedException();
     }
 
     private void OnDistanceChanging(EnergyBoost energyBoost)
@@ -78,26 +99,5 @@ public class PlayerPresenter : MonoBehaviour
     private void EndGame()
     {
         OnEndGame?.Invoke();
-    }
-
-    public void StartGame()
-    {
-        _model.Init();
-        _model.StartGame();
-    }
-
-    public void ResurrectPlayer(float energy)
-    {
-        _model.Resurrect(energy);
-    }
-
-    public float TakeTotalDistance()
-    {
-        return _model.TotalDistanceTraveled;
-    }
-
-    public void ResetPlayer()
-    {
-        _model.ResetGame(_view.transform);
     }
 }

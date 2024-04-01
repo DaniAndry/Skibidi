@@ -14,11 +14,6 @@ public class EnemyMover : MonoBehaviour
     private int _kickStateHash = Animator.StringToHash("Kick");
     private Vector3 _startPositionEnemy;
 
-    private void Awake()
-    {
-        _startPositionEnemy = _enemy.transform.position;
-    }
-
     private void OnEnable()
     {
         _animator = _enemy.GetComponent<Animator>();
@@ -29,6 +24,10 @@ public class EnemyMover : MonoBehaviour
         _animator.Play(_idleStateHash);
     }
 
+    private void Awake()
+    {
+        _startPositionEnemy = _enemy.transform.position;
+    } 
 
     private void StartMove()
     {

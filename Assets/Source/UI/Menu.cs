@@ -28,12 +28,6 @@ public class Menu : MonoBehaviour
         _startButton.onClick.RemoveListener(OnClickStart);
     }
 
-    private void OnClickStart()
-    {
-        ClickingStart?.Invoke();
-        _menuWindow.Close();
-    }
-
     public void SetDistance(float distance)
     {
         if(distance > _recordDistance)
@@ -42,5 +36,11 @@ public class Menu : MonoBehaviour
             _recordDistanceText.text = $"{Convert.ToInt32(_recordDistance)}";
             TaskCounter.IncereaseProgress(Convert.ToInt32(_recordDistance), TaskType.RecordDistance.ToString());
         }
+    }
+
+    private void OnClickStart()
+    {
+        ClickingStart?.Invoke();
+        _menuWindow.Close();
     }
 }

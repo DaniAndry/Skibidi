@@ -16,17 +16,17 @@ public class StatesGameIniter : MonoBehaviour
     private StartStateGame _startStateGame;
     private EndStateGame _endStateGame;
 
-    private void Awake()
-    {
-        Init();
-    }
-
     private void OnEnable()
     {
         _resurrectStateGame.Enable();
         _restartStateGame.Enable();
         _startStateGame.Enable();
         _endStateGame.Enable();
+    }
+
+    private void Awake()
+    {
+        Init();
     }
 
     private void OnDisable()

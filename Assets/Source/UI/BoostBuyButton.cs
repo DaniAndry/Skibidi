@@ -5,14 +5,18 @@ using UnityEngine.UI;
 public class BoostBuyButton : MonoBehaviour
 {
     [SerializeField] private Boost _boost;
+
     [SerializeField] private int _priceBuyBoost;
     [SerializeField] private int _priceUpgradeBoost;
+
     [SerializeField] private Button _buyForMoney;
     [SerializeField] private Button _buyForAd;
     [SerializeField] private Button _upgradeForMoney;
     [SerializeField] private Button _upgradeForAd;
+
     [SerializeField] private TMP_Text _workTimeText;
     [SerializeField] private TMP_Text _countBoosts;
+
     [SerializeField] private Image _panelCountUpgrade;
     [SerializeField] private Image _prefabCountUpgradeImage;
 
@@ -26,6 +30,14 @@ public class BoostBuyButton : MonoBehaviour
 
     public int Price => _priceBuyBoost;
 
+    private void OnEnable()
+    {
+        _buyForMoney.onClick.AddListener(BuyForMoney);
+        _buyForAd.onClick.AddListener(BuyForAd);
+        _upgradeForMoney.onClick.AddListener(UpgradeForMoney);
+        _upgradeForAd.onClick.AddListener(UpgradeForAd);
+    }
+
     private void Awake()
     {
         _upgradeEffect = GetComponentInChildren<ParticleSystem>();
@@ -34,14 +46,6 @@ public class BoostBuyButton : MonoBehaviour
         _shopBoosts = GetComponentInParent<ShopBoosts>();
 
         UpdateText();
-    }
-
-    private void OnEnable()
-    {
-        _buyForMoney.onClick.AddListener(BuyForMoney);
-        _buyForAd.onClick.AddListener(BuyForAd);
-        _upgradeForMoney.onClick.AddListener(UpgradeForMoney);
-        _upgradeForAd.onClick.AddListener(UpgradeForAd);
     }
 
     private void OnDisable()

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIEffectsController : MonoBehaviour
@@ -10,7 +9,6 @@ public class UIEffectsController : MonoBehaviour
     private void OnEnable()
     {
         _bank.OnBuy += BuyEffect;
-
     }
 
     private void OnDisable()

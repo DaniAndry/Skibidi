@@ -17,14 +17,7 @@ public class ShopSkins : MonoBehaviour
     private SkinSelecter _selecter;
     private GameObject _modelSkin;
 
-    private void Start()
-    {
-        _selecter = GetComponent<SkinSelecter>();
-        LoadShop();
-        _buyButton.gameObject.SetActive(false);
-    }
-
-    public void OnEnable()
+    private void OnEnable()
     {
         _buyButton.onClick.AddListener(TryBuySkin);
 
@@ -34,7 +27,14 @@ public class ShopSkins : MonoBehaviour
         }
     }
 
-    public void OnDisable()
+    private void Start()
+    {
+        _selecter = GetComponent<SkinSelecter>();
+        LoadShop();
+        _buyButton.gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
     {
         _buyButton.onClick.RemoveListener(TryBuySkin);
 
@@ -42,25 +42,6 @@ public class ShopSkins : MonoBehaviour
         {
             skin.OnSelected -= SelectSkin;
         }
-    }
-
-    private void SelectSkin(Skin skin)
-    {
-        _selectedSkin = skin;
-        _buyButton.gameObject.SetActive(true);
-
-        ShowInfoForSkin();
-    }
-    //тут немного грязно
-    public void ShowInfoForSkin()
-    {
-        _name.text = _selectedSkin.Name;
-        _description.text = _selectedSkin.Description;
-
-        if (_modelSkin != null)
-            Destroy(_modelSkin);
-
-        _modelSkin = Instantiate(_selectedSkin.GetPrefab(), _placeSkin);
     }
 
     public void TurnOffSkin()
@@ -73,22 +54,6 @@ public class ShopSkins : MonoBehaviour
         _modelSkin?.SetActive(true);
     }
 
-    private void TryBuySkin()
-    {
-        if (_bank.TryTakeValue(_selectedSkin.Price))
-        {
-            _bank.TakeMoney(_selectedSkin.Price);
-            BuySkin();
-        }
-        else
-            ThrowErrorBuySkin();
-
-    }
-
-    private void ThrowErrorBuySkin()
-    {
-        Debug.Log("ErrorBuy");
-    }
 
     public void BuySkin()
     {
@@ -120,5 +85,42 @@ public class ShopSkins : MonoBehaviour
         //    BoughtSkins.Add(skin);
         //}
         // }
+    }
+
+    public void ShowInfoForSkin()
+    {
+        _name.text = _selectedSkin.Name;
+        _description.text = _selectedSkin.Description;
+
+        if (_modelSkin != null)
+            Destroy(_modelSkin);
+
+        _modelSkin = Instantiate(_selectedSkin.GetPrefab(), _placeSkin);
+    }
+
+    private void SelectSkin(Skin skin)
+    {
+        _selectedSkin = skin;
+        _buyButton.gameObject.SetActive(true);
+
+        ShowInfoForSkin();
+    }
+
+
+    private void TryBuySkin()
+    {
+        if (_bank.TryTakeValue(_selectedSkin.Price))
+        {
+            _bank.TakeMoney(_selectedSkin.Price);
+            BuySkin();
+        }
+        else
+            ThrowErrorBuySkin();
+
+    }
+
+    private void ThrowErrorBuySkin()
+    {
+        Debug.Log("ErrorBuy");
     }
 }

@@ -9,17 +9,17 @@ public class Chunk : MonoBehaviour
     public BeginPoint Begin { get; private set; }
     public EndPoint End { get; private set; }
     public LenghtChunk LenghChunk { get; private set; }
+   
+    private void OnEnable()
+    {
+        Spawned?.Invoke(this);
+    }
 
     private void Awake()
     {
         Begin = GetComponentInChildren<BeginPoint>();
         End = GetComponentInChildren<EndPoint>();
         LenghChunk = GetComponentInChildren<LenghtChunk>();
-    }
-
-    private void OnEnable()
-    {
-        Spawned?.Invoke(this);
     }
 
     private void OnDisable()

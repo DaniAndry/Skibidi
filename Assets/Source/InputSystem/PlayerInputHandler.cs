@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+    public static PlayerInputHandler Instance;
+
     [SerializeField] private InputActionAsset _playerControls;
     [SerializeField] private string _actionMapName = "Player";
     [SerializeField] private string _turn = "Turn";
@@ -19,8 +21,13 @@ public class PlayerInputHandler : MonoBehaviour
     public float DeltaMobileJump { get; private set; } = 200;
 
 
-    public static PlayerInputHandler Instance;
-
+    private void OnEnable()
+    {
+        _turnAction.Enable();
+        _jumpAction.Enable();
+        _jumpMobileAction.Enable();
+    }
+   
     private void Awake()
     {
         if(Instance == null)
@@ -40,6 +47,13 @@ public class PlayerInputHandler : MonoBehaviour
         RegisterInputActions();
     }
 
+    private void OnDisable()
+    {
+        _turnAction.Disable();
+        _jumpAction.Disable();
+        _jumpMobileAction.Disable();
+    }
+
     private void RegisterInputActions()
     {
         _turnAction.performed += context => TurnInput = context.ReadValue<Vector2>();
@@ -50,19 +64,5 @@ public class PlayerInputHandler : MonoBehaviour
 
         _jumpMobileAction.performed += context => JumpMobileTriggered = context.ReadValue<Vector2>();
         _jumpMobileAction.canceled += context => JumpMobileTriggered = Vector2.zero;
-    }
-
-    private void OnEnable()
-    {
-        _turnAction.Enable();
-        _jumpAction.Enable();
-        _jumpMobileAction.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _turnAction.Disable();
-        _jumpAction.Disable();
-        _jumpMobileAction.Disable();
-    }
+    }  
 }

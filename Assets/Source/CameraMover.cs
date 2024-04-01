@@ -20,17 +20,6 @@ public class CameraMover : MonoBehaviour
         Move();
     }
 
-    private void Move()
-    {
-        if (_isMove)
-        {
-            Vector3 newCamPosition = new Vector3(_player.position.x + _offSet.x, _player.position.y + _offSet.y, _player.position.z + _offSet.z);
-            Quaternion newCamRotation = Quaternion.Euler(20, 0, 0);
-            transform.position = Vector3.Lerp(transform.position, newCamPosition, _speed * Time.deltaTime);
-            transform.rotation = Quaternion.Lerp(transform.rotation, newCamRotation, _speed * Time.deltaTime);
-        }
-    }
-
     public void StartMove()
     {
         _isMove = true;
@@ -56,5 +45,16 @@ public class CameraMover : MonoBehaviour
     {
         transform.position = _startPosition;
         transform.rotation = _startRotation;
+    }
+
+    private void Move()
+    {
+        if (_isMove)
+        {
+            Vector3 newCamPosition = new Vector3(_player.position.x + _offSet.x, _player.position.y + _offSet.y, _player.position.z + _offSet.z);
+            Quaternion newCamRotation = Quaternion.Euler(20, 0, 0);
+            transform.position = Vector3.Lerp(transform.position, newCamPosition, _speed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, newCamRotation, _speed * Time.deltaTime);
+        }
     }
 }

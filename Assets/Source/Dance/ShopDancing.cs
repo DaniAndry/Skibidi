@@ -15,11 +15,6 @@ public class ShopDancing : MonoBehaviour
     private PlayerMoverView _player;
     private GameObject _modelDance;
 
-    private void Start()
-    {
-        _selecter = GetComponent<DanceSelector>();
-    }
-
     private void OnEnable()
     {
         _buyButton.onClick.AddListener(TryBuySkin);
@@ -28,6 +23,11 @@ public class ShopDancing : MonoBehaviour
         {
             dance.OnSelected += SelectDance;
         }
+    }
+
+    private void Start()
+    {
+        _selecter = GetComponent<DanceSelector>();
     }
 
     private void OnDisable()

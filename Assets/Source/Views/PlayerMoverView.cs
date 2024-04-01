@@ -32,6 +32,12 @@ public class PlayerMoverView : MonoBehaviour
 
     public float CurrentSpeed => _speed;
 
+    private void OnEnable()
+    {
+        _cameraMover.GetPlayerTransform(transform);
+        _speedBoostButton.onClick.AddListener(UseSpeedBoost);
+    }
+
     private void Awake()
     {
         _startPlayerPosition = transform.position;
@@ -46,33 +52,9 @@ public class PlayerMoverView : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        _cameraMover.GetPlayerTransform(transform);
-        _speedBoostButton.onClick.AddListener(UseSpeedBoost);
-    }
-
     private void OnDisable()
     {
         _speedBoostButton.onClick.RemoveListener(UseSpeedBoost);
-    }
-
-    private void MobileContorol()
-    {
-        if (_joystick.Horizontal < 0f && _joystick.Horizontal > -1)
-            OnMoving?.Invoke(_joystick.Horizontal);
-        else if (_joystick.Horizontal > 0f && _joystick.Horizontal < 1)
-            OnMoving?.Invoke(_joystick.Horizontal);
-        else
-            OnMoving?.Invoke(0);
-    }
-
-    private void UseSpeedBoost()
-    {
-        if (_speedBoost.TryUse())
-            OnSpeedBoostChanging?.Invoke(_speedBoost.Bonus, _speedBoost.Time);
-        else
-            Debug.Log("ErrorUseBoost");
     }
 
     public GameObject GetPrefab()
@@ -129,7 +111,7 @@ public class PlayerMoverView : MonoBehaviour
     {
         _cameraMover?.ResetCameraPosition();
         transform.position = _startPlayerPosition;
-        OnRestart?.Invoke();    
+        OnRestart?.Invoke();
     }
 
     public void EndMove()
@@ -152,5 +134,23 @@ public class PlayerMoverView : MonoBehaviour
     public void Somersault()
     {
         OnSomersault?.Invoke();
+    }
+
+    private void MobileContorol()
+    {
+        if (_joystick.Horizontal < 0f && _joystick.Horizontal > -1)
+            OnMoving?.Invoke(_joystick.Horizontal);
+        else if (_joystick.Horizontal > 0f && _joystick.Horizontal < 1)
+            OnMoving?.Invoke(_joystick.Horizontal);
+        else
+            OnMoving?.Invoke(0);
+    }
+
+    private void UseSpeedBoost()
+    {
+        if (_speedBoost.TryUse())
+            OnSpeedBoostChanging?.Invoke(_speedBoost.Bonus, _speedBoost.Time);
+        else
+            Debug.Log("ErrorUseBoost");
     }
 }
