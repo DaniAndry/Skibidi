@@ -9,7 +9,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     [SerializeField] private bool _snapX = false;
     [SerializeField] private bool _snapY = false;
 
-    [SerializeField] protected RectTransform background = null;
+    [SerializeField] protected RectTransform Background = null;
     [SerializeField] private RectTransform _handle = null;
 
     private RectTransform _baseRect = null;
@@ -35,7 +35,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             Debug.LogError("The Joystick is not placed inside a canvas");
 
         Vector2 center = new Vector2(0.5f, 0.5f);
-        background.pivot = center;
+        Background.pivot = center;
         _handle.anchorMin = center;
         _handle.anchorMax = center;
         _handle.pivot = center;
@@ -65,8 +65,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         if (_canvas.renderMode == RenderMode.ScreenSpaceCamera)
             _camera = _canvas.worldCamera;
 
-        Vector2 position = RectTransformUtility.WorldToScreenPoint(_camera, background.position);
-        Vector2 radius = background.sizeDelta / 2;
+        Vector2 position = RectTransformUtility.WorldToScreenPoint(_camera, Background.position);
+        Vector2 radius = Background.sizeDelta / 2;
         _input = (eventData.position - position) / (radius * _canvas.scaleFactor);
         FormatInput();
         HandleInput(_input.magnitude, _input.normalized, radius, _camera);
@@ -96,7 +96,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(_baseRect, screenPosition, _camera, out localPoint))
         {
             Vector2 pivotOffset = _baseRect.pivot * _baseRect.sizeDelta;
-            return localPoint - (background.anchorMax * _baseRect.sizeDelta) + pivotOffset;
+            return localPoint - (Background.anchorMax * _baseRect.sizeDelta) + pivotOffset;
         }
         return Vector2.zero;
     }

@@ -16,13 +16,13 @@ public class JoystickEditor : Editor
 
     protected virtual void OnEnable()
     {
-        _handleRange = serializedObject.FindProperty("handleRange");
-        _deadZone = serializedObject.FindProperty("deadZone");
-        _axisOptions = serializedObject.FindProperty("axisOptions");
-        _snapX = serializedObject.FindProperty("snapX");
-        _snapY = serializedObject.FindProperty("snapY");
-        background = serializedObject.FindProperty("background");
-        _handle = serializedObject.FindProperty("handle");
+        _handleRange = serializedObject.FindProperty("_handleRange");
+        _deadZone = serializedObject.FindProperty("_deadZone");
+        _axisOptions = serializedObject.FindProperty("_axisOptions");
+        _snapX = serializedObject.FindProperty("_snapX");
+        _snapY = serializedObject.FindProperty("_snapY");
+        background = serializedObject.FindProperty("_background");
+        _handle = serializedObject.FindProperty("_handle");
     }
 
     public override void OnInspectorGUI()

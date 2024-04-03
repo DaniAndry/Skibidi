@@ -11,19 +11,19 @@ public class DynamicJoystick : Joystick
     {
         MoveThreshold = _moveThreshold;
         base.Start();
-        background.gameObject.SetActive(false);
+        Background.gameObject.SetActive(false);
     }
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
-        background.gameObject.SetActive(true);
+        Background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
+        Background.gameObject.SetActive(true);
         base.OnPointerDown(eventData);
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-        background.gameObject.SetActive(false);
+        Background.gameObject.SetActive(false);
         base.OnPointerUp(eventData);
     }
 
@@ -32,7 +32,7 @@ public class DynamicJoystick : Joystick
         if (magnitude > _moveThreshold)
         {
             Vector2 difference = normalised * (magnitude - _moveThreshold) * radius;
-            background.anchoredPosition += difference;
+            Background.anchoredPosition += difference;
         }
         base.HandleInput(magnitude, normalised, radius, cam);
     }
