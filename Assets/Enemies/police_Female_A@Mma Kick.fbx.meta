@@ -3,7 +3,12 @@ guid: 10b1c076c6858304db807846d0be412f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: people_pal
+    second: {fileID: 2100000, guid: 76b673a3202e14f4e9198bf1525378fb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

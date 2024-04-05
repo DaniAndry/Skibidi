@@ -1,38 +1,40 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class DynamicJoystick : Joystick
 {
-    public float MoveThreshold { get { return _moveThreshold; } set { _moveThreshold = Mathf.Abs(value); } }
+    public float MoveThreshold { get { return moveThreshold; } set { moveThreshold = Mathf.Abs(value); } }
 
-    [SerializeField] private float _moveThreshold = 1;
+    [SerializeField] private float moveThreshold = 1;
 
     protected override void Start()
     {
-        MoveThreshold = _moveThreshold;
+        MoveThreshold = moveThreshold;
         base.Start();
-        Background.gameObject.SetActive(false);
+        background.gameObject.SetActive(false);
     }
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        Background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
-        Background.gameObject.SetActive(true);
+        background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
+        background.gameObject.SetActive(true);
         base.OnPointerDown(eventData);
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-        Background.gameObject.SetActive(false);
+        background.gameObject.SetActive(false);
         base.OnPointerUp(eventData);
     }
 
     protected override void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
     {
-        if (magnitude > _moveThreshold)
+        if (magnitude > moveThreshold)
         {
-            Vector2 difference = normalised * (magnitude - _moveThreshold) * radius;
-            Background.anchoredPosition += difference;
+            Vector2 difference = normalised * (magnitude - moveThreshold) * radius;
+            background.anchoredPosition += difference;
         }
         base.HandleInput(magnitude, normalised, radius, cam);
     }
