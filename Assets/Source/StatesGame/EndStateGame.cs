@@ -1,3 +1,5 @@
+using System;
+
 public class EndStateGame
 {
     private readonly Menu _menu;
@@ -6,8 +8,9 @@ public class EndStateGame
     private readonly PlayerPresenter _presenter;
     private readonly PlayerResurrect _playerResurrect;
     private readonly HudWindow _hudWindow;
+    private readonly YandexLeaderboard _yandexLeaderboard;
 
-    public EndStateGame(Menu menu, PlayerPresenter presenter, PlayerMoverPresenter presenterMover, PlayerResurrect playerResurrect, EndGameScreen endScreen, HudWindow hudWindow)
+    public EndStateGame(Menu menu, PlayerPresenter presenter, PlayerMoverPresenter presenterMover, PlayerResurrect playerResurrect, EndGameScreen endScreen, HudWindow hudWindow, YandexLeaderboard yandex)
     {
         _menu = menu;
         _presenterMover = presenterMover;
@@ -15,6 +18,7 @@ public class EndStateGame
         _playerResurrect = playerResurrect;
         _endScreen = endScreen;
         _hudWindow = hudWindow;
+        _yandexLeaderboard = yandex;
     }
 
     public void Enable()
@@ -35,6 +39,7 @@ public class EndStateGame
         _playerResurrect.StartTimer();
         _endScreen.SetData(_presenter.TakeTotalDistance());
         _menu.SetDistance(_presenter.TakeTotalDistance());
+        _yandexLeaderboard.SetPlayerScore(Convert.ToInt32(_presenter.TakeTotalDistance()));
     }
 
     private void OpenWindows()

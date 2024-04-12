@@ -47,10 +47,10 @@ public class PlayerPresenter : MonoBehaviour
         _model?.Init();
 
         _view.MaxEnergyChanging += OnMaxEnergyChanging;
-        _view.DistanceBoostChanging += OnDistanceChanging;
-        _model.EnergyChanged += OnEnergyChanged;
+        _view.DistanceBoostChanging += UseDistanceDistanceBoost;
+        _model.EnergyChanged += OnEnergyChanging;
         _model.OnEnergyGone += EndGame;
-        _model.DistanceChanging += OnDistanceChanged;
+        _model.DistanceChanging += OnDistanceChanging;
         _view.EnergyChanging += OnViewEnergyChanged;
         _view.GameOvered += EndGame;
     }
@@ -58,10 +58,10 @@ public class PlayerPresenter : MonoBehaviour
     public void Disable()
     {
         _view.MaxEnergyChanging -= OnMaxEnergyChanging;
-        _view.DistanceBoostChanging -= OnDistanceChanging;
-        _model.EnergyChanged -= OnEnergyChanged;
+        _view.DistanceBoostChanging -= UseDistanceDistanceBoost;
+        _model.EnergyChanged -= OnEnergyChanging;
         _model.OnEnergyGone -= EndGame;
-        _model.DistanceChanging -= OnDistanceChanged;
+        _model.DistanceChanging -= OnDistanceChanging;
         _view.EnergyChanging -= OnViewEnergyChanged;
     }
 
@@ -70,17 +70,17 @@ public class PlayerPresenter : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    private void OnDistanceChanging(EnergyBoost energyBoost)
+    private void UseDistanceDistanceBoost(EnergyBoost energyBoost)
     {
         _model.TurnOnEnergyBoost(energyBoost.Bonus, energyBoost.Time);
     }
 
-    private void OnEnergyChanged()
+    private void OnEnergyChanging()
     {
         _view.SetEnergy(_model.CurrentEnergy);
     }
 
-    private void OnDistanceChanged()
+    private void OnDistanceChanging()
     {
         _view.SetDistance(_model.TotalDistanceTraveled);
     }

@@ -76,6 +76,7 @@ public class PlayerView : MonoBehaviour
         _bank.GiveMoney(count);
         OnMoneyChanging?.Invoke(count, isBoost);
     }
+
     private void UseEnergyBoost()
     {
         if (_energyBoost.TryUse())

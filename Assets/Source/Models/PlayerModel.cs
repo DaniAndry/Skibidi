@@ -46,7 +46,6 @@ public class PlayerModel
         _lastPosition = transformPosition.position;
         CurrentEnergy = MaxEnergy;
         TotalDistanceTraveled = 0;
-        CurrentEnergy = MaxEnergy;
     }
 
     public void Update(Transform transform)
