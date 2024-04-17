@@ -8,6 +8,7 @@ public class ShopSkins : MonoBehaviour
     [SerializeField] private Transform _placeSkin;
     [SerializeField] private Bank _bank;
     [SerializeField] private Button _buyButton;
+    [SerializeField] private Button _selectButton;
     [SerializeField] private List<Skin> _skinForSale;
     [SerializeField] private TMP_Text _description;
     [SerializeField] private TMP_Text _name;
@@ -17,30 +18,33 @@ public class ShopSkins : MonoBehaviour
     private SkinSelecter _selecter;
     private GameObject _modelSkin;
 
-    private void OnEnable()
-    {
-        _buyButton.onClick.AddListener(TryBuySkin);
-
-        foreach (var skin in _skinForSale)
-        {
-            skin.OnSelected += SelectSkin;
-        }
-    }
-
     private void Start()
     {
         _selecter = GetComponent<SkinSelecter>();
         LoadShop();
         _buyButton.gameObject.SetActive(false);
+        _selectButton.gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        _buyButton.onClick.AddListener(TryBuySkin);
+        _selectButton.onClick.AddListener(SelectSkin);
+
+        foreach (var skin in _skinForSale)
+        {
+            skin.OnSelected += ShowInfoSkin;
+        }
     }
 
     private void OnDisable()
     {
         _buyButton.onClick.RemoveListener(TryBuySkin);
+        _selectButton.onClick.RemoveListener(SelectSkin);
 
         foreach (var skin in _skinForSale)
         {
-            skin.OnSelected -= SelectSkin;
+            skin.OnSelected -= ShowInfoSkin;
         }
     }
 
@@ -52,20 +56,20 @@ public class ShopSkins : MonoBehaviour
     public void TurnOnSkinModel()
     {
         _modelSkin?.SetActive(true);
+        _modelSkin?.GetComponent<Animator>().Play("Idle");
     }
-
 
     public void BuySkin()
     {
         _selectedSkin.Unlock();
         _buyButton.gameObject.SetActive(false);
+        _selectButton.gameObject.SetActive(true);
         _selecter.AddSkin(_selectedSkin);
+        _selecter.SelectSkin(_selectedSkin);
         _skinForSale.Remove(_selectedSkin);
-        _selectedSkin.OnSelected -= SelectSkin;
 
         SaveShop();
     }
-
 
     public void SaveShop()
     {
@@ -87,25 +91,41 @@ public class ShopSkins : MonoBehaviour
         // }
     }
 
-    public void ShowInfoForSkin()
+    private void SpawnSkin()
     {
-        _name.text = _selectedSkin.Name;
-        _description.text = _selectedSkin.Description;
-
         if (_modelSkin != null)
             Destroy(_modelSkin);
 
         _modelSkin = Instantiate(_selectedSkin.GetPrefab(), _placeSkin);
+        Vector3 position = new Vector3(_placeSkin.position.x, _placeSkin.position.y, _placeSkin.position.z);
+        _modelSkin.transform.position = position;
+        _modelSkin.GetComponent<Animator>().Play("Idle");
     }
 
-    private void SelectSkin(Skin skin)
+    private void ShowInfoSkin(Skin skin)
     {
         _selectedSkin = skin;
-        _buyButton.gameObject.SetActive(true);
+        _name.text = _selectedSkin.Name;
+        _description.text = _selectedSkin.Description;
 
-        ShowInfoForSkin();
+        if (_selectedSkin.IsBought)
+        {
+            _selectButton.gameObject.SetActive(true);
+            _buyButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            _buyButton.gameObject.SetActive(true);
+            _selectButton.gameObject.SetActive(false);
+        }
+
+        SpawnSkin();
     }
 
+    private void SelectSkin()
+    {
+        _selecter.SelectSkin(_selectedSkin);
+    }
 
     private void TryBuySkin()
     {
@@ -116,7 +136,6 @@ public class ShopSkins : MonoBehaviour
         }
         else
             ThrowErrorBuySkin();
-
     }
 
     private void ThrowErrorBuySkin()

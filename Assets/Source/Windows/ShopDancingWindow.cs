@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class ShopDancingWindow : Window
 {
     [SerializeField] private Button _openButton;
-    [SerializeField] private BoostShopWindow _shopBoosts;
+    [SerializeField] private ShopBoostWindow _shopBoosts;
     [SerializeField] private ShopSkinsWindow _shopSkins;
 
     private ShopDancing _shop;

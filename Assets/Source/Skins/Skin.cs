@@ -1,5 +1,6 @@
+using System;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Skin : MonoBehaviour
@@ -8,9 +9,11 @@ public class Skin : MonoBehaviour
     [SerializeField] private GameObject _prefabSkin;
     [SerializeField] private int _price;
     [SerializeField] private Image _buyFlag;
+    [SerializeField] private Image _SelectFlag;
     [SerializeField] private string _name;
     [SerializeField] private string _description;
     [SerializeField] private bool _isSelected;
+    [SerializeField] private TMP_Text _priceText;
 
     private Button _skinChangeButton;
 
@@ -20,13 +23,14 @@ public class Skin : MonoBehaviour
     public int Price => _price;
     public bool IsBought { get; private set; } = false;
 
-    public event UnityAction<Skin> OnSelected;
+    public event Action<Skin> OnSelected;
 
     private void Awake()
     {
         _skinChangeButton = GetComponent<Button>();
         _buyFlag.gameObject.SetActive(IsBought);
-        _skinChangeButton.onClick.AddListener(Select);
+        _skinChangeButton.onClick.AddListener(ShowInfo);
+        _priceText.text = $"{_price}";
     }
 
     public PlayerView GetView()
@@ -41,6 +45,7 @@ public class Skin : MonoBehaviour
 
     public void TurnOffSkin()
     {
+        Debug.Log(_playerView);
         _playerView.gameObject.SetActive(false);
     }
 
@@ -48,21 +53,18 @@ public class Skin : MonoBehaviour
     {
         IsBought = true;
         _buyFlag.gameObject.SetActive(IsBought);
+        _priceText.text = $"Bought";
     }
 
-    public void Select()
+    public void ShowInfo()
     {
         OnSelected?.Invoke(this);
-
-        if (IsBought && _isSelected)
-        {
-            TurnOnSkin();
-        }
     }
 
     public void ChangeStatus()
     {
         _isSelected = !_isSelected;
+        _SelectFlag.gameObject.SetActive(_isSelected);
     }
 
     private void TurnOnSkin()

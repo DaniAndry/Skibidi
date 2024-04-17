@@ -25,6 +25,6 @@ public class EndGameScreen : MonoBehaviour
 
     public void CloseEndScreen()
     {
-        GetComponent<EndScreenWindow>().Close();
+        GetComponent<EndScreenWindow>().CloseWithoutSound();
     }
 }

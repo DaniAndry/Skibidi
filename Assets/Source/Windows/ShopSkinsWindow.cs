@@ -5,7 +5,7 @@ public class ShopSkinsWindow : Window
 {
     [SerializeField] private Button _openButton;
     [SerializeField] private ShopDancingWindow _shopDancing;
-    [SerializeField] private BoostShopWindow _shopBoosts;
+    [SerializeField] private ShopBoostWindow _shopBoosts;
 
     private ShopSkins _shop;
 

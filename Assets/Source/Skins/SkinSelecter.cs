@@ -23,47 +23,35 @@ public class SkinSelecter : MonoBehaviour
         InitSkin();
     }
 
-    private void OnDisable()
-    {
-        foreach (var skin in _boughtSkins)
-        {
-            skin.OnSelected -= SelectSkin;
-        }
-    }
-
     public void AddSkin(Skin skin)
     {
         _boughtSkins.Add(skin);
-        SelectSkin(skin);
-        skin.OnSelected += SelectSkin;
     }
 
-    private void SelectSkin(Skin skin)
+    public void SelectSkin(Skin skin)
     {
         if (skin != _selectedSkin)
         {
-            Debug.Log(_selectedSkin.ToString());
             _selectedSkin.ChangeStatus();
             _selectedSkin = skin;
 
             _selectedSkin.ChangeStatus();
             InitSkin();
-            Debug.Log(_selectedSkin.ToString());
         }
     }
 
     private void InitSkin()
     {
-        Player = _selectedSkin.GetView();
-        OnChangingSkin?.Invoke(Player);
-
         foreach (Skin skin in _boughtSkins)
         {
-            if (!skin.IsSelected)
+            if (skin.IsSelected == false)
             {
                 skin.TurnOffSkin();
             }
         }
+
+        Player = _selectedSkin.GetView();
+        OnChangingSkin?.Invoke(Player);
     }
 
     private void SaveData()
