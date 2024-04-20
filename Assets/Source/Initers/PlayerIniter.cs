@@ -7,9 +7,10 @@ public class PlayerIniter : MonoBehaviour
     [SerializeField] private PlayerPresenter _presenter;
     [SerializeField] private SkinSelecter _skinSelecter;
     [SerializeField] private DanceSelecter _danceSelecter;
+    [SerializeField] private Shop _danceShop;
+    [SerializeField] private Shop _skinShop;
     [SerializeField] private ChunksPlacer _chunksPlacer;
     [SerializeField] private ChunksPlacer _backChunksPlacer;
-    [SerializeField] private ShopDancing _shopDancing;
 /*    [SerializeField] private PlayerEffectsSelecter _playerEffectsSelecter;*/
     [SerializeField] private PlayerAnimatorController _playerAnimatorController;
 
@@ -24,8 +25,6 @@ public class PlayerIniter : MonoBehaviour
     private void OnEnable()
     {
         _skinSelecter.OnChangingSkin += Init;
-
-        _shopDancing.GetPlayer(_viewMover);
     }
 
     private void OnDisable()
@@ -47,8 +46,6 @@ public class PlayerIniter : MonoBehaviour
         _chunksPlacer.GetPlayerTransform(playerView.transform);
         _backChunksPlacer.GetPlayerTransform(playerView.transform);
 
-        _shopDancing.GetPlayer(_viewMover);
-
         _model = new PlayerModel();
         _moverModel = new PlayerMoverModel(_rigidbody, _animator);
         _playerAnimatorController.Init(_viewMover, _animator);
@@ -57,7 +54,9 @@ public class PlayerIniter : MonoBehaviour
 /*        _playerEffects = _playerEffectsSelecter.GetEffects();*/
      /*   _playerEffects.Init(_viewMover, _view);*/
         _chunksPlacer.GetPlayerTransform(playerView.transform);
-        _danceSelecter.Init(_view);
+
+        _danceShop.GetView(_viewMover);
+        _skinShop.GetView(_viewMover);
 
         _presenter?.Enable();
         _moverPresenter?.Enable();

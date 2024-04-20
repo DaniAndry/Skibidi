@@ -7,7 +7,7 @@ public class ShopSkinsWindow : Window
     [SerializeField] private ShopDancingWindow _shopDancing;
     [SerializeField] private ShopBoostWindow _shopBoosts;
 
-    private ShopSkins _shop;
+    private Shop _shop;
 
     private void OnEnable()
     {
@@ -17,7 +17,7 @@ public class ShopSkinsWindow : Window
     private void Awake()
     {
         OpenWithoutSound();
-        _shop = GetComponent<ShopSkins>();
+        _shop = GetComponent<Shop>();
     }
 
     private void OnDisable()
@@ -28,7 +28,7 @@ public class ShopSkinsWindow : Window
     public override void Open()
     {
         base.Open();
-        _shop.TurnOnSkinModel();
+        _shop.TurnOnModel();
 
         _shopBoosts.CloseWithoutSound();
         _shopDancing.Close();
@@ -37,6 +37,6 @@ public class ShopSkinsWindow : Window
     public override void Close()
     {
         base.CloseWithoutSound();
-        _shop.TurnOffSkin();
+        _shop.TurnOffModel();
     }
 }
