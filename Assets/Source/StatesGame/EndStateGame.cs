@@ -35,6 +35,8 @@ public class EndStateGame
 
     private void End()
     {
+        AudioManager.Instance.Pause("Music");
+
         _presenterMover.EndPlayerMove();
         _playerResurrect.StartTimer();
         _endScreen.SetData(_presenter.TakeTotalDistance());
@@ -44,6 +46,9 @@ public class EndStateGame
 
     private void OpenWindows()
     {
+        AudioManager.Instance.Play("GameOver");
+        AudioManager.Instance.Stop("Music");
+
         _menu.GetComponent<MenuWindow>().OpenWithoutSound();
         _endScreen.GetComponent<EndScreenWindow>().OpenWithoutSound();
         _hudWindow.CloseWithoutSound();

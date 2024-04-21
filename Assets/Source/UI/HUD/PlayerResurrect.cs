@@ -42,6 +42,7 @@ public class PlayerResurrect : MonoBehaviour
 
     public void StartTimer()
     {
+        AudioManager.Instance.Play("Clock");
         _waitForWindow = StartCoroutine(WaitForWindow());
         _playerResurrectWindow.OpenWithoutSound();
     }
@@ -63,6 +64,9 @@ public class PlayerResurrect : MonoBehaviour
 
     private void Resurrect(float energy)
     {
+        AudioManager.Instance.Play("Ressurect");
+        AudioManager.Instance.UnPause("Music");
+
         _isTimeRunning = false;
         _playerResurrectWindow.CloseWithoutSound();
         OnResurrect?.Invoke(energy);
@@ -70,6 +74,7 @@ public class PlayerResurrect : MonoBehaviour
 
     private void EndTime()
     {
+        AudioManager.Instance.Stop("Clock");
         _playerResurrectWindow.CloseWithoutSound();
         _price = 1;
         OnRestart?.Invoke();
