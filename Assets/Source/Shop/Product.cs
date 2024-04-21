@@ -9,15 +9,13 @@ public abstract class Product : MonoBehaviour
     [SerializeField] private int _price;
     [SerializeField] private Image _buyFlag;
     [SerializeField] private Image _SelectFlag;
-    [SerializeField] private string _name;
-    [SerializeField] private string _description;
+    [SerializeField] private string _descriptionTranslation;
     [SerializeField] private bool _isSelected;
     [SerializeField] private TMP_Text _priceText;
 
     private Button _showButton;
 
-    public string Description => _description;
-    public string Name => _name;
+    public string Description => _descriptionTranslation;
     public bool IsSelected => _isSelected;
     public int Price => _price;
     public bool IsBought { get; private set; } = false;
@@ -26,6 +24,7 @@ public abstract class Product : MonoBehaviour
 
     private void Awake()
     {
+        _descriptionTranslation = Lean.Localization.LeanLocalization.GetTranslationText(_descriptionTranslation);
         _showButton = GetComponent<Button>();
         _showButton.onClick.AddListener(ShowInfo);
         _buyFlag.gameObject.SetActive(IsBought);
@@ -41,7 +40,7 @@ public abstract class Product : MonoBehaviour
     {
         IsBought = true;
         _buyFlag.gameObject.SetActive(IsBought);
-        _priceText.text = $"Bought";
+        _priceText.text = Lean.Localization.LeanLocalization.GetTranslationText("Bought");
     }
 
     public void ShowInfo()

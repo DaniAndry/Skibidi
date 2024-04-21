@@ -46,9 +46,8 @@ public class ShopDancing : Shop
 
     public override void ShowInfoProduct(Product dance)
     {
-        Name.text = dance.Name;
         _selectedDance = dance.GetComponent<Dance>();
-        BuyButton.gameObject.SetActive(true);
+        Description.text = _selectedDance.Description;
 
         if (_selectedDance.IsBought)
         {
@@ -72,8 +71,6 @@ public class ShopDancing : Shop
 
     public override void TryBuyProduct()
     {
-        Debug.Log(_selectedDance.Name);
-
         if (BankMoney.TryTakeValue(_selectedDance.Price))
         {
             BankMoney.TakeMoney(_selectedDance.Price);

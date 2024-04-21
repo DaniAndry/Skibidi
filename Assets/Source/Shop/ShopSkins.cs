@@ -53,7 +53,6 @@ public class ShopSkins : Shop
     public override void ShowInfoProduct(Product skin)
     {
         _selectedSkin = skin.GetComponent<Skin>();
-        Name.text = _selectedSkin.Name;
         Description.text = _selectedSkin.Description;
 
         if (_selectedSkin.IsBought)
@@ -77,8 +76,6 @@ public class ShopSkins : Shop
 
     public override void TryBuyProduct()
     {
-        Debug.Log(_selectedSkin.Name);
-
         if (BankMoney.TryTakeValue(_selectedSkin.Price))
         {
             BankMoney.TakeMoney(_selectedSkin.Price);

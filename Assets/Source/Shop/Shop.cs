@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +9,6 @@ public abstract class Shop : MonoBehaviour
     [SerializeField] private Button _buyButton;
     [SerializeField] private Button _selectButton;
     [SerializeField] private TMP_Text _description;
-    [SerializeField] private TMP_Text _name;
 
     private PlayerMoverView _playerView;
 
@@ -20,7 +18,6 @@ public abstract class Shop : MonoBehaviour
     public Button BuyButton => _buyButton;
     public Button SelectButton => _selectButton;
     public TMP_Text Description => _description;
-    public TMP_Text Name => _name;
 
     public GameObject ModelSkin { get; private set; }
 
