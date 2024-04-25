@@ -71,7 +71,7 @@ public class ShopDancing : Shop
 
     public override void TryBuyProduct()
     {
-        if (BankMoney.TryTakeValue(_selectedDance.Price))
+        if (BankMoney.TryTakeMoney(_selectedDance.Price))
         {
             BankMoney.TakeMoney(_selectedDance.Price);
             BuyProduct();

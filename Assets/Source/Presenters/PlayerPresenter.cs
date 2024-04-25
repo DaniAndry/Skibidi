@@ -66,11 +66,6 @@ public class PlayerPresenter : MonoBehaviour
         _view.EnergyChanging -= OnViewEnergyChanged;
     }
 
-    private void _view_GameOvered()
-    {
-        throw new NotImplementedException();
-    }
-
     private void UseDistanceDistanceBoost(EnergyBoost energyBoost)
     {
         _model.TurnOnEnergyBoost(energyBoost.Bonus, energyBoost.Time);

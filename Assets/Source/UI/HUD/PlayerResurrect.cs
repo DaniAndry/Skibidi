@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerResurrect : MonoBehaviour
 {
     [SerializeField] private TMP_Text _timer;
+    [SerializeField] private TMP_Text _priceDiamondText;
     [SerializeField] private Button _diamondContinue;
     [SerializeField] private Button _watchContinue;
     [SerializeField] private Bank _bank;
@@ -21,23 +22,26 @@ public class PlayerResurrect : MonoBehaviour
     private float _energyGiftForDiamond = 100;
 
     public event Action OnRestart;
-    public event Action<float> OnResurrect;
+    public event Action<float> OnResurrected;
+    public event Action<Action> OnResurrecting;
+    public event Action<Action> OnCallAd;
 
     private void Awake()
     {
         _playerResurrectWindow = GetComponent<PlayerResurrectWindow>();
+        _priceDiamondText.text = _price.ToString();
     }
 
     private void OnEnable()
     {
         _diamondContinue.onClick.AddListener(DiamondResurrect);
-        _watchContinue.onClick.AddListener(WatchResurrect);
+        _watchContinue.onClick.AddListener(OnResurrect);
     }
 
     private void OnDisable()
     {
         _diamondContinue.onClick.RemoveListener(DiamondResurrect);
-        _watchContinue.onClick.RemoveListener(WatchResurrect);
+        _watchContinue.onClick.RemoveListener(OnResurrect);
     }
 
     public void StartTimer()
@@ -47,19 +51,27 @@ public class PlayerResurrect : MonoBehaviour
         _playerResurrectWindow.OpenWithoutSound();
     }
 
+    private void ResurrectWatch()
+    {
+        _price *= 2;
+        _priceDiamondText.text = _price.ToString();
+        Resurrect(_energyGiftForWatch);
+    }
+
+    private void OnResurrect()
+    {
+        OnResurrecting?.Invoke(ResurrectWatch);
+    }
+
     private void DiamondResurrect()
     {
-        if (_bank.TryTakeValue(_price))
+        if (_bank.TryTakeDiamond(_price))
         {
             _bank.TakeDiamond(_price);
             _price *= 2;
+            _priceDiamondText.text = _price.ToString();
             Resurrect(_energyGiftForDiamond);
         }       
-    }
-
-    private void WatchResurrect()
-    {
-        Resurrect(_energyGiftForWatch);
     }
 
     private void Resurrect(float energy)
@@ -69,7 +81,7 @@ public class PlayerResurrect : MonoBehaviour
 
         _isTimeRunning = false;
         _playerResurrectWindow.CloseWithoutSound();
-        OnResurrect?.Invoke(energy);
+        OnResurrected?.Invoke(energy);
     }
 
     private void EndTime()
@@ -78,6 +90,10 @@ public class PlayerResurrect : MonoBehaviour
         _playerResurrectWindow.CloseWithoutSound();
         _price = 1;
         OnRestart?.Invoke();
+        int chance = UnityEngine.Random.Range(0, 100);
+
+        if(chance <= 20)
+            OnCallAd?.Invoke(null);
     }
 
     private IEnumerator WaitForWindow()

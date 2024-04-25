@@ -21,6 +21,8 @@ public class EndStateGame
         _yandexLeaderboard = yandex;
     }
 
+    public event Action OnEndGame;
+
     public void Enable()
     {
         _presenter.OnEndGame += End;
@@ -52,5 +54,7 @@ public class EndStateGame
         _menu.GetComponent<MenuWindow>().OpenWithoutSound();
         _endScreen.GetComponent<EndScreenWindow>().OpenWithoutSound();
         _hudWindow.CloseWithoutSound();
+
+        OnEndGame?.Invoke();
     }
 }

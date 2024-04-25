@@ -76,7 +76,7 @@ public class ShopSkins : Shop
 
     public override void TryBuyProduct()
     {
-        if (BankMoney.TryTakeValue(_selectedSkin.Price))
+        if (BankMoney.TryTakeMoney(_selectedSkin.Price))
         {
             BankMoney.TakeMoney(_selectedSkin.Price);
             BuyProduct();

@@ -7,6 +7,7 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] private Button _startButton;
     [SerializeField] private TMP_Text _recordDistanceText;
+    [SerializeField] private Bank _bank;
 
     private float _recordDistance;
     private MenuWindow _menuWindow;
@@ -15,7 +16,7 @@ public class Menu : MonoBehaviour
 
     private void Awake()
     {
-        _menuWindow = GetComponent<MenuWindow>();
+        _menuWindow = GetComponent<MenuWindow>();       
     }
 
     private void OnEnable()
