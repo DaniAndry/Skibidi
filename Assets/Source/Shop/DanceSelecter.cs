@@ -9,17 +9,15 @@ public class DanceSelecter : MonoBehaviour
     private Dance _selectedDance;
     private ShopDancing _shopDancing;
 
-    public Dance FirstDance => _firstDance;
-
     private void Start()
     {
         _shopDancing = GetComponent<ShopDancing>();
 
         _selectedDance = _firstDance;
-        _firstDance.ChangeStatus();
         _firstDance.Unlock();
         AddDance(_firstDance);
-        Invoke("AddFirstSkin", 0.1f);
+
+        Invoke("AddFirstDance", 0.1f);
     }
 
     public void AddDance(Dance dance)
@@ -31,14 +29,18 @@ public class DanceSelecter : MonoBehaviour
     {
         if (dance != _selectedDance)
         {
-            _selectedDance.ChangeStatus();
-            _selectedDance = dance;
+            if (dance != null)
+            {
+                _selectedDance.ChangeStatus();
+                _selectedDance = dance;
+                _selectedDance.ChangeStatus();
+            }
 
-            _selectedDance.ChangeStatus();
+            _shopDancing.Player.GetNameDance(_selectedDance.NameDanceAnim);
         }
     }
 
-    private void AddFirstSkin()
+    private void AddFirstDance()
     {
         _shopDancing.Player.GetNameDance(_firstDance.NameDanceAnim);
     }

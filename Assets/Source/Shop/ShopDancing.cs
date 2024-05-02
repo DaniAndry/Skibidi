@@ -17,6 +17,7 @@ public class ShopDancing : Shop
     {
         BuyButton.onClick.AddListener(TryBuyProduct);
         SelectButton.onClick.AddListener(SelectProduct);
+        OnChangingSkin += SelectProduct;
 
         foreach (var dance in _danceForSale)
         {
@@ -28,6 +29,7 @@ public class ShopDancing : Shop
     {
         BuyButton.onClick.RemoveListener(TryBuyProduct);
         SelectButton.onClick.RemoveListener(SelectProduct);
+        OnChangingSkin -= SelectProduct;
 
         foreach (var dance in _danceForSale)
         {
@@ -66,7 +68,6 @@ public class ShopDancing : Shop
     public override void SelectProduct()
     {
         _selecter.SelectDance(_selectedDance);
-        Player.GetNameDance(_selectedDance.NameDanceAnim);
     }
 
     public override void TryBuyProduct()
@@ -90,5 +91,4 @@ public class ShopDancing : Shop
     {
         Debug.Log("ErrorBuy");
     }
-
 }
