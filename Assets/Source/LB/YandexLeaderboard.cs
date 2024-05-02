@@ -11,6 +11,11 @@ public class YandexLeaderboard : MonoBehaviour
 
     [SerializeField] private LeaderboardView _leaderboardView;
 
+    private void Start()
+    {
+        Fill();
+    }
+
     public void SetPlayerScore(int score)
     {
         if (PlayerAccount.IsAuthorized == false)
@@ -18,8 +23,11 @@ public class YandexLeaderboard : MonoBehaviour
 
         Leaderboard.GetPlayerEntry(LeaderboardName, (result) =>
         {
-            if (result.score < score)
+            if (result == null || result.score < score)
+            {
                 Leaderboard.SetScore(LeaderboardName, score);
+                _leaderboardView.ConstructLeaderboard(_leaderboardPlayers);
+            }
         });
     }
 
@@ -43,6 +51,8 @@ public class YandexLeaderboard : MonoBehaviour
 
                 _leaderboardPlayers.Add(new LeaderboardPlayer(rank, name, score));
             }
+
+            _leaderboardView.ConstructLeaderboard(_leaderboardPlayers);
         });
     }
 }

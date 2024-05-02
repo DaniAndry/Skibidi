@@ -7,7 +7,6 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] private Button _startButton;
     [SerializeField] private TMP_Text _recordDistanceText;
-    [SerializeField] private Bank _bank;
 
     private float _recordDistance;
     private MenuWindow _menuWindow;

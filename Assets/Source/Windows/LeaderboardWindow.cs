@@ -6,6 +6,7 @@ public class LeaderboardWindow : Window
     [SerializeField] private Button _openButton;
     [SerializeField] private Button _closeButton;
 
+    private YandexLeaderboard _yandexleaderboard;
     private LeaderboardInitializer _initializer;
 
     private void Awake()
@@ -13,6 +14,7 @@ public class LeaderboardWindow : Window
         CloseWithoutSound();
         _initializer = GetComponent<LeaderboardInitializer>();
     }
+
     private void OnEnable()
     {
         _openButton.onClick.AddListener(Open);
@@ -29,5 +31,6 @@ public class LeaderboardWindow : Window
     {
         base.Open();
         _initializer.OpenLeaderboard();
+        _yandexleaderboard.Fill();
     } 
 }

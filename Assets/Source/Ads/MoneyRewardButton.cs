@@ -7,8 +7,8 @@ public class MoneyRewardButton : MonoBehaviour
 {
     [SerializeField] private Bank _bank;
     [SerializeField] private TMP_Text _amountRewardText;
+    [SerializeField] private Button _rewardButton;
 
-    private Button _rewardButton;
     private int _amountReward;
     private int _moneyTight = 150;
     private int _moneyNormal = 500;
@@ -34,8 +34,6 @@ public class MoneyRewardButton : MonoBehaviour
     public void RefreshAmountButton()
     {
         int chance = UnityEngine.Random.Range(0, 100);
-
-        Debug.Log(chance);
 
         if (_bank.Money <= _moneyTight && chance <= 30)
         {
