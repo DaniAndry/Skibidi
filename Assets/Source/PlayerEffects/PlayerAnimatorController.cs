@@ -13,9 +13,11 @@ public class PlayerAnimatorController : MonoBehaviour
 
     private Animator _animator;
     private PlayerMoverView _playerMoverView;
+    private int DanceState;
 
     private void OnDisable()
     {
+        _playerMoverView.OnDance -= Dance;
         _playerMoverView.OnRestart -= ResetPlayer;
         _playerMoverView.OnStarted -= Run;
         _playerMoverView.OnJumped -= Jump;
@@ -31,6 +33,7 @@ public class PlayerAnimatorController : MonoBehaviour
         _playerMoverView = playerMoverView;
         _animator = animator;
 
+        _playerMoverView.OnDance += Dance;
         _playerMoverView.OnRestart += ResetPlayer;
         _playerMoverView.OnStarted += Run;
         _playerMoverView.OnJumped += Jump;
@@ -74,6 +77,12 @@ public class PlayerAnimatorController : MonoBehaviour
     private void Lose()
     {
         _animator.Play(LoseState);
+    }
+
+    private void Dance()
+    {
+        DanceState = Animator.StringToHash(_playerMoverView.NameDanceAnim);
+        _animator.Play(DanceState);
     }
 
     private void ResetPlayer()

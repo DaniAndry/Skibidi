@@ -81,5 +81,4 @@ public abstract class Shop : MonoBehaviour
         ModelSkin.transform.position = position;
         ModelSkin.GetComponent<Animator>().Play("Idle");
     }
-
 }
