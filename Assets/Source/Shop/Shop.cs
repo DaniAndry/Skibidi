@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,8 @@ public abstract class Shop : MonoBehaviour
     [SerializeField] private TMP_Text _description;
 
     private PlayerMoverView _playerView;
+
+    public event Action OnChangingSkin;
 
     public PlayerMoverView Player => _playerView;
     public Bank BankMoney => _bank;
@@ -30,6 +33,7 @@ public abstract class Shop : MonoBehaviour
     public void GetView(PlayerMoverView view)
     {
         _playerView = view;
+        OnChangingSkin?.Invoke();
     }
 
     public void TurnOffModel()
@@ -81,5 +85,4 @@ public abstract class Shop : MonoBehaviour
         ModelSkin.transform.position = position;
         ModelSkin.GetComponent<Animator>().Play("Idle");
     }
-
 }
