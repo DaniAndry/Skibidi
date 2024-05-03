@@ -6,14 +6,17 @@ public class FunDance : MonoBehaviour
     private readonly int DanceCamera = Animator.StringToHash("DanceCamera");
     private readonly int IdleState = Animator.StringToHash("Idle");
 
+    [SerializeField] private GameObject _enemyPolice;
     [SerializeField] private Camera _danceCamera;
 
     private Animator _danceCameraAnimator;
+    private Animator _enemyAnimator;
     private PlayerMoverView _playerMoverView;
 
     private void Awake()
     {
         _danceCameraAnimator = _danceCamera.GetComponent<Animator>();
+        _enemyAnimator = _enemyPolice.GetComponent<Animator>();
         _danceCamera.gameObject.SetActive(false);
     }
 
@@ -27,6 +30,8 @@ public class FunDance : MonoBehaviour
         AudioManager.Instance.Play("Skrillix");
         _playerMoverView.Dance();
         _danceCamera.gameObject.SetActive(true);
+
+        _enemyAnimator.Play(_playerMoverView.NameDanceAnim);
         _danceCameraAnimator.Play(DanceCamera);
     }
 
@@ -35,6 +40,8 @@ public class FunDance : MonoBehaviour
         AudioManager.Instance.Stop("Skrillix");
         _playerMoverView.ResetMove();
         _danceCamera.gameObject.SetActive(false);
+
+        _enemyAnimator.Play(IdleState);
         _danceCameraAnimator.Play(IdleState);
     }
 }

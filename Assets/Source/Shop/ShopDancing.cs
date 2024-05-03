@@ -17,7 +17,7 @@ public class ShopDancing : Shop
     {
         BuyButton.onClick.AddListener(TryBuyProduct);
         SelectButton.onClick.AddListener(SelectProduct);
-        OnChangingSkin += SelectProduct;
+        OnChangingSkin += ChooseDance;
 
         foreach (var dance in _danceForSale)
         {
@@ -29,7 +29,7 @@ public class ShopDancing : Shop
     {
         BuyButton.onClick.RemoveListener(TryBuyProduct);
         SelectButton.onClick.RemoveListener(SelectProduct);
-        OnChangingSkin -= SelectProduct;
+        OnChangingSkin -= ChooseDance;
 
         foreach (var dance in _danceForSale)
         {
@@ -85,6 +85,11 @@ public class ShopDancing : Shop
     {
         base.TurnOnModel();
         ModelSkin?.GetComponent<Animator>().Play(_selectedDance.NameDanceAnim);
+    }
+
+    private void ChooseDance()
+    {
+        _selecter.ChooseDance();
     }
 
     private void ThrowErrorBuySkin()
