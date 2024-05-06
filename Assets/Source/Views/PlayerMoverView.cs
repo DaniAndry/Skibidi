@@ -94,6 +94,8 @@ public class PlayerMoverView : MonoBehaviour
             float moveSpeed = 2;
             AudioManager.Instance.Play("Crash");
             OnChangingSpeedCrash?.Invoke(moveSpeed);
+
+            TaskCounter.IncereaseProgress(1, TaskType.CrashWall.ToString());
         }
     }
 

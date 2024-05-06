@@ -31,6 +31,8 @@ public class EnergyUpgrade : MonoBehaviour
             CurrentPrice += _encreaceMoney;
             UpdateUI();
 
+            TaskCounter.IncereaseProgress(1, TaskType.UpgradeEnergy.ToString());
+
             if (CurrentEnergy < _maxCountEnergy)
             {
                 CurrentEnergy += _encreaceEnergy;
@@ -40,7 +42,8 @@ public class EnergyUpgrade : MonoBehaviour
             {
                 CurrentEnergy = _maxCountEnergy;
                 return CurrentEnergy;
-            } 
+            }
+
         }
         else
         {

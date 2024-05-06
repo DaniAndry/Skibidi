@@ -19,8 +19,6 @@ public class TaskTimeInspector : MonoBehaviour
     {
         _startWeeklyTime = DateTime.Now;
         _startDailyTime = DateTime.Now;
-
-        Debug.Log($"{_startDailyTime} è {_startWeeklyTime}");
     }
 
     public void RefreshTime()
@@ -40,13 +38,11 @@ public class TaskTimeInspector : MonoBehaviour
             int subtractDays = DateTime.Now.Day - _startWeeklyTime.Day;
             int daysLeft = _weeklyTime - subtractDays;
             _weeklyTimerText.text = daysLeft.ToString();
-            Debug.Log("ChangeTime");
         }
         else
         {
             _startWeeklyTime = DateTime.Now;
             OnGoneWeeklyTime?.Invoke();
-            Debug.Log("OnGoneWeeklyTime");
         }
     }
 }
