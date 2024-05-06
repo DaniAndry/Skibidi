@@ -82,9 +82,9 @@ public class TaskView : MonoBehaviour
     private void TakeReward()
     {
         _task.RewardPlayer();
-        OnComplete?.Invoke(this);
         _takeReward.interactable = false;
         _takeRewardParticle?.Play();
+        OnComplete?.Invoke(this);
         Invoke("Destroy", 1f);
     }
 
