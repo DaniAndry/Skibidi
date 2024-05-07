@@ -1,4 +1,3 @@
-using Agava.YandexGames;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,10 +6,15 @@ public class LeaderboardWindow : Window
     [SerializeField] private Button _openButton;
     [SerializeField] private Button _closeButton;
 
+    private YandexLeaderboard _yandexleaderboard;
+    private LeaderboardInitializer _initializer;
+
     private void Awake()
     {
-        CloseWithoutSound(); 
+        CloseWithoutSound();
+        _initializer = GetComponent<LeaderboardInitializer>();
     }
+
     private void OnEnable()
     {
         _openButton.onClick.AddListener(Open);
@@ -26,16 +30,7 @@ public class LeaderboardWindow : Window
     public override void Open()
     {
         base.Open();
-        openLeaderboard();
-    }
-    private void openLeaderboard()
-    {
-        PlayerAccount.Authorize();
-
-        if (PlayerAccount.IsAuthorized)
-            PlayerAccount.RequestPersonalProfileDataPermission();
-
-        if (PlayerAccount.IsAuthorized == false)
-            return;
-    }
+        _initializer.OpenLeaderboard();
+        _yandexleaderboard.Fill();
+    } 
 }

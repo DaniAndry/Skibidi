@@ -13,5 +13,4 @@ public class LeaderboardElement : MonoBehaviour
         _playerRank.text = rank.ToString();
         _playerScore.text = score.ToString();
     }
-
 }

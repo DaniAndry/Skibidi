@@ -5,11 +5,14 @@ public class PlayerIniter : MonoBehaviour
     [SerializeField] private Menu _viewMenu;
     [SerializeField] private PlayerMoverPresenter _moverPresenter;
     [SerializeField] private PlayerPresenter _presenter;
-    [SerializeField] private SkinSelecter _selecter;
+    [SerializeField] private SkinSelecter _skinSelecter;
+    [SerializeField] private DanceSelecter _danceSelecter;
+    [SerializeField] private Shop _danceShop;
+    [SerializeField] private Shop _skinShop;
     [SerializeField] private ChunksPlacer _chunksPlacer;
     [SerializeField] private ChunksPlacer _backChunksPlacer;
-    [SerializeField] private ShopDancing _shopDancing;
-    [SerializeField] private PlayerEffectsSelecter _playerEffectsSelecter;
+    /*    [SerializeField] private PlayerEffectsSelecter _playerEffectsSelecter;*/
+    [SerializeField] private FunDance _funDance;
     [SerializeField] private PlayerAnimatorController _playerAnimatorController;
 
     private PlayerEffectController _playerEffects;
@@ -22,14 +25,12 @@ public class PlayerIniter : MonoBehaviour
 
     private void OnEnable()
     {
-        _selecter.OnChangingSkin += Init;
-
-        _shopDancing.GetPlayer(_viewMover);
+        _skinSelecter.OnChangingSkin += Init;
     }
 
     private void OnDisable()
     {
-        _selecter.OnChangingSkin -= Init;
+        _skinSelecter.OnChangingSkin -= Init;
 
         _presenter.Disable();
         _moverPresenter.Disable();
@@ -46,16 +47,18 @@ public class PlayerIniter : MonoBehaviour
         _chunksPlacer.GetPlayerTransform(playerView.transform);
         _backChunksPlacer.GetPlayerTransform(playerView.transform);
 
-        _shopDancing.GetPlayer(_viewMover);
-
         _model = new PlayerModel();
         _moverModel = new PlayerMoverModel(_rigidbody, _animator);
+        _funDance.Init(_viewMover);
         _playerAnimatorController.Init(_viewMover, _animator);
         _presenter.Init(_model, _view);
         _moverPresenter.Init(_moverModel, _viewMover);
-        _playerEffects = _playerEffectsSelecter.GetEffects();
-        _playerEffects.Init(_viewMover, _view);
+/*        _playerEffects = _playerEffectsSelecter.GetEffects();*/
+     /*   _playerEffects.Init(_viewMover, _view);*/
         _chunksPlacer.GetPlayerTransform(playerView.transform);
+
+        _danceShop.GetView(_viewMover);
+        _skinShop.GetView(_viewMover);
 
         _presenter?.Enable();
         _moverPresenter?.Enable();

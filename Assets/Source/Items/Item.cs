@@ -5,7 +5,7 @@ public abstract class Item : MonoBehaviour
     protected ParticleSystem ExplosionParticle;
 
     protected float Resourses;
-    protected float Delay = 2;
+    protected float Delay = 2f;
     protected PlayerView PlayerView;
     protected PlayerMoverView PlayerMoverView;
 

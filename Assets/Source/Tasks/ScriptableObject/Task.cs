@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class Task : ScriptableObject
 {
-    [SerializeField] private string _descrition;
+    [SerializeField] private string _descritionTranslation;
     [SerializeField] private int _amountMaxCollect;
     [SerializeField] private int _amountReward;
     [SerializeField] private Sprite _rewardIcon;
@@ -12,8 +12,8 @@ public abstract class Task : ScriptableObject
 
     public string TaskType => Convert.ToString(_taskType);
     public int AmountMaxCollect => _amountMaxCollect;
+    public string Description => _descritionTranslation;
     public Sprite RewardIcon => _rewardIcon;
-    public string Description => _descrition;
     public int AmountReward => _amountReward;
 
     public void TurnOnTask()

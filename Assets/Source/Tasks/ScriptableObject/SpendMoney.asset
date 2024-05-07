@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b0baf5460125c4caeb265438a0d117, type: 3}
   m_Name: SpendMoney
   m_EditorClassIdentifier: 
-  _descrition: Spend Money
+  _descritionTranslation: Tasks/SpendMoney
   _amountMaxCollect: 10
   _amountReward: 1000
   _rewardIcon: {fileID: 21300000, guid: 52066fc285ffc4bb0b9fc98f1d840149, type: 3}
