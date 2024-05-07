@@ -5,6 +5,12 @@ using UnityEngine;
 public class Bank : MonoBehaviour
 {
     [SerializeField] private List<TMP_Text> _moneyText;
+<<<<<<< Updated upstream
+=======
+    [SerializeField] private List<TMP_Text> _diamondText;
+    [SerializeField] private List<TMP_Text> _moneyForGameText;
+    [SerializeField] private List<TMP_Text> _diamondForGameText;
+>>>>>>> Stashed changes
 
     private int _money = 50;
 
