@@ -8,22 +8,26 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] private float _moveDistance = 10f;
     [SerializeField] private float _duration = 5f;
 
-    private bool _running = false;
     private Animator _animator;
     private int _idleStateHash = Animator.StringToHash("Idle");
     private int _runStateHash = Animator.StringToHash("Run");
     private int _kickStateHash = Animator.StringToHash("Kick");
-
+    private Vector3 _startPositionEnemy;
 
     private void OnEnable()
     {
         _animator = _enemy.GetComponent<Animator>();
         _player.OnStarted += StartMove;
         _player.OnStoped += EndMove;
+        _player.OnRestart += ResetEnemy;
 
         _animator.Play(_idleStateHash);
     }
 
+    private void Awake()
+    {
+        _startPositionEnemy = _enemy.transform.position;
+    } 
 
     private void StartMove()
     {
@@ -38,6 +42,12 @@ public class EnemyMover : MonoBehaviour
         Vector3 endPosition = new Vector3(_player.transform.position.x - 0.2f, _player.transform.position.y, _player.transform.position.z - 0.2f);
 
         _enemy.transform.DOMove(endPosition, 0.7f).SetEase(Ease.Linear).OnComplete(HitPlayer);
+    }
+
+    private void ResetEnemy()
+    {
+        _enemy.transform.position = _startPositionEnemy;
+        _animator.Play(_idleStateHash);
     }
 
     private void HitPlayer()

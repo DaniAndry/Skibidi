@@ -9,15 +9,15 @@ public class ShopSkinsWindow : Window
 
     private ShopSkins _shop;
 
+    private void OnEnable()
+    {
+        _openButton.onClick.AddListener(Open);
+    }
+
     private void Awake()
     {
         OpenWithoutSound();
         _shop = GetComponent<ShopSkins>();
-    }
-
-    private void OnEnable()
-    {
-        _openButton.onClick.AddListener(Open);
     }
 
     private void OnDisable()

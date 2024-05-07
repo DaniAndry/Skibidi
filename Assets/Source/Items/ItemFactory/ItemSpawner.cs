@@ -13,8 +13,11 @@ public class ItemSpawner : MonoBehaviour
 
     private Dictionary<Chunk, List<GameObject>> _spawnedItems = new Dictionary<Chunk, List<GameObject>>();
 
+
     private void OnEnable()
     {
+        _player = GetComponentInParent<PlayerView>();
+
         foreach (var chunk in _chunksPlacer.Chunks)
         {
             chunk.Spawned += OnChunkSpawned;

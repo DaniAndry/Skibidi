@@ -1,13 +1,26 @@
-    using UnityEngine;
+using UnityEngine;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class Window : MonoBehaviour
 {
     [SerializeField] private CanvasGroup _canvasGroup;
 
+    private ParticleSystem _effectButtonClick;
+    private Animator _animator;
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+        _effectButtonClick = GetComponentInChildren<ParticleSystem>();
+    }
+
     public virtual void Open()
     {
+        if (_animator != null)
+            _animator.SetTrigger("open");
+
         AudioManager.Instance.Play("ClickOpen");
+        _effectButtonClick?.Play();
         _canvasGroup.blocksRaycasts = true;
         _canvasGroup.interactable = true;
         _canvasGroup.alpha = 1f;
@@ -27,7 +40,7 @@ public class Window : MonoBehaviour
         _canvasGroup.interactable = true;
         _canvasGroup.alpha = 1f;
     }
-    
+
     public virtual void CloseWithoutSound()
     {
         _canvasGroup.interactable = false;

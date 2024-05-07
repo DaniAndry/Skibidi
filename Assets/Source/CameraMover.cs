@@ -7,8 +7,8 @@ public class CameraMover : MonoBehaviour
 
     private Transform _player;
     private bool _isMove = false;
-    private Vector3 _startPosition = new Vector3(-1.3f, 0.7f, 1.5f);
-    private Quaternion _startRotation = Quaternion.Euler(22, 142, 0);
+    private Vector3 _startPosition = new Vector3(-1.213f, -34.5f, 17.892f);
+    private Quaternion _startRotation = Quaternion.Euler(22, 140, 0);
 
     private void Awake()
     {
@@ -20,20 +20,15 @@ public class CameraMover : MonoBehaviour
         Move();
     }
 
-    private void Move()
-    {
-        if (_isMove)
-        {
-            Vector3 newCamPosition = new Vector3(_player.position.x + _offSet.x, _player.position.y + _offSet.y, _player.position.z + _offSet.z);
-            Quaternion newCamRotation = Quaternion.Euler(20, 0, 0);
-            transform.position = Vector3.Lerp(transform.position, newCamPosition, _speed * Time.deltaTime);
-            transform.rotation = Quaternion.Lerp(transform.rotation, newCamRotation, _speed * Time.deltaTime);
-        }
-    }
-
     public void StartMove()
     {
         _isMove = true;
+    }
+
+    public void ResetCameraPosition()
+    {
+        transform.position = _startPosition;
+        transform.rotation = _startRotation;
     }
 
     public void EndMove()
@@ -50,5 +45,16 @@ public class CameraMover : MonoBehaviour
     {
         transform.position = _startPosition;
         transform.rotation = _startRotation;
+    }
+
+    private void Move()
+    {
+        if (_isMove)
+        {
+            Vector3 newCamPosition = new Vector3(_player.position.x + _offSet.x, _player.position.y + _offSet.y, _player.position.z + _offSet.z);
+            Quaternion newCamRotation = Quaternion.Euler(20, 0, 0);
+            transform.position = Vector3.Lerp(transform.position, newCamPosition, _speed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, newCamRotation, _speed * Time.deltaTime);
+        }
     }
 }

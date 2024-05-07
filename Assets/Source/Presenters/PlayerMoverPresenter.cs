@@ -5,6 +5,11 @@ public class PlayerMoverPresenter : MonoBehaviour
     private PlayerMoverModel _model;
     private PlayerMoverView _view;
 
+    private void FixedUpdate()
+    {
+        _model?.Update();
+    }
+
     public void Init(PlayerMoverModel model, PlayerMoverView view)
     {
         _model = model;
@@ -14,38 +19,39 @@ public class PlayerMoverPresenter : MonoBehaviour
     public void Enable()
     {
         _view.OnMoving += SetDataMove;
-        _view.OnJumping += Jump;
-        _view.ChangingSpeedCrash += ChangeSpeedCrash;
-        _view.SpeedBoostChanging += OnSpeedChanging;
-        _view.OnKicked += _model.Kick;
+        _view.OnChangingSpeedCrash += ChangeSpeedCrash;
+        _view.OnSpeedBoostChanging += OnSpeedChanging;
+        _view.OnSomersault += Somerslaut;
         _model.OnChangeSpeed += _view.ChangeCurrentSpeed;
+        _model.Jumped += _view.Jumped;
     }
 
     public void Disable()
     {
         _view.OnMoving -= SetDataMove;
-        _view.OnJumping -= Jump;
-        _view.ChangingSpeedCrash -= ChangeSpeedCrash;
-        _view.SpeedBoostChanging -= OnSpeedChanging;
-        _view.OnKicked -= _model.Kick;
+        _view.OnChangingSpeedCrash -= ChangeSpeedCrash;
+        _view.OnSpeedBoostChanging -= OnSpeedChanging;
+        _view.OnSomersault -= Somerslaut;
         _model.OnChangeSpeed -= _view.ChangeCurrentSpeed;
+        _model.Jumped -= _view.Jumped;
     }
 
-    private void FixedUpdate()
+    public void EndPlayerMove()
     {
-        _model?.Update();
+        _model.EndMove();
+        _view.EndMove();
     }
 
-    public void EndGame()
+    public void ResetPlayerMove()
     {
-        _model.EndGame();
-        _view.EndGame();
+        _model.ResetMove();
+        _view.ResetMove();
     }
 
-    public void StartGame()
+    public void StartPlayerMove()
     {
-        _model.StartGame();
-        _view.StartGame();
+        _model.StartMove();
+        _view.StartMove();
     }
 
     private void SetDataMove(float coefficient)
@@ -53,9 +59,9 @@ public class PlayerMoverPresenter : MonoBehaviour
         _model.SetDataMove(coefficient);
     }
 
-    private void Jump()
+    private void Somerslaut()
     {
-        _model.Jump();
+        _model.Somersault();
     }
 
     private void ChangeSpeedCrash(float moveSpeed)

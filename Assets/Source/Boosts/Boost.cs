@@ -51,7 +51,7 @@ public class Boost : MonoBehaviour
 
     public void Upgrade()
     {
-        if(_countUpgrade < _maxCountUpgrade)
+        if (_countUpgrade < _maxCountUpgrade)
         {
             _countUpgrade++;
             _time += _timeIncreaseNumber;
@@ -60,12 +60,8 @@ public class Boost : MonoBehaviour
     }
 
     public void SavaData()
-    {
-
-    }
+    { }
 
     public void LoadData()
-    {
-
-    }
+    { }
 }

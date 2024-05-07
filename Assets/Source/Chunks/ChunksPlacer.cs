@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ChunksPlacer : MonoBehaviour
@@ -7,7 +8,10 @@ public class ChunksPlacer : MonoBehaviour
     [SerializeField] private Chunk _firstChunk;
     [SerializeField] private int _spawnLenght = 40;
 
+    private float _disableLenght = 5f;
+    private Vector3 _startFirstChunkPosition;
     private Transform _player;
+
     private List<Chunk> _disabledChunks = new List<Chunk>();
     private List<Chunk> _spawnedChunks = new List<Chunk>();
 
@@ -15,6 +19,7 @@ public class ChunksPlacer : MonoBehaviour
 
     private void Start()
     {
+        _startFirstChunkPosition = _firstChunk.transform.position;
         _spawnedChunks.Add(_firstChunk);
     }
 
@@ -24,6 +29,29 @@ public class ChunksPlacer : MonoBehaviour
         {
             SpawnChunk();
         }
+        if(_player.position.z > _spawnedChunks[0].End.transform.position.z + _disableLenght)
+        {
+            DisableChunks();
+        }
+    }
+
+    public void GetPlayerTransform(Transform player)
+    {
+        _player = player;
+    }
+
+    public void ResetFirstChunk()
+    {
+        foreach (Chunk chunk in _spawnedChunks)
+        {
+            chunk.gameObject.SetActive(false);
+        }
+
+        _spawnedChunks.Clear();
+
+        _firstChunk.gameObject.SetActive(true);
+        _firstChunk.transform.position = _startFirstChunkPosition;
+        _spawnedChunks.Add(_firstChunk);
     }
 
     private void SpawnChunk()
@@ -46,16 +74,13 @@ public class ChunksPlacer : MonoBehaviour
             }
         }
 
-        float position = _spawnedChunks[_spawnedChunks.Count - 1].transform.localScale.z;
+        float position = _spawnedChunks[_spawnedChunks.Count - 1].LenghChunk.transform.localScale.z;
 
-        newChunk.transform.position = _spawnedChunks[_spawnedChunks.Count - 1].transform.position;
+        newChunk.transform.position = _spawnedChunks[_spawnedChunks.Count - 1].LenghChunk.transform.position;
         newChunk.transform.position += new Vector3(0, 0, position);
         newChunk.gameObject.SetActive(true);
 
         _spawnedChunks.Add(newChunk);
-
-        if (_spawnedChunks.Count == 3)
-            DisableChunks();
     }
 
     private void DisableChunks()
@@ -65,10 +90,5 @@ public class ChunksPlacer : MonoBehaviour
             _spawnedChunks[i].gameObject.SetActive(false);
             _spawnedChunks.Remove(_spawnedChunks[i]);
         }
-    }
-
-    public void GetPlayerTransform(Transform player)
-    {
-        _player = player;
     }
 }

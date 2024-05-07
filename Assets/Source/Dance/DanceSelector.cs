@@ -11,7 +11,7 @@ public class DanceSelector : MonoBehaviour
 
     public PlayerView Player { get; private set; }
 
-    public event Action<PlayerView> OnChangingDance;
+   // public event Action<PlayerView> OnChangingDance;
 
     private void Start()
     {

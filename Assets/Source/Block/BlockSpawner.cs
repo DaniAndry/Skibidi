@@ -23,7 +23,7 @@ public class BlockSpawner : MonoBehaviour
 
         if (_chunkSpawnCount[chunk] == 1)
         {
-            return; // Не спавнить блоки для первого chunk
+            return;
         }
 
         if (!_spawnedBlocks.ContainsKey(chunk))
@@ -31,18 +31,18 @@ public class BlockSpawner : MonoBehaviour
             _spawnedBlocks[chunk] = new List<GameObject>();
         }
 
-        Vector3 transform;
+        Vector3 spawnPossition;
 
         for (int i = 0; i < count; i++)
         {
             do
             {
-                transform = GetRandomSpawnPosition(chunk);
+                spawnPossition = GetRandomSpawnPosition(chunk);
             }
-            while (CheckCollision(transform));
+            while (CheckCollision(spawnPossition));
 
             Block block = SelectBlock();
-            GameObject blockObj = Instantiate(block.gameObject, transform, Quaternion.identity);
+            GameObject blockObj = Instantiate(block.gameObject, spawnPossition, Quaternion.identity);
             _spawnedBlocks[chunk].Add(blockObj);
         }
     }
@@ -90,10 +90,17 @@ public class BlockSpawner : MonoBehaviour
         Vector3 chunkCenter = chunk.transform.position;
         Vector3 extents = bounds.extents;
 
-        float randomX = chunkCenter.x + Random.Range(-0.5f, 0.5f);
+        float minZ = chunkCenter.z - extents.z + 5f; 
+        float maxZ = chunkCenter.z + extents.z - 5f;
+
+        minZ = Mathf.Min(minZ, maxZ);
+        maxZ = Mathf.Max(minZ, maxZ);
+
+        float randomX = chunkCenter.x + Random.Range(-extents.x, extents.x);
         float randomY = chunkCenter.y + 0.2f;
-        float randomZ = chunkCenter.z + Random.Range(-extents.z, extents.z);
+        float randomZ = Random.Range(minZ, maxZ);
 
         return new Vector3(randomX, randomY, randomZ);
     }
+
 }

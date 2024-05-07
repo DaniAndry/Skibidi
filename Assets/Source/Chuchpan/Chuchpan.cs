@@ -50,7 +50,7 @@ public class Chuchpan : MonoBehaviour
 
     private void Robbery(PlayerView playerView)
     {
-        playerView.AddMoney(_reward);
+        playerView.AddMoney(_reward,false);
         Invoke("Destroy", 1f);
     }
 

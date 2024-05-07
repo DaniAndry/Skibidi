@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using UnityEngine;
 
 public class PlayerModel
@@ -10,17 +9,18 @@ public class PlayerModel
     private float _energyTime;
     private bool _isEnergyBoost = false;
 
-    public float TotalDistanceTraveled { get; private set; }
-    public float MaxEnergy { get; private set; } = 50f;
-    public float CurrentEnergy { get; private set; }
-
     public event Action DistanceChanging;
     public event Action OnEnergyGone;
     public event Action EnergyChanged;
 
+    public float TotalDistanceTraveled { get; private set; }
+    public float MaxEnergy { get; private set; } = 40f;
+    public float CurrentEnergy { get; private set; }
+
+
     public void Init()
     {
-        LoadPlayer();
+        /*LoadPlayer();*/
         CurrentEnergy = MaxEnergy;
     }
 
@@ -30,31 +30,23 @@ public class PlayerModel
     }
 
     public void StartGame()
-    {
-        TotalDistanceTraveled = 0;
+    {      
+        CurrentEnergy = MaxEnergy;
+        _isEnergyGone = false;
     }
 
-    private void GiveEnergy(Transform transform)
+    public void Resurrect(float energy)
     {
-        if (CurrentEnergy > 0)
-        {
-            float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
-            TotalDistanceTraveled += distanceMoved;
+        CurrentEnergy = energy;
+        _isEnergyGone = false;
+    }
 
-            ChangingEnergy(distanceMoved);
-
-            _lastPosition = transform.position;
-
-            DistanceChanging?.Invoke();
-            EnergyChanged?.Invoke();
-
-            _isEnergyGone = false;
-        }
-        else if (_isEnergyGone == false)
-        {
-            OnEnergyGone?.Invoke();
-            _isEnergyGone = true;
-        }
+    public void ResetGame(Transform transformPosition)
+    {
+        _lastPosition = transformPosition.position;
+        CurrentEnergy = MaxEnergy;
+        TotalDistanceTraveled = 0;
+        CurrentEnergy = MaxEnergy;
     }
 
     public void Update(Transform transform)
@@ -109,6 +101,28 @@ public class PlayerModel
         {
             MaxEnergy = data.Energy;
             TotalDistanceTraveled = data.TotalDistance;
+        }
+    }
+
+    private void GiveEnergy(Transform transform)
+    {
+        if (CurrentEnergy > 0 && _isEnergyGone == false)
+        {
+            float distanceMoved = Vector3.Distance(transform.position, _lastPosition);
+            TotalDistanceTraveled += distanceMoved;
+
+            ChangingEnergy(distanceMoved);
+
+            _lastPosition = transform.position;
+
+            DistanceChanging?.Invoke();
+            EnergyChanged?.Invoke();
+
+            if (CurrentEnergy <= 0)
+            {
+                _isEnergyGone = true;
+                OnEnergyGone?.Invoke();
+            }
         }
     }
 }
