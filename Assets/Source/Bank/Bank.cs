@@ -40,19 +40,6 @@ public class Bank : MonoBehaviour
         }
     }
 
-    public void UpdateText()
-    {
-        foreach(TMP_Text money in _moneyText)
-        {
-            money.text = _money.ToString();
-        }
-        
-        foreach(TMP_Text diamond in _diamondText)
-        {
-            diamond.text = _diamond.ToString();
-        }
-    }
-
     public bool TryTakeValue(int value)
     {
         if(_money >= value)
@@ -81,6 +68,19 @@ public class Bank : MonoBehaviour
         if (name == Convert.ToString(ResourceType.Money))
         {
             GiveMoney(amount);
+        }
+    }
+
+    private void UpdateText()
+    {
+        foreach (TMP_Text money in _moneyText)
+        {
+            money.text = _money.ToString();
+        }
+
+        foreach (TMP_Text diamond in _diamondText)
+        {
+            diamond.text = _diamond.ToString();
         }
     }
 }

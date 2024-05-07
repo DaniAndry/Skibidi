@@ -4,10 +4,10 @@ using UnityEngine.UI;
 public class ShopDancingWindow : Window
 {
     [SerializeField] private Button _openButton;
-    [SerializeField] private BoostShopWindow _shopBoosts;
+    [SerializeField] private ShopBoostWindow _shopBoosts;
     [SerializeField] private ShopSkinsWindow _shopSkins;
 
-    private ShopDancing _shop;
+    private Shop _shop;
 
     private void OnEnable()
     {
@@ -17,7 +17,7 @@ public class ShopDancingWindow : Window
     private void Awake()
     {
         CloseWithoutSound();
-        _shop = GetComponent<ShopDancing>();
+        _shop = GetComponent<Shop>();
     }
 
     private void OnDisable()
@@ -28,7 +28,7 @@ public class ShopDancingWindow : Window
     public override void Open()
     {
         base.Open();
-        _shop.TurnOnDanceModel();
+        _shop.TurnOnModel();
 
         _shopBoosts.CloseWithoutSound();
         _shopSkins.Close();
@@ -37,6 +37,6 @@ public class ShopDancingWindow : Window
     public override void Close()
     {
         base.CloseWithoutSound();
-        _shop.TurnOffDanceModel();
+        _shop.TurnOffModel();
     }
 }

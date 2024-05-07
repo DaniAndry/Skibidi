@@ -28,7 +28,7 @@ public class TestFocus : MonoBehaviour
 
     private void MuteAudio(bool value)
     {
-        AudioListener.volume = value ? 1 : 0;
+        AudioListener.volume = value ? 0 : 1;
     }
 
     private void PauseGame(bool value)

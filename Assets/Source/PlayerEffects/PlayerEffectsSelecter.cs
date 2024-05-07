@@ -11,7 +11,7 @@ public class PlayerEffectsSelecter : MonoBehaviour
     {
         foreach (var playerEffect in _playersEffects)
         {
-            if (playerEffect.enabled == true)
+            if (playerEffect.gameObject.activeSelf == true)
             {
                 _playerEffectController = playerEffect;
             }

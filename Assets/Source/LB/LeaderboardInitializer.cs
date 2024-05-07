@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class LeaderboardInitializer : MonoBehaviour
 {
-
-    private void openLeaderboard()
+    public void OpenLeaderboard()
     {
         PlayerAccount.Authorize();
 

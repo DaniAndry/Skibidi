@@ -13,12 +13,12 @@ public class ResurrectStateGame
 
     public void Enable()
     {
-        _playerResurrect.OnResurrect += Resurrect;
+        _playerResurrect.OnResurrected += Resurrect;
     }
 
     public void Disable()
     {
-        _playerResurrect.OnResurrect -= Resurrect;
+        _playerResurrect.OnResurrected -= Resurrect;
     }
 
     private void Resurrect(float energy)

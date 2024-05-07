@@ -15,7 +15,7 @@ public class PlayerView : MonoBehaviour
 
     private Button _energyBoostButton;
     private Button _energyUpgradeButton;
-
+   
     public event Action<float> EnergyChanging;
     public event Action<float> MaxEnergyChanging;
     public event Action<float,bool>OnMoneyChanging;
@@ -73,9 +73,10 @@ public class PlayerView : MonoBehaviour
 
     public void AddMoney(int count, bool isBoost)
     {
-        _bank.GiveMoney(count);
+        _bank.GiveMoneyForGame(count);
         OnMoneyChanging?.Invoke(count, isBoost);
     }
+
     private void UseEnergyBoost()
     {
         if (_energyBoost.TryUse())

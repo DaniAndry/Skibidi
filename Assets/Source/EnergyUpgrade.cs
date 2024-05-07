@@ -25,7 +25,7 @@ public class EnergyUpgrade : MonoBehaviour
 
     public float Upgrade()
     {
-        if (_bank.TryTakeValue(CurrentPrice))
+        if (_bank.TryTakeMoney(CurrentPrice))
         {
             _bank.TakeMoney(CurrentPrice);
             CurrentPrice += _encreaceMoney;

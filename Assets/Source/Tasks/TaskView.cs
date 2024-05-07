@@ -37,7 +37,7 @@ public class TaskView : MonoBehaviour
         _amountCompleted.maxValue = _task.AmountMaxCollect;
         _startExecution.gameObject.SetActive(true);
 
-        UpdateUI();
+        Invoke("UpdateUI", 0.1f);
     }
 
     public void GetTask(Task task)
@@ -74,7 +74,7 @@ public class TaskView : MonoBehaviour
     {
         _amountRewardText.text = $"{_task.AmountReward}";
         _rewardIcon.sprite = _task.RewardIcon;
-        _descriptionText.text = $"{_task.Description}: {_task.AmountMaxCollect}";
+        _descriptionText.text = $"{Lean.Localization.LeanLocalization.GetTranslationText(_task.Description)}: {_task.AmountMaxCollect}";
         _amountCompleted.value = _amountProgress;
         _amountCompleted.value = _amountProgress;
     }
@@ -82,9 +82,9 @@ public class TaskView : MonoBehaviour
     private void TakeReward()
     {
         _task.RewardPlayer();
-        OnComplete?.Invoke(this);
         _takeReward.interactable = false;
         _takeRewardParticle?.Play();
+        OnComplete?.Invoke(this);
         Invoke("Destroy", 1f);
     }
 
