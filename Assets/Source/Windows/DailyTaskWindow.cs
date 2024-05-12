@@ -1,2 +1,2 @@
-﻿class DailyTaskWindow : Window
+﻿class DailyRewardsWindow : Window
 { }

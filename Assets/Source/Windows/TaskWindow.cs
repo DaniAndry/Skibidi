@@ -8,7 +8,7 @@ public class TaskWindow : Window
     [SerializeField] private Button _openDailyList;
     [SerializeField] private Button _openWeeklyList;
     [SerializeField] private Button _openDistanceList;
-    [SerializeField] private DailyTaskWindow _dailyTaskList;
+    [SerializeField] private DailyRewardsWindow _dailyTaskList;
     [SerializeField] private WeeklyTaskWindow _weeklyTaskList;
     [SerializeField] private DistanceTaskWindow _distanceTaskList;
 
