@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,18 +6,14 @@ using UnityEngine.UI;
 public class BoostBuyButton : MonoBehaviour
 {
     [SerializeField] private Boost _boost;
-
     [SerializeField] private int _priceBuyBoost;
     [SerializeField] private int _priceUpgradeBoost;
-
     [SerializeField] private Button _buyForMoney;
     [SerializeField] private Button _buyForAd;
     [SerializeField] private Button _upgradeForMoney;
     [SerializeField] private Button _upgradeForAd;
-
     [SerializeField] private TMP_Text _workTimeText;
     [SerializeField] private TMP_Text _countBoosts;
-
     [SerializeField] private Image _panelCountUpgrade;
     [SerializeField] private Image _prefabCountUpgradeImage;
 
@@ -26,21 +23,22 @@ public class BoostBuyButton : MonoBehaviour
     private TMP_Text _priceUpgradeText;
     private ShopBoosts _shopBoosts;
     private bool _isBanUpgrade = false;
-    private ParticleSystem _upgradeEffect;
+
+    public event Action<Action> OnBuyBoostAd;
+    public event Action<Action> OnUpgradeBoostAd;
 
     public int Price => _priceBuyBoost;
 
     private void OnEnable()
     {
-        _buyForMoney.onClick.AddListener(BuyForMoney);
-        _buyForAd.onClick.AddListener(BuyForAd);
-        _upgradeForMoney.onClick.AddListener(UpgradeForMoney);
-        _upgradeForAd.onClick.AddListener(UpgradeForAd);
+        _buyForMoney.onClick.AddListener(Buy);
+        _buyForAd.onClick.AddListener(OnBuyForAd);
+        _upgradeForMoney.onClick.AddListener(BuyUpgrade);
+        _upgradeForAd.onClick.AddListener(OnUpgradeForAd);
     }
 
     private void Awake()
     {
-        _upgradeEffect = GetComponentInChildren<ParticleSystem>();
         _priceBuyText = _buyForMoney.GetComponentInChildren<TMP_Text>();
         _priceUpgradeText = _upgradeForMoney.GetComponentInChildren<TMP_Text>();
         _shopBoosts = GetComponentInParent<ShopBoosts>();
@@ -50,10 +48,99 @@ public class BoostBuyButton : MonoBehaviour
 
     private void OnDisable()
     {
-        _buyForMoney.onClick.RemoveListener(BuyForMoney);
-        _buyForAd.onClick.RemoveListener(BuyForAd);
-        _upgradeForMoney.onClick.RemoveListener(UpgradeForMoney);
-        _upgradeForAd.onClick.RemoveListener(UpgradeForAd);
+        _buyForMoney.onClick.RemoveListener(Buy);
+        _buyForAd.onClick.RemoveListener(OnBuyForAd);
+        _upgradeForMoney.onClick.RemoveListener(BuyUpgrade);
+        _upgradeForAd.onClick.RemoveListener(OnUpgradeForAd);
+    }
+
+    public void SelectAdButtons()
+    {
+        int chanceBuy = UnityEngine.Random.Range(0, 100);
+        int chanceUpgrade = UnityEngine.Random.Range(0, 100);
+
+        if (_boost.Count < 5 && chanceBuy <= 20)
+            _buyForAd.gameObject.SetActive(true);
+        else if (chanceBuy <= 10)
+            _buyForAd.gameObject.SetActive(true);
+        else
+            _buyForAd.gameObject.SetActive(false);
+
+        if (chanceUpgrade <= 10)
+            _upgradeForAd.gameObject.SetActive(true);
+        else
+            _upgradeForAd.gameObject.SetActive(false);
+
+    }
+
+    public void LoadData()
+    {
+        _countUpgrade = _boost.CountUpgrade;
+        _workTime = _boost.Time;
+
+        if (_countUpgrade > 5)
+            BanUpgrade();
+
+        UpdateText();
+    }
+
+    private void BuyBoost()
+    {
+        _workTime = _boost.Time;
+        UpdateText();
+
+        TaskCounter.IncereaseProgress(1, TaskType.BuyBoost.ToString());
+    }
+
+    private void UpgradeBoost()
+    {
+        _workTime = _boost.Time;
+        _countUpgrade++;
+        SpawnUpgradeImage();
+        UpdateText();
+
+        if (_countUpgrade > 3)
+            BanUpgrade();
+    }
+
+    private void Buy()
+    {
+        _shopBoosts.Buy(_boost, _priceBuyBoost);
+        BuyBoost();
+    }
+
+    private void BuyUpgrade()
+    {
+        if (_isBanUpgrade == false)
+        {
+            _shopBoosts.BuyUpgrade(_boost, _priceUpgradeBoost);
+            UpgradeBoost();
+        }
+    }
+
+    private void RewardBoost()
+    {
+        _shopBoosts.Buy(_boost, 0);
+        BuyBoost();
+    }
+
+    private void RewardUpgradeBoost()
+    {
+        if (_isBanUpgrade == false)
+        {
+            _shopBoosts.BuyUpgrade(_boost, 0);
+            UpgradeBoost();
+        }
+    }
+
+    private void OnBuyForAd()
+    {
+        OnBuyBoostAd?.Invoke(RewardBoost);
+    }
+
+    private void OnUpgradeForAd()
+    {
+        OnUpgradeBoostAd?.Invoke(RewardUpgradeBoost);
     }
 
     private void UpdateText()
@@ -76,48 +163,5 @@ public class BoostBuyButton : MonoBehaviour
         Vector3 imagePosition = new Vector3(_prefabCountUpgradeImage.transform.position.x, _prefabCountUpgradeImage.transform.position.y + Mathf.Abs(_prefabCountUpgradeImage.transform.position.y) / 2 * _countUpgrade, 0);
         Image upgradeImage = Instantiate(_prefabCountUpgradeImage, imagePosition, Quaternion.Euler(0, 0, 0));
         upgradeImage.transform.SetParent(_panelCountUpgrade.transform, false);
-    }
-
-    public void BuyForMoney()
-    {
-        _shopBoosts.Buy(_boost, _priceBuyBoost);
-        _workTime = _boost.Time;
-        UpdateText();
-    }
-
-    public void BuyForAd()
-    {
-    }
-
-    public void UpgradeForMoney()
-    {
-        if (_isBanUpgrade == false)
-        {
-            _upgradeEffect.Play();
-            _shopBoosts.BuyUpgrade(_boost, _priceUpgradeBoost);
-            _workTime = _boost.Time;
-            _countUpgrade++;
-            SpawnUpgradeImage();
-            UpdateText();
-
-            if (_countUpgrade > 3)
-                BanUpgrade();
-        }
-    }
-
-    public void UpgradeForAd()
-    {
-        _upgradeEffect.Play();
-    }
-
-    public void LoadData()
-    {
-        _countUpgrade = _boost.CountUpgrade;
-        _workTime = _boost.Time;
-
-        if (_countUpgrade > 5)
-            BanUpgrade();
-
-        UpdateText();
     }
 }

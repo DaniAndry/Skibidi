@@ -29,7 +29,9 @@ public class PlayerMoverView : MonoBehaviour
     public event Action OnSomersault;
     public event Action OnCrashed;
     public event Action OnRestart;
+    public event Action OnDance;
 
+    public string NameDanceAnim => _nameDanceAnim;
     public float CurrentSpeed => _speed;
 
     private void OnEnable()
@@ -92,6 +94,8 @@ public class PlayerMoverView : MonoBehaviour
             float moveSpeed = 2;
             AudioManager.Instance.Play("Crash");
             OnChangingSpeedCrash?.Invoke(moveSpeed);
+
+            TaskCounter.IncereaseProgress(1, TaskType.CrashWall.ToString());
         }
     }
 
@@ -134,6 +138,11 @@ public class PlayerMoverView : MonoBehaviour
     public void Somersault()
     {
         OnSomersault?.Invoke();
+    }
+    
+    public void Dance()
+    {
+        OnDance?.Invoke();
     }
 
     private void MobileContorol()

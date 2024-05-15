@@ -147,6 +147,7 @@ public class PlayerMoverModel
         {
             Jumped?.Invoke();
             _rigidbody.AddForce(0, _jumpPower, 0, ForceMode.Impulse);
+            TaskCounter.IncereaseProgress(1, Convert.ToString(TaskType.Jump));
         }
     }
 

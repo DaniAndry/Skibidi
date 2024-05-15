@@ -25,11 +25,13 @@ public class EnergyUpgrade : MonoBehaviour
 
     public float Upgrade()
     {
-        if (_bank.TryTakeValue(CurrentPrice))
+        if (_bank.TryTakeMoney(CurrentPrice))
         {
             _bank.TakeMoney(CurrentPrice);
             CurrentPrice += _encreaceMoney;
             UpdateUI();
+
+            TaskCounter.IncereaseProgress(1, TaskType.UpgradeEnergy.ToString());
 
             if (CurrentEnergy < _maxCountEnergy)
             {
@@ -40,7 +42,8 @@ public class EnergyUpgrade : MonoBehaviour
             {
                 CurrentEnergy = _maxCountEnergy;
                 return CurrentEnergy;
-            } 
+            }
+
         }
         else
         {

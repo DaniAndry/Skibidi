@@ -15,7 +15,7 @@ public class Menu : MonoBehaviour
 
     private void Awake()
     {
-        _menuWindow = GetComponent<MenuWindow>();
+        _menuWindow = GetComponent<MenuWindow>();       
     }
 
     private void OnEnable()

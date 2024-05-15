@@ -7,7 +7,7 @@ public class BlockCar : Block
         if (collision.gameObject.TryGetComponent(out PlayerMoverView player) && collision.gameObject.TryGetComponent(out PlayerView playerView))
         {
             player.CrashOnCar();
-            AudioManager.Instance.Play("StoneCrash");
+            AudioManager.Instance.Play("CarCrash");
             playerView.GameOver();
         }
     }

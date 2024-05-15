@@ -38,6 +38,7 @@ public class Boost : MonoBehaviour
         {
             Decrease();
             AudioManager.Instance.Play("UseBoost");
+            TaskCounter.IncereaseProgress(1, TaskType.UseBoost.ToString());
         }
 
         return _canUse;
