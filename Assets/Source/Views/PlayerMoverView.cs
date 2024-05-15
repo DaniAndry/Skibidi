@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -143,6 +144,11 @@ public class PlayerMoverView : MonoBehaviour
     public void Dance()
     {
         OnDance?.Invoke();
+    }
+
+    public void SetSpeedBoostTimer(float time)
+    {
+        _speedBoost.SetTimeText(time);
     }
 
     private void MobileContorol()

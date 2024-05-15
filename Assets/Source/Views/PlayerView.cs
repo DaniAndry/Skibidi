@@ -77,6 +77,11 @@ public class PlayerView : MonoBehaviour
         OnMoneyChanging?.Invoke(count, isBoost);
     }
 
+    public void SetEnergyTime(float time)
+    {
+        _energyBoost.SetTimeText(time);
+    }
+
     private void UseEnergyBoost()
     {
         if (_energyBoost.TryUse())

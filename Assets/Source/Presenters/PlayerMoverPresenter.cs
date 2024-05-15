@@ -24,6 +24,7 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.OnSomersault += Somerslaut;
         _model.OnChangeSpeed += _view.ChangeCurrentSpeed;
         _model.Jumped += _view.Jumped;
+        _model.OnChangingBoostTime += _view.SetSpeedBoostTimer;
     }
 
     public void Disable()
@@ -34,6 +35,7 @@ public class PlayerMoverPresenter : MonoBehaviour
         _view.OnSomersault -= Somerslaut;
         _model.OnChangeSpeed -= _view.ChangeCurrentSpeed;
         _model.Jumped -= _view.Jumped;
+        _model.OnChangingBoostTime -= _view.SetSpeedBoostTimer;
     }
 
     public void EndPlayerMove()

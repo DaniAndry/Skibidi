@@ -51,8 +51,9 @@ public class PlayerPresenter : MonoBehaviour
         _model.EnergyChanged += OnEnergyChanging;
         _model.OnEnergyGone += EndGame;
         _view.GameOvered += EndGame;
-        _model.DistanceChanging += OnDistanceChanging;
         _view.EnergyChanging += OnViewEnergyChanged;
+        _model.DistanceChanging += OnDistanceChanging;
+        _model.OnTimeChanging += _view.SetEnergyTime;
     }
 
     public void Disable()
@@ -64,6 +65,7 @@ public class PlayerPresenter : MonoBehaviour
         _view.GameOvered -= EndGame;
         _model.DistanceChanging -= OnDistanceChanging;
         _view.EnergyChanging -= OnViewEnergyChanged;
+        _model.OnTimeChanging -= _view.SetEnergyTime;
     }
 
     private void UseDistanceDistanceBoost(EnergyBoost energyBoost)
