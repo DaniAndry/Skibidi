@@ -5,6 +5,7 @@ using UnityEngine;
 public class Boost : MonoBehaviour
 {
     [SerializeField] private float _bonus;
+    [SerializeField] private TMP_Text _timeText;
 
     private float _time = 5;
     private int _countBoosts;
@@ -18,17 +19,6 @@ public class Boost : MonoBehaviour
     public float Time => _time;
 
     public event Action OnUpdateCount;
-
-    private void Decrease()
-    {
-        _countBoosts--;
-        UpdateText();
-    }
-
-    private void UpdateText()
-    {
-        OnUpdateCount?.Invoke();
-    }
 
     public bool TryUse()
     {
@@ -60,9 +50,22 @@ public class Boost : MonoBehaviour
         }
     }
 
-    public void SavaData()
-    { }
+    public void SetTimeText(float amount)
+    {
+        if (amount > 0)
+            _timeText.text = Math.Round(amount, 1).ToString();
+        else
+            _timeText.text = " ";
+    }
 
-    public void LoadData()
-    { }
+    private void Decrease()
+    {
+        _countBoosts--;
+        UpdateText();
+    }
+
+    private void UpdateText()
+    {
+        OnUpdateCount?.Invoke();
+    }
 }

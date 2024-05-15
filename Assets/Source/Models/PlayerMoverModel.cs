@@ -25,7 +25,8 @@ public class PlayerMoverModel
 
     public event Action Jumped;
 
-    public event UnityAction<float> OnChangeSpeed;
+    public event Action<float> OnChangeSpeed;
+    public event Action<float> OnChangingBoostTime;
 
     public PlayerMoverModel(Rigidbody rigidbody, Animator animator)
     {
@@ -71,6 +72,9 @@ public class PlayerMoverModel
         _isMove = true;
         _turnSpeed = _maxTurnSpeed;
         OnChangeSpeed?.Invoke(MoveSpeed);
+
+        _isSpeedBoost = false;
+        OnChangingBoostTime?.Invoke(0);
     }
 
     public void ResetMove()
@@ -164,6 +168,7 @@ public class PlayerMoverModel
         if (MoveSpeed != _moveVariableSpeed && _isSpeedBoost)
         {
             _speedTime -= Time.deltaTime;
+            OnChangingBoostTime?.Invoke(_speedTime);
 
             if (_speedTime > 0)
             {
