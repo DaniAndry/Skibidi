@@ -16,11 +16,11 @@ public class Bank : MonoBehaviour
 
     public event Action OnBuy;
 
-    public int Money { get; private set; }  = 50;
+    public int Money { get; private set; }  = 500000;
 
     private void OnEnable()
     {
-        AwardGiver.OnReward += GiveRewardMoney;
+        AwardGiver.OnReward += GiveReward;
     }
 
     private void Start()
@@ -30,7 +30,7 @@ public class Bank : MonoBehaviour
 
     private void OnDisable()
     {
-        AwardGiver.OnReward -= GiveRewardMoney;
+        AwardGiver.OnReward -= GiveReward;
     }
 
     public void TakeMoney(int money)
@@ -89,6 +89,12 @@ public class Bank : MonoBehaviour
         Money += money;
         UpdateText();
     }
+    
+    public void GiveDiamond(int diamond)
+    {
+        _diamond += diamond;
+        UpdateText();
+    }
 
     public void GiveMoneyForGame(int money)
     {
@@ -121,11 +127,15 @@ public class Bank : MonoBehaviour
         UpdateText();
     }
 
-    private void GiveRewardMoney(string name, int amount)
+    private void GiveReward(string name, int amount)
     {
         if (name == Convert.ToString(ResourceType.Money))
         {
             GiveMoney(amount);
+        }
+        else if (name == Convert.ToString(ResourceType.Diamond))
+        {
+            GiveDiamond(amount);
         }
     }
 }
