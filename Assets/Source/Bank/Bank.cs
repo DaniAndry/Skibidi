@@ -95,6 +95,8 @@ public class Bank : MonoBehaviour
         _moneyForGame += money;
         Money += money;
         UpdateText();
+
+        TaskCounter.IncereaseProgress(Convert.ToInt32(money), TaskType.CollectMoney.ToString());
     }
 
     public void MoneyMultiplyAd()

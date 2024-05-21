@@ -12,6 +12,7 @@ public class PlayerModel
     public event Action DistanceChanging;
     public event Action OnEnergyGone;
     public event Action EnergyChanged;
+    public event Action<float> OnTimeChanging;
 
     public float TotalDistanceTraveled { get; private set; }
     public float MaxEnergy { get; private set; } = 40f;
@@ -33,6 +34,9 @@ public class PlayerModel
     {      
         CurrentEnergy = MaxEnergy;
         _isEnergyGone = false;
+
+        _isEnergyBoost = false;
+        OnTimeChanging?.Invoke(0);
     }
 
     public void Resurrect(float energy)
@@ -62,6 +66,7 @@ public class PlayerModel
         else if (_isEnergyBoost)
         {
             _energyTime -= Time.deltaTime;
+            OnTimeChanging?.Invoke(_energyTime);
 
             if (_energyTime > 0)
             {

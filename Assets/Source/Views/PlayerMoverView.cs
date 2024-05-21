@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -94,6 +95,8 @@ public class PlayerMoverView : MonoBehaviour
             float moveSpeed = 2;
             AudioManager.Instance.Play("Crash");
             OnChangingSpeedCrash?.Invoke(moveSpeed);
+
+            TaskCounter.IncereaseProgress(1, TaskType.CrashWall.ToString());
         }
     }
 
@@ -141,6 +144,11 @@ public class PlayerMoverView : MonoBehaviour
     public void Dance()
     {
         OnDance?.Invoke();
+    }
+
+    public void SetSpeedBoostTimer(float time)
+    {
+        _speedBoost.SetTimeText(time);
     }
 
     private void MobileContorol()

@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 public static class TaskCounter
 {
-    public static int JumpCounter = 0;
-    public static int SpendMoneyCounter = 0;
-
     public static event Action<float, string> OnExecute;
 
     private static Dictionary<string, bool> _tasks = new Dictionary<string, bool>();

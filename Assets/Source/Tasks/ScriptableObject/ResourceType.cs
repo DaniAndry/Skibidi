@@ -4,8 +4,5 @@ public enum ResourceType
     Diamond,
     SpeedBoost,
     EnergyBoost,
-    MoneyBoost,
-    Case,
-    Skin,
-    Dance
+    MoneyBoost
 }
