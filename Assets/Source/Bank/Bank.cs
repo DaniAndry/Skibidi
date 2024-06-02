@@ -13,10 +13,12 @@ public class Bank : MonoBehaviour
     private int _diamond = 10;
     private int _moneyForGame;
     private int _diamondForGame;
+    private BankData _data;
 
     public event Action OnBuy;
 
-    public int Money { get; private set; }  = 50;
+    public int Money { get; private set; } = 50;
+    public int Diamond => _diamond;
 
     private void OnEnable()
     {
@@ -25,7 +27,10 @@ public class Bank : MonoBehaviour
 
     private void Start()
     {
+        _data = SaveSystem.LoadBank();
         UpdateText();
+        _diamond = _data.DiamondBalance;
+        Money = _data.MoneyBalance;
     }
 
     private void OnDisable()
@@ -42,17 +47,18 @@ public class Bank : MonoBehaviour
             AudioManager.Instance.Play("Buy");
             OnBuy?.Invoke();
             UpdateText();
+            SaveSystem.SaveBank(this);
         }
     }
 
     public void UpdateText()
     {
-        foreach(TMP_Text money in _moneyText)
+        foreach (TMP_Text money in _moneyText)
         {
             money.text = Money.ToString();
         }
-        
-        foreach(TMP_Text diamond in _diamondText)
+
+        foreach (TMP_Text diamond in _diamondText)
         {
             diamond.text = _diamond.ToString();
         }
@@ -61,27 +67,28 @@ public class Bank : MonoBehaviour
         {
             diamond.text = _diamondForGame.ToString();
         }
-        
+
         foreach (TMP_Text money in _moneyForGameText)
         {
             money.text = _moneyForGame.ToString();
         }
+        SaveSystem.SaveBank(this);
     }
 
     public bool TryTakeMoney(int value)
     {
-        if(Money >= value)
+        if (Money >= value)
             return true;
-        else 
-            return false; 
-    } 
+        else
+            return false;
+    }
 
     public bool TryTakeDiamond(int value)
     {
-        if(_diamond >= value)
+        if (_diamond >= value)
             return true;
-        else 
-            return false; 
+        else
+            return false;
     }
 
     public void GiveMoney(int money)

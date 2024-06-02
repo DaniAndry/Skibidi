@@ -6,16 +6,24 @@ public class EnergyUpgrade : MonoBehaviour
     [SerializeField] private TMP_Text _currentPrice;
     [SerializeField] private Bank _bank;
 
-    private int _maxCountEnergy = 50;
     private int _encreaceEnergy = 10;
     private int _encreaceMoney = 5;
 
+    private UpgradeData _data;
+
     public int CurrentPrice { get; private set; } = 10;
+    public int MaxCountEnergy { get; private set; }
     public float CurrentEnergy { get; private set; } = 0;
 
     private void Awake()
     {
         UpdateUI();
+    }
+
+    private void Start()
+    {
+        _data = SaveSystem.LoadEnergyUpgrade();
+        MaxCountEnergy = _data.CountUpgrade;
     }
 
     private void UpdateUI()
@@ -31,16 +39,18 @@ public class EnergyUpgrade : MonoBehaviour
             CurrentPrice += _encreaceMoney;
             UpdateUI();
 
+            SaveSystem.SaveEnergyUpgrade(this);
+
             TaskCounter.IncereaseProgress(1, TaskType.UpgradeEnergy.ToString());
 
-            if (CurrentEnergy < _maxCountEnergy)
+            if (CurrentEnergy < MaxCountEnergy)
             {
                 CurrentEnergy += _encreaceEnergy;
                 return CurrentEnergy;
             }
             else
             {
-                CurrentEnergy = _maxCountEnergy;
+                CurrentEnergy = MaxCountEnergy;
                 return CurrentEnergy;
             }
 

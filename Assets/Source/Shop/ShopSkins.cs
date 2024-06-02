@@ -78,8 +78,13 @@ public class ShopSkins : Shop
     {
         if (BankMoney.TryTakeMoney(_selectedSkin.Price))
         {
+            List<Skin> skins = SaveSystem.LoadShop().BoughtSkins;
             BankMoney.TakeMoney(_selectedSkin.Price);
+
             BuyProduct();
+            skins.Add(_selectedSkin);
+            ShopData data = new ShopData(skins);
+            SaveSystem.SaveShop(data);
         }
         else
             ThrowErrorBuySkin();
