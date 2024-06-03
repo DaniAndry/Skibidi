@@ -10,7 +10,7 @@ public class Bank : MonoBehaviour
     [SerializeField] private List<TMP_Text> _moneyForGameText;
     [SerializeField] private List<TMP_Text> _diamondForGameText;
 
-    private int _diamond = 10;
+    private int _diamond = 10000000;
     private int _moneyForGame;
     private int _diamondForGame;
 
