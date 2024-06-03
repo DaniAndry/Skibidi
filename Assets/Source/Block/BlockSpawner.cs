@@ -97,10 +97,9 @@ public class BlockSpawner : MonoBehaviour
         maxZ = Mathf.Max(minZ, maxZ);
 
         float randomX = chunkCenter.x + Random.Range(-extents.x, extents.x);
-        float randomY = chunkCenter.y + 0.2f;
+        float randomY = chunkCenter.y;
         float randomZ = Random.Range(minZ, maxZ);
 
         return new Vector3(randomX, randomY, randomZ);
     }
-
 }
