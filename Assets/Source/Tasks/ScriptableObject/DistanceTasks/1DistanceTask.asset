@@ -17,4 +17,4 @@ MonoBehaviour:
   _amountReward: 10
   _rewardIcon: {fileID: 21300000, guid: 52066fc285ffc4bb0b9fc98f1d840149, type: 3}
   _resourceType: 0
-  _taskType: 16
+  _taskType: 7

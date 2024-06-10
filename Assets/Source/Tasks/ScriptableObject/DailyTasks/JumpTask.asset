@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: JumpTask
   m_EditorClassIdentifier: 
   _descritionTranslation: Tasks/Jump
-  _amountMaxCollect: 10
-  _amountReward: 10
+  _amountMaxCollect: 50
+  _amountReward: 50
   _rewardIcon: {fileID: 21300000, guid: c3189121f7e3342a3b2fcc2f495c9e31, type: 3}
   _resourceType: 0
   _taskType: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CollectMoney
   m_EditorClassIdentifier: 
   _descritionTranslation: Tasks/CollectMoney
-  _amountMaxCollect: 100
-  _amountReward: 10
-  _rewardIcon: {fileID: 21300000, guid: 52066fc285ffc4bb0b9fc98f1d840149, type: 3}
-  _resourceType: 0
+  _amountMaxCollect: 300
+  _amountReward: 5
+  _rewardIcon: {fileID: 21300000, guid: 9d29f17266a7746ce95c45716aee9f6c, type: 3}
+  _resourceType: 3
   _taskType: 1

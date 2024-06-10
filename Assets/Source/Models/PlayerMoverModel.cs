@@ -119,7 +119,7 @@ public class PlayerMoverModel
         }
         else
         {
-            _speedTime = time;
+            _speedTime += time;
         }
     }
 

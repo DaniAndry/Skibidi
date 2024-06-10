@@ -12,6 +12,8 @@ public class CameraMover : MonoBehaviour
 
     private void Awake()
     {
+        _startPosition = transform.position;
+
         SetStartPosition();
     }
 
@@ -27,8 +29,7 @@ public class CameraMover : MonoBehaviour
 
     public void ResetCameraPosition()
     {
-        transform.position = _startPosition;
-        transform.rotation = _startRotation;
+        SetStartPosition();
     }
 
     public void EndMove()

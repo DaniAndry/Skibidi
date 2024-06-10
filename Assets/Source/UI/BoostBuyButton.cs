@@ -17,6 +17,7 @@ public class BoostBuyButton : MonoBehaviour
     [SerializeField] private Image _panelCountUpgrade;
     [SerializeField] private Image _prefabCountUpgradeImage;
 
+    private int _maxUpgradeBoost = 5;
     private int _countUpgrade = 0;
     private float _workTime = 10;
     private TMP_Text _priceBuyText;
@@ -78,7 +79,7 @@ public class BoostBuyButton : MonoBehaviour
         _countUpgrade = _boost.CountUpgrade;
         _workTime = _boost.Time;
 
-        if (_countUpgrade > 5)
+        if (_countUpgrade > _maxUpgradeBoost)
             BanUpgrade();
 
         UpdateText();

@@ -11,8 +11,9 @@ public class MoneyRewardButton : MonoBehaviour
 
     private int _amountReward;
     private int _moneyTight = 150;
-    private int _moneyNormal = 500;
-    private int _muchMoney = 1000;
+    private int _moneyNormal = 1500;
+    private int _muchMoney = 3000;
+    private int _rewardMoney = 200;
 
     public event Action<Action> OnRewardButtonClick;
 
@@ -37,22 +38,22 @@ public class MoneyRewardButton : MonoBehaviour
 
         if (_bank.Money <= _moneyTight && chance <= 30)
         {
-            RefreshAmountPrice(_moneyTight);
+            RefreshAmountPrice(_rewardMoney);
             _rewardButton.gameObject.SetActive(true);
         }
         else if(_bank.Money <= _moneyNormal && chance <= 20)
         {
-            RefreshAmountPrice(_moneyNormal);
+            RefreshAmountPrice(_rewardMoney * 3);
             _rewardButton.gameObject.SetActive(true);
         }
         else if(_bank.Money <= _muchMoney && chance <= 20)
         {
-            RefreshAmountPrice(_muchMoney);
+            RefreshAmountPrice(_rewardMoney * 5);
             _rewardButton.gameObject.SetActive(true);
         }
         else if(_bank.Money >= _muchMoney && chance <= 20)
         {
-            RefreshAmountPrice(_muchMoney * 2);
+            RefreshAmountPrice(_rewardMoney * 8);
             _rewardButton.gameObject.SetActive(true);
         }
         else

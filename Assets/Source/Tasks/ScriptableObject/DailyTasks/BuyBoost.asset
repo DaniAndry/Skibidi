@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BuyBoost
   m_EditorClassIdentifier: 
   _descritionTranslation: Tasks/BuyBoost
-  _amountMaxCollect: 2
-  _amountReward: 10
+  _amountMaxCollect: 10
+  _amountReward: 100
   _rewardIcon: {fileID: 21300000, guid: 52066fc285ffc4bb0b9fc98f1d840149, type: 3}
-  _resourceType: 2
+  _resourceType: 0
   _taskType: 4

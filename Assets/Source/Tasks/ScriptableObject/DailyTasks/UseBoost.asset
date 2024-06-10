@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: UseBoost
   m_EditorClassIdentifier: 
   _descritionTranslation: Tasks/UseBoost
-  _amountMaxCollect: 2
-  _amountReward: 10
+  _amountMaxCollect: 15
+  _amountReward: 100
   _rewardIcon: {fileID: 21300000, guid: 52066fc285ffc4bb0b9fc98f1d840149, type: 3}
   _resourceType: 0
   _taskType: 3

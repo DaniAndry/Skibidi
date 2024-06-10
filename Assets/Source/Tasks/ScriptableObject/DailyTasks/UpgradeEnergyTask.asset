@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: UpgradeEnergyTask
   m_EditorClassIdentifier: 
   _descritionTranslation: Tasks/UpgradeEnergy
-  _amountMaxCollect: 2
+  _amountMaxCollect: 5
   _amountReward: 10
-  _rewardIcon: {fileID: 21300000, guid: 52066fc285ffc4bb0b9fc98f1d840149, type: 3}
-  _resourceType: 0
+  _rewardIcon: {fileID: 21300000, guid: b7d7e36f0c41c4316a6ea75d0a9321a6, type: 3}
+  _resourceType: 3
   _taskType: 5

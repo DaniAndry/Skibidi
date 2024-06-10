@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SpendMoneyWeekly
   m_EditorClassIdentifier: 
   _descritionTranslation: Tasks/SpendMoney
-  _amountMaxCollect: 10
-  _amountReward: 2000
-  _rewardIcon: {fileID: 21300000, guid: 52066fc285ffc4bb0b9fc98f1d840149, type: 3}
-  _resourceType: 0
+  _amountMaxCollect: 5000
+  _amountReward: 50
+  _rewardIcon: {fileID: 21300000, guid: cda87792b516f4e0d8bf7d3ef5cdbae9, type: 3}
+  _resourceType: 1
   _taskType: 2
