@@ -22,6 +22,7 @@ namespace Source.Yandex
         private void OnInitialized()
         {
             SceneManager.LoadScene(_mainScene);
+            SaveSystem.LoadData();
         }
     }
 }

@@ -27,10 +27,14 @@ public class Bank : MonoBehaviour
 
     private void Start()
     {
-        _data = SaveSystem.LoadBank();
+        if (SaveSystem.LoadBank() != null)
+        {
+            _data = SaveSystem.LoadBank();
+            _diamond = _data.DiamondBalance;
+            Money = _data.MoneyBalance;
+        }
+
         UpdateText();
-        _diamond = _data.DiamondBalance;
-        Money = _data.MoneyBalance;
     }
 
     private void OnDisable()
@@ -47,7 +51,6 @@ public class Bank : MonoBehaviour
             AudioManager.Instance.Play("Buy");
             OnBuy?.Invoke();
             UpdateText();
-            SaveSystem.SaveBank(this);
         }
     }
 
@@ -72,6 +75,7 @@ public class Bank : MonoBehaviour
         {
             money.text = _moneyForGame.ToString();
         }
+
         SaveSystem.SaveBank(this);
     }
 

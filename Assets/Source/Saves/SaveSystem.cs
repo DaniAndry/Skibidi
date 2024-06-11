@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Agava.YandexGames;
 
-public class SaveSystem : MonoBehaviour
+public class SaveSystem
 {
     private const string PlayerDataKey = "playerData";
     private const string EnergyUpgradeDataKey = "energyUpgradeData";
@@ -10,10 +10,6 @@ public class SaveSystem : MonoBehaviour
 
     static SaveData _saveData;
 
-    private void Start()
-    {
-        LoadData();
-    }
 
     public static void SavePlayer(PlayerModel player)
     {
@@ -96,7 +92,6 @@ public class SaveSystem : MonoBehaviour
 
         SaveData saveData = JsonUtility.FromJson<SaveData>(jsonData);
         _saveData = saveData;
-        Debug.Log(_saveData);
 
         Debug.Log("Data loaded successfully from cloud.");
     }

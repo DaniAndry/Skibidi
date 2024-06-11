@@ -22,8 +22,11 @@ public class EnergyUpgrade : MonoBehaviour
 
     private void Start()
     {
-        _data = SaveSystem.LoadEnergyUpgrade();
-        MaxCountEnergy = _data.CountUpgrade;
+        if(SaveSystem.LoadEnergyUpgrade() != null)
+        {
+            _data = SaveSystem.LoadEnergyUpgrade();
+            MaxCountEnergy = _data.CountUpgrade;
+        }
     }
 
     private void UpdateUI()
