@@ -1,9 +1,8 @@
 using UnityEngine;
+using YG;
 
 public class VideoAdView : MonoBehaviour
 {
-    public void Show(System.Action reward) => Agava.YandexGames.VideoAd.Show(OnOpenCallback, reward, OnCloseCallback);
-
     private void OnOpenCallback()
     {
         Time.timeScale = 0;
@@ -14,5 +13,5 @@ public class VideoAdView : MonoBehaviour
     {
         Time.timeScale = 1;
         AudioListener.volume = 1f;
-    }
+    }  
 }

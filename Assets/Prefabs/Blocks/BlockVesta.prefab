@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1844070198885890941}
   - component: {fileID: 6236215724024930405}
   - component: {fileID: 6891602804772347238}
+  - component: {fileID: 912050706555408058}
   m_Layer: 0
   m_Name: BlockVesta
   m_TagString: Untagged
@@ -53,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf6f9f06819c8443bb0277c4de289aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _crashParticle: {fileID: 0}
+  _crashParticle: {fileID: 198535614377564514, guid: e6b0c8eedb7b4b148b2d830fdcf06603, type: 3}
 --- !u!65 &6891602804772347238
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -75,6 +76,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.68884015, y: 0.39043993, z: 1.881607}
   m_Center: {x: 0.09072417, y: 0.24058703, z: -0.012748718}
+--- !u!114 &912050706555408058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585744794116467165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 376d7cbb9bdb8dc478c4aab2264d04f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1418124298840635914
 GameObject:
   m_ObjectHideFlags: 0

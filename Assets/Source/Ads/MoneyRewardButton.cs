@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class MoneyRewardButton : MonoBehaviour
 {
@@ -14,8 +15,7 @@ public class MoneyRewardButton : MonoBehaviour
     private int _moneyNormal = 1500;
     private int _muchMoney = 3000;
     private int _rewardMoney = 200;
-
-    public event Action<Action> OnRewardButtonClick;
+    private int _id;
 
     private void Awake()
     {
@@ -40,21 +40,25 @@ public class MoneyRewardButton : MonoBehaviour
         {
             RefreshAmountPrice(_rewardMoney);
             _rewardButton.gameObject.SetActive(true);
+            _id = 1;
         }
         else if(_bank.Money <= _moneyNormal && chance <= 20)
         {
             RefreshAmountPrice(_rewardMoney * 3);
             _rewardButton.gameObject.SetActive(true);
+            _id = 2;
         }
         else if(_bank.Money <= _muchMoney && chance <= 20)
         {
             RefreshAmountPrice(_rewardMoney * 5);
             _rewardButton.gameObject.SetActive(true);
+            _id = 3;
         }
         else if(_bank.Money >= _muchMoney && chance <= 20)
         {
             RefreshAmountPrice(_rewardMoney * 8);
             _rewardButton.gameObject.SetActive(true);
+            _id = 4;
         }
         else
         {
@@ -68,13 +72,8 @@ public class MoneyRewardButton : MonoBehaviour
         _amountRewardText.text = _amountReward.ToString();
     }
 
-    private void OnRewardCallback()
-    {
-        _bank.GiveMoney(_amountReward);
-    }
-
     private void OnButtonClick()
     {
-        OnRewardButtonClick?.Invoke(OnRewardCallback);
+        YandexGame.RewVideoShow(_id);
     }
 }

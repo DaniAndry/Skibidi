@@ -16,6 +16,8 @@ public class PlayerMoverView : MonoBehaviour
     private float _speed;
     private bool _isProtected;
     private bool _canMove = false;
+    private bool _canJump = true;
+    private PlayerInputHandler _inputHandler;
 
     public event Action<float> OnMoving;
     public event Action<float> OnChangingSpeed;
@@ -27,6 +29,7 @@ public class PlayerMoverView : MonoBehaviour
     public event Action OnStoped;
     public event Action OnKicked;
     public event Action OnJumped;
+    public event Action OnJumping;
     public event Action OnSomersault;
     public event Action OnCrashed;
     public event Action OnRestart;
@@ -39,25 +42,41 @@ public class PlayerMoverView : MonoBehaviour
     {
         _cameraMover.GetPlayerTransform(transform);
         _speedBoostButton.onClick.AddListener(UseSpeedBoost);
+        _inputHandler.OnMobileJumpButtonClick += MobileJump;
+        _inputHandler.OnJumpButtonClick += Jump;
     }
 
     private void Awake()
     {
+        _inputHandler = PlayerInputHandler.Instance;
         _startPlayerPosition = transform.position;
         _speedBoostButton = _speedBoost.GetComponent<Button>();
+        _inputHandler.OnMobileJumpButtonClick -= MobileJump;
+        _inputHandler.OnJumpButtonClick -= Jump;
     }
 
     private void Update()
     {
-        if (_canMove) 
+        if (_canMove)
         {
-            MobileContorol();
+            PlayerInputContorol();
         }
     }
 
     private void OnDisable()
     {
         _speedBoostButton.onClick.RemoveListener(UseSpeedBoost);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        _canJump = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+
+        _canJump = false;
     }
 
     public GameObject GetPrefab()
@@ -92,7 +111,7 @@ public class PlayerMoverView : MonoBehaviour
     {
         if (!_isProtected)
         {
-            float moveSpeed = 2;
+            float moveSpeed = 3;
             AudioManager.Instance.Play("Crash");
             OnChangingSpeedCrash?.Invoke(moveSpeed);
 
@@ -140,7 +159,7 @@ public class PlayerMoverView : MonoBehaviour
     {
         OnSomersault?.Invoke();
     }
-    
+
     public void Dance()
     {
         OnDance?.Invoke();
@@ -151,7 +170,7 @@ public class PlayerMoverView : MonoBehaviour
         _speedBoost.SetTimeText(time);
     }
 
-    private void MobileContorol()
+    private void PlayerInputContorol()
     {
         if (_joystick.Horizontal < 0f && _joystick.Horizontal > -1)
             OnMoving?.Invoke(_joystick.Horizontal);
@@ -159,6 +178,18 @@ public class PlayerMoverView : MonoBehaviour
             OnMoving?.Invoke(_joystick.Horizontal);
         else
             OnMoving?.Invoke(0);
+    }
+
+    private void MobileJump(Vector2 swape)
+    {
+        if (_canJump && swape.y > _inputHandler.DeltaMobileJump)
+            OnJumping?.Invoke();
+    }
+
+    private void Jump() 
+    {
+        if (_canJump)
+            OnJumping?.Invoke();
     }
 
     private void UseSpeedBoost()

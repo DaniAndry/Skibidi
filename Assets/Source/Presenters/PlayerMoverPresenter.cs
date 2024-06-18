@@ -18,6 +18,7 @@ public class PlayerMoverPresenter : MonoBehaviour
 
     public void Enable()
     {
+        _view.OnJumping += _model.Jump;
         _view.OnMoving += SetDataMove;
         _view.OnChangingSpeedCrash += ChangeSpeedCrash;
         _view.OnSpeedBoostChanging += OnSpeedChanging;
@@ -29,6 +30,7 @@ public class PlayerMoverPresenter : MonoBehaviour
 
     public void Disable()
     {
+        _view.OnJumping -= _model.Jump;
         _view.OnMoving -= SetDataMove;
         _view.OnChangingSpeedCrash -= ChangeSpeedCrash;
         _view.OnSpeedBoostChanging -= OnSpeedChanging;

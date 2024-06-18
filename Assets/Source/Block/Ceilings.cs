@@ -8,7 +8,7 @@ public class Ceilings : MonoBehaviour
     private void Awake()
     {
         Collider[] collidersCelling = GetComponentsInChildren<Collider>();
-        Collider[] collidersBlock = GetComponentsInParent<Collider>();
+        Collider[] collidersBlock = GetComponents<Collider>();
         _colliders.AddRange(collidersCelling);
         _colliders.AddRange(collidersBlock);
     }

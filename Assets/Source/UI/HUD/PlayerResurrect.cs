@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class PlayerResurrect : MonoBehaviour
 {
@@ -20,11 +21,10 @@ public class PlayerResurrect : MonoBehaviour
     private PlayerResurrectWindow _playerResurrectWindow;
     private float _energyGiftForWatch = 200;
     private float _energyGiftForDiamond = 100;
+    private int _id = 6;
 
     public event Action OnRestart;
     public event Action<float> OnResurrected;
-    public event Action<Action> OnResurrecting;
-    public event Action<Action> OnCallAd;
 
     private void Awake()
     {
@@ -51,7 +51,7 @@ public class PlayerResurrect : MonoBehaviour
         _playerResurrectWindow.OpenWithoutSound();
     }
 
-    private void ResurrectWatch()
+    public void ResurrectWatch()
     {
         _price *= 2;
         _priceDiamondText.text = _price.ToString();
@@ -60,7 +60,7 @@ public class PlayerResurrect : MonoBehaviour
 
     private void OnResurrect()
     {
-        OnResurrecting?.Invoke(ResurrectWatch);
+        YandexGame.RewVideoShow(_id);
     }
 
     private void DiamondResurrect()
@@ -89,11 +89,9 @@ public class PlayerResurrect : MonoBehaviour
         AudioManager.Instance.Stop("Clock");
         _playerResurrectWindow.CloseWithoutSound();
         _price = 1;
+        _priceDiamondText.text = _price.ToString();
         OnRestart?.Invoke();
-        int chance = UnityEngine.Random.Range(0, 100);
-
-        if(chance <= 20)
-            OnCallAd?.Invoke(null);
+        YandexGame.FullscreenShow();
     }
 
     private IEnumerator WaitForWindow()

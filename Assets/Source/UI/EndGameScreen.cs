@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class EndGameScreen : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class EndGameScreen : MonoBehaviour
     [SerializeField] private Button _rewardButton;
     [SerializeField] private Bank _bank;
 
-    public event Action<Action> OnRewardButtonClick;
+    private int _id = 5;
 
     private void Start()
     {
@@ -51,13 +52,8 @@ public class EndGameScreen : MonoBehaviour
             _rewardButton.gameObject.SetActive(false);
     }
 
-    private void RewardMoney()
-    {
-        _bank.MoneyMultiplyAd();
-    }
-
     private void OnClick()
     {
-        OnRewardButtonClick?.Invoke(RewardMoney);
+        YandexGame.RewVideoShow(_id);
     }
 }

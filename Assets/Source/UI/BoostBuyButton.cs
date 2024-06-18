@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class BoostBuyButton : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class BoostBuyButton : MonoBehaviour
     [SerializeField] private TMP_Text _countBoosts;
     [SerializeField] private Image _panelCountUpgrade;
     [SerializeField] private Image _prefabCountUpgradeImage;
+    [SerializeField] private int _buyId;
+    [SerializeField] private int _upgradeId;
 
     private int _maxUpgradeBoost = 5;
     private int _countUpgrade = 0;
@@ -24,9 +27,6 @@ public class BoostBuyButton : MonoBehaviour
     private TMP_Text _priceUpgradeText;
     private ShopBoosts _shopBoosts;
     private bool _isBanUpgrade = false;
-
-    public event Action<Action> OnBuyBoostAd;
-    public event Action<Action> OnUpgradeBoostAd;
 
     public int Price => _priceBuyBoost;
 
@@ -119,13 +119,13 @@ public class BoostBuyButton : MonoBehaviour
         }
     }
 
-    private void RewardBoost()
+    public void RewardBoost()
     {
         _shopBoosts.Buy(_boost, 0);
         BuyBoost();
     }
 
-    private void RewardUpgradeBoost()
+    public void RewardUpgradeBoost()
     {
         if (_isBanUpgrade == false)
         {
@@ -136,12 +136,12 @@ public class BoostBuyButton : MonoBehaviour
 
     private void OnBuyForAd()
     {
-        OnBuyBoostAd?.Invoke(RewardBoost);
+        YandexGame.RewVideoShow(_buyId);
     }
 
     private void OnUpgradeForAd()
     {
-        OnUpgradeBoostAd?.Invoke(RewardUpgradeBoost);
+        YandexGame.RewVideoShow(_upgradeId);
     }
 
     private void UpdateText()

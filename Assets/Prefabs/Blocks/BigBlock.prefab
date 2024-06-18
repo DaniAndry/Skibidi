@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 14109267695331704}
   - component: {fileID: 6981132665637193568}
   - component: {fileID: 7498247364424751760}
+  - component: {fileID: 3245294165167914957}
   m_Layer: 0
   m_Name: BigBlock
   m_TagString: Untagged
@@ -152,6 +153,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _crashParticle: {fileID: 8348064502780500236, guid: 600c3f07b99b90f47b5878a33e958fcc, type: 3}
+--- !u!114 &3245294165167914957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5429449528921227965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 376d7cbb9bdb8dc478c4aab2264d04f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5601397416195683029
 GameObject:
   m_ObjectHideFlags: 0

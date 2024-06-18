@@ -19,11 +19,12 @@ public class PlayerInputHandler : MonoBehaviour
     private InputAction _pauseAction;
 
     public event Action OnPauseButtonClick;
+    public event Action OnJumpButtonClick;
+    public event Action<Vector2> OnMobileJumpButtonClick;
 
     public Vector2 TurnInput { get; private set; }
-    public Vector2 JumpMobileTriggered { get; private set; }
-    public bool JumpTriggered { get; private set; }
-    public float DeltaMobileJump { get; private set; } = 100;
+    public Vector2 JumpMobileTriggered { get; private set;}
+    public float DeltaMobileJump { get; private set; } = 70;
 
     private void OnEnable()
     {
@@ -66,12 +67,11 @@ public class PlayerInputHandler : MonoBehaviour
         _turnAction.performed += context => TurnInput = context.ReadValue<Vector2>();
         _turnAction.canceled += context => TurnInput = Vector2.zero;
 
-        _jumpAction.performed += context => JumpTriggered = true;
-        _jumpAction.canceled += context => JumpTriggered = false;
+        _jumpAction.performed += context => OnJumpButtonClick?.Invoke();
 
         _pauseAction.performed += context => OnPauseButtonClick?.Invoke();
 
-        _jumpMobileAction.performed += context => JumpMobileTriggered = context.ReadValue<Vector2>();
+        _jumpMobileAction.performed += context => OnMobileJumpButtonClick?.Invoke(context.ReadValue<Vector2>());
         _jumpMobileAction.canceled += context => JumpMobileTriggered = Vector2.zero;
     }  
 }

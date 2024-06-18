@@ -48,7 +48,7 @@ public class PlayerIniter : MonoBehaviour
         _backChunksPlacer.GetPlayerTransform(playerView.transform);
 
         _model = new PlayerModel();
-        _moverModel = new PlayerMoverModel(_rigidbody, _animator);
+        _moverModel = new PlayerMoverModel(_rigidbody);
         _funDance.Init(_viewMover);
         _playerAnimatorController.Init(_viewMover, _animator);
         _presenter.Init(_model, _view);

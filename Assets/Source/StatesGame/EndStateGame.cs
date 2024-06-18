@@ -1,4 +1,5 @@
 using System;
+using YG;
 
 public class EndStateGame
 {
@@ -8,9 +9,9 @@ public class EndStateGame
     private readonly PlayerPresenter _presenter;
     private readonly PlayerResurrect _playerResurrect;
     private readonly HudWindow _hudWindow;
-    private readonly YandexLeaderboard _yandexLeaderboard;
+    private readonly LeaderboardYG _leaderboard;
 
-    public EndStateGame(Menu menu, PlayerPresenter presenter, PlayerMoverPresenter presenterMover, PlayerResurrect playerResurrect, EndGameScreen endScreen, HudWindow hudWindow, YandexLeaderboard yandex)
+    public EndStateGame(Menu menu, PlayerPresenter presenter, PlayerMoverPresenter presenterMover, PlayerResurrect playerResurrect, EndGameScreen endScreen, HudWindow hudWindow, LeaderboardYG leaderboard)
     {
         _menu = menu;
         _presenterMover = presenterMover;
@@ -18,7 +19,7 @@ public class EndStateGame
         _playerResurrect = playerResurrect;
         _endScreen = endScreen;
         _hudWindow = hudWindow;
-        _yandexLeaderboard = yandex;
+        _leaderboard = leaderboard;
     }
 
     public event Action OnEndGame;
@@ -43,7 +44,9 @@ public class EndStateGame
         _playerResurrect.StartTimer();
         _endScreen.SetData(_presenter.TakeTotalDistance());
         _menu.SetDistance(_presenter.TakeTotalDistance());
-        _yandexLeaderboard.SetPlayerScore(Convert.ToInt32(_presenter.TakeTotalDistance()));
+        YandexGame.NewLeaderboardScores("Leaderboard", Convert.ToInt32(_presenter.TakeTotalDistance()));
+        _leaderboard.NewScore(Convert.ToInt32(_presenter.TakeTotalDistance()));
+        _leaderboard.UpdateLB();
     }
 
     private void OpenWindows()

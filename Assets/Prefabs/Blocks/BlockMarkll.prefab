@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 2132620171282030325}
   - component: {fileID: 3006972957115728714}
   - component: {fileID: 6332766246259573734}
+  - component: {fileID: 1047486607602710676}
   m_Layer: 0
   m_Name: BlockMarkll
   m_TagString: Untagged
@@ -223,7 +224,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf6f9f06819c8443bb0277c4de289aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _crashParticle: {fileID: 0}
+  _crashParticle: {fileID: 198535614377564514, guid: e6b0c8eedb7b4b148b2d830fdcf06603, type: 3}
+--- !u!114 &1047486607602710676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671282155970274336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 376d7cbb9bdb8dc478c4aab2264d04f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2529249913064274521
 GameObject:
   m_ObjectHideFlags: 0
