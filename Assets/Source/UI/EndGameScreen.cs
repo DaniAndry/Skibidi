@@ -55,5 +55,6 @@ public class EndGameScreen : MonoBehaviour
     private void OnClick()
     {
         YandexGame.RewVideoShow(_id);
+        _rewardButton.gameObject.SetActive(false);
     }
 }

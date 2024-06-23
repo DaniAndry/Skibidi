@@ -26,6 +26,8 @@ public class EndStateGame
 
     public void Enable()
     {
+        Load();
+
         _presenter.OnEndGame += End;
         _playerResurrect.OnRestart += OpenWindows;
     }
@@ -47,6 +49,8 @@ public class EndStateGame
         YandexGame.NewLeaderboardScores("Leaderboard", Convert.ToInt32(_presenter.TakeTotalDistance()));
         _leaderboard.NewScore(Convert.ToInt32(_presenter.TakeTotalDistance()));
         _leaderboard.UpdateLB();
+
+        Save();
     }
 
     private void OpenWindows()
@@ -59,5 +63,22 @@ public class EndStateGame
         _hudWindow.CloseWithoutSound();
 
         OnEndGame?.Invoke();
+    }
+
+    private void Save()
+    {
+        YandexGame.savesData.Record = _presenter.TakeTotalDistance();
+        YandexGame.SaveProgress();
+    }
+
+    private void Load()
+    {
+        float record = YandexGame.savesData.Record;
+
+        _endScreen.SetData(record);
+        _menu.SetDistance(record);
+        YandexGame.NewLeaderboardScores("Leaderboard", Convert.ToInt32(record));
+        _leaderboard.NewScore(Convert.ToInt32(record));
+        _leaderboard.UpdateLB();
     }
 }

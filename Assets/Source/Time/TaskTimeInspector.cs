@@ -20,8 +20,6 @@ public class TaskTimeInspector : MonoBehaviour
     {
         _startDailyTime = YandexGame.savesData.StartDailyTime;
         _startWeeklyTime = YandexGame.savesData.StartWeeklyTime;
-        Debug.Log(_startDailyTime);
-        Debug.Log(_startWeeklyTime);
     }
 
     public void RefreshTime()
@@ -64,7 +62,5 @@ public class TaskTimeInspector : MonoBehaviour
         YandexGame.savesData.StartDailyTime = _startDailyTime;
         YandexGame.savesData.StartWeeklyTime = _startWeeklyTime;
         YandexGame.SaveProgress();
-
-        Debug.Log(YandexGame.savesData.StartDailyTime);
     }
 }

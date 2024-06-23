@@ -31,6 +31,7 @@ namespace YG
         public List<float> AmountDistanceProgreses;
         public int StartWeeklyTime;
         public int StartDailyTime;
+        public float WorldSound = 0.5f;
 
         public SavesYG()
         {

@@ -9,6 +9,13 @@ public class BlockCar : Block
             player.CrashOnCar();
             AudioManager.Instance.Play("CarCrash");
             playerView.GameOver();
+
+            Invoke("Destroy", 0.4f);
         }
+    }
+
+    private void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

@@ -7,33 +7,41 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> _itemPrefabs;
     [SerializeField] private ChunksPlacer _chunksPlacer;
     [SerializeField] private PlayerView _player;
+    [SerializeField] private PlayerMoverView _mover;
     [SerializeField] private BoostItemFactory _boostItemFactory;
     [SerializeField] private OtherItemFactory _otherItemFactory;
     [SerializeField] private BlockSpawner _blockSpawner;
 
     private Dictionary<Chunk, List<GameObject>> _spawnedItems = new Dictionary<Chunk, List<GameObject>>();
 
-
     private void OnEnable()
     {
         _player = GetComponentInParent<PlayerView>();
+        _mover = GetComponentInParent<PlayerMoverView>();
+
+        _mover.OnStarted += SpawnFirstChunk;
 
         foreach (var chunk in _chunksPlacer.Chunks)
         {
-            chunk.Spawned += OnChunkSpawned;
-            chunk.Deactivated += OnChunkDeactivated;
+            chunk.OnSpawned += OnChunkSpawned;
+            chunk.OnDeactivated += OnChunkDeactivated;
         }
-
-        OnChunkSpawned(_chunksPlacer.Chunks[0]);
     }
 
     private void OnDisable()
     {
+        _mover.OnStarted -= SpawnFirstChunk;
+
         foreach (var chunk in _chunksPlacer.Chunks)
         {
-            chunk.Spawned -= OnChunkSpawned;
-            chunk.Deactivated -= OnChunkDeactivated;
+            chunk.OnSpawned -= OnChunkSpawned;
+            chunk.OnDeactivated -= OnChunkDeactivated;
         }
+    }
+
+    private void SpawnFirstChunk()
+    {
+        OnChunkSpawned(_chunksPlacer.Chunks[0]);
     }
 
     private void OnChunkSpawned(Chunk chunk)

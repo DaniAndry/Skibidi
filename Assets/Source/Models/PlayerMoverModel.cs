@@ -47,7 +47,7 @@ public class PlayerMoverModel
             float turn = DefineTurn();
 
             float newXPosition = currentPosition.x + _turnSpeed * turn * Time.deltaTime;
-            newXPosition = Mathf.Clamp(newXPosition, -1.5f, 1.5f);
+            newXPosition = Mathf.Clamp(newXPosition, -1.7f, 1.7f);
 
             _rigidbody.position = new Vector3(newXPosition, currentPosition.y, currentPosition.z);
 
