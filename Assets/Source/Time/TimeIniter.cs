@@ -6,7 +6,7 @@ public class TimeIniter : MonoBehaviour
 
     private void Start()
     {
-        _taskInspector.SetTime();
+        _taskInspector.Load();
         _taskInspector.RefreshTime();
     }
 }

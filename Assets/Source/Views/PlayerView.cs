@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class PlayerView : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class PlayerView : MonoBehaviour
         _moneyBoostButton = _moneyBoost.GetComponent<Button>();
         _energyBoostButton = _energyBoost.GetComponent<Button>();
         _energyUpgradeButton = _energyUpgrade.GetComponent<Button>();
+
+        UpdateUI(0);
     }
 
     private void OnEnable()
@@ -78,6 +81,9 @@ public class PlayerView : MonoBehaviour
     public void UpdateUI(float maxEnergy)
     {
         _maxEnergy.text = maxEnergy.ToString();
+
+        if(maxEnergy == 0)
+            _maxEnergy.text = YandexGame.savesData.MaxEnergy.ToString();
     }
 
     public void AddMoney(int count, bool isBoost)

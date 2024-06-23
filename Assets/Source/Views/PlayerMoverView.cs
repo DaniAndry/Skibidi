@@ -75,7 +75,6 @@ public class PlayerMoverView : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-
         _canJump = false;
     }
 

@@ -17,8 +17,6 @@ public class PlayerPresenter : MonoBehaviour
     {
         _model = model;
         _view = view;
-
-        _view.UpdateUI(_model.MaxEnergy);
     }
 
     public void StartGame()
@@ -91,6 +89,11 @@ public class PlayerPresenter : MonoBehaviour
     private void OnMaxEnergyChanging(float maxEnergyAmount)
     {
         _model.ChangeMaxEnergy(maxEnergyAmount);
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
         _view.UpdateUI(_model.MaxEnergy);
     }
 

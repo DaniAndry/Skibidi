@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public abstract class TaskSpawner : MonoBehaviour
 {
@@ -8,26 +9,29 @@ public abstract class TaskSpawner : MonoBehaviour
     [SerializeField] private List<Task> _tasks = new List<Task>();
     [SerializeField] private TaskTimeInspector _timeInspector;
 
-    private Queue<TaskView> _prefabTaskViews = new Queue<TaskView>();
+    protected List<float> _amountProgreses = new List<float>();
+    
     private List<TaskView> _activeTasks = new List<TaskView>();
-
+    private Dictionary<int, float> _activeDailyId = new Dictionary<int, float>();
+    
+    public List<TaskView> ActiveTasks => _activeTasks;
     public TaskTimeInspector TaskInspector => _timeInspector;
 
     private void Awake()
     {
         TaskCounter.Init();
-        RefreshTasks();
+        SpawnTasks();
     }
 
     private void OnDisable()
     {
-        foreach (var task in _prefabTaskViews)
+        foreach (var task in _activeTasks)
         {
             task.OnComplete -= DestroyTask;
         }
     }
 
-    public virtual void SpawnTasks()
+    public void SpawnTasks()
     {
         for (int i = 0; i < _tasks.Count; i++)
         {
@@ -36,33 +40,25 @@ public abstract class TaskSpawner : MonoBehaviour
             taskView.transform.SetParent(_contentTasks);
             taskView.GetTask(_tasks[i]);
             taskView.Init();
-
-            taskView.gameObject.SetActive(false);
-            _prefabTaskViews.Enqueue(taskView);
+            taskView.InitId(i);
+            taskView.gameObject.SetActive(true);
+            _activeTasks.Add(taskView);
+            Save();
         }
 
-        foreach (var task in _prefabTaskViews)
+        foreach (var task in _activeTasks)
         {
             task.OnComplete += DestroyTask;
         }
+
+        Load();
     }
 
-    protected void TurnOnTasks()
+    public virtual void RefreshTasks()
     {
-        if(_prefabTaskViews.Count > 0)
-        {
-            TaskView task = _prefabTaskViews.Peek();
-            task.gameObject.SetActive(true);
-            _activeTasks.Add(task);
-            _prefabTaskViews.Dequeue();
-        }
-    }
+        _activeDailyId.Clear();
 
-    protected void RefreshTasks()
-    {
-        _prefabTaskViews.Clear();
-         
-        foreach(var task in _activeTasks)
+        foreach (var task in _activeTasks)
         {
             Destroy(task.gameObject);
         }
@@ -72,16 +68,26 @@ public abstract class TaskSpawner : MonoBehaviour
         SpawnTasks();
     }
 
-    private void DestroyTask(TaskView taskView)
+    public abstract void Save();
+
+    public virtual void Load()
     {
-        foreach (var task in _activeTasks)
+        for(int i = 0; i < _activeTasks.Count; i++)
         {
-            if (taskView == task)
+            _activeTasks[i].InitProgress(_amountProgreses[i]);
+        }
+
+        for (int i = 0; i < _activeTasks.Count; i++)
+        {
+            if (_amountProgreses[i] == -1)
             {
-                _activeTasks.Remove(task);
-                TurnOnTasks();
-                break;
+                _activeTasks[i].gameObject.SetActive(false);
             }
         }
+    }
+
+    private void DestroyTask(TaskView taskView)
+    {
+        taskView.gameObject.SetActive(false);
     }
 }

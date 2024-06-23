@@ -1,4 +1,5 @@
 using System;
+using YG;
 
 public class EnergyBoost : Boost
 {
@@ -21,5 +22,20 @@ public class EnergyBoost : Boost
                 Increase();
             }
         }
+    }
+
+    public override void Save()
+    {
+        YandexGame.savesData.CountEnergyBoost = Count;
+        YandexGame.savesData.CountUpgradeEnergyBoost = CountUpgrade;
+        YandexGame.SaveProgress();
+    }
+
+    public override void Load()
+    {
+        Count = YandexGame.savesData.CountEnergyBoost;
+        CountUpgrade = YandexGame.savesData.CountUpgradeEnergyBoost;
+        LoadTimer();
+        UpdateText();
     }
 }

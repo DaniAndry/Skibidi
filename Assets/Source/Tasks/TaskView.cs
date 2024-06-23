@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class TaskView : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class TaskView : MonoBehaviour
     private Slider _amountCompleted;
 
     public event Action<TaskView> OnComplete;
+
+    public float AmountProgress => _amountProgress;
+    public int Id { get; private set; }
 
     private void OnEnable()
     {
@@ -38,6 +42,20 @@ public class TaskView : MonoBehaviour
         _startExecution.gameObject.SetActive(true);
 
         Invoke("UpdateUI", 0.1f);
+    }
+
+    public void InitId(int id)
+    {
+        Id = id;
+    }
+
+    public void InitProgress(float amount)
+    {
+        _amountProgress = amount;
+        UpdateUI();
+
+        if (_amountCompleted.value >= _task.AmountMaxCollect)
+            CompleteTask();
     }
 
     public void GetTask(Task task)
@@ -63,6 +81,7 @@ public class TaskView : MonoBehaviour
         if (_task.TaskType == name)
         {
             _amountProgress += amount;
+            Save();
             UpdateUI();
 
             if (_amountCompleted.value >= _task.AmountMaxCollect)
@@ -82,14 +101,42 @@ public class TaskView : MonoBehaviour
     private void TakeReward()
     {
         _task.RewardPlayer();
-        OnComplete?.Invoke(this);
         _takeReward.interactable = false;
         _takeRewardParticle?.Play();
         Invoke("Destroy", 1f);
+
+        SaveDestroyTask();
     }
 
-    private void Destroy()
+    public void Destroy()
     {
+        OnComplete?.Invoke(this);
         Destroy(gameObject);
+    }
+
+    private void SaveDestroyTask()
+    {
+        if (GetComponentInParent<DailyTaskSpawner>())
+            YandexGame.savesData.AmountDailyProgreses[Id] = -1;
+        else if (GetComponentInParent<WeeklyTaskSpawner>())
+            YandexGame.savesData.AmountWeeklyProgreses[Id] = -1;
+        else if (GetComponentInParent<DistanceTaskSpawner>())
+            YandexGame.savesData.AmountDistanceProgreses[Id] = -1;
+
+        YandexGame.SaveProgress();
+    }
+
+    private void Save()
+    {
+        YandexGame.SaveProgress();
+
+        if (GetComponentInParent<DailyTaskSpawner>())
+            YandexGame.savesData.AmountDailyProgreses[Id] = _amountProgress;
+        else if (GetComponentInParent<WeeklyTaskSpawner>())
+            YandexGame.savesData.AmountWeeklyProgreses[Id] = _amountProgress;
+        else if (GetComponentInParent<DistanceTaskSpawner>())
+            YandexGame.savesData.AmountDistanceProgreses[Id] = _amountProgress;
+
+        YandexGame.SaveProgress();
     }
 }

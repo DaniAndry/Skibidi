@@ -75,5 +75,6 @@ public class MoneyRewardButton : MonoBehaviour
     private void OnButtonClick()
     {
         YandexGame.RewVideoShow(_id);
+        _rewardButton.gameObject.SetActive(false);
     }
 }

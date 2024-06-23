@@ -6,7 +6,6 @@ public class PlayerIniter : MonoBehaviour
     [SerializeField] private PlayerMoverPresenter _moverPresenter;
     [SerializeField] private PlayerPresenter _presenter;
     [SerializeField] private SkinSelecter _skinSelecter;
-    [SerializeField] private DanceSelecter _danceSelecter;
     [SerializeField] private Shop _danceShop;
     [SerializeField] private Shop _skinShop;
     [SerializeField] private ChunksPlacer _chunksPlacer;

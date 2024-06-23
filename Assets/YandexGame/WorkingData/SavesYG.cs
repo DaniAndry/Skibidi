@@ -1,34 +1,39 @@
-﻿
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+
 namespace YG
 {
     [System.Serializable]
     public class SavesYG
     {
-        // "Технические сохранения" для работы плагина (Не удалять)
         public int idSave;
         public bool isFirstSession = true;
         public string language = "ru";
         public bool promptDone;
+        public int Money = 50000;
+        public int Diamond = 5000;
+        public float MaxEnergy = 50;
+        public float Record = 0;
+        public int CountEnergyBoost = 0;
+        public int CountUpgradeEnergyBoost = 1;
+        public int CountSpeedBoost = 0;
+        public int CountUpgradeSpeedBoost = 1;
+        public int CountMoneyBoost = 0;
+        public int CountUpgradeMoneyBoost = 1;
+        public float VolumeSound = 0.5f;
+        public List<Skin> BoughtSkins;
+        public Skin SelectedSkin;
+        public List<Dance> BoughtDances;
+        public Dance SelectedDance;
+        public List<float> AmountDailyProgreses;
+        public List<float> AmountWeeklyProgreses;
+        public List<float> AmountDistanceProgreses;
+        public int StartWeeklyTime;
+        public int StartDailyTime;
 
-        // Тестовые сохранения для демо сцены
-        // Можно удалить этот код, но тогда удалите и демо (папка Example)
-        public int money = 1;                       // Можно задать полям значения по умолчанию
-        public string newPlayerName = "Hello!";
-        public bool[] openLevels = new bool[3];
-
-        // Ваши сохранения
-
-        // ...
-
-        // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
-
-
-        // Вы можете выполнить какие то действия при загрузке сохранений
         public SavesYG()
         {
-            // Допустим, задать значения по умолчанию для отдельных элементов массива
-
-            openLevels[1] = true;
         }
     }
 }

@@ -11,11 +11,9 @@ public abstract class Shop : MonoBehaviour
     [SerializeField] private Button _selectButton;
     [SerializeField] private TMP_Text _description;
 
-    private PlayerMoverView _playerView;
-
     public event Action OnChangingSkin;
 
-    public PlayerMoverView Player => _playerView;
+    public PlayerMoverView Player { get; private set; }
     public Bank BankMoney => _bank;
     public Transform PlaceSkin => _placeSkin;
     public Button BuyButton => _buyButton;
@@ -32,7 +30,7 @@ public abstract class Shop : MonoBehaviour
 
     public void GetView(PlayerMoverView view)
     {
-        _playerView = view;
+        Player = view;
         OnChangingSkin?.Invoke();
     }
 
@@ -46,7 +44,7 @@ public abstract class Shop : MonoBehaviour
         if (ModelSkin != null)
             Destroy(ModelSkin);
 
-        ModelSkin = Instantiate(_playerView.GetPrefab(), _placeSkin);
+        ModelSkin = Instantiate(Player.GetPrefab(), _placeSkin);
         ModelSkin.GetComponent<Animator>().Play(dance.NameDanceAnim);
 
         SetPositionModel();

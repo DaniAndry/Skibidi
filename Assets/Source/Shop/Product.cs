@@ -43,6 +43,11 @@ public abstract class Product : MonoBehaviour
         _priceText.text = Lean.Localization.LeanLocalization.GetTranslationText("Bought");
     }
 
+    public void TurnOnProduct()
+    {
+        gameObject.SetActive(true);
+    }
+
     public void ShowInfo()
     {
         OnSelected?.Invoke(this);
@@ -52,5 +57,14 @@ public abstract class Product : MonoBehaviour
     {
         _isSelected = !_isSelected;
         _SelectFlag.gameObject.SetActive(_isSelected);
+    }
+
+    public void LoadProgress(bool IsSelect, bool IsBought)
+    {
+        if (IsBought)
+            Unlock();
+
+        if (IsSelect)
+            ChangeStatus();
     }
 }

@@ -1,3 +1,5 @@
+using YG;
+
 public class DailyTaskSpawner : TaskSpawner
 {
     private void OnEnable()
@@ -10,13 +12,24 @@ public class DailyTaskSpawner : TaskSpawner
         TaskInspector.OnGoneDailyTime -= RefreshTasks;    
     }
 
-    public override void SpawnTasks()
+    public override void Save()
     {
-        base.SpawnTasks();
-
-        for (int i = 0; i < 3; i++)
+        if (YandexGame.savesData.AmountDailyProgreses.Count < ActiveTasks.Count)
         {
-            TurnOnTasks();
+            YandexGame.savesData.AmountDailyProgreses.Add(0);
+            YandexGame.SaveProgress();
         }
+    }
+
+    public override void RefreshTasks()
+    {
+        YandexGame.savesData.AmountDailyProgreses.Clear();
+        base.RefreshTasks();
+    }
+
+    public override void Load()
+    {
+        _amountProgreses = YandexGame.savesData.AmountDailyProgreses;
+        base.Load();
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using YG;
 
 public class SpeedBoost : Boost
 {
@@ -21,5 +22,19 @@ public class SpeedBoost : Boost
                 Increase();
             }
         }
+    }
+    public override void Save()
+    {
+        YandexGame.savesData.CountSpeedBoost = Count;
+        YandexGame.savesData.CountUpgradeSpeedBoost = CountUpgrade;
+        YandexGame.SaveProgress();
+    }
+
+    public override void Load()
+    {
+        Count = YandexGame.savesData.CountSpeedBoost;
+        CountUpgrade = YandexGame.savesData.CountUpgradeSpeedBoost;
+        LoadTimer();
+        UpdateText();
     }
 }

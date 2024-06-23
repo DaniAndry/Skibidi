@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 
 public class SkinSelecter : MonoBehaviour
@@ -16,16 +17,15 @@ public class SkinSelecter : MonoBehaviour
 
     private void Start()
     {
-        _selectedSkin = _firstSkin;
-        _firstSkin.ChangeStatus();
-        _firstSkin.Unlock();
-        AddSkin(_firstSkin);
-        InitSkin();
+        Load();
     }
 
     public void AddSkin(Skin skin)
     {
-        _boughtSkins.Add(skin);
+        if (_boughtSkins.Contains(skin) == false)
+        {
+            _boughtSkins.Add(skin);
+        }
     }
 
     public void SelectSkin(Skin skin)
@@ -52,5 +52,52 @@ public class SkinSelecter : MonoBehaviour
 
         Player = _selectedSkin.GetView();
         OnChangingSkin?.Invoke(Player);
+
+        Save();
+    }
+
+    private void Load()
+    {
+        foreach (var skin in YandexGame.savesData.BoughtSkins)
+        {
+            _boughtSkins.Add(skin);
+        }
+
+        _selectedSkin = YandexGame.savesData.SelectedSkin;
+
+        if (_boughtSkins.Count == 0)
+        {
+            _selectedSkin = _firstSkin;
+            _firstSkin.ChangeStatus();
+            _firstSkin.Unlock();
+            AddSkin(_firstSkin);
+            InitSkin();
+        }
+        else
+        {
+            foreach (Skin skin in _boughtSkins)
+            {
+                skin.LoadProgress(false, true);
+
+                if (skin == _selectedSkin)
+                    skin.LoadProgress(true, true);
+            }
+        }
+
+        if (_selectedSkin == null)
+        {
+            _selectedSkin = _firstSkin;
+            _selectedSkin.ChangeStatus();
+            _firstSkin.Unlock();
+        }
+
+        InitSkin();
+    }
+
+    private void Save()
+    {
+        YandexGame.savesData.BoughtSkins = _boughtSkins;
+        YandexGame.savesData.SelectedSkin = _selectedSkin;
+        YandexGame.SaveProgress();
     }
 }
