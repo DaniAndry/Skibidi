@@ -9,6 +9,7 @@ public class PlayerMoverView : MonoBehaviour
     [SerializeField] private CameraMover _cameraMover;
     [SerializeField] private Boost _speedBoost;
     [SerializeField] private GameObject _prefabForDanceShop;
+    [SerializeField] private Button _jumpButton;
 
     private Vector3 _startPlayerPosition;
     private string _nameDanceAnim;
@@ -42,8 +43,8 @@ public class PlayerMoverView : MonoBehaviour
     {
         _cameraMover.GetPlayerTransform(transform);
         _speedBoostButton.onClick.AddListener(UseSpeedBoost);
-        _inputHandler.OnMobileJumpButtonClick += MobileJump;
         _inputHandler.OnJumpButtonClick += Jump;
+        _jumpButton.onClick.AddListener(Jump);
     }
 
     private void Awake()
@@ -51,8 +52,8 @@ public class PlayerMoverView : MonoBehaviour
         _inputHandler = PlayerInputHandler.Instance;
         _startPlayerPosition = transform.position;
         _speedBoostButton = _speedBoost.GetComponent<Button>();
-        _inputHandler.OnMobileJumpButtonClick -= MobileJump;
         _inputHandler.OnJumpButtonClick -= Jump;
+        _jumpButton.onClick.RemoveListener(Jump);
     }
 
     private void Update()
@@ -61,6 +62,8 @@ public class PlayerMoverView : MonoBehaviour
         {
             PlayerInputContorol();
         }
+
+        CheckGrounded();
     }
 
     private void OnDisable()
@@ -68,14 +71,20 @@ public class PlayerMoverView : MonoBehaviour
         _speedBoostButton.onClick.RemoveListener(UseSpeedBoost);
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void CheckGrounded()
     {
-        _canJump = true;
-    }
+        RaycastHit hit;
+        Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), transform.up * -1);
 
-    private void OnCollisionExit(Collision collision)
-    {
-        _canJump = false;
+        if (Physics.Raycast(ray, out hit, 0.3f))
+        {
+            if (hit.collider.TryGetComponent(out Chunk chunk))
+                _canJump = true;
+        }
+        else
+        {
+            _canJump = false;
+        }
     }
 
     public GameObject GetPrefab()
@@ -179,13 +188,7 @@ public class PlayerMoverView : MonoBehaviour
             OnMoving?.Invoke(0);
     }
 
-    private void MobileJump(Vector2 swape)
-    {
-        if (_canJump && swape.y > _inputHandler.DeltaMobileJump)
-            OnJumping?.Invoke();
-    }
-
-    private void Jump() 
+    private void Jump()
     {
         if (_canJump)
             OnJumping?.Invoke();

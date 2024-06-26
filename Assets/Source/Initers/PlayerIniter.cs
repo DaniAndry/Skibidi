@@ -10,7 +10,7 @@ public class PlayerIniter : MonoBehaviour
     [SerializeField] private Shop _skinShop;
     [SerializeField] private ChunksPlacer _chunksPlacer;
     [SerializeField] private ChunksPlacer _backChunksPlacer;
-    /*    [SerializeField] private PlayerEffectsSelecter _playerEffectsSelecter;*/
+    [SerializeField] private PlayerEffectsSelecter _playerEffectsSelecter;
     [SerializeField] private FunDance _funDance;
     [SerializeField] private PlayerAnimatorController _playerAnimatorController;
 
@@ -52,8 +52,9 @@ public class PlayerIniter : MonoBehaviour
         _playerAnimatorController.Init(_viewMover, _animator);
         _presenter.Init(_model, _view);
         _moverPresenter.Init(_moverModel, _viewMover);
-/*        _playerEffects = _playerEffectsSelecter.GetEffects();*/
-     /*   _playerEffects.Init(_viewMover, _view);*/
+        _playerEffectsSelecter.InitPlayer(_view);
+        _playerEffects = _playerEffectsSelecter.GetEffects();
+        _playerEffects.Init(_viewMover, _view);
         _chunksPlacer.GetPlayerTransform(playerView.transform);
 
         _danceShop.GetView(_viewMover);

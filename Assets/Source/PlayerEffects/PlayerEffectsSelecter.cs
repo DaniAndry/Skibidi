@@ -1,25 +1,18 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerEffectsSelecter : MonoBehaviour
 {
-    [SerializeField] private List<PlayerEffectController> _playersEffects;
-
-   private PlayerEffectController _playerEffectController;
-
-    private void Start()
-    {
-        foreach (var playerEffect in _playersEffects)
-        {
-            if (playerEffect.gameObject.activeSelf == true)
-            {
-                _playerEffectController = playerEffect;
-            }
-        }
-    }
+    private PlayerEffectController _playerEffectController;
+    private PlayerView _playerView;
 
     public PlayerEffectController GetEffects()
     {
         return _playerEffectController;
+    }
+
+    public void InitPlayer(PlayerView view)
+    {
+        _playerView = view;
+        _playerEffectController = _playerView.GetComponent<PlayerEffectController>();
     }
 }

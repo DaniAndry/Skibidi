@@ -7,11 +7,11 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> _itemPrefabs;
     [SerializeField] private ChunksPlacer _chunksPlacer;
     [SerializeField] private PlayerView _player;
-    [SerializeField] private PlayerMoverView _mover;
     [SerializeField] private BoostItemFactory _boostItemFactory;
     [SerializeField] private OtherItemFactory _otherItemFactory;
     [SerializeField] private BlockSpawner _blockSpawner;
 
+    private PlayerMoverView _mover;
     private Dictionary<Chunk, List<GameObject>> _spawnedItems = new Dictionary<Chunk, List<GameObject>>();
 
     private void OnEnable()

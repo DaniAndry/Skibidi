@@ -33,6 +33,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "JumpMobile1",
+                    "type": "Button",
+                    "id": "11d3a1d0-7037-4aff-b22d-4dbe2d00b072",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "5384a248-6ec7-4d03-a8fd-083cf2179f4a",
@@ -101,7 +110,7 @@
                 {
                     "name": "2D Vector",
                     "id": "aa012b54-2498-481f-afe9-59a6c5aa5c2f",
-                    "path": "2DVector(mode=2)",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -110,7 +119,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
+                    "name": "Up",
                     "id": "611c5427-e209-41b1-875b-0d1c5d289ac1",
                     "path": "<Touchscreen>/delta/up",
                     "interactions": "",
@@ -130,6 +139,28 @@
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "1b898598-5b14-4407-a512-91c44b9eec4b",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpMobile1",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Up",
+                    "id": "83469a0c-15bf-4deb-8a9d-1b0b49c5da10",
+                    "path": "<Touchscreen>/delta/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpMobile1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
