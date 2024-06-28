@@ -39,6 +39,6 @@ public class Block : MonoBehaviour
 
     private void DisableCelling()
     {
-        _ceiling.gameObject.SetActive(false);
+        _ceiling.gameObject.GetComponent<Collider>().enabled = false;
     }
 }

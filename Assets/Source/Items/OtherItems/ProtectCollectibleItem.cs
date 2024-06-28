@@ -4,7 +4,7 @@ using UnityEngine;
 public class ProtectCollectibleItem : OtherItem
 {
     private bool _isActivated = true;
-    private int _duration = 5;
+    private int _duration = 20;
 
     public override void Boost()
     {

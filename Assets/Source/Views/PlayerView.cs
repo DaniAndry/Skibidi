@@ -88,7 +88,7 @@ public class PlayerView : MonoBehaviour
 
     public void AddMoney(int count, bool isBoost)
     {
-        if (count > 0 && _isMoneyBoost)
+        if (_isMoneyBoost || isBoost)
         {
             OnMoneyChanging?.Invoke(count * _moneyBoost.Bonus, isBoost);
             _bank.GiveMoneyForGame(count * Convert.ToInt32(_moneyBoost.Bonus));

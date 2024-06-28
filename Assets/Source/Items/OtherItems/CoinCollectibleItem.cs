@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CoinCollectibleItem : OtherItem
 {
-    private int _boostCount = 20;
+    private int _boostCount = 40;
     private int _deBoostCount = -5;
     private bool _isBoost = true;
 

@@ -42,6 +42,7 @@ public class ItemSpawner : MonoBehaviour
     private void SpawnFirstChunk()
     {
         OnChunkSpawned(_chunksPlacer.Chunks[0]);
+        OnChunkSpawned(_chunksPlacer.Chunks[0]);
     }
 
     private void OnChunkSpawned(Chunk chunk)

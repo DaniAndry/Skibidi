@@ -78,7 +78,7 @@ public class PlayerEffectController : MonoBehaviour
 
     private void SpeedBoostEffect(float speed)
     {
-        _effectType = PlayerEffectType.SpeedBoost;
+      /*  _effectType = PlayerEffectType.SpeedBoost;
 
         if (IsBoost(speed))
         {
@@ -87,7 +87,7 @@ public class PlayerEffectController : MonoBehaviour
         else
         {
             StopEffect();
-        }
+        }*/
     }
 
     private void EnergyBoostEffect(float count)
@@ -130,6 +130,6 @@ public class PlayerEffectController : MonoBehaviour
 
     private bool IsBoost(float count)
     {
-        return count > 20;
+        return count > 3;
     }
 }
