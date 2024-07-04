@@ -6,6 +6,8 @@ public class Block : MonoBehaviour
 
     private Ceiling _ceiling;
 
+    public ParticleSystem CrashParticle => _crashParticle;
+
     private void Awake()
     {
         _ceiling = GetComponentInChildren<Ceiling>();

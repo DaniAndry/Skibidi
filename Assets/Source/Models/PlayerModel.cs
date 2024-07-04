@@ -12,7 +12,7 @@ public class PlayerModel
 
     public event Action DistanceChanging;
     public event Action OnEnergyGone;
-    public event Action EnergyChanged;
+    public event Action OnEnergyChanged;
     public event Action<float> OnTimeChanging;
 
     public float TotalDistanceTraveled { get; private set; }
@@ -22,7 +22,6 @@ public class PlayerModel
     public void Init()
     {
         Load();
-        CurrentEnergy = MaxEnergy;
     }
 
     public void TakeEnergy(float count)
@@ -105,13 +104,14 @@ public class PlayerModel
             _lastPosition = transform.position;
 
             DistanceChanging?.Invoke();
-            EnergyChanged?.Invoke();
+            OnEnergyChanged?.Invoke();
 
-            if (CurrentEnergy <= 0)
-            {
-                _isEnergyGone = true;
-                OnEnergyGone?.Invoke();
-            }
+        }
+
+        if (CurrentEnergy <= 0 && _isEnergyGone == false)
+        {
+            _isEnergyGone = true;
+            OnEnergyGone?.Invoke();
         }
     }
 
@@ -124,5 +124,6 @@ public class PlayerModel
     private void Load()
     {
         MaxEnergy = YandexGame.savesData.MaxEnergy;
+        CurrentEnergy = MaxEnergy;
     }
 }

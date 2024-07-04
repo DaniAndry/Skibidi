@@ -19,6 +19,7 @@ public class PlayerMoverView : MonoBehaviour
     private bool _canMove = false;
     private bool _canJump = true;
     private PlayerInputHandler _inputHandler;
+    private PlayerView _playerView;
 
     public event Action<float> OnMoving;
     public event Action<float> OnChangingSpeed;
@@ -54,6 +55,7 @@ public class PlayerMoverView : MonoBehaviour
         _speedBoostButton = _speedBoost.GetComponent<Button>();
         _inputHandler.OnJumpButtonClick -= Jump;
         _jumpButton.onClick.RemoveListener(Jump);
+        _playerView = GetComponent<PlayerView>();
     }
 
     private void Update()
@@ -117,7 +119,7 @@ public class PlayerMoverView : MonoBehaviour
 
     public void Crash()
     {
-        if (!_isProtected)
+        if (_isProtected == false)
         {
             float moveSpeed = 3;
             AudioManager.Instance.Play("Crash");
@@ -129,7 +131,11 @@ public class PlayerMoverView : MonoBehaviour
 
     public void CrashOnCar()
     {
-        OnCrashed?.Invoke();
+        if (_isProtected == false)
+        {
+            OnCrashed?.Invoke();
+            _playerView.GameOver();
+        }
     }
 
     public void StartMove()

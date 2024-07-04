@@ -4,13 +4,14 @@ public class BlockCar : Block
 {
     protected override void Activate(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out PlayerMoverView player) && collision.gameObject.TryGetComponent(out PlayerView playerView))
+        if (collision.gameObject.TryGetComponent(out PlayerMoverView player))
         {
             player.CrashOnCar();
             AudioManager.Instance.Play("CarCrash");
-            playerView.GameOver();
+            Instantiate(CrashParticle.gameObject, transform.position, transform.rotation);
+            GetComponent<Collider>().enabled = false;
 
-            Invoke("Destroy", 0.4f);
+            Invoke("Destroy", 0.1f);
         }
     }
 

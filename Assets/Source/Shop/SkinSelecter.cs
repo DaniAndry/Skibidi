@@ -68,9 +68,9 @@ public class SkinSelecter : MonoBehaviour
         if (_boughtSkins.Count == 0)
         {
             _selectedSkin = _firstSkin;
-            _firstSkin.ChangeStatus();
-            _firstSkin.Unlock();
-            AddSkin(_firstSkin);
+            _selectedSkin.ChangeStatus();
+            _selectedSkin.Unlock();
+            AddSkin(_selectedSkin);
             InitSkin();
         }
         else

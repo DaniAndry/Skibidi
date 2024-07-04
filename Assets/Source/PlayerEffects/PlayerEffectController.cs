@@ -9,7 +9,6 @@ public enum PlayerEffectType
     EnergyDeboost,
     CoinBoost,
     CoinDeboost,
-    Deboost
 }
 
 public class PlayerEffectController : MonoBehaviour
@@ -34,16 +33,16 @@ public class PlayerEffectController : MonoBehaviour
     {
         _view = playerView;
         _viewMover = playerMoverView;
-
-        for (int i = 0; i < _effects.Count; i++)
-        {
-            _effectsDictionary.Add((PlayerEffectType)i, _effects[i]);
-        }
-
         _viewMover.OnProtected += ProtectBoostEffect;
         _viewMover.OnChangingSpeed += SpeedBoostEffect;
         _view.EnergyChanging += EnergyBoostEffect;
         _view.OnMoneyChanging += CoinBoostEffect;
+
+        for (int i = 0; i < _effects.Count; i++)
+        {
+            if (_effectsDictionary.ContainsKey((PlayerEffectType)i) == false)
+                _effectsDictionary.Add((PlayerEffectType)i, _effects[i]);
+        }
     }
 
     private void PlayEffect()
@@ -78,16 +77,16 @@ public class PlayerEffectController : MonoBehaviour
 
     private void SpeedBoostEffect(float speed)
     {
-      /*  _effectType = PlayerEffectType.SpeedBoost;
+        /*  _effectType = PlayerEffectType.SpeedBoost;
 
-        if (IsBoost(speed))
-        {
-            PlayEffect();
-        }
-        else
-        {
-            StopEffect();
-        }*/
+          if (IsBoost(speed))
+          {
+              PlayEffect();
+          }
+          else
+          {
+              StopEffect();
+          }*/
     }
 
     private void EnergyBoostEffect(float count)

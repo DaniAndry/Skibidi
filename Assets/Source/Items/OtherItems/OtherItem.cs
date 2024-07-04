@@ -22,8 +22,8 @@ public class OtherItem : Item
     public virtual void DeBoost()
     { }
 
-    public void Init(ItemViewSpawner spawwner)
+    public void Init(ItemViewSpawner spawner)
     {
-        _spawner = spawwner;
+        _spawner = spawner;
     }
 }

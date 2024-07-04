@@ -46,7 +46,7 @@ public class PlayerPresenter : MonoBehaviour
 
         _view.MaxEnergyChanging += OnMaxEnergyChanging;
         _view.DistanceBoostChanging += UseDistanceDistanceBoost;
-        _model.EnergyChanged += OnEnergyChanging;
+        _model.OnEnergyChanged += OnEnergyChanging;
         _model.OnEnergyGone += EndGame;
         _view.GameOvered += EndGame;
         _view.EnergyChanging += OnViewEnergyChanged;
@@ -58,7 +58,7 @@ public class PlayerPresenter : MonoBehaviour
     {
         _view.MaxEnergyChanging -= OnMaxEnergyChanging;
         _view.DistanceBoostChanging -= UseDistanceDistanceBoost;
-        _model.EnergyChanged -= OnEnergyChanging;
+        _model.OnEnergyChanged -= OnEnergyChanging;
         _model.OnEnergyGone -= EndGame;
         _view.GameOvered -= EndGame;
         _model.DistanceChanging -= OnDistanceChanging;
