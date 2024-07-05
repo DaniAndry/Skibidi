@@ -60,8 +60,8 @@ public class PlayerIniter : MonoBehaviour
         _danceShop.GetView(_viewMover);
         _skinShop.GetView(_viewMover);
 
-        _presenter?.Enable();
         _moverPresenter?.Enable();
+        _presenter?.Enable();
     }
 }
 

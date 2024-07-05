@@ -18,26 +18,26 @@ public class PlayerMoverPresenter : MonoBehaviour
 
     public void Enable()
     {
-        _view.OnJumping += _model.Jump;
         _view.OnMoving += SetDataMove;
         _view.OnChangingSpeedCrash += ChangeSpeedCrash;
         _view.OnSpeedBoostChanging += OnSpeedChanging;
         _view.OnSomersault += Somerslaut;
         _model.OnChangeSpeed += _view.ChangeCurrentSpeed;
-        _model.Jumped += _view.Jumped;
         _model.OnChangingBoostTime += _view.SetSpeedBoostTimer;
+        _view.OnJumping += Jump;
+        _model.OnJumped += _view.Jumped;
     }
 
     public void Disable()
     {
-        _view.OnJumping -= _model.Jump;
         _view.OnMoving -= SetDataMove;
         _view.OnChangingSpeedCrash -= ChangeSpeedCrash;
         _view.OnSpeedBoostChanging -= OnSpeedChanging;
         _view.OnSomersault -= Somerslaut;
         _model.OnChangeSpeed -= _view.ChangeCurrentSpeed;
-        _model.Jumped -= _view.Jumped;
         _model.OnChangingBoostTime -= _view.SetSpeedBoostTimer;
+        _view.OnJumping -= Jump;
+        _model.OnJumped -= _view.Jumped;
     }
 
     public void EndPlayerMove()
@@ -61,6 +61,11 @@ public class PlayerMoverPresenter : MonoBehaviour
     private void SetDataMove(float coefficient)
     {
         _model.SetDataMove(coefficient);
+    }
+
+    private void Jump()
+    {
+        _model.Jump();
     }
 
     private void Somerslaut()

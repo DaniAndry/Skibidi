@@ -71,7 +71,6 @@ public class SkinSelecter : MonoBehaviour
             _selectedSkin.ChangeStatus();
             _selectedSkin.Unlock();
             AddSkin(_selectedSkin);
-            InitSkin();
         }
         else
         {

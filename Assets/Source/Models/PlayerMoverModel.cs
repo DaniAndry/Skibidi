@@ -14,14 +14,11 @@ public class PlayerMoverModel
     private float _speedTime;
     private float _jumpPower = 4f;
     private float _moveCoefficient;
-
     private bool _isMove = false;
     private bool _isSpeedBoost;
-
     private PlayerInputHandler _inputHandler;
 
-    public event Action Jumped;
-
+    public event Action OnJumped;
     public event Action<float> OnChangeSpeed;
     public event Action<float> OnChangingBoostTime;
 
@@ -114,7 +111,7 @@ public class PlayerMoverModel
 
     public void Jump()
     {
-        Jumped?.Invoke();
+        OnJumped?.Invoke();
         _rigidbody.AddForce(0f, _jumpPower, 0f, ForceMode.Impulse);
         TaskCounter.IncereaseProgress(1, Convert.ToString(TaskType.Jump));
     }

@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,21 +39,11 @@ public class PlayerMoverView : MonoBehaviour
     public string NameDanceAnim => _nameDanceAnim;
     public float CurrentSpeed => _speed;
 
-    private void OnEnable()
-    {
-        _cameraMover.GetPlayerTransform(transform);
-        _speedBoostButton.onClick.AddListener(UseSpeedBoost);
-        _inputHandler.OnJumpButtonClick += Jump;
-        _jumpButton.onClick.AddListener(Jump);
-    }
-
     private void Awake()
     {
         _inputHandler = PlayerInputHandler.Instance;
         _startPlayerPosition = transform.position;
         _speedBoostButton = _speedBoost.GetComponent<Button>();
-        _inputHandler.OnJumpButtonClick -= Jump;
-        _jumpButton.onClick.RemoveListener(Jump);
         _playerView = GetComponent<PlayerView>();
     }
 
@@ -68,9 +57,19 @@ public class PlayerMoverView : MonoBehaviour
         CheckGrounded();
     }
 
+    private void OnEnable()
+    {
+        _cameraMover.GetPlayerTransform(transform);
+        _speedBoostButton.onClick.AddListener(UseSpeedBoost);
+        _inputHandler.OnJumpButtonClick += Jump;
+        _jumpButton.onClick.AddListener(Jump);
+    }
+
     private void OnDisable()
     {
         _speedBoostButton.onClick.RemoveListener(UseSpeedBoost);
+        _inputHandler.OnJumpButtonClick -= Jump;
+        _jumpButton.onClick.RemoveListener(Jump);
     }
 
     private void CheckGrounded()
@@ -157,6 +156,7 @@ public class PlayerMoverView : MonoBehaviour
         _cameraMover?.EndMove();
         _canMove = false;
         OnStoped?.Invoke();
+        _isProtected = false;
     }
 
     public void Kick()
@@ -196,8 +196,10 @@ public class PlayerMoverView : MonoBehaviour
 
     private void Jump()
     {
-        if (_canJump)
+        if (_canJump && _canMove)
+        {
             OnJumping?.Invoke();
+        }
     }
 
     private void UseSpeedBoost()
