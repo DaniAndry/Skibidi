@@ -1,13 +1,19 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ProtectCollectibleItem : OtherItem
 {
     private bool _isActivated = false;
-    private float _duration = 7;
+    private float _duration = 10;
     private WaitForSeconds _protectTime = new WaitForSeconds(1f);
     private Coroutine _protectCoroutine;
     private float _time;
+
+    private void OnDisable()
+    {
+        ProtectDisable();
+    }
 
     public override void Boost()
     {
@@ -27,16 +33,10 @@ public class ProtectCollectibleItem : OtherItem
         {
             _time--;
 
-            if (_time > 0)
+            if (_time <= 0)
             {
-                Debug.Log(_time);
-            }
-            else
-            {
-                Debug.Log(123);
                 _time = _duration;
                 ProtectDisable();
-                _isActivated = false;
             }
 
             yield return _protectTime;
@@ -45,6 +45,10 @@ public class ProtectCollectibleItem : OtherItem
 
     private void ProtectDisable()
     {
-        PlayerMoverView.Protect(!_isActivated);
+        if(PlayerMoverView != null && _isActivated)
+        {
+            _isActivated = false;
+            PlayerMoverView.Protect(_isActivated);
+        }
     }
 }
