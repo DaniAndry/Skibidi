@@ -13,16 +13,6 @@ public class SpeedBoost : Boost
         AwardGiver.OnReward -= GiveRewardBoost;
     }
 
-    private void GiveRewardBoost(string name, int amount)
-    {
-        if (name == Convert.ToString(ResourceType.SpeedBoost))
-        {
-            for(int i = 0; i <= amount; i++)
-            {
-                Increase();
-            }
-        }
-    }
     public override void Save()
     {
         YandexGame.savesData.CountSpeedBoost = Count;
@@ -36,5 +26,16 @@ public class SpeedBoost : Boost
         CountUpgrade = YandexGame.savesData.CountUpgradeSpeedBoost;
         LoadTimer();
         UpdateText();
+    }
+
+    private void GiveRewardBoost(string name, int amount)
+    {
+        if (name == Convert.ToString(ResourceType.SpeedBoost))
+        {
+            for(int i = 0; i <= amount; i++)
+            {
+                Increase();
+            }
+        }
     }
 }

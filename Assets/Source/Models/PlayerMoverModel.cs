@@ -18,15 +18,15 @@ public class PlayerMoverModel
     private bool _isSpeedBoost;
     private PlayerInputHandler _inputHandler;
 
-    public event Action OnJumped;
-    public event Action<float> OnChangeSpeed;
-    public event Action<float> OnChangingBoostTime;
-
     public PlayerMoverModel(Rigidbody rigidbody)
     {
         _rigidbody = rigidbody;
         _inputHandler = PlayerInputHandler.Instance;
     }
+
+    public event Action OnJumped;
+    public event Action<float> OnChangeSpeed;
+    public event Action<float> OnChangingBoostTime;
 
     public float MoveSpeed { get; private set; }
 

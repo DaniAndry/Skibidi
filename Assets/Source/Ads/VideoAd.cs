@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
@@ -13,16 +12,17 @@ public class VideoAd : MonoBehaviour
 
     private void OnEnable()
     {
-        _resurrect.OnRestart += RefreshAdButtons;
+        _resurrect.OnRestarting += RefreshAdButtons;
         YandexGame.RewardVideoEvent += Rewarded;
     }
 
     private void OnDisable()
     {
-        _resurrect.OnRestart += RefreshAdButtons;
+        _resurrect.OnRestarting += RefreshAdButtons;
         YandexGame.RewardVideoEvent -= Rewarded;
     }
-    void Rewarded(int id)
+
+    private void Rewarded(int id)
     {
         if (id == 1)
             _bank.GiveMoney(200);

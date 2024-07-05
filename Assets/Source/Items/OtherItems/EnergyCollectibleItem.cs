@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class EnergyCollectibleItem : OtherItem
 {
     private int _boostCount = 100;

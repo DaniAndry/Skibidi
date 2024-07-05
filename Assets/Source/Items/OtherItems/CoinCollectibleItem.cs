@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class CoinCollectibleItem : OtherItem
 {
     private int _boostCount = 40;

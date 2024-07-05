@@ -13,7 +13,7 @@ public class PlayerAnimatorController : MonoBehaviour
 
     private Animator _animator;
     private PlayerMoverView _playerMoverView;
-    private int DanceState;
+    private int _danceState;
 
     private void OnDisable()
     {
@@ -81,8 +81,8 @@ public class PlayerAnimatorController : MonoBehaviour
 
     private void Dance()
     {
-        DanceState = Animator.StringToHash(_playerMoverView.NameDanceAnim);
-        _animator.Play(DanceState);
+        _danceState = Animator.StringToHash(_playerMoverView.NameDanceAnim);
+        _animator.Play(_danceState);
     }
 
     private void ResetPlayer()

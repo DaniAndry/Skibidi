@@ -23,7 +23,7 @@ public class PlayerResurrect : MonoBehaviour
     private float _energyGiftForDiamond = 100;
     private int _id = 6;
 
-    public event Action OnRestart;
+    public event Action OnRestarting;
     public event Action<float> OnResurrected;
 
     private void Awake()
@@ -90,7 +90,7 @@ public class PlayerResurrect : MonoBehaviour
         _playerResurrectWindow.CloseWithoutSound();
         _price = 1;
         _priceDiamondText.text = _price.ToString();
-        OnRestart?.Invoke();
+        OnRestarting?.Invoke();
         YandexGame.FullscreenShow();
     }
 

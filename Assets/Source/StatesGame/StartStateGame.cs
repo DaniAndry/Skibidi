@@ -25,11 +25,11 @@ public class StartStateGame
 
     public void Enable()
     {
-        _menu.ClickingStart += Start;
+        _menu.OnClickStart += Start;
     }
 
     public void Disable()
     {
-        _menu.ClickingStart -= Start;
+        _menu.OnClickStart -= Start;
     }
 }

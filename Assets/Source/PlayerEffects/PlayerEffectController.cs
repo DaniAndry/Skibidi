@@ -18,14 +18,12 @@ public class PlayerEffectController : MonoBehaviour
     private PlayerView _view;
     private PlayerMoverView _viewMover;
     private PlayerEffectType _effectType;
-
     private Dictionary<PlayerEffectType, ParticleSystem> _effectsDictionary = new Dictionary<PlayerEffectType, ParticleSystem>();
 
     private void OnDisable()
     {
         _viewMover.OnProtected -= ProtectBoostEffect;
-        _viewMover.OnChangingSpeed -= SpeedBoostEffect;
-        _view.EnergyChanging -= EnergyBoostEffect;
+        _view.OnEnergyChanging -= EnergyBoostEffect;
         _view.OnMoneyChanging -= CoinBoostEffect;
     }
 
@@ -34,8 +32,7 @@ public class PlayerEffectController : MonoBehaviour
         _view = playerView;
         _viewMover = playerMoverView;
         _viewMover.OnProtected += ProtectBoostEffect;
-        _viewMover.OnChangingSpeed += SpeedBoostEffect;
-        _view.EnergyChanging += EnergyBoostEffect;
+        _view.OnEnergyChanging += EnergyBoostEffect;
         _view.OnMoneyChanging += CoinBoostEffect;
 
         for (int i = 0; i < _effects.Count; i++)
@@ -73,20 +70,6 @@ public class PlayerEffectController : MonoBehaviour
         {
             StopEffect();
         }
-    }
-
-    private void SpeedBoostEffect(float speed)
-    {
-        /*  _effectType = PlayerEffectType.SpeedBoost;
-
-          if (IsBoost(speed))
-          {
-              PlayEffect();
-          }
-          else
-          {
-              StopEffect();
-          }*/
     }
 
     private void EnergyBoostEffect(float count)

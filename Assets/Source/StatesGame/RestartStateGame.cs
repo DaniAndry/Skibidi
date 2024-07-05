@@ -17,12 +17,12 @@ public class RestartStateGame
 
     public void Enable()
     {
-        _playerResurrect.OnRestart += ResetGame;
+        _playerResurrect.OnRestarting += ResetGame;
     }
 
     public void Disable()
     {
-        _playerResurrect.OnRestart -= ResetGame;
+        _playerResurrect.OnRestarting -= ResetGame;
     }
 
     public void ResetGame()

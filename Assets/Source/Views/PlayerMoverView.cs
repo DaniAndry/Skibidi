@@ -25,7 +25,6 @@ public class PlayerMoverView : MonoBehaviour
     public event Action<float> OnChangingSpeedCrash;
     public event Action<float, float> OnSpeedBoostChanging;
     public event Action<bool> OnProtected;
-
     public event Action OnStarted;
     public event Action OnStoped;
     public event Action OnKicked;
@@ -70,22 +69,6 @@ public class PlayerMoverView : MonoBehaviour
         _speedBoostButton.onClick.RemoveListener(UseSpeedBoost);
         _inputHandler.OnJumpButtonClick -= Jump;
         _jumpButton.onClick.RemoveListener(Jump);
-    }
-
-    private void CheckGrounded()
-    {
-        RaycastHit hit;
-        Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), transform.up * -1);
-
-        if (Physics.Raycast(ray, out hit, 0.3f))
-        {
-            if (hit.collider.TryGetComponent(out Chunk chunk))
-                _canJump = true;
-        }
-        else
-        {
-            _canJump = false;
-        }
     }
 
     public GameObject GetPrefab()
@@ -182,6 +165,22 @@ public class PlayerMoverView : MonoBehaviour
     public void SetSpeedBoostTimer(float time)
     {
         _speedBoost.SetTimeText(time);
+    }
+
+    private void CheckGrounded()
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), transform.up * -1);
+
+        if (Physics.Raycast(ray, out hit, 0.3f))
+        {
+            if (hit.collider.TryGetComponent(out Chunk chunk))
+                _canJump = true;
+        }
+        else
+        {
+            _canJump = false;
+        }
     }
 
     private void PlayerInputContorol()

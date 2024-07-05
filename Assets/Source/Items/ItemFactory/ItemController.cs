@@ -7,8 +7,8 @@ public class ItemController : MonoBehaviour
 {
     private List<ItemView> _items = new List<ItemView>();
 
-    public event Action ItemsClearedDueToMismatch;
-    public event Action ItemsClearedDueToMatch;
+    public event Action OnItemsClearedDueToMismatch;
+    public event Action OnItemsClearedDueToMatch;
 
     public void AddItem(ItemView newItem, OtherItem otherItem)
     {
@@ -32,14 +32,14 @@ public class ItemController : MonoBehaviour
     {
         otherItem.Boost();
         ClearPanel();
-        ItemsClearedDueToMatch?.Invoke();
+        OnItemsClearedDueToMatch?.Invoke();
     }
 
     private void ActivationDeboost(OtherItem otherItem)
     {
         otherItem.DeBoost();
         ClearPanel();
-        ItemsClearedDueToMismatch?.Invoke();
+        OnItemsClearedDueToMismatch?.Invoke();
     }
 
     private void ClearPanel()

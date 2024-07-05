@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class EnergyItem : Item
 {
     protected float Energy = 50;

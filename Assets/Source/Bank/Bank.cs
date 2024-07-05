@@ -19,6 +19,11 @@ public class Bank : MonoBehaviour
 
     public int Money { get; private set; }  = 500000;
 
+    private void Start()
+    {
+        UpdateText();
+    }
+
     private void Awake()
     {
         Load();
@@ -27,11 +32,6 @@ public class Bank : MonoBehaviour
     private void OnEnable()
     {
         AwardGiver.OnReward += GiveReward;
-    }
-
-    private void Start()
-    {
-        UpdateText();
     }
 
     private void OnDisable()

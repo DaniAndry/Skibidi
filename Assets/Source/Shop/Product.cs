@@ -15,12 +15,12 @@ public abstract class Product : MonoBehaviour
 
     private Button _showButton;
 
+    public event Action<Product> OnSelected;
+
     public string Description => _descriptionTranslation;
     public bool IsSelected => _isSelected;
     public int Price => _price;
     public bool IsBought { get; private set; } = false;
-
-    public event Action<Product> OnSelected;
 
     private void Awake()
     {

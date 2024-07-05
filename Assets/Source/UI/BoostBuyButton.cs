@@ -72,6 +72,21 @@ public class BoostBuyButton : MonoBehaviour
 
     }
 
+    public void RewardBoost()
+    {
+        _shopBoosts.Buy(_boost, 0);
+        BuyBoost();
+    }
+
+    public void RewardUpgradeBoost()
+    {
+        if (_isBanUpgrade == false)
+        {
+            _shopBoosts.BuyUpgrade(_boost, 0);
+            UpgradeBoost();
+        }
+    }
+
     public void Load()
     {
         _boost.Load();
@@ -111,21 +126,6 @@ public class BoostBuyButton : MonoBehaviour
         if (_isBanUpgrade == false)
         {
             _shopBoosts.BuyUpgrade(_boost, _priceUpgradeBoost);
-            UpgradeBoost();
-        }
-    }
-
-    public void RewardBoost()
-    {
-        _shopBoosts.Buy(_boost, 0);
-        BuyBoost();
-    }
-
-    public void RewardUpgradeBoost()
-    {
-        if (_isBanUpgrade == false)
-        {
-            _shopBoosts.BuyUpgrade(_boost, 0);
             UpgradeBoost();
         }
     }

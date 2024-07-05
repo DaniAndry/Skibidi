@@ -21,13 +21,12 @@ public class PlayerView : MonoBehaviour
     private Button _energyUpgradeButton;
     private bool _isMoneyBoost = false;
     private float _moneyBoostTime;
-    private Coroutine _timeMoneyBoostCoroutine;
 
-    public event Action<float> EnergyChanging;
-    public event Action<float> MaxEnergyChanging;
+    public event Action<float> OnEnergyChanging;
+    public event Action<float> OnMaxEnergyChanging;
     public event Action<float, bool> OnMoneyChanging;
-    public event Action<EnergyBoost> DistanceBoostChanging;
-    public event Action GameOvered;
+    public event Action<EnergyBoost> OnDistanceBoostChanging;
+    public event Action OnGameOvered;
 
     private void Awake()
     {
@@ -54,18 +53,18 @@ public class PlayerView : MonoBehaviour
 
     public void GameOver()
     {
-        GameOvered?.Invoke();
+        OnGameOvered?.Invoke();
     }
 
     public void OnEnergyChanged(float energyAmount)
     {
         AudioManager.Instance.Play("UseBoost");
-        EnergyChanging?.Invoke(energyAmount);
+        OnEnergyChanging?.Invoke(energyAmount);
     }
 
     public void OnChangeMaxEnergy()
     {
-        MaxEnergyChanging?.Invoke(_energyUpgrade.Upgrade());
+        OnMaxEnergyChanging?.Invoke(_energyUpgrade.Upgrade());
     }
 
     public void SetDistance(float distance)
@@ -110,7 +109,7 @@ public class PlayerView : MonoBehaviour
         {
             _isMoneyBoost = true;
             _moneyBoostTime = _moneyBoost.Time;
-            _timeMoneyBoostCoroutine = StartCoroutine(TimeChanging());
+            StartCoroutine(TimeChanging());
         }
         else
             Debug.Log("ErrorUseBoost");
@@ -119,7 +118,7 @@ public class PlayerView : MonoBehaviour
     private void UseEnergyBoost()
     {
         if (_energyBoost.TryUse())
-            DistanceBoostChanging?.Invoke(_energyBoost);
+            OnDistanceBoostChanging?.Invoke(_energyBoost);
         else
             Debug.Log("ErrorUseBoost");
     }

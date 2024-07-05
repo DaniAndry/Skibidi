@@ -13,13 +13,12 @@ public abstract class Shop : MonoBehaviour
 
     public event Action OnChangingSkin;
 
-    public PlayerMoverView Player { get; private set; }
     public Bank BankMoney => _bank;
     public Transform PlaceSkin => _placeSkin;
     public Button BuyButton => _buyButton;
     public Button SelectButton => _selectButton;
     public TMP_Text Description => _description;
-
+    public PlayerMoverView Player { get; private set; }
     public GameObject ModelSkin { get; private set; }
 
     private void Start()
@@ -50,12 +49,12 @@ public abstract class Shop : MonoBehaviour
         SetPositionModel();
     }
 
-    virtual public void TurnOnModel()
+    public virtual void TurnOnModel()
     {
         ModelSkin?.SetActive(true);
     }
 
-    virtual public void BuyProduct()
+    public virtual void BuyProduct()
     {
         _buyButton.gameObject.SetActive(false);
         _selectButton.gameObject.SetActive(true);

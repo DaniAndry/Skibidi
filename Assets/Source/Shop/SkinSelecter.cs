@@ -11,9 +11,9 @@ public class SkinSelecter : MonoBehaviour
     private List<Skin> _boughtSkins = new List<Skin>();
     private Skin _selectedSkin;
 
-    public PlayerView Player { get; private set; }
-
     public event Action<PlayerView> OnChangingSkin;
+
+    public PlayerView Player { get; private set; }
 
     private void Start()
     {

@@ -13,16 +13,6 @@ public class MoneyBoost : Boost
         AwardGiver.OnReward -= GiveRewardBoost;
     }
 
-    private void GiveRewardBoost(string name, int amount)
-    {
-        if (name == Convert.ToString(ResourceType.MoneyBoost))
-        {
-            for (int i = 0; i < amount; i++)
-            {
-                Increase();
-            }
-        }
-    }
     public override void Save()
     {
         YandexGame.savesData.CountMoneyBoost = Count;
@@ -36,5 +26,16 @@ public class MoneyBoost : Boost
         CountUpgrade = YandexGame.savesData.CountUpgradeMoneyBoost;
         LoadTimer();
         UpdateText();
+    }
+
+    private void GiveRewardBoost(string name, int amount)
+    {
+        if (name == Convert.ToString(ResourceType.MoneyBoost))
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Increase();
+            }
+        }
     }
 }

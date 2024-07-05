@@ -1,13 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class ProtectCollectibleItem : OtherItem
 {
     private bool _isActivated = false;
     private float _duration = 10;
     private WaitForSeconds _protectTime = new WaitForSeconds(1f);
-    private Coroutine _protectCoroutine;
     private float _time;
 
     private void OnDisable()
@@ -23,7 +21,7 @@ public class ProtectCollectibleItem : OtherItem
             _isActivated = true;
             Delay = _duration + 1f;
             PlayerMoverView.Protect(_isActivated);
-            _protectCoroutine = StartCoroutine(ProtectOnTime());
+            StartCoroutine(ProtectOnTime());
         }
     }
 

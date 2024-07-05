@@ -11,12 +11,12 @@ public abstract class Boost : MonoBehaviour
     private int _maxCountUpgrade = 5;
     private int _timeIncreaseNumber = 5;
 
+    public event Action OnUpdateCount;
+    
     public float Bonus => _bonus;
     public float Time => _time;
     public int CountUpgrade { get; protected set; }
     public int Count { get; protected set; }
-
-    public event Action OnUpdateCount;
 
     private void Awake()
     {

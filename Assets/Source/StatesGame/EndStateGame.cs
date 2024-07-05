@@ -29,13 +29,13 @@ public class EndStateGame
         Load();
 
         _presenter.OnEndGame += End;
-        _playerResurrect.OnRestart += OpenWindows;
+        _playerResurrect.OnRestarting += OpenWindows;
     }
 
     public void Disable()
     {
         _presenter.OnEndGame -= End;
-        _playerResurrect.OnRestart -= OpenWindows;
+        _playerResurrect.OnRestarting -= OpenWindows;
     }
 
     private void End()
