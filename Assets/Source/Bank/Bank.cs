@@ -11,13 +11,13 @@ public class Bank : MonoBehaviour
     [SerializeField] private List<TMP_Text> _moneyForGameText;
     [SerializeField] private List<TMP_Text> _diamondForGameText;
 
-    private int _diamond = 10000000;
+    private int _diamond = 0;
     private int _moneyForGame;
     private int _diamondForGame;
 
     public event Action OnBuy;
 
-    public int Money { get; private set; }  = 500000;
+    public int Money { get; private set; }  = 0;
 
     private void Start()
     {
@@ -128,7 +128,7 @@ public class Bank : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public void ResetValueForGame()
     {
         _moneyForGame = 0;
         _diamondForGame = 0;

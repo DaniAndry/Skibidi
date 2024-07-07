@@ -16,6 +16,7 @@ public class EndGameScreen : MonoBehaviour
     private void Start()
     {
         RefreshAdButton();
+        _rewardButton.interactable = true;
     }
 
     private void OnEnable()
@@ -38,7 +39,7 @@ public class EndGameScreen : MonoBehaviour
     public void CloseEndScreen()
     {
         GetComponent<EndScreenWindow>().CloseWithoutSound();
-        _bank.Reset();
+        _bank.ResetValueForGame();
         RefreshAdButton();
     }
 
@@ -55,6 +56,20 @@ public class EndGameScreen : MonoBehaviour
     private void OnClick()
     {
         YandexGame.RewVideoShow(_id);
-        _rewardButton.gameObject.SetActive(false);
+        _rewardButton.interactable = false;
+        Invoke("TurnOnConfetti", 0.3f);
+    }
+
+    private void TurnOnConfetti()
+    {
+        _rewardButton.GetComponentInChildren<ParticleSystem>().Play();
+        AudioManager.Instance.Play("Confetti");
+        Invoke("TurnOffObject", 1.5f);
+    }
+
+    private void TurnOffObject()
+    {
+        _rewardButton?.gameObject.SetActive(false);
+        _rewardButton.interactable=true;
     }
 }

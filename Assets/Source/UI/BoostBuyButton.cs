@@ -101,8 +101,6 @@ public class BoostBuyButton : MonoBehaviour
     {
         _workTime = _boost.Time;
         UpdateText();
-
-        TaskCounter.IncereaseProgress(1, TaskType.BuyBoost.ToString());
     }
 
     private void UpgradeBoost()

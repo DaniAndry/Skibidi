@@ -11,7 +11,7 @@ public class TaskTimeInspector : MonoBehaviour
     private int _startWeeklyTime;
     private int _startDailyTime;
     private int _dailyTime = 1;
-    private int _weeklyTime = 7;
+    private int _weeklyTime = 3;
 
     public event Action OnGoneDailyTime;
     public event Action OnGoneWeeklyTime;
@@ -42,7 +42,7 @@ public class TaskTimeInspector : MonoBehaviour
 
             if (daysLeft > _weeklyTime)
             {
-                daysLeft = 7;
+                daysLeft = _weeklyTime;
                 _startWeeklyTime = DateTime.Now.Day;
                 Save();
             }

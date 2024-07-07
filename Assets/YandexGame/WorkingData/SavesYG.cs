@@ -9,8 +9,8 @@ namespace YG
         public bool isFirstSession = true;
         public string language = "ru";
         public bool promptDone;
-        public int Money = 50000;
-        public int Diamond = 5000;
+        public int Money = 0;
+        public int Diamond = 0;
         public float MaxEnergy = 50;
         public float Record = 0;
         public int CountEnergyBoost = 0;

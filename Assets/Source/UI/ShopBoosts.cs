@@ -10,6 +10,7 @@ public class ShopBoosts : MonoBehaviour
         {
             _bank.TakeMoney(price);
             boost.Increase();
+            TaskCounter.IncereaseProgress(1, TaskType.BuyBoost.ToString());
         }
     }
 
