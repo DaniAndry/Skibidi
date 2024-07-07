@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class FunDance : MonoBehaviour
 {
@@ -27,7 +26,7 @@ public class FunDance : MonoBehaviour
 
     public void TurnOnDance()
     {
-        AudioManager.Instance.Play("Skrillix");
+        AudioManager.Instance.Play("FunDance");
         _playerMoverView.Dance();
         _danceCamera.gameObject.SetActive(true);
 
@@ -37,7 +36,7 @@ public class FunDance : MonoBehaviour
 
     public void TurnOffDance()
     {
-        AudioManager.Instance.Stop("Skrillix");
+        AudioManager.Instance.Stop("FunDance");
         _playerMoverView.ResetMove();
         _danceCamera.gameObject.SetActive(false);
 

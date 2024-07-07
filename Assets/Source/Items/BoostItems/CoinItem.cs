@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class CoinItem : Item
 {
     protected int Reward = 2;

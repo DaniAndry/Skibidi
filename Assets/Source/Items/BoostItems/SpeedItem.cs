@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class SpeedItem : Item
 {
     private float _value = 5f;

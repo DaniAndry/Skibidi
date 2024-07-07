@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _descritionTranslation: Tasks/UseBoost
   _amountMaxCollect: 150
-  _amountReward: 488
+  _amountReward: 4500
   _rewardIcon: {fileID: 21300000, guid: 52066fc285ffc4bb0b9fc98f1d840149, type: 3}
   _resourceType: 0
   _taskType: 3

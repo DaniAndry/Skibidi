@@ -1,9 +1,7 @@
-using UnityEngine;
-
 public class EnergyCollectibleItem : OtherItem
 {
-    private int _boostCount = 50;
-    private int _deBoostCount = -35;
+    private int _boostCount = 100;
+    private int _deBoostCount = -50;
 
     public override void Boost()
     {

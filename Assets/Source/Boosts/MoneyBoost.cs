@@ -1,4 +1,5 @@
 using System;
+using YG;
 
 public class MoneyBoost : Boost
 {
@@ -10,6 +11,21 @@ public class MoneyBoost : Boost
     private void OnDisable()
     {
         AwardGiver.OnReward -= GiveRewardBoost;
+    }
+
+    public override void Save()
+    {
+        YandexGame.savesData.CountMoneyBoost = Count;
+        YandexGame.savesData.CountUpgradeMoneyBoost = CountUpgrade;
+        YandexGame.SaveProgress();
+    }
+
+    public override void Load()
+    {
+        Count = YandexGame.savesData.CountMoneyBoost;
+        CountUpgrade = YandexGame.savesData.CountUpgradeMoneyBoost;
+        LoadTimer();
+        UpdateText();
     }
 
     private void GiveRewardBoost(string name, int amount)

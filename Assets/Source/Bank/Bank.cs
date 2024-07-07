@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using YG;
 
 public class Bank : MonoBehaviour
 {
@@ -10,22 +11,27 @@ public class Bank : MonoBehaviour
     [SerializeField] private List<TMP_Text> _moneyForGameText;
     [SerializeField] private List<TMP_Text> _diamondForGameText;
 
-    private int _diamond = 10000000;
+    private int _diamond = 0;
     private int _moneyForGame;
     private int _diamondForGame;
 
     public event Action OnBuy;
 
-    public int Money { get; private set; }  = 500000;
-
-    private void OnEnable()
-    {
-        AwardGiver.OnReward += GiveReward;
-    }
+    public int Money { get; private set; }  = 0;
 
     private void Start()
     {
         UpdateText();
+    }
+
+    private void Awake()
+    {
+        Load();
+    }
+
+    private void OnEnable()
+    {
+        AwardGiver.OnReward += GiveReward;
     }
 
     private void OnDisable()
@@ -66,6 +72,8 @@ public class Bank : MonoBehaviour
         {
             money.text = _moneyForGame.ToString();
         }
+
+        Save();
     }
 
     public bool TryTakeMoney(int value)
@@ -120,7 +128,7 @@ public class Bank : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public void ResetValueForGame()
     {
         _moneyForGame = 0;
         _diamondForGame = 0;
@@ -137,5 +145,18 @@ public class Bank : MonoBehaviour
         {
             GiveDiamond(amount);
         }
+    }
+
+    private void Save()
+    {
+        YandexGame.savesData.Money = Money;
+        YandexGame.savesData.Diamond = _diamond;
+        YandexGame.SaveProgress();
+    }
+
+    private void Load()
+    {
+        Money = YandexGame.savesData.Money;
+        _diamond = YandexGame.savesData.Diamond;
     }
 }

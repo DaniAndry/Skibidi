@@ -1,10 +1,9 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerMoverModel
 {
-    private readonly float _maxSpeed = 4f;
+    private readonly float _maxSpeed = 3f;
     private readonly float _maxTurnSpeed = 1.5f;
     private readonly Rigidbody _rigidbody;
 
@@ -13,26 +12,21 @@ public class PlayerMoverModel
     private float _moveVariableSpeed;
     private float _speedBonus;
     private float _speedTime;
-    private float _jumpPower = 3f;
+    private float _jumpPower = 4f;
     private float _moveCoefficient;
-
     private bool _isMove = false;
     private bool _isSpeedBoost;
-    private bool _isGrounded = false;
-    private bool _enableJump = true;
-
     private PlayerInputHandler _inputHandler;
 
-    public event Action Jumped;
-
-    public event Action<float> OnChangeSpeed;
-    public event Action<float> OnChangingBoostTime;
-
-    public PlayerMoverModel(Rigidbody rigidbody, Animator animator)
+    public PlayerMoverModel(Rigidbody rigidbody)
     {
         _rigidbody = rigidbody;
         _inputHandler = PlayerInputHandler.Instance;
     }
+
+    public event Action OnJumped;
+    public event Action<float> OnChangeSpeed;
+    public event Action<float> OnChangingBoostTime;
 
     public float MoveSpeed { get; private set; }
 
@@ -50,18 +44,11 @@ public class PlayerMoverModel
             float turn = DefineTurn();
 
             float newXPosition = currentPosition.x + _turnSpeed * turn * Time.deltaTime;
-            newXPosition = Mathf.Clamp(newXPosition, -1.5f, 1.5f);
+            newXPosition = Mathf.Clamp(newXPosition, -1.7f, 1.7f);
 
             _rigidbody.position = new Vector3(newXPosition, currentPosition.y, currentPosition.z);
 
-            if (_enableJump)
-                _rigidbody.velocity = new Vector3(0, 0, MoveSpeed);
-
-            if (_inputHandler.JumpTriggered)
-                Jump();
-
-            if (_inputHandler.JumpMobileTriggered.y > _inputHandler.DeltaMobileJump)
-                Jump();
+            _rigidbody.position += _rigidbody.transform.forward * MoveSpeed * Time.deltaTime;
         }
     }
 
@@ -95,7 +82,6 @@ public class PlayerMoverModel
     public void Update()
     {
         ChangeSpeed();
-        CheckGround();
         Move();
     }
 
@@ -123,41 +109,16 @@ public class PlayerMoverModel
         }
     }
 
-    public void CheckGround()
-    {
-        Transform transform = _rigidbody.transform;
-
-        Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * 0.5f), transform.position.z);
-        Vector3 direction = transform.TransformDirection(Vector3.down);
-        float distance = 100f;
-
-        if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
-        {
-            Debug.DrawRay(origin, direction * distance, Color.red);
-            Debug.DrawLine(origin, direction * distance, Color.red);
-            _isGrounded = false;
-            _enableJump = false;
-        }
-        else
-        {
-            _isGrounded = true;
-            _enableJump = true;
-        }
-    }
-
     public void Jump()
     {
-        if (_enableJump && _isGrounded)
-        {
-            Jumped?.Invoke();
-            _rigidbody.AddForce(0, _jumpPower, 0, ForceMode.Impulse);
-            TaskCounter.IncereaseProgress(1, Convert.ToString(TaskType.Jump));
-        }
+        OnJumped?.Invoke();
+        _rigidbody.AddForce(0f, _jumpPower, 0f, ForceMode.Impulse);
+        TaskCounter.IncereaseProgress(1, Convert.ToString(TaskType.Jump));
     }
 
     public void Somersault()
     {
-        _rigidbody.AddForce(0, _jumpPower, 1, ForceMode.Impulse);
+        _rigidbody.AddForce(0, _jumpPower, 2, ForceMode.Impulse);
     }
 
     private void ChangeSpeed()

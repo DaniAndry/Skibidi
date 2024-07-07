@@ -9,10 +9,10 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] private float _duration = 5f;
 
     private Animator _animator;
+    private Vector3 _startPositionEnemy;
     private int _idleStateHash = Animator.StringToHash("Idle");
     private int _runStateHash = Animator.StringToHash("Run");
     private int _kickStateHash = Animator.StringToHash("Kick");
-    private Vector3 _startPositionEnemy;
 
     private void OnEnable()
     {

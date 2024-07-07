@@ -230,8 +230,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.023197772, z: 2.1748133}
-  m_Center: {x: 0, y: -0.5272868, z: 0.0123187145}
+  m_Size: {x: 0.7675755, y: 0.023197772, z: 2.109323}
+  m_Center: {x: 0.012461272, y: -0.5272868, z: 0.036014456}
 --- !u!1 &2534963050164657104
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,6 +828,7 @@ GameObject:
   - component: {fileID: 2295418042358707346}
   - component: {fileID: -4434124721865124106}
   - component: {fileID: -1482992709944179330}
+  - component: {fileID: -7866309323414238407}
   m_Layer: 0
   m_Name: BlockVAZ
   m_TagString: Untagged
@@ -884,8 +885,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.3154274, y: 0.8483944, z: 3.390079}
-  m_Center: {x: 0.014306017, y: 0.4936562, z: 0.06663588}
+  m_Size: {x: 1.3154274, y: 0.72641486, z: 3.390079}
+  m_Center: {x: 0.014306017, y: 0.43266657, z: 0.06663588}
 --- !u!114 &-1482992709944179330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -898,7 +899,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf6f9f06819c8443bb0277c4de289aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _crashParticle: {fileID: 0}
+  _crashParticle: {fileID: 198535614377564514, guid: e6b0c8eedb7b4b148b2d830fdcf06603, type: 3}
+--- !u!114 &-7866309323414238407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6889734441086989252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 376d7cbb9bdb8dc478c4aab2264d04f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7307967253329016563
 GameObject:
   m_ObjectHideFlags: 0

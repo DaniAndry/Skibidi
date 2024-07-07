@@ -6,6 +6,8 @@ public class Block : MonoBehaviour
 
     private Ceiling _ceiling;
 
+    public ParticleSystem CrashParticle => _crashParticle;
+
     private void Awake()
     {
         _ceiling = GetComponentInChildren<Ceiling>();
@@ -39,6 +41,6 @@ public class Block : MonoBehaviour
 
     private void DisableCelling()
     {
-        _ceiling.gameObject.SetActive(false);
+        _ceiling.gameObject.GetComponent<Collider>().enabled = false;
     }
 }

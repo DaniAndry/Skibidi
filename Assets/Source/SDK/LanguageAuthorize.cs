@@ -1,19 +1,19 @@
-using Agava.YandexGames;
 using UnityEngine;
+using YG;
 
 public class LanguageAuthorize : MonoBehaviour
 {
     public void Start()
     {
-        if (YandexGamesSdk.Environment.i18n.lang == "ru")
+        if (YandexGame.EnvironmentData.language == "ru")
         {
             Lean.Localization.LeanLocalization.SetCurrentLanguageAll("Russian");
         }
-        else if (YandexGamesSdk.Environment.i18n.lang == "en")
+        else if (YandexGame.EnvironmentData.language == "en")
         {
             Lean.Localization.LeanLocalization.SetCurrentLanguageAll("English");
         }
-        else if(YandexGamesSdk.Environment.i18n.lang == "tr")
+        else if (YandexGame.EnvironmentData.language == "tr")
         {
             Lean.Localization.LeanLocalization.SetCurrentLanguageAll("Turkish");
         }

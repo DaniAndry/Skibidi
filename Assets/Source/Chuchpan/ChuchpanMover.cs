@@ -7,8 +7,8 @@ public class ChuchpanMover : MonoBehaviour
     private float _targetX = 1f;
     private float _minX = -0.9f;
     private float _maxX = 1f;
-    private Vector3 _targetPosition;
     private bool _isPushed = false;
+    private Vector3 _targetPosition;
     private Chuchpan _chuchpan;
 
     private void Start()

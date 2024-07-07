@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class EndGameScreen : MonoBehaviour
 {
@@ -10,11 +11,12 @@ public class EndGameScreen : MonoBehaviour
     [SerializeField] private Button _rewardButton;
     [SerializeField] private Bank _bank;
 
-    public event Action<Action> OnRewardButtonClick;
+    private int _id = 5;
 
     private void Start()
     {
         RefreshAdButton();
+        _rewardButton.interactable = true;
     }
 
     private void OnEnable()
@@ -37,7 +39,7 @@ public class EndGameScreen : MonoBehaviour
     public void CloseEndScreen()
     {
         GetComponent<EndScreenWindow>().CloseWithoutSound();
-        _bank.Reset();
+        _bank.ResetValueForGame();
         RefreshAdButton();
     }
 
@@ -51,13 +53,23 @@ public class EndGameScreen : MonoBehaviour
             _rewardButton.gameObject.SetActive(false);
     }
 
-    private void RewardMoney()
-    {
-        _bank.MoneyMultiplyAd();
-    }
-
     private void OnClick()
     {
-        OnRewardButtonClick?.Invoke(RewardMoney);
+        YandexGame.RewVideoShow(_id);
+        _rewardButton.interactable = false;
+        Invoke("TurnOnConfetti", 0.3f);
+    }
+
+    private void TurnOnConfetti()
+    {
+        _rewardButton.GetComponentInChildren<ParticleSystem>().Play();
+        AudioManager.Instance.Play("Confetti");
+        Invoke("TurnOffObject", 1.5f);
+    }
+
+    private void TurnOffObject()
+    {
+        _rewardButton?.gameObject.SetActive(false);
+        _rewardButton.interactable=true;
     }
 }

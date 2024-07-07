@@ -9,7 +9,6 @@ public enum PlayerEffectType
     EnergyDeboost,
     CoinBoost,
     CoinDeboost,
-    Deboost
 }
 
 public class PlayerEffectController : MonoBehaviour
@@ -19,14 +18,12 @@ public class PlayerEffectController : MonoBehaviour
     private PlayerView _view;
     private PlayerMoverView _viewMover;
     private PlayerEffectType _effectType;
-
     private Dictionary<PlayerEffectType, ParticleSystem> _effectsDictionary = new Dictionary<PlayerEffectType, ParticleSystem>();
 
     private void OnDisable()
     {
         _viewMover.OnProtected -= ProtectBoostEffect;
-        _viewMover.OnChangingSpeed -= SpeedBoostEffect;
-        _view.EnergyChanging -= EnergyBoostEffect;
+        _view.OnEnergyChanging -= EnergyBoostEffect;
         _view.OnMoneyChanging -= CoinBoostEffect;
     }
 
@@ -34,16 +31,15 @@ public class PlayerEffectController : MonoBehaviour
     {
         _view = playerView;
         _viewMover = playerMoverView;
+        _viewMover.OnProtected += ProtectBoostEffect;
+        _view.OnEnergyChanging += EnergyBoostEffect;
+        _view.OnMoneyChanging += CoinBoostEffect;
 
         for (int i = 0; i < _effects.Count; i++)
         {
-            _effectsDictionary.Add((PlayerEffectType)i, _effects[i]);
+            if (_effectsDictionary.ContainsKey((PlayerEffectType)i) == false)
+                _effectsDictionary.Add((PlayerEffectType)i, _effects[i]);
         }
-
-        _viewMover.OnProtected += ProtectBoostEffect;
-        _viewMover.OnChangingSpeed += SpeedBoostEffect;
-        _view.EnergyChanging += EnergyBoostEffect;
-        _view.OnMoneyChanging += CoinBoostEffect;
     }
 
     private void PlayEffect()
@@ -71,20 +67,6 @@ public class PlayerEffectController : MonoBehaviour
             PlayEffect();
         }
         else if (!isProtect)
-        {
-            StopEffect();
-        }
-    }
-
-    private void SpeedBoostEffect(float speed)
-    {
-        _effectType = PlayerEffectType.SpeedBoost;
-
-        if (IsBoost(speed))
-        {
-            PlayEffect();
-        }
-        else
         {
             StopEffect();
         }
@@ -130,6 +112,6 @@ public class PlayerEffectController : MonoBehaviour
 
     private bool IsBoost(float count)
     {
-        return count > 20;
+        return count > 3;
     }
 }

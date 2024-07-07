@@ -11,7 +11,6 @@ public class ChunksPlacer : MonoBehaviour
     private float _disableLenght = 5f;
     private Vector3 _startFirstChunkPosition;
     private Transform _player;
-
     private List<Chunk> _disabledChunks = new List<Chunk>();
     private List<Chunk> _spawnedChunks = new List<Chunk>();
 
@@ -29,6 +28,7 @@ public class ChunksPlacer : MonoBehaviour
         {
             SpawnChunk();
         }
+
         if(_player.position.z > _spawnedChunks[0].End.transform.position.z + _disableLenght)
         {
             DisableChunks();

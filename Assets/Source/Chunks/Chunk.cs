@@ -3,17 +3,12 @@ using UnityEngine.Events;
 
 public class Chunk : MonoBehaviour
 {
-    public event UnityAction<Chunk> Spawned;
-    public event UnityAction<Chunk> Deactivated;
+    public event UnityAction<Chunk> OnSpawned;
+    public event UnityAction<Chunk> OnDeactivated;
 
     public BeginPoint Begin { get; private set; }
     public EndPoint End { get; private set; }
     public LenghtChunk LenghChunk { get; private set; }
-   
-    private void OnEnable()
-    {
-        Spawned?.Invoke(this);
-    }
 
     private void Awake()
     {
@@ -22,8 +17,13 @@ public class Chunk : MonoBehaviour
         LenghChunk = GetComponentInChildren<LenghtChunk>();
     }
 
+    private void OnEnable()
+    {
+        OnSpawned?.Invoke(this);
+    }
+
     private void OnDisable()
     {
-        Deactivated?.Invoke(this);
+        OnDeactivated?.Invoke(this);
     }
 }

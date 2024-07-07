@@ -4,6 +4,8 @@ using UnityEngine.Events;
 
 public class Chuchpan : MonoBehaviour
 {
+    private readonly int FallState = Animator.StringToHash("Hit");
+
     [SerializeField] private ParticleSystem _fall;
     [SerializeField] private ParticleSystem _moneyDrop;
     [SerializeField] private GameObject _model;
@@ -12,7 +14,6 @@ public class Chuchpan : MonoBehaviour
     private Collider _collider;
     private Animator _animator;
 
-    private readonly int FallState = Animator.StringToHash("Hit");
     public event UnityAction<float> OnHit;
 
     private void Start()

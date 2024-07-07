@@ -2,27 +2,34 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class Boost : MonoBehaviour
+public abstract class Boost : MonoBehaviour
 {
     [SerializeField] private float _bonus;
     [SerializeField] private TMP_Text _timeText;
 
     private float _time = 5;
-    private int _countBoosts;
-    private int _countUpgrade = 0;
     private int _maxCountUpgrade = 5;
     private int _timeIncreaseNumber = 5;
 
-    public int CountUpgrade => _countUpgrade;
-    public int Count => _countBoosts;
+    public event Action OnUpdateCount;
+    
     public float Bonus => _bonus;
     public float Time => _time;
+    public int CountUpgrade { get; protected set; }
+    public int Count { get; protected set; }
 
-    public event Action OnUpdateCount;
+    private void Awake()
+    {
+        Load();
+    }
+
+    public abstract void Save();
+
+    public abstract void Load();
 
     public bool TryUse()
     {
-        bool _canUse = _countBoosts > 0;
+        bool _canUse = Count > 0;
 
         if (_canUse)
         {
@@ -36,18 +43,26 @@ public class Boost : MonoBehaviour
 
     public void Increase()
     {
-        _countBoosts++;
+        Count++;
         UpdateText();
     }
 
     public void Upgrade()
     {
-        if (_countUpgrade < _maxCountUpgrade)
+        if (CountUpgrade < _maxCountUpgrade)
         {
-            _countUpgrade++;
+            CountUpgrade++;
             _time += _timeIncreaseNumber;
             AudioManager.Instance.Play("UpgradeBoost");
+
+            Save();
         }
+    }
+
+    public void UpdateText()
+    {
+        OnUpdateCount?.Invoke();
+        Save();
     }
 
     public void SetTimeText(float amount)
@@ -58,14 +73,14 @@ public class Boost : MonoBehaviour
             _timeText.text = " ";
     }
 
-    private void Decrease()
+    public void LoadTimer()
     {
-        _countBoosts--;
-        UpdateText();
+        _time = CountUpgrade * _timeIncreaseNumber;
     }
 
-    private void UpdateText()
+    private void Decrease()
     {
-        OnUpdateCount?.Invoke();
+        Count--;
+        UpdateText();
     }
 }

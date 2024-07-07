@@ -15,7 +15,6 @@ public class Ceiling : MonoBehaviour
         {
             player.Somersault();
             _ceilings.DisableColliders();
-            Debug.Log("Сальто");
         }
     }
 }

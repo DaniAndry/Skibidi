@@ -17,8 +17,6 @@ public class PlayerPresenter : MonoBehaviour
     {
         _model = model;
         _view = view;
-
-        _view.UpdateUI(_model.MaxEnergy);
     }
 
     public void StartGame()
@@ -46,25 +44,25 @@ public class PlayerPresenter : MonoBehaviour
     {
         _model?.Init();
 
-        _view.MaxEnergyChanging += OnMaxEnergyChanging;
-        _view.DistanceBoostChanging += UseDistanceDistanceBoost;
-        _model.EnergyChanged += OnEnergyChanging;
+        _view.OnMaxEnergyChanging += OnMaxEnergyChanging;
+        _view.OnDistanceBoostChanging += UseDistanceDistanceBoost;
+        _model.OnEnergyChanged += OnEnergyChanging;
         _model.OnEnergyGone += EndGame;
-        _view.GameOvered += EndGame;
-        _view.EnergyChanging += OnViewEnergyChanged;
+        _view.OnGameOvered += EndGame;
+        _view.OnEnergyChanging += OnViewEnergyChanged;
         _model.DistanceChanging += OnDistanceChanging;
         _model.OnTimeChanging += _view.SetEnergyTime;
     }
 
     public void Disable()
     {
-        _view.MaxEnergyChanging -= OnMaxEnergyChanging;
-        _view.DistanceBoostChanging -= UseDistanceDistanceBoost;
-        _model.EnergyChanged -= OnEnergyChanging;
+        _view.OnMaxEnergyChanging -= OnMaxEnergyChanging;
+        _view.OnDistanceBoostChanging -= UseDistanceDistanceBoost;
+        _model.OnEnergyChanged -= OnEnergyChanging;
         _model.OnEnergyGone -= EndGame;
-        _view.GameOvered -= EndGame;
+        _view.OnGameOvered -= EndGame;
         _model.DistanceChanging -= OnDistanceChanging;
-        _view.EnergyChanging -= OnViewEnergyChanged;
+        _view.OnEnergyChanging -= OnViewEnergyChanged;
         _model.OnTimeChanging -= _view.SetEnergyTime;
     }
 
@@ -91,6 +89,11 @@ public class PlayerPresenter : MonoBehaviour
     private void OnMaxEnergyChanging(float maxEnergyAmount)
     {
         _model.ChangeMaxEnergy(maxEnergyAmount);
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
         _view.UpdateUI(_model.MaxEnergy);
     }
 

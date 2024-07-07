@@ -1,63 +1,59 @@
-using System.Collections.Generic;
 using UnityEngine;
-using System;
+using YG;
 
 public class VideoAd : MonoBehaviour
 {
-    [SerializeField] private PlayerResurrect _playerResurrect;
-    [SerializeField] private List<BoostBuyButton> _boostButtons = new List<BoostBuyButton>();
-    [SerializeField] private EndGameScreen _endScreen;
+    [SerializeField] private Bank _bank;
+    [SerializeField] private PlayerResurrect _resurrect;
+    [SerializeField] private BoostBuyButton _energyBoost;
+    [SerializeField] private BoostBuyButton _speedBoost;
+    [SerializeField] private BoostBuyButton _moneyBoost;
     [SerializeField] private MoneyRewardButton _moneyReward;
-
-    private VideoAdView _view;
-
-    private void Awake()
-    {
-        _view = GetComponent<VideoAdView>();
-    }
 
     private void OnEnable()
     {
-        foreach(var button in _boostButtons)
-        {
-            button.OnBuyBoostAd += OnRewardCallback;
-            button.OnUpgradeBoostAd += OnRewardCallback;
-        }
-
-        _moneyReward.OnRewardButtonClick += OnRewardCallback;
-        _endScreen.OnRewardButtonClick += OnRewardCallback;
-        _playerResurrect.OnCallAd += OnRewardCallback;
-        _playerResurrect.OnResurrecting += OnRewardCallback;
-        _playerResurrect.OnRestart += RefreshAdButtons;
+        _resurrect.OnRestarting += RefreshAdButtons;
+        YandexGame.RewardVideoEvent += Rewarded;
     }
 
     private void OnDisable()
     {
-        foreach (var button in _boostButtons)
-        {
-            button.OnBuyBoostAd -= OnRewardCallback;
-            button.OnUpgradeBoostAd -= OnRewardCallback;
-        }
-
-        _moneyReward.OnRewardButtonClick -= OnRewardCallback;
-        _endScreen.OnRewardButtonClick -= OnRewardCallback;
-        _playerResurrect.OnCallAd -= OnRewardCallback;
-        _playerResurrect.OnResurrecting -= OnRewardCallback;
-        _playerResurrect.OnRestart -= RefreshAdButtons;
+        _resurrect.OnRestarting += RefreshAdButtons;
+        YandexGame.RewardVideoEvent -= Rewarded;
     }
 
-    private void OnRewardCallback(Action reward)
+    private void Rewarded(int id)
     {
-        _view.Show(reward);
+        if (id == 1)
+            _bank.GiveMoney(200);
+        else if (id == 2)
+            _bank.GiveMoney(200 * 3);
+        else if (id == 3)
+            _bank.GiveMoney(200 * 5);
+        else if (id == 4)
+            _bank.GiveMoney(200 * 8);
+        else if (id == 5)
+            _bank.MoneyMultiplyAd();
+        else if (id == 6)
+            _resurrect.ResurrectWatch();
+        else if (id == 7)
+            _energyBoost.RewardBoost();
+        else if (id == 8)
+            _moneyBoost.RewardBoost();
+        else if (id == 9)
+            _speedBoost.RewardBoost();
+        else if (id == 10)
+            _energyBoost.RewardUpgradeBoost();
+        else if (id == 11)
+            _moneyBoost.RewardUpgradeBoost();
+        else if (id == 12)
+            _speedBoost.RewardUpgradeBoost();
     }
-
     private void RefreshAdButtons()
     {
-        foreach( var button in _boostButtons)
-        {
-            button.SelectAdButtons();
-        }
-
+        _energyBoost.SelectAdButtons();
+        _moneyBoost.SelectAdButtons();
+        _speedBoost.SelectAdButtons();
         _moneyReward.RefreshAmountButton();
     }
 }

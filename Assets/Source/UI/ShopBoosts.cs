@@ -10,9 +10,8 @@ public class ShopBoosts : MonoBehaviour
         {
             _bank.TakeMoney(price);
             boost.Increase();
+            TaskCounter.IncereaseProgress(1, TaskType.BuyBoost.ToString());
         }
-        else
-            Debug.Log("Error Buy Boost");
     }
 
     public void BuyUpgrade(Boost boost, int price)
@@ -22,7 +21,5 @@ public class ShopBoosts : MonoBehaviour
             _bank.TakeMoney(price);
             boost.Upgrade();
         }
-        else
-            Debug.Log("Error Buy Boost");
     }
 }

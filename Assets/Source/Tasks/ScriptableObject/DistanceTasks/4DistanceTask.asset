@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 4DistanceTask
   m_EditorClassIdentifier: 
   _descritionTranslation: Tasks/DistanceTask
-  _amountMaxCollect: 20000
-  _amountReward: 50
+  _amountMaxCollect: 10000
+  _amountReward: 25
   _rewardIcon: {fileID: 21300000, guid: 4ca0708151b60449d97a6e6a1455f979, type: 3}
   _resourceType: 1
   _taskType: 7

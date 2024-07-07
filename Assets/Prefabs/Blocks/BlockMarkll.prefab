@@ -147,8 +147,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.03187141, z: 2.470904}
-  m_Center: {x: 0, y: -0.3548618, z: 2.34917}
+  m_Size: {x: 0.8254952, y: 0.03187141, z: 2.4427526}
+  m_Center: {x: -0.06901354, y: -0.3548618, z: 2.335094}
 --- !u!1 &671282155970274336
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 2132620171282030325}
   - component: {fileID: 3006972957115728714}
   - component: {fileID: 6332766246259573734}
+  - component: {fileID: 1047486607602710676}
   m_Layer: 0
   m_Name: BlockMarkll
   m_TagString: Untagged
@@ -176,7 +177,7 @@ Transform:
   m_GameObject: {fileID: 671282155970274336}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.686, y: 0.5111, z: 17.381}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -223,7 +224,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf6f9f06819c8443bb0277c4de289aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _crashParticle: {fileID: 0}
+  _crashParticle: {fileID: 198535614377564514, guid: e6b0c8eedb7b4b148b2d830fdcf06603, type: 3}
+--- !u!114 &1047486607602710676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671282155970274336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 376d7cbb9bdb8dc478c4aab2264d04f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2529249913064274521
 GameObject:
   m_ObjectHideFlags: 0

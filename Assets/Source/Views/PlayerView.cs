@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class PlayerView : MonoBehaviour
 {
@@ -20,19 +21,20 @@ public class PlayerView : MonoBehaviour
     private Button _energyUpgradeButton;
     private bool _isMoneyBoost = false;
     private float _moneyBoostTime;
-    private Coroutine _timeMoneyBoostCoroutine;
 
-    public event Action<float> EnergyChanging;
-    public event Action<float> MaxEnergyChanging;
+    public event Action<float> OnEnergyChanging;
+    public event Action<float> OnMaxEnergyChanging;
     public event Action<float, bool> OnMoneyChanging;
-    public event Action<EnergyBoost> DistanceBoostChanging;
-    public event Action GameOvered;
+    public event Action<EnergyBoost> OnDistanceBoostChanging;
+    public event Action OnGameOvered;
 
     private void Awake()
     {
         _moneyBoostButton = _moneyBoost.GetComponent<Button>();
         _energyBoostButton = _energyBoost.GetComponent<Button>();
         _energyUpgradeButton = _energyUpgrade.GetComponent<Button>();
+
+        UpdateUI(0);
     }
 
     private void OnEnable()
@@ -51,18 +53,18 @@ public class PlayerView : MonoBehaviour
 
     public void GameOver()
     {
-        GameOvered?.Invoke();
+        OnGameOvered?.Invoke();
     }
 
     public void OnEnergyChanged(float energyAmount)
     {
         AudioManager.Instance.Play("UseBoost");
-        EnergyChanging?.Invoke(energyAmount);
+        OnEnergyChanging?.Invoke(energyAmount);
     }
 
     public void OnChangeMaxEnergy()
     {
-        MaxEnergyChanging?.Invoke(_energyUpgrade.Upgrade());
+        OnMaxEnergyChanging?.Invoke(_energyUpgrade.Upgrade());
     }
 
     public void SetDistance(float distance)
@@ -78,11 +80,14 @@ public class PlayerView : MonoBehaviour
     public void UpdateUI(float maxEnergy)
     {
         _maxEnergy.text = maxEnergy.ToString();
+
+        if(maxEnergy == 0)
+            _maxEnergy.text = YandexGame.savesData.MaxEnergy.ToString();
     }
 
     public void AddMoney(int count, bool isBoost)
     {
-        if (count > 0 && _isMoneyBoost)
+        if (_isMoneyBoost || isBoost)
         {
             OnMoneyChanging?.Invoke(count * _moneyBoost.Bonus, isBoost);
             _bank.GiveMoneyForGame(count * Convert.ToInt32(_moneyBoost.Bonus));
@@ -104,7 +109,7 @@ public class PlayerView : MonoBehaviour
         {
             _isMoneyBoost = true;
             _moneyBoostTime = _moneyBoost.Time;
-            _timeMoneyBoostCoroutine = StartCoroutine(TimeChanging());
+            StartCoroutine(TimeChanging());
         }
         else
             Debug.Log("ErrorUseBoost");
@@ -113,7 +118,7 @@ public class PlayerView : MonoBehaviour
     private void UseEnergyBoost()
     {
         if (_energyBoost.TryUse())
-            DistanceBoostChanging?.Invoke(_energyBoost);
+            OnDistanceBoostChanging?.Invoke(_energyBoost);
         else
             Debug.Log("ErrorUseBoost");
     }

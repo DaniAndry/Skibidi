@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using YG;
 
 public class PlayerModel
 {
@@ -11,18 +12,16 @@ public class PlayerModel
 
     public event Action DistanceChanging;
     public event Action OnEnergyGone;
-    public event Action EnergyChanged;
+    public event Action OnEnergyChanged;
     public event Action<float> OnTimeChanging;
 
     public float TotalDistanceTraveled { get; private set; }
-    public float MaxEnergy { get; private set; } = 40f;
+    public float MaxEnergy { get; private set; }
     public float CurrentEnergy { get; private set; }
-
 
     public void Init()
     {
-        /*LoadPlayer();*/
-        CurrentEnergy = MaxEnergy;
+        Load();
     }
 
     public void TakeEnergy(float count)
@@ -90,22 +89,7 @@ public class PlayerModel
     public void ChangeMaxEnergy(float maxEnergyAmount)
     {
         MaxEnergy += maxEnergyAmount;
-    }
-
-    public void SavePlayer()
-    {
-        SaveSystem.SavePlayer(this);
-    }
-
-    public void LoadPlayer()
-    {
-        PlayerData data = SaveSystem.LoadPlayer();
-
-        if (data != null)
-        {
-            MaxEnergy = data.Energy;
-            TotalDistanceTraveled = data.TotalDistance;
-        }
+        Save();
     }
 
     private void GiveEnergy(Transform transform)
@@ -120,13 +104,26 @@ public class PlayerModel
             _lastPosition = transform.position;
 
             DistanceChanging?.Invoke();
-            EnergyChanged?.Invoke();
+            OnEnergyChanged?.Invoke();
 
-            if (CurrentEnergy <= 0)
-            {
-                _isEnergyGone = true;
-                OnEnergyGone?.Invoke();
-            }
         }
+
+        if (CurrentEnergy <= 0 && _isEnergyGone == false)
+        {
+            _isEnergyGone = true;
+            OnEnergyGone?.Invoke();
+        }
+    }
+
+    private void Save()
+    {
+        YandexGame.savesData.MaxEnergy = MaxEnergy;
+        YandexGame.SaveProgress();
+    }
+
+    private void Load()
+    {
+        MaxEnergy = YandexGame.savesData.MaxEnergy;
+        CurrentEnergy = MaxEnergy;
     }
 }

@@ -11,7 +11,7 @@ public class Menu : MonoBehaviour
     private float _recordDistance;
     private MenuWindow _menuWindow;
 
-    public event Action ClickingStart;
+    public event Action OnClickStart;
 
     private void Awake()
     {
@@ -20,12 +20,12 @@ public class Menu : MonoBehaviour
 
     private void OnEnable()
     {
-        _startButton.onClick.AddListener(OnClickStart);
+        _startButton.onClick.AddListener(OnClick);
     }
 
     private void OnDisable()
     {
-        _startButton.onClick.RemoveListener(OnClickStart);
+        _startButton.onClick.RemoveListener(OnClick);
     }
 
     public void SetDistance(float distance)
@@ -38,9 +38,9 @@ public class Menu : MonoBehaviour
         }
     }
 
-    private void OnClickStart()
+    private void OnClick()
     {
-        ClickingStart?.Invoke();
+        OnClickStart?.Invoke();
         _menuWindow.Close();
     }
 }

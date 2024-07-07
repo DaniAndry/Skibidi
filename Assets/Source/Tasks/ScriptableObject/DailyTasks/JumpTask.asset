@@ -15,6 +15,6 @@ MonoBehaviour:
   _descritionTranslation: Tasks/Jump
   _amountMaxCollect: 50
   _amountReward: 50
-  _rewardIcon: {fileID: 21300000, guid: c3189121f7e3342a3b2fcc2f495c9e31, type: 3}
+  _rewardIcon: {fileID: 21300000, guid: 52066fc285ffc4bb0b9fc98f1d840149, type: 3}
   _resourceType: 0
   _taskType: 0
