@@ -3,6 +3,8 @@ using Agava.WebUtility;
 
 public class TestFocus : MonoBehaviour
 {
+    [SerializeField] private PauseWindow _pause;
+
     private void OnEnable()
     {
         Application.focusChanged += OnInBackgroundChangeApp;
@@ -16,8 +18,11 @@ public class TestFocus : MonoBehaviour
 
     private void OnInBackgroundChangeApp(bool inApp)
     {
-        MuteAudio(!inApp);
-        PauseGame(!inApp);
+        if (_pause.IsPause == false)
+        {
+            MuteAudio(!inApp);
+            PauseGame(!inApp);
+        }
     }
 
     private void OnInBackgroundChangeWeb(bool isBackgrond)

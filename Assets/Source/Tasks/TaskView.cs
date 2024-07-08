@@ -16,6 +16,7 @@ public class TaskView : MonoBehaviour
     private float _amountProgress;
     private Task _task;
     private Slider _amountCompleted;
+    private TaskWindow _window;
 
     public event Action<TaskView> OnComplete;
 
@@ -24,12 +25,15 @@ public class TaskView : MonoBehaviour
 
     private void OnEnable()
     {
+        _window = GetComponentInParent<TaskWindow>();
+        _startExecution.onClick.AddListener(_window.Close);
         _takeReward.onClick.AddListener(TakeReward);
         TaskCounter.OnExecute += ExecuteTask;
     }
 
     private void OnDisable()
     {
+        _startExecution.onClick.RemoveListener(_window.Close);
         _takeReward.onClick.RemoveListener(TakeReward);
         TaskCounter.OnExecute -= ExecuteTask;
     }
