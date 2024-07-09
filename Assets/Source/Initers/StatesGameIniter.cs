@@ -26,6 +26,11 @@ public class StatesGameIniter : MonoBehaviour
         _endStateGame.Enable();
     }
 
+    private void Start()
+    {
+        AudioManager.Instance.Play("Music2");
+    }
+
     private void Awake()
     {
         Init();

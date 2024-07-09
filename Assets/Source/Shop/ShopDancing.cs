@@ -8,7 +8,7 @@ public class ShopDancing : Shop
     private Dance _selectedDance;
     private DanceSelecter _selecter;
 
-    private void Start()
+    private void Awake()
     {
         _selecter = GetComponent<DanceSelecter>();
     }

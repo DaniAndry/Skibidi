@@ -9,7 +9,7 @@ namespace YG
         public bool isFirstSession = true;
         public string language = "ru";
         public bool promptDone;
-        public int Money = 0;
+        public int Money = 5000000;
         public int Diamond = 0;
         public float MaxEnergy = 50;
         public float Record = 0;
@@ -19,16 +19,17 @@ namespace YG
         public int CountUpgradeSpeedBoost = 1;
         public int CountMoneyBoost = 0;
         public int CountUpgradeMoneyBoost = 1;
+        public int CountUpgradeEnergy = 1;
         public float VolumeSound = 0.5f;
-        public List<Skin> BoughtSkins;
         public Skin SelectedSkin;
-        public List<Dance> BoughtDances;
         public Dance SelectedDance;
-        public List<float> AmountDailyProgreses;
-        public List<float> AmountWeeklyProgreses;
-        public List<float> AmountDistanceProgreses;
-        public int StartWeeklyTime;
-        public int StartDailyTime;
+        public List<Skin> BoughtSkins = new List<Skin>();
+        public List<Dance> BoughtDances = new List<Dance>();
+        public List<float> AmountDailyProgreses = new List<float>();
+        public List<float> AmountWeeklyProgreses = new List<float>();
+        public List<float> AmountDistanceProgreses = new List<float>();
+        public int StartWeeklyTime = 3;
+        public int StartDailyTime = 1;
         public float WorldSound = 0.5f;
 
         public SavesYG()

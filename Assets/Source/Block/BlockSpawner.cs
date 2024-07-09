@@ -68,6 +68,11 @@ public class BlockSpawner : MonoBehaviour
             {
                 return true;
             }
+            
+            if (hitCollider.gameObject.GetComponent<Block>())
+            {
+                return false;
+            }
         }
         return false;
     }

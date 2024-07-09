@@ -3,7 +3,17 @@ using YG;
 
 public class LanguageAuthorize : MonoBehaviour
 {
-    public void Start()
+    private void OnEnable() => YandexGame.GetDataEvent += Load;
+
+    private void OnDisable() => YandexGame.GetDataEvent -= Load;
+
+    private void Awake()
+    {
+        if (YandexGame.SDKEnabled == true)
+            Load();
+    }
+
+    public void Load()
     {
         if (YandexGame.EnvironmentData.language == "ru")
         {

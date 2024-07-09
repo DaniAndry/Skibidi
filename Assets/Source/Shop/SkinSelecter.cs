@@ -15,9 +15,22 @@ public class SkinSelecter : MonoBehaviour
 
     public PlayerView Player { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
-        Load();
+        if (YandexGame.SDKEnabled == true)
+        {
+            Load();
+        }
+    }
+
+    private void OnEnable()
+    {
+        YandexGame.GetDataEvent += Load;
+    }
+
+    private void OnDisable()
+    {
+        YandexGame.GetDataEvent -= Load;
     }
 
     public void AddSkin(Skin skin)

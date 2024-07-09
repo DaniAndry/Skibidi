@@ -82,9 +82,18 @@ public class TaskView : MonoBehaviour
 
     private void ExecuteTask(float amount, string name)
     {
-        if (_task.TaskType == name)
+        if (_task.TaskType == name && _task.Type != TaskType.RecordDistance)
         {
             _amountProgress += amount;
+            Save();
+            UpdateUI();
+
+            if (_amountCompleted.value >= _task.AmountMaxCollect)
+                CompleteTask();
+        }
+        else if (_task.Type == TaskType.RecordDistance)
+        {
+            _amountProgress = amount;
             Save();
             UpdateUI();
 

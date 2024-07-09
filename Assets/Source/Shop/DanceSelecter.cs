@@ -10,10 +10,24 @@ public class DanceSelecter : MonoBehaviour
     private Dance _selectedDance;
     private ShopDancing _shopDancing;
 
-    private void Start()
+    private void Awake()
     {
         _shopDancing = GetComponent<ShopDancing>();
-        Load();
+        
+        if (YandexGame.SDKEnabled == true)
+        {
+            Load();
+        }
+    }
+
+    private void OnEnable()
+    {
+        YandexGame.GetDataEvent += Load;
+    }
+
+    private void OnDisable()
+    {
+        YandexGame.GetDataEvent -= Load;
     }
 
     public void AddDance(Dance dance)
@@ -74,7 +88,9 @@ public class DanceSelecter : MonoBehaviour
             _firstDance.Unlock();
         }
 
-        Invoke("ChooseDance", 0.1f);
+        Debug.Log(_shopDancing);
+
+        Invoke("ChooseDance", 0.2f);
     }
 
     private void Save()

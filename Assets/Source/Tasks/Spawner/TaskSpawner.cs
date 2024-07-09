@@ -10,7 +10,6 @@ public abstract class TaskSpawner : MonoBehaviour
     [SerializeField] private TaskTimeInspector _timeInspector;
 
     protected List<float> _amountProgreses = new List<float>();
-    
     private List<TaskView> _activeTasks = new List<TaskView>();
     private Dictionary<int, float> _activeDailyId = new Dictionary<int, float>();
     

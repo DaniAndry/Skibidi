@@ -61,6 +61,7 @@ public class EndStateGame
         _menu.GetComponent<MenuWindow>().OpenWithoutSound();
         _endScreen.GetComponent<EndScreenWindow>().OpenWithoutSound();
         _hudWindow.CloseWithoutSound();
+        AudioManager.Instance.UnPause("Music2");
 
         OnEndGame?.Invoke();
     }

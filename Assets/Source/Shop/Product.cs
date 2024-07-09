@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 [RequireComponent(typeof(Button))]
 public abstract class Product : MonoBehaviour
@@ -24,16 +25,21 @@ public abstract class Product : MonoBehaviour
 
     private void Awake()
     {
-        _descriptionTranslation = Lean.Localization.LeanLocalization.GetTranslationText(_descriptionTranslation);
         _showButton = GetComponent<Button>();
         _showButton.onClick.AddListener(ShowInfo);
         _buyFlag.gameObject.SetActive(IsBought);
         _priceText.text = $"{_price}";
     }
 
+    private void OnEnable()
+    {
+        YandexGame.GetDataEvent += LoadText;
+    }
+
     private void OnDisable()
     {
         _showButton.onClick?.RemoveListener(ShowInfo);
+        YandexGame.GetDataEvent -= LoadText;
     }
 
     public void Unlock()
@@ -66,5 +72,10 @@ public abstract class Product : MonoBehaviour
 
         if (IsSelect)
             ChangeStatus();
+    }
+
+    private void LoadText()
+    {
+        _descriptionTranslation = Lean.Localization.LeanLocalization.GetTranslationText(_descriptionTranslation);
     }
 }
