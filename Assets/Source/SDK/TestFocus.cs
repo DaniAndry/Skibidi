@@ -27,8 +27,11 @@ public class TestFocus : MonoBehaviour
 
     private void OnInBackgroundChangeWeb(bool isBackgrond)
     {
-        MuteAudio(isBackgrond);
-        PauseGame(isBackgrond);
+        if (_pause.IsPause == false)
+        {
+            MuteAudio(isBackgrond);
+            PauseGame(isBackgrond);
+        }
     }
 
     private void MuteAudio(bool value)
