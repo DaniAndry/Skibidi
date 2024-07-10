@@ -9,11 +9,9 @@ public class Bank : MonoBehaviour
     [SerializeField] private List<TMP_Text> _moneyText;
     [SerializeField] private List<TMP_Text> _diamondText;
     [SerializeField] private List<TMP_Text> _moneyForGameText;
-    [SerializeField] private List<TMP_Text> _diamondForGameText;
 
     private int _diamond = 0;
     private int _moneyForGame;
-    private int _diamondForGame;
 
     public event Action OnBuy;
 
@@ -61,11 +59,6 @@ public class Bank : MonoBehaviour
         foreach(TMP_Text diamond in _diamondText)
         {
             diamond.text = _diamond.ToString();
-        }
-
-        foreach (TMP_Text diamond in _diamondForGameText)
-        {
-            diamond.text = _diamondForGame.ToString();
         }
         
         foreach (TMP_Text money in _moneyForGameText)
@@ -131,7 +124,6 @@ public class Bank : MonoBehaviour
     public void ResetValueForGame()
     {
         _moneyForGame = 0;
-        _diamondForGame = 0;
         UpdateText();
     }
 
