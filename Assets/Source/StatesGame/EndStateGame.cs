@@ -26,14 +26,14 @@ public class EndStateGame
 
     public void Enable()
     {
-        Load();
-
+        YandexGame.GetDataEvent += Load;
         _presenter.OnEndGame += End;
         _playerResurrect.OnRestarting += OpenWindows;
     }
 
     public void Disable()
     {
+        YandexGame.GetDataEvent -= Load;
         _presenter.OnEndGame -= End;
         _playerResurrect.OnRestarting -= OpenWindows;
     }

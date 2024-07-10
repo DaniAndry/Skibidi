@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using YG;
 
 public abstract class Boost : MonoBehaviour
 {
@@ -20,7 +21,18 @@ public abstract class Boost : MonoBehaviour
 
     private void Awake()
     {
-        Load();
+        if(YandexGame.SDKEnabled)
+            Load();
+    }
+
+    private void OnEnable()
+    {
+        YandexGame.GetDataEvent += Load;
+    }
+
+    private void OnDisable()
+    {
+        YandexGame.GetDataEvent -= Load;
     }
 
     public abstract void Save();

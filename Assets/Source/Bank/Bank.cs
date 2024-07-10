@@ -24,16 +24,21 @@ public class Bank : MonoBehaviour
 
     private void Awake()
     {
-        Load();
+        if (YandexGame.SDKEnabled == true)
+        {
+            Load();
+        }
     }
 
     private void OnEnable()
     {
+        YandexGame.GetDataEvent += Load;
         AwardGiver.OnReward += GiveReward;
     }
 
     private void OnDisable()
     {
+        YandexGame.GetDataEvent -= Load;
         AwardGiver.OnReward -= GiveReward;
     }
 

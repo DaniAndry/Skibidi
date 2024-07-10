@@ -20,7 +20,6 @@ namespace YG
         public int CountMoneyBoost = 0;
         public int CountUpgradeMoneyBoost = 1;
         public int CountUpgradeEnergy = 1;
-        public float VolumeSound = 0.5f;
         public Skin SelectedSkin;
         public Dance SelectedDance;
         public List<Skin> BoughtSkins = new List<Skin>();
