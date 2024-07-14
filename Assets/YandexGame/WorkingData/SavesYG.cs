@@ -20,10 +20,10 @@ namespace YG
         public int CountMoneyBoost = 0;
         public int CountUpgradeMoneyBoost = 1;
         public int CountUpgradeEnergy = 1;
-        public Skin SelectedSkin;
-        public Dance SelectedDance;
-        public List<Skin> BoughtSkins = new List<Skin>();
-        public List<Dance> BoughtDances = new List<Dance>();
+        public int SelectedDance;
+        public int SelectedSkin;
+        public List<int> BoughtSkins = new List<int>();
+        public List<int> BoughtDances = new List<int>();
         public List<float> AmountDailyProgreses = new List<float>();
         public List<float> AmountWeeklyProgreses = new List<float>();
         public List<float> AmountDistanceProgreses = new List<float>();

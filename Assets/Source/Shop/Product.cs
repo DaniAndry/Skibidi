@@ -13,6 +13,7 @@ public abstract class Product : MonoBehaviour
     [SerializeField] private string _descriptionTranslation;
     [SerializeField] private bool _isSelected;
     [SerializeField] private TMP_Text _priceText;
+    [SerializeField] private int _id;
 
     private Button _showButton;
 
@@ -21,6 +22,7 @@ public abstract class Product : MonoBehaviour
     public string Description => _descriptionTranslation;
     public bool IsSelected => _isSelected;
     public int Price => _price;
+    public int Id => _id;   
     public bool IsBought { get; private set; } = false;
 
     private void Awake()

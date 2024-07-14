@@ -19,20 +19,11 @@ public abstract class TaskSpawner : MonoBehaviour
     private void Awake()
     {
         TaskCounter.Init();
-
-        if(YandexGame.SDKEnabled)
-            SpawnTasks();
-    }
-
-    private void OnEnable()
-    {
-        YandexGame.GetDataEvent += SpawnTasks;
+        SpawnTasks();
     }
 
     private void OnDisable()
     {
-        YandexGame.GetDataEvent -= SpawnTasks;
-
         foreach (var task in _activeTasks)
         {
             task.OnComplete -= DestroyTask;

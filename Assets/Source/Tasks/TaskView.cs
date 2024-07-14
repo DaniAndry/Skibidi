@@ -91,7 +91,7 @@ public class TaskView : MonoBehaviour
             if (_amountCompleted.value >= _task.AmountMaxCollect)
                 CompleteTask();
         }
-        else if (_task.Type == TaskType.RecordDistance)
+        else if (_task.TaskType == name && _task.Type == TaskType.RecordDistance)
         {
             _amountProgress = amount;
             Save();
@@ -141,8 +141,6 @@ public class TaskView : MonoBehaviour
 
     private void Save()
     {
-        YandexGame.SaveProgress();
-
         if (GetComponentInParent<DailyTaskSpawner>())
             YandexGame.savesData.AmountDailyProgreses[Id] = _amountProgress;
         else if (GetComponentInParent<WeeklyTaskSpawner>())

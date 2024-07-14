@@ -1,7 +1,7 @@
 {
-    "idSave": 3461,
+    "idSave": 514,
     "isFirstSession": false,
-    "language": "en",
+    "language": "ru",
     "promptDone": false,
     "Money": 5000000,
     "Diamond": 0,
@@ -14,21 +14,14 @@
     "CountMoneyBoost": 0,
     "CountUpgradeMoneyBoost": 1,
     "CountUpgradeEnergy": 1,
-    "SelectedSkin": {
-        "instanceID": 50232
-    },
-    "SelectedDance": {
-        "instanceID": 50842
-    },
+    "SelectedDance": 1,
+    "SelectedSkin": 1,
     "BoughtSkins": [
-        {
-            "instanceID": 50232
-        }
+        1,
+        3
     ],
     "BoughtDances": [
-        {
-            "instanceID": 50842
-        }
+        1
     ],
     "AmountDailyProgreses": [
         0.0,
@@ -47,19 +40,8 @@
         0.0,
         0.0
     ],
-    "AmountDistanceProgreses": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-    ],
-    "StartWeeklyTime": 10,
-    "StartDailyTime": 10,
-    "WorldSound": 0.8555788397789002
+    "AmountDistanceProgreses": [],
+    "StartWeeklyTime": 12,
+    "StartDailyTime": 12,
+    "WorldSound": 0.5
 }

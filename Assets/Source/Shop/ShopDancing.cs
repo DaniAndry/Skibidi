@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class ShopDancing : Shop
 {
-    [SerializeField] private List<Dance> _danceForSale;
+    [SerializeField] private List<Dance> _dancesForSale;
 
     private Dance _selectedDance;
     private DanceSelecter _selecter;
@@ -19,7 +20,7 @@ public class ShopDancing : Shop
         SelectButton.onClick.AddListener(SelectProduct);
         OnChangingSkin += ChooseDance;
 
-        foreach (var dance in _danceForSale)
+        foreach (var dance in _dancesForSale)
         {
             dance.OnSelected += ShowInfoProduct;
         }
@@ -31,7 +32,7 @@ public class ShopDancing : Shop
         SelectButton.onClick.RemoveListener(SelectProduct);
         OnChangingSkin -= ChooseDance;
 
-        foreach (var dance in _danceForSale)
+        foreach (var dance in _dancesForSale)
         {
             dance.OnSelected -= ShowInfoProduct;         
         }
@@ -42,7 +43,7 @@ public class ShopDancing : Shop
         base.BuyProduct();
         _selectedDance.Unlock();
         _selecter.AddDance(_selectedDance);
-        _danceForSale.Remove(_selectedDance);
+        _dancesForSale.Remove(_selectedDance);
         SelectProduct();
     }
 
@@ -90,10 +91,43 @@ public class ShopDancing : Shop
     private void ChooseDance()
     {
         _selecter.ChooseDance();
+        Load();
     }
 
     private void ThrowErrorBuySkin()
     {
         Debug.Log("ErrorBuy");
+    }
+
+    private void Load()
+    {
+        List<int> boughtDancesId = YandexGame.savesData.BoughtDances;
+        int selectedDanceId = YandexGame.savesData.SelectedDance;
+
+        if (boughtDancesId.Count != 0)
+        {
+            for (int i = 0; i < _dancesForSale.Count; i++)
+            {
+                for (int j = 0; j < boughtDancesId.Count; j++)
+                {
+                    if (_dancesForSale[i].Id == boughtDancesId[j])
+                    {
+                        _selectedDance = _dancesForSale[i];
+                        base.BuyProduct();
+                        _selectedDance.Unlock();
+                        _selecter.AddDance(_selectedDance);
+                    }
+
+                    if (_dancesForSale[i].Id == selectedDanceId)
+                    {
+                        _selecter.SelectDance(_selectedDance);
+                    }
+                }
+            }
+        }
+        else
+        {
+            _selecter.InitFirstDance();
+        }
     }
 }

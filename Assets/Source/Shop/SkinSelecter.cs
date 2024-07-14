@@ -15,42 +15,29 @@ public class SkinSelecter : MonoBehaviour
 
     public PlayerView Player { get; private set; }
 
-    private void Awake()
+    public void InitFirstSkin()
     {
-        if (YandexGame.SDKEnabled == true)
-        {
-            Load();
-        }
-    }
-
-    private void OnEnable()
-    {
-        YandexGame.GetDataEvent += Load;
-    }
-
-    private void OnDisable()
-    {
-        YandexGame.GetDataEvent -= Load;
+        _selectedSkin = _firstSkin;
+        _selectedSkin.Unlock();
+        _selectedSkin.ChangeStatus();
+        AddSkin(_selectedSkin);
+        InitSkin();
     }
 
     public void AddSkin(Skin skin)
     {
-        if (_boughtSkins.Contains(skin) == false)
-        {
-            _boughtSkins.Add(skin);
-        }
+        _boughtSkins.Add(skin);
     }
 
     public void SelectSkin(Skin skin)
     {
-        if (skin != _selectedSkin)
-        {
+        if (_selectedSkin != null)
             _selectedSkin.ChangeStatus();
-            _selectedSkin = skin;
 
-            _selectedSkin.ChangeStatus();
-            InitSkin();
-        }
+        _selectedSkin = skin;
+
+        _selectedSkin.ChangeStatus();
+        InitSkin();
     }
 
     private void InitSkin()
@@ -69,47 +56,15 @@ public class SkinSelecter : MonoBehaviour
         Save();
     }
 
-    private void Load()
-    {
-        foreach (var skin in YandexGame.savesData.BoughtSkins)
-        {
-            _boughtSkins.Add(skin);
-        }
-
-        _selectedSkin = YandexGame.savesData.SelectedSkin;
-
-        if (_boughtSkins.Count == 0)
-        {
-            _selectedSkin = _firstSkin;
-            _selectedSkin.ChangeStatus();
-            _selectedSkin.Unlock();
-            AddSkin(_selectedSkin);
-        }
-        else
-        {
-            foreach (Skin skin in _boughtSkins)
-            {
-                skin.LoadProgress(false, true);
-
-                if (skin == _selectedSkin)
-                    skin.LoadProgress(true, true);
-            }
-        }
-
-        if (_selectedSkin == null)
-        {
-            _selectedSkin = _firstSkin;
-            _selectedSkin.ChangeStatus();
-            _firstSkin.Unlock();
-        }
-
-        InitSkin();
-    }
-
     private void Save()
     {
-        YandexGame.savesData.BoughtSkins = _boughtSkins;
-        YandexGame.savesData.SelectedSkin = _selectedSkin;
+        for (int i = 0; i < _boughtSkins.Count; i++)
+        {
+            if (YandexGame.savesData.BoughtSkins.Contains(_boughtSkins[i].Id) == false)
+                YandexGame.savesData.BoughtSkins.Add(_boughtSkins[i].Id);
+        }
+
+        YandexGame.savesData.SelectedSkin = _selectedSkin.Id;
         YandexGame.SaveProgress();
     }
 }

@@ -17,11 +17,6 @@ public class Bank : MonoBehaviour
 
     public int Money { get; private set; }  = 0;
 
-    private void Start()
-    {
-        UpdateText();
-    }
-
     private void Awake()
     {
         if (YandexGame.SDKEnabled == true)
@@ -155,5 +150,7 @@ public class Bank : MonoBehaviour
     {
         Money = YandexGame.savesData.Money;
         _diamond = YandexGame.savesData.Diamond;
+
+        UpdateText();
     }
 }
