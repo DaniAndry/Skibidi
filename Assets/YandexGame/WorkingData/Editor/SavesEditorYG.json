@@ -1,18 +1,18 @@
 {
-    "idSave": 514,
+    "idSave": 721,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "Money": 5000000,
+    "Money": 4999100,
     "Diamond": 0,
     "MaxEnergy": 50.0,
     "Record": 0.0,
     "CountEnergyBoost": 0,
-    "CountUpgradeEnergyBoost": 1,
+    "CountUpgradeEnergyBoost": 2,
     "CountSpeedBoost": 0,
-    "CountUpgradeSpeedBoost": 1,
+    "CountUpgradeSpeedBoost": 2,
     "CountMoneyBoost": 0,
-    "CountUpgradeMoneyBoost": 1,
+    "CountUpgradeMoneyBoost": 2,
     "CountUpgradeEnergy": 1,
     "SelectedDance": 1,
     "SelectedSkin": 1,
@@ -29,7 +29,7 @@
         0.0,
         0.0,
         0.0,
-        0.0,
+        900.0,
         0.0
     ],
     "AmountWeeklyProgreses": [
@@ -37,11 +37,22 @@
         0.0,
         0.0,
         0.0,
+        900.0,
+        0.0
+    ],
+    "AmountDistanceProgreses": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
         0.0,
         0.0
     ],
-    "AmountDistanceProgreses": [],
-    "StartWeeklyTime": 12,
-    "StartDailyTime": 12,
+    "StartWeeklyTime": 14,
+    "StartDailyTime": 14,
     "WorldSound": 0.5
 }
