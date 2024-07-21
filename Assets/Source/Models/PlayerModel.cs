@@ -21,7 +21,8 @@ public class PlayerModel
 
     public void Init()
     {
-        Load();
+        if(YandexGame.SDKEnabled)
+            Load();
     }
 
     public void TakeEnergy(float count)

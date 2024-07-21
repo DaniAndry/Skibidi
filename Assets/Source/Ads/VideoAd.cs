@@ -18,7 +18,7 @@ public class VideoAd : MonoBehaviour
 
     private void OnDisable()
     {
-        _resurrect.OnRestarting += RefreshAdButtons;
+        _resurrect.OnRestarting -= RefreshAdButtons;
         YandexGame.RewardVideoEvent -= Rewarded;
     }
 

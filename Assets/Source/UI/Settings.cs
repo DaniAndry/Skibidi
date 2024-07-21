@@ -7,18 +7,21 @@ public class Settings : MonoBehaviour, IPointerExitHandler
 {
     [SerializeField] private Slider _sound;
 
-    private void Start()
+    private void Awake()
     {
-        Load();
+        if(YandexGame.SDKEnabled)
+            Load();
     }
 
     private void OnEnable()
     {
+        YandexGame.GetDataEvent += Load;
         _sound.onValueChanged.AddListener(ChangeSound);
     }
 
     private void OnDisable()
     {
+        YandexGame.GetDataEvent -= Load;
         _sound.onValueChanged.RemoveListener(ChangeSound);
     }
 

@@ -26,14 +26,14 @@ public class EndStateGame
 
     public void Enable()
     {
-        Load();
-
+        YandexGame.GetDataEvent += Load;
         _presenter.OnEndGame += End;
         _playerResurrect.OnRestarting += OpenWindows;
     }
 
     public void Disable()
     {
+        YandexGame.GetDataEvent -= Load;
         _presenter.OnEndGame -= End;
         _playerResurrect.OnRestarting -= OpenWindows;
     }
@@ -61,6 +61,7 @@ public class EndStateGame
         _menu.GetComponent<MenuWindow>().OpenWithoutSound();
         _endScreen.GetComponent<EndScreenWindow>().OpenWithoutSound();
         _hudWindow.CloseWithoutSound();
+        AudioManager.Instance.UnPause("Music2");
 
         OnEndGame?.Invoke();
     }

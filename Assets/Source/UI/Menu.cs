@@ -13,6 +13,11 @@ public class Menu : MonoBehaviour
 
     public event Action OnClickStart;
 
+    private void Start()
+    {
+        AudioManager.Instance.Play("Music2");
+    }
+
     private void Awake()
     {
         _menuWindow = GetComponent<MenuWindow>();       

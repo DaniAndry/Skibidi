@@ -15,8 +15,10 @@ public class StartStateGame
 
     private void Start()
     {
-        AudioManager.Instance.Play("StartGame");
+        AudioManager.Instance.Play("StartGame"); 
         AudioManager.Instance.Play("Music");
+        AudioManager.Instance.Pause("Music2");
+        AudioManager.Instance.Pause("MenuMusic");
 
         _hudWindow.OpenWithoutSound();
         _presenter.StartGame();

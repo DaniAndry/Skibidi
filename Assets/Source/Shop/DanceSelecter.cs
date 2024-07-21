@@ -10,77 +10,59 @@ public class DanceSelecter : MonoBehaviour
     private Dance _selectedDance;
     private ShopDancing _shopDancing;
 
-    private void Start()
+    private void Awake()
     {
         _shopDancing = GetComponent<ShopDancing>();
-        Load();
+    }
+
+    public void InitFirstDance()
+    {
+        _selectedDance = _firstDance;
+        _firstDance.ChangeStatus();
+        _firstDance.Unlock();
+        AddDance(_firstDance);
+        ChooseDance();
     }
 
     public void AddDance(Dance dance)
     {
         _boughtDances.Add(dance);
+        Save();
     }
-     
+
     public void SelectDance(Dance dance)
     {
-        if (dance != _selectedDance)
-        {
-            _selectedDance.ChangeStatus();
-            _selectedDance = dance;
+        if (_selectedDance != null)
             _selectedDance.ChangeStatus();
 
-            ChooseDance();
-        }
+        _selectedDance = dance;
+        _selectedDance.ChangeStatus();
+
+        ChooseDance();
     }
 
     public void ChooseDance()
     {
-        _shopDancing.Player.GetNameDance(_selectedDance.NameDanceAnim);
-        Save();
-    }
-
-    private void Load()
-    {
-        foreach (var dance in YandexGame.savesData.BoughtDances)
+        if (_selectedDance != null)
         {
-            _boughtDances.Add(dance);
+            _shopDancing.Player.GetNameDance(_selectedDance.NameDanceAnim);
+            Save();
         }
-
-        _selectedDance = YandexGame.savesData.SelectedDance;
-
-        if (_boughtDances.Count == 0)
-        {
-            _selectedDance = _firstDance;
-            _firstDance.ChangeStatus();
-            _firstDance.Unlock();
-            AddDance(_firstDance);
-            Invoke("ChooseDance", 0.1f);
-        }
-        else
-        {
-            foreach (Dance dance in _boughtDances)
-            {
-                dance.LoadProgress(false, true);
-
-                if (dance == _selectedDance)
-                    dance.LoadProgress(true, true);
-            }
-        }
-
-        if (_selectedDance == null)
-        {
-            _selectedDance = _firstDance;
-            _selectedDance.ChangeStatus();
-            _firstDance.Unlock();
-        }
-
-        Invoke("ChooseDance", 0.1f);
     }
 
     private void Save()
     {
-        YandexGame.savesData.BoughtDances = _boughtDances;
-        YandexGame.savesData.SelectedDance = _selectedDance;
+        for (int i = 0; i < _boughtDances.Count; i++)
+        {
+            if (YandexGame.savesData.BoughtDances.Contains(_boughtDances[i].Id) == false)
+                YandexGame.savesData.BoughtDances.Add(_boughtDances[i].Id);
+        }
+
+        if (_selectedDance != null)
+            YandexGame.savesData.SelectedDance = _selectedDance.Id;
+
+        YandexGame.SaveProgress();
+
         YandexGame.SaveProgress();
     }
 }

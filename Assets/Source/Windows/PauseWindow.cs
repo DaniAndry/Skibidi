@@ -9,6 +9,8 @@ public class PauseWindow : Window
     private bool _isPause = false;
     private PlayerInputHandler _inputHandler;
 
+    public bool IsPause => _isPause;
+
     private void Start()
     {
         CloseWithoutSound();

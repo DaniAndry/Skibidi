@@ -27,6 +27,7 @@ public class FunDance : MonoBehaviour
     public void TurnOnDance()
     {
         AudioManager.Instance.Play("FunDance");
+        AudioManager.Instance.Pause("Music2");
         _playerMoverView.Dance();
         _danceCamera.gameObject.SetActive(true);
 
@@ -37,6 +38,7 @@ public class FunDance : MonoBehaviour
     public void TurnOffDance()
     {
         AudioManager.Instance.Stop("FunDance");
+        AudioManager.Instance.UnPause("Music2");
         _playerMoverView.ResetMove();
         _danceCamera.gameObject.SetActive(false);
 

@@ -15,6 +15,7 @@ public abstract class Task : ScriptableObject
     public string Description => _descritionTranslation;
     public Sprite RewardIcon => _rewardIcon;
     public int AmountReward => _amountReward;
+    public TaskType Type => _taskType;
 
     public void TurnOnTask()
     {
