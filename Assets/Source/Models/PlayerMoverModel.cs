@@ -12,7 +12,7 @@ public class PlayerMoverModel
     private float _moveVariableSpeed;
     private float _speedBonus;
     private float _speedTime;
-    private float _jumpPower = 4f;
+    private float _jumpPower = 2f;
     private float _moveCoefficient;
     private bool _isMove = false;
     private bool _isSpeedBoost;

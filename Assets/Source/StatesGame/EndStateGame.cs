@@ -43,7 +43,7 @@ public class EndStateGame
         AudioManager.Instance.Pause("Music");
 
         _presenterMover.EndPlayerMove();
-        _playerResurrect.StartTimer();
+        _playerResurrect.OpenWindow();
         _endScreen.SetData(_presenter.TakeTotalDistance());
         _menu.SetDistance(_presenter.TakeTotalDistance());
         YandexGame.NewLeaderboardScores("Leaderboard", Convert.ToInt32(_presenter.TakeTotalDistance()));
