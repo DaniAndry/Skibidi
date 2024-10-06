@@ -101,6 +101,8 @@ public class ShopSkins : Shop
             {
                 for (int j = 0; j < boughtSkinsId.Count; j++)
                 {
+                    Debug.Log(boughtSkinsId[j]);
+
                     if (_skinsForSale[i].Id == boughtSkinsId[j])
                     {
                         _selectedSkin = _skinsForSale[i];
@@ -112,6 +114,7 @@ public class ShopSkins : Shop
                     if(_skinsForSale[i].Id == selectedSkinId)
                     {
                         _selecter.SelectSkin(_selectedSkin);
+                        break;
                     }
                 }
             }

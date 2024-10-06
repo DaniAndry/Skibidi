@@ -12,7 +12,7 @@ public class PlayerMoverModel
     private float _moveVariableSpeed;
     private float _speedBonus;
     private float _speedTime;
-    private float _jumpPower = 2f;
+    private float _jumpPower = 3.5f;
     private float _moveCoefficient;
     private bool _isMove = false;
     private bool _isSpeedBoost;
@@ -112,6 +112,7 @@ public class PlayerMoverModel
     public void Jump()
     {
         OnJumped?.Invoke();
+        Debug.Log(1);
         _rigidbody.AddForce(0f, _jumpPower, 0f, ForceMode.Impulse);
         TaskCounter.IncereaseProgress(1, Convert.ToString(TaskType.Jump));
     }

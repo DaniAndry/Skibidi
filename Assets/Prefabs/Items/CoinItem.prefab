@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoinItem
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 59dc7f3d17cd0304d89ccd2eb172cbba, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -84,6 +88,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 59dc7f3d17cd0304d89ccd2eb172cbba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 357638765669161670}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 59dc7f3d17cd0304d89ccd2eb172cbba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4081338600991202540}
   m_SourcePrefab: {fileID: 100100000, guid: 59dc7f3d17cd0304d89ccd2eb172cbba, type: 3}
 --- !u!1 &5956539019955316106 stripped
 GameObject:
@@ -141,6 +148,18 @@ CapsuleCollider:
   m_Height: 0.00598951
   m_Direction: 1
   m_Center: {x: 0.000016409384, y: 0.00004336494, z: 0.000027339447}
+--- !u!114 &-4081338600991202540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5956539019955316106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6679e40ad417a4386a3bbf0f5222b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6476791996802465584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 59dc7f3d17cd0304d89ccd2eb172cbba, type: 3}
@@ -154,9 +173,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6476791996802465584}
     m_Modifications:
+    - target: {fileID: 1261813362942762, guid: a419fd8615e012d4db964c79e0d1e733, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1503414589296656, guid: a419fd8615e012d4db964c79e0d1e733, type: 3}
       propertyPath: m_Name
       value: GlitterExplosionYellow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1503414589296656, guid: a419fd8615e012d4db964c79e0d1e733, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678067928130182, guid: a419fd8615e012d4db964c79e0d1e733, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868212018145750, guid: a419fd8615e012d4db964c79e0d1e733, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1944500621435866, guid: a419fd8615e012d4db964c79e0d1e733, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4648984154963362, guid: a419fd8615e012d4db964c79e0d1e733, type: 3}
       propertyPath: m_RootOrder

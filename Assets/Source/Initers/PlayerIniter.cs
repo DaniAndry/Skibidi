@@ -29,14 +29,16 @@ public class PlayerIniter : MonoBehaviour
 
     private void OnDisable()
     {
-        _skinSelecter.OnChangingSkin -= Init;
-
         _presenter.Disable();
         _moverPresenter.Disable();
+
+        _skinSelecter.OnChangingSkin -= Init;
     }
 
     public void Init(PlayerView playerView)
     {
+        Debug.Log("Init");
+
         playerView.gameObject.SetActive(true);
 
         _view = playerView;

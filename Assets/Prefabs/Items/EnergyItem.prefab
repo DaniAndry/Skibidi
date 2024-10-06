@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyItem
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fa2d79f0b5e45404389665d80b25016b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -84,6 +88,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fa2d79f0b5e45404389665d80b25016b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4248457736339939153}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fa2d79f0b5e45404389665d80b25016b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3080005320844379905}
   m_SourcePrefab: {fileID: 100100000, guid: fa2d79f0b5e45404389665d80b25016b, type: 3}
 --- !u!4 &3503250702570448039 stripped
 Transform:
@@ -151,6 +158,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3080005320844379905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311593421214662173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6679e40ad417a4386a3bbf0f5222b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6438819301189800031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159,9 +178,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3503250702570448039}
     m_Modifications:
+    - target: {fileID: 1052691760244170, guid: 36ec478573ed11f449b93071b21383dd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436742034963900, guid: 36ec478573ed11f449b93071b21383dd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1534525040551404, guid: 36ec478573ed11f449b93071b21383dd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552480383562112, guid: 36ec478573ed11f449b93071b21383dd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1611865643261376, guid: 36ec478573ed11f449b93071b21383dd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1728528800216656, guid: 36ec478573ed11f449b93071b21383dd, type: 3}
       propertyPath: m_Name
       value: Thunderball Explosion 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1728528800216656, guid: 36ec478573ed11f449b93071b21383dd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976424677468880, guid: 36ec478573ed11f449b93071b21383dd, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4549945358807404, guid: 36ec478573ed11f449b93071b21383dd, type: 3}
       propertyPath: m_RootOrder

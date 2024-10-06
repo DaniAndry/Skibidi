@@ -3,7 +3,12 @@ guid: ed6971219a076ac41ae351ce4e0d63cb
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Garage_Rusty_01
+    second: {fileID: 2100000, guid: 53db274714d6c2d448975d401683df8c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

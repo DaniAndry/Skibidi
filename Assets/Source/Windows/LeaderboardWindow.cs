@@ -23,17 +23,4 @@ public class LeaderboardWindow : Window
         _openButton.onClick.RemoveListener(Open);
         _closeButton.onClick.RemoveListener(Close);
     }
-
-    public override void Open()
-    {
-        if (YandexGame.auth == false)
-        {
-            YandexGame.AuthDialog();
-            Close();
-        }
-        else
-        {
-            base.Open();
-        }
-    }
 }
