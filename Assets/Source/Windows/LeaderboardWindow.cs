@@ -6,6 +6,7 @@ public class LeaderboardWindow : Window
 {
     [SerializeField] private Button _openButton;
     [SerializeField] private Button _closeButton;
+    [SerializeField] private AuthWindow _authWindow;
 
     private void Awake()
     {
@@ -22,5 +23,13 @@ public class LeaderboardWindow : Window
     {
         _openButton.onClick.RemoveListener(Open);
         _closeButton.onClick.RemoveListener(Close);
+    }
+
+    public override void Open()
+    {
+        if (YandexGame.auth)
+            base.Open();
+        else
+            _authWindow.Open();
     }
 }

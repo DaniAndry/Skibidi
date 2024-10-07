@@ -82,7 +82,7 @@ public abstract class Boost : MonoBehaviour
         if (amount > 0)
             _timeText.text = Math.Round(amount, 1).ToString();
         else
-            _timeText.text = " ";
+            _timeText.text = "-";
     }
 
     public void LoadTimer()

@@ -22,8 +22,6 @@ public class SkinSelecter : MonoBehaviour
         _selectedSkin.ChangeStatus();
         AddSkin(_selectedSkin);
         InitSkin();
-
-        Debug.Log("initFirstSkin");
     }
 
     public void AddSkin(Skin skin)
@@ -40,8 +38,6 @@ public class SkinSelecter : MonoBehaviour
 
         _selectedSkin.ChangeStatus();
         InitSkin();
-
-        Debug.Log("selectSkin");
     }
 
     private void InitSkin()

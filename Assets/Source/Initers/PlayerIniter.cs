@@ -37,8 +37,6 @@ public class PlayerIniter : MonoBehaviour
 
     public void Init(PlayerView playerView)
     {
-        Debug.Log("Init");
-
         playerView.gameObject.SetActive(true);
 
         _view = playerView;
