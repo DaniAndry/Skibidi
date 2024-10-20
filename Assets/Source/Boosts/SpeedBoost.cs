@@ -25,7 +25,7 @@ public class SpeedBoost : Boost
         Count = YandexGame.savesData.CountSpeedBoost;
         CountUpgrade = YandexGame.savesData.CountUpgradeSpeedBoost;
         LoadTimer();
-        UpdateText();
+        Invoke("UpdateText", 0.3f);
     }
 
     private void GiveRewardBoost(string name, int amount)

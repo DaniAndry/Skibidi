@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using YG;
 
 public class EnergyBoost : Boost
@@ -24,8 +25,9 @@ public class EnergyBoost : Boost
     {
         Count = YandexGame.savesData.CountEnergyBoost;
         CountUpgrade = YandexGame.savesData.CountUpgradeEnergyBoost;
+
         LoadTimer();
-        UpdateText();
+        Invoke("UpdateText", 0.3f);
     }
 
     private void GiveRewardBoost(string name, int amount)
