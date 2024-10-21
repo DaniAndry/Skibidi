@@ -44,7 +44,6 @@ public class EndStateGame
 
         _presenterMover.EndPlayerMove();
         _playerResurrect.OpenWindow();
-        _endScreen.SetData(_presenter.TakeTotalDistance());
         _menu.SetDistance(_presenter.TakeTotalDistance());
         YandexGame.NewLeaderboardScores("Leaderboard", Convert.ToInt32(_presenter.TakeTotalDistance()));
         _leaderboard.NewScore(Convert.ToInt32(_presenter.TakeTotalDistance()));
@@ -59,7 +58,6 @@ public class EndStateGame
         AudioManager.Instance.Stop("Music");
 
         _menu.GetComponent<MenuWindow>().OpenWithoutSound();
-        _endScreen.GetComponent<EndScreenWindow>().OpenWithoutSound();
         _hudWindow.CloseWithoutSound();
         AudioManager.Instance.UnPause("Music2");
 
@@ -76,7 +74,6 @@ public class EndStateGame
     {
         float record = YandexGame.savesData.Record;
 
-        _endScreen.SetData(record);
         _menu.SetDistance(record);
         YandexGame.NewLeaderboardScores("Leaderboard", Convert.ToInt32(record));
         _leaderboard.NewScore(Convert.ToInt32(record));

@@ -7,7 +7,6 @@ using YG;
 public class EndGameScreen : MonoBehaviour
 {
     [SerializeField] private Button _exitButton;
-    [SerializeField] private TMP_Text _distance;
     [SerializeField] private Button _rewardButton;
     [SerializeField] private Bank _bank;
 
@@ -31,14 +30,8 @@ public class EndGameScreen : MonoBehaviour
         _rewardButton.onClick.RemoveListener(OnClick);
     }
 
-    public void SetData(float distance)
-    {
-        _distance.text = $"{Convert.ToInt32(distance)}";
-    }
-
     public void CloseEndScreen()
     {
-        GetComponent<EndScreenWindow>().CloseWithoutSound();
         _bank.ResetValueForGame();
         RefreshAdButton();
     }
