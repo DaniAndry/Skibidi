@@ -21,6 +21,7 @@ public class AuthWindow : Window
 
     private void OpenAuthDialog()
     {
-        YandexGame.AuthDialog();
+            YandexGame.AuthDialog();
+            Close();
     }
 }
