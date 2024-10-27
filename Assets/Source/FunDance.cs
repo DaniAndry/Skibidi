@@ -7,6 +7,7 @@ public class FunDance : MonoBehaviour
 
     [SerializeField] private GameObject _enemyPolice;
     [SerializeField] private Camera _danceCamera;
+    [SerializeField] private CanvasGroup _info;
 
     private Animator _danceCameraAnimator;
     private Animator _enemyAnimator;
@@ -28,6 +29,8 @@ public class FunDance : MonoBehaviour
     {
         AudioManager.Instance.Play("FunDance");
         AudioManager.Instance.Pause("Music2");
+
+        _info.alpha = 0f;
         _playerMoverView.Dance();
         _danceCamera.gameObject.SetActive(true);
 
@@ -39,6 +42,8 @@ public class FunDance : MonoBehaviour
     {
         AudioManager.Instance.Stop("FunDance");
         AudioManager.Instance.UnPause("Music2");
+
+        _info.alpha = 1f;
         _playerMoverView.ResetMove();
         _danceCamera.gameObject.SetActive(false);
 
