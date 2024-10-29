@@ -3,7 +3,42 @@ guid: 3c485410a81e7424eb8f46badfd9c3b7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 43dee72f5fa820649924a9faf5de2995, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Legs
+    second: {fileID: 2100000, guid: b54d0830654a744448066fd7d3f8b26b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Legs1
+    second: {fileID: 2100000, guid: 8f1132c29195aee42af35a6b57868296, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Outside glass
+    second: {fileID: 2100000, guid: d40444ea5d3a0764295b874496c3de6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocket
+    second: {fileID: 2100000, guid: ef8922313a7c92d408310cf42b8a6d69, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rocket1
+    second: {fileID: 2100000, guid: 7539e9077f06fc74eae6a5b43d712be6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rocket2
+    second: {fileID: 2100000, guid: 248f8e847c3423246b672a727fb2264b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
